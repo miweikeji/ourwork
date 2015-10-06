@@ -3,6 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/rl_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/all_title_bar_hight"
         android:layout_alignParentTop="true"
@@ -12,7 +13,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
+            android:id="@+id/img_back"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
@@ -23,17 +24,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/textView"
+            android:id="@+id/tv_title"
             android:layout_centerVertical="true"
             android:layout_marginLeft="50dp"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_toRightOf="@+id/img_back"
+            android:layout_toEndOf="@+id/img_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/textView2"
+            android:id="@+id/tv_center_title"
+            android:visibility="invisible"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
@@ -41,7 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/textView3"
+            android:id="@+id/tv_right_title"
+            android:visibility="invisible"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:layout_alignParentRight="true" />
