@@ -1,11 +1,8 @@
-package com.miweikeij.app;
+package app.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.miweikeij.app.R;
 
-import com.miweikeji.app.views.NavigationBar;
+import app.views.NavigationBar;
 
 public class MainActivity extends BaseActivity {
 

@@ -8,7 +8,7 @@
         android:layout_height="@dimen/all_title_bar_hight"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#80cc29">
+        android:background="@color/base_green">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -17,6 +17,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
+            android:background="@drawable/btn_back_selector"
             android:layout_alignParentStart="true"
             />
 

@@ -1,16 +1,17 @@
-package com.miweikeji.app.views;
+package app.views;
 
 import android.app.Activity;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
+
 /**
  * Created by Administrator on 2015/10/2.
  */

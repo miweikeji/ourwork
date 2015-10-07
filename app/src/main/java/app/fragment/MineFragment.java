@@ -1,4 +1,4 @@
-package com.miweikeji.app.fragment;
+package app.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
