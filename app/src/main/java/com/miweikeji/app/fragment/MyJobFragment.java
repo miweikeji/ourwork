@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import com.miweikeij.app.R;
 
 /**
- * Created by Administrator on 2015/10/2.
+ * Created by Administrator on 2015/10/8.
  */
-public class MineFragment extends Fragment {
+public class MyJobFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_mine,null);
+        View layout = inflater.inflate(R.layout.fragment_myjob,null);
         return layout;
     }
 }
