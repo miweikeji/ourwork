@@ -1,24 +1,18 @@
 package app.activity;
 
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.miweikeji.app.fragment.CarpenterHomeFragment;
-import com.miweikeji.app.fragment.JobOpportunityFragment;
-import com.miweikeji.app.fragment.MyJobFragment;
+import app.fragment.CarpenterHomeFragment;
+import app.fragment.JobOpportunityFragment;
+import app.fragment.MyJobFragment;
 import com.miweikeij.app.R;
 
 import app.fragment.MineFragment;
-import app.views.NavigationBar;
 
 public class MainActivity extends FragmentActivity {
 
