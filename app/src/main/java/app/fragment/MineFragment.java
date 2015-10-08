@@ -1,4 +1,4 @@
-package com.miweikeji.app.fragment;
+package app.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

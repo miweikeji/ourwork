@@ -1,4 +1,4 @@
-package com.miweikeij.app;
+package app.activity;
 
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
@@ -14,9 +14,11 @@ import android.widget.RelativeLayout;
 
 import com.miweikeji.app.fragment.CarpenterHomeFragment;
 import com.miweikeji.app.fragment.JobOpportunityFragment;
-import com.miweikeji.app.fragment.MineFragment;
 import com.miweikeji.app.fragment.MyJobFragment;
-import com.miweikeji.app.views.NavigationBar;
+import com.miweikeij.app.R;
+
+import app.fragment.MineFragment;
+import app.views.NavigationBar;
 
 public class MainActivity extends FragmentActivity {
 
