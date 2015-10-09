@@ -5,4 +5,11 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_base">BaseActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_basic_info">BasicInfoActivity</string>
+    <string name="title_activity_craftsman_group">CraftsmanGroupActivity</string>
+    <string name="title_activity_craftsman_friends">CraftsmanFriendsActivity</string>
+    <string name="title_activity_find_fartner">FindFartnerActivity</string>
+    <string name="title_activity_my_friends">MyFriendsActivity</string>
+    <string name="title_activity_work_arrangement">WorkArrangementActivity</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <RelativeLayout
@@ -8,7 +9,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@color/base_green"
-        >
+
+        android:id="@+id/relativeLayout4">
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,4 +24,31 @@
 
 
     </RelativeLayout>
+
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        class="app.views.PagerSlidingTabStrip"
+        android:id="@+id/pagerSliding"
+        android:layout_below="@+id/relativeLayout4"
+        android:layout_centerHorizontal="true"
+        app:pstsShouldExpand="true"
+        app:pstsUnderlineHeight="1dp"
+        app:pstsIndicatorHeight="2dp"
+        app:zmsTabTextColor="@color/white"
+        app:zmsSelectedTabTextColor="@color/line"
+        android:background="@color/base_green"
+        app:pstsIndicatorColor="@color/base_orange"
+        app:zmsSelectedTabTextSize="16sp"
+        app:zmsTabTextSize="16sp"
+        app:pstsDividerColor="@color/base_green"
+        />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="android.support.v4.view.ViewPager"
+        android:id="@+id/pager"
+        android:layout_below="@+id/pagerSliding"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -17,7 +17,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/btn_back_selector"
+            android:background="@mipmap/img_back"
             android:layout_alignParentStart="true"
             />
 
@@ -27,7 +27,9 @@
             android:text="New Text"
             android:id="@+id/tv_title"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             android:layout_toRightOf="@+id/img_back"
             android:layout_toEndOf="@+id/img_back" />
 
