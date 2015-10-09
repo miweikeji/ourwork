@@ -18,7 +18,8 @@
         android:id="@+id/rl_tabs"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="52dp"
+        android:background="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
@@ -33,9 +34,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="工作机会"
+                android:drawablePadding="2dp"
+                android:drawableTop="@mipmap/tabs_job_true"
+                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/textView3" />
+                android:textColor="@color/base_green"
+                android:id="@+id/tv_tabs_job" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -49,9 +54,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="匠之家"
+                android:drawablePadding="2dp"
+                android:drawableTop="@mipmap/tabs_home_false"
+                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/textView4" />
+                android:id="@+id/tv_tabs_home" />
 
         </RelativeLayout>
 
@@ -66,9 +74,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的工作"
+                android:drawablePadding="2dp"
+                android:drawableTop="@mipmap/tabs_myjob_false"
+                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/textView5" />
+                android:id="@+id/tv_tabs_myjob" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -82,9 +93,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我"
+                android:gravity="center_horizontal"
+                android:drawablePadding="2dp"
+                android:drawableTop="@mipmap/tabs_mine_false"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/textView6" />
+                android:id="@+id/tv_tabs_mine" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

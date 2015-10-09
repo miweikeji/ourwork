@@ -11,5 +11,6 @@
     <color name="base_blue">#313ef5</color>
     <color name="white">#FFFFFF</color>
     <color name="line">#D5D5D5</color>
+    <color name="tabs_tv">#949494</color>
 
 </resources>
