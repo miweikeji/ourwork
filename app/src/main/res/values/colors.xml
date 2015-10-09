@@ -5,9 +5,9 @@
 
     <color name="base_background">#F8F6F2</color>
     <color name="base_divider">#1e000000</color>
-
     <color name="base_green">#80cc29</color>
     <color name="base_orange">#f56c31</color>
     <color name="base_blue">#313ef5</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>
