@@ -9,5 +9,8 @@
     <color name="base_green">#80cc29</color>
     <color name="base_orange">#f56c31</color>
     <color name="base_blue">#313ef5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="line">#D5D5D5</color>
+    <color name="tabs_tv">#949494</color>
 
 </resources>

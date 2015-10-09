@@ -10,14 +10,15 @@ import android.view.ViewGroup;
 import com.miweikeij.app.R;
 
 /**
- * Created by Administrator on 2015/10/2.
+ * Created by Administrator on 2015/10/9.
  */
-public class MineFragment extends Fragment {
+public class CompletedFragment extends Fragment{
 
+    private View layout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_mine,null);
+        layout = inflater.inflate(R.layout.fragment_completed,null);
         return layout;
     }
 }
