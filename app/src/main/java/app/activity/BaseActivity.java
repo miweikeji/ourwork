@@ -18,10 +18,12 @@ public abstract class BaseActivity extends FragmentActivity {
 
     private LinearLayout mContentView;
     public static LinkedList<Activity> sAllActivitys = new LinkedList<Activity>();
+    public Activity mActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        mActivity=this;
         NavigationBar mBar = (NavigationBar)findViewById(R.id.navigationBar);
         initCotentView();
         initTitle(mBar);

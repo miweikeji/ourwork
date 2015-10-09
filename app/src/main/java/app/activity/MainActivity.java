@@ -12,6 +12,10 @@ import app.fragment.JobOpportunityFragment;
 import app.fragment.MyJobFragment;
 import com.miweikeij.app.R;
 
+import app.entity.Meta;
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.views.NavigationBar;
 import app.fragment.MineFragment;
 
 public class MainActivity extends FragmentActivity {
@@ -26,12 +30,23 @@ public class MainActivity extends FragmentActivity {
     private int currentTabIndex;
     private RelativeLayout[] mTabs;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initUI();
-    }
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            initUI();
 
+            HttpRequest.testHttp(this, new ICallback<Meta>() {
+                @Override
+                public void onSucceed(Meta result) {
+
+                }
+
+                @Override
+                public void onFail(String error) {
+
+                }
+            }, "13365047950", "0");
+        }
     private void initUI() {
         mTabs = new RelativeLayout[4];
         mTabs[3] = (RelativeLayout)findViewById(R.id.rl_mine);
