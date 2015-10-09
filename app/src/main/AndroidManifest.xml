@@ -20,6 +20,14 @@
             android:name="app.activity.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name="app.activity.RegisterActivity"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name="app.activity.BasicInfoActivity"
+            android:label="@string/title_activity_basic_info" >
+        </activity>
     </application>
 
 </manifest>

@@ -17,7 +17,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/btn_back_selector"
+            android:background="@mipmap/img_back"
             android:layout_alignParentStart="true"
             />
 

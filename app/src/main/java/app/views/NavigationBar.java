@@ -49,27 +49,31 @@ public class NavigationBar extends LinearLayout implements View.OnClickListener 
         tv_right_title.setOnClickListener(this);
     }
 
-    private void setTitle(String title){
+    public void setImgBackInVisible(){
+        img_back.setVisibility(View.INVISIBLE);
+    }
+
+    public void setTitle(String title){
         tv_title.setText(title);
     }
 
-    private void setCenterTitle(String centerTitle){
+    public void setCenterTitle(String centerTitle){
         tv_center_title.setVisibility(View.VISIBLE);
         tv_title.setVisibility(View.INVISIBLE);
         tv_center_title.setText(centerTitle);
     }
 
-    private void setRightTitle(String rightTitle){
+    public void setRightTitle(String rightTitle){
         tv_right_title.setVisibility(View.VISIBLE);
         tv_right_title.setText(rightTitle);
     }
 
 
-    private void setBarInVisibile(){
+    public void setBarInVisibile(){
         rl_navigation_bar.setVisibility(View.GONE);
     }
 
-    private void setContexts(Activity activity){
+    public void setContexts(Activity activity){
         this.activity = activity;
     }
     @Override
