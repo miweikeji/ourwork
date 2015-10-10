@@ -11,6 +11,7 @@
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/has_greads_line_bg"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
@@ -20,6 +21,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_weight="1">
 
             <EditText
@@ -28,39 +31,78 @@
                 android:inputType="phone"
                 android:ems="11"
                 android:background="@null"
-                android:id="@+id/editText3"
+                android:id="@+id/et_phone"
                 android:hint="输入您的手机号码"
+                android:textSize="15sp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:text="本机号码"
+                android:id="@+id/button6"
+                android:textSize="14sp"
+                android:textColor="#757575"
+                android:background="@drawable/has_gread_line_bg"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/line"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_weight="1">
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText4"
+                android:id="@+id/et_code"
                 android:background="@null"
                 android:hint="输入验证码"
+                android:textSize="15sp"
                 android:inputType="number"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:text="获取验证码"
+                android:id="@+id/btn_send_code"
+                android:textSize="14sp"
+                android:textColor="#757575"
+                android:background="@drawable/sl_get_code"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/line"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_weight="1">
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText5"
+                android:id="@+id/et_psw"
                 android:background="@null"
                 android:hint="输入密码"
+                android:textSize="15sp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -82,7 +124,7 @@
         android:layout_height="50dp"
         android:text="提交注册"
         android:textColor="@color/white"
-        android:id="@+id/button2"
+        android:id="@+id/btn_register"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:background="#F55F31"

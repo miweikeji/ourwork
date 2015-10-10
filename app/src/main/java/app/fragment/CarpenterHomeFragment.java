@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.miweikeij.app.R;
 
+import app.activity.AllWorksActivity;
 import app.activity.CraftsmanGroupActivity;
 import app.activity.FindFartnerActivity;
 import app.activity.MyFriendsActivity;
@@ -35,10 +36,12 @@ public class CarpenterHomeFragment extends Fragment implements View.OnClickListe
         RelativeLayout rl_find_craftsman=(RelativeLayout)layout.findViewById(R.id.rl_find_craftsman);
         RelativeLayout rl_my_friends=(RelativeLayout)layout.findViewById(R.id.rl_my_friends);
         RelativeLayout rl_work_arrangement=(RelativeLayout)layout.findViewById(R.id.rl_work_arrangement);
+        RelativeLayout rl_all_craftsman=(RelativeLayout) layout.findViewById(R.id.rl_all_craftsman);
         rl_work_arrangement.setOnClickListener(this);
         rl_carftsman_group.setOnClickListener(this);
         rl_my_friends.setOnClickListener(this);
         rl_find_craftsman.setOnClickListener(this);
+        rl_all_craftsman.setOnClickListener(this);
     }
 
     @Override
@@ -55,6 +58,9 @@ public class CarpenterHomeFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.rl_work_arrangement:
                 startActivity(new Intent(getActivity(), WorkArrangementActivity.class));
+                break;
+            case R.id.rl_all_craftsman:
+                startActivity(new Intent(getActivity(), AllWorksActivity.class));
                 break;
         }
     }

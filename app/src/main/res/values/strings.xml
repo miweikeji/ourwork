@@ -12,4 +12,6 @@
     <string name="title_activity_find_fartner">FindFartnerActivity</string>
     <string name="title_activity_my_friends">MyFriendsActivity</string>
     <string name="title_activity_work_arrangement">WorkArrangementActivity</string>
+    <string name="title_activity_owner_reservation">OwnerReservationActivity</string>
+    <string name="title_activity_all_works">AllWorksActivity</string>
 </resources>

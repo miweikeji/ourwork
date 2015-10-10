@@ -1,6 +1,7 @@
 package app.activity;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -9,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.LinkedList;
 
@@ -17,6 +21,7 @@ import app.views.NavigationBar;
 public abstract class BaseActivity extends FragmentActivity {
 
     private LinearLayout mContentView;
+    public static DisplayImageOptions options;
     public static LinkedList<Activity> sAllActivitys = new LinkedList<Activity>();
     public Activity mActivity;
     @Override
@@ -24,6 +29,7 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         mActivity=this;
+        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
         NavigationBar mBar = (NavigationBar)findViewById(R.id.navigationBar);
         initCotentView();
         initTitle(mBar);

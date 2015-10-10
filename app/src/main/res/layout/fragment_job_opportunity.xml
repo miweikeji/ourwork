@@ -47,6 +47,17 @@
                     android:id="@+id/pager"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true" />
+
+                <app.views.ViewpagerIndicator
+                    android:id="@+id/viewpagerIndicator1"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="38dp"
+                    android:layout_marginEnd="38dp" />
+
             </RelativeLayout>
 
             <RelativeLayout

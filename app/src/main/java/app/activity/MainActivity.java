@@ -42,17 +42,7 @@ public class MainActivity extends FragmentActivity {
             setContentView(R.layout.activity_main);
             initUI();
 
-            HttpRequest.testHttp(this, new ICallback<Meta>() {
-                @Override
-                public void onSucceed(Meta result) {
 
-                }
-
-                @Override
-                public void onFail(String error) {
-
-                }
-            }, "13365047950", "0");
         }
     private void initUI() {
         tv_tabs_mine= (TextView) findViewById(R.id.tv_tabs_mine);

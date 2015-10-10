@@ -26,12 +26,13 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
+        android:name="app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="app.activity.MainActivity"
+            android:name="app.activity.RegisterActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,11 +42,10 @@
         </activity>
         <activity
             android:name="app.activity.LoginActivity"
-
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="app.activity.RegisterActivity"
+            android:name="app.activity.MainActivity"
             android:label="@string/title_activity_register" >
         </activity>
         <activity
@@ -71,6 +71,16 @@
         <activity
             android:name="app.activity.WorkArrangementActivity"
             android:label="@string/title_activity_work_arrangement" >
+        </activity>
+        <activity
+            android:name="app.activity.OwnerReservationActivity"
+            android:label="@string/title_activity_owner_reservation"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="app.activity.AllWorksActivity"
+            android:label="@string/title_activity_all_works"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 

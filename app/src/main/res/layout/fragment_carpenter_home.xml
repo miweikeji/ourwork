@@ -53,7 +53,8 @@
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/white">
+                        android:background="@color/white"
+                        android:id="@+id/rl_all_craftsman">
 
                         <TextView
                             android:layout_width="wrap_content"

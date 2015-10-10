@@ -287,7 +287,17 @@ public class MobileOS {
 	public static boolean isJellyOrNewer() {
 		return android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN;
 	}
-
+	/**
+	 * 获取设备id
+	 *
+	 * @return
+	 */
+	public static String getDeviceId(Context context) {
+		final TelephonyManager tm = (TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		String deviceId = tm.getDeviceId();
+		return deviceId;
+	}
 
 	/**
 	 * 获取屏幕宽度

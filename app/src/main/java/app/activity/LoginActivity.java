@@ -24,10 +24,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void initUI() {
         TextView forgetPsw = (TextView)findViewById(R.id.forget_psw);
         TextView register = (TextView)findViewById(R.id.toRegister);
-        forgetPsw.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
-        forgetPsw.getPaint().setAntiAlias(true);//抗锯齿
-        register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
-        register.getPaint().setAntiAlias(true);//抗锯齿
+        forgetPsw.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
+        forgetPsw.getPaint().setAntiAlias(true);
+        register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        register.getPaint().setAntiAlias(true);
         register.setOnClickListener(this);
         forgetPsw.setOnClickListener(this);
     }
