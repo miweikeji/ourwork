@@ -1,5 +1,6 @@
 package app.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -86,6 +87,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             public void onSucceed(RegisterInfo result) {
                 MyLog.e("","result="+result.toString());
                 Toast.makeText(RegisterActivity.this,"result.toString()",Toast.LENGTH_LONG).show();
+                BasicInfoActivity.startActivity(RegisterActivity.this,result.getId());
+                finish();
             }
 
             @Override

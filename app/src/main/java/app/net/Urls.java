@@ -16,5 +16,6 @@ public class Urls {
     public final static String test = base_server + "App/Signup/getMsgCode";
     public final static String register = base_server+"App/Signup/register";
     public final static String login = base_server+"App/Signin/login";
+    public final static String BasicInfo = base_server+"App/Crafts/createCraftsBasicInfo";
 
 }

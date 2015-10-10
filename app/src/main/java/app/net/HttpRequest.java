@@ -100,7 +100,7 @@ public class HttpRequest {
         mList.add(new Param("mobile", mobile));
         mList.add(new Param("password",password));
         MyLog.e("","请求参数=="+mList.toString());
-        new MyAsyncTask(context, Urls.login, mList, new ICallback<String>() {
+        new MyAsyncTask(context, Urls.BasicInfo, mList, new ICallback<String>() {
 
             @Override
             public void onSucceed(String result) {
@@ -110,6 +110,43 @@ public class HttpRequest {
                     callback.onSucceed(userInfo);
                 } else {
                     callback.onFail(userInfo.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     * 基础信息
+     */
+    public static void infoHttp(Context context, String id,String name,String age,
+                                int wroktype,String workage,String workhome,final ICallback<Meta> callback
+    ) {
+        if (mList == null) {
+            mList = new ArrayList<Param>();
+        }
+        mList.clear();
+        mList.add(new Param("id", id));
+        mList.add(new Param("name", name));
+        mList.add(new Param("age", age));
+        mList.add(new Param("wroktype", ""+wroktype));
+        mList.add(new Param("workage", workage));
+        mList.add(new Param("workhome",workhome));
+        MyLog.e("","请求参数=="+mList.toString());
+        new MyAsyncTask(context, Urls.login, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+
+                Meta mate = JsonUtil.parseObject(result, Meta.class);
+                if (mate.getStatus() == 0) {
+                    callback.onSucceed(mate);
+                } else {
+                    callback.onFail(mate.getMsg());
                 }
             }
 
