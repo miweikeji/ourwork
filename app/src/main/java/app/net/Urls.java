@@ -15,5 +15,6 @@ public class Urls {
     //测试
     public final static String test = base_server + "App/Signup/getMsgCode";
     public final static String register = base_server+"App/Signup/register";
+    public final static String login = base_server+"App/Signin/login";
 
 }

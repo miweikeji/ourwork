@@ -400,7 +400,7 @@
                     android:text="退出登录"
                     android:id="@+id/button4"
                     android:textColor="@color/white"
-                    android:background="#F55F31"
+                    android:background="@drawable/sl_orgin"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>

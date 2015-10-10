@@ -127,7 +127,7 @@
         android:id="@+id/btn_register"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-        android:background="#F55F31"
+        android:background="@drawable/sl_orgin"
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp" />
