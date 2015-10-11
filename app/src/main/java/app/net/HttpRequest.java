@@ -137,7 +137,7 @@ public class HttpRequest {
         mList.add(new Param("workage", workage));
         mList.add(new Param("workhome",workhome));
         MyLog.e("","请求参数=="+mList.toString());
-        new MyAsyncTask(context, Urls.login, mList, new ICallback<String>() {
+        new MyAsyncTask(context, Urls.BasicInfo, mList, new ICallback<String>() {
 
             @Override
             public void onSucceed(String result) {
