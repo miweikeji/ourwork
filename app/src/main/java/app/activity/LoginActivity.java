@@ -89,7 +89,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onSucceed(UserInfo result) {
 
-                if(result.isHasinfo()){
+                if(!result.isHasinfo()){
                     startActivity(new Intent(LoginActivity.this,BasicInfoActivity.class));
                 }
             }

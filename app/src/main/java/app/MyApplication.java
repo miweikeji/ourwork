@@ -11,7 +11,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 /**
  * Created by Administrator on 2015/10/10.
  */
-public class MyApplication extends Application{
+public class  MyApplication extends Application{
 
     @Override
     public void onCreate() {
