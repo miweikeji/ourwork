@@ -24,7 +24,7 @@ import app.views.ViewpagerIndicator;
 /**
  * Created by Administrator on 2015/10/8.
  */
-public class JobOpportunityFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public class JobOpportunityFragment extends Fragment implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
     private View layout;
     private ViewpagerIndicator indicator;
@@ -37,6 +37,23 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
             "http://mss-product.oss-cn-shenzhen.aliyuncs.com/picture/advert/p720/A720_1442222369280.jpg",
             "http://mss-product.oss-cn-shenzhen.aliyuncs.com/picture/advert/p720/A720_1442919679412.jpg"};
 
+    JobOpportunityFragmentDelegate delegate;
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.rl_water:
+                delegate.getCraftsmanType("水电工");
+                break;
+        }
+    }
+
+    public interface JobOpportunityFragmentDelegate {
+        public void getCraftsmanType(String type);
+    }
+    public void setJobOpportunityFragmentDelegate(JobOpportunityFragmentDelegate delegate){
+        this.delegate = delegate;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +79,9 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
         rl_hight_two.setLayoutParams(params_two);
         pager = (ViewPager)layout.findViewById(R.id.pager);
         indicator = (ViewpagerIndicator) layout.findViewById(R.id.viewpagerIndicator1);
+
+        RelativeLayout rl_water = (RelativeLayout)layout.findViewById(R.id.rl_water);
+        rl_water.setOnClickListener(this);
     }
     private void initViewPager() {
         fm = getFragmentManager();

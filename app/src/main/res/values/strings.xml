@@ -14,4 +14,6 @@
     <string name="title_activity_work_arrangement">WorkArrangementActivity</string>
     <string name="title_activity_owner_reservation">OwnerReservationActivity</string>
     <string name="title_activity_all_works">AllWorksActivity</string>
+    <string name="title_activity_group_members">GroupMembersActivity</string>
+    <string name="title_activity_add_members">AddMembersActivity</string>
 </resources>

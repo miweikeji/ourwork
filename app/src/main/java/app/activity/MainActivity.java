@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import app.fragment.CarpenterHomeFragment;
+import app.fragment.JobContentsFragment;
 import app.fragment.JobOpportunityFragment;
 import app.fragment.MyJobFragment;
 import com.miweikeij.app.R;
@@ -26,7 +27,7 @@ public class MainActivity extends FragmentActivity {
     private MineFragment mineFragment;
     private MyJobFragment jobFragment;
     private CarpenterHomeFragment homeFragment;
-    private JobOpportunityFragment opportunityFragment;
+    private JobContentsFragment jobContentsFragment;
 
     private TextView tv_tabs_mine;
     private TextView tv_tabs_myjob;
@@ -60,13 +61,13 @@ public class MainActivity extends FragmentActivity {
         mineFragment = new MineFragment();
         jobFragment = new MyJobFragment();
         homeFragment = new CarpenterHomeFragment();
-        opportunityFragment = new JobOpportunityFragment();
-        fragments = new Fragment[]{opportunityFragment,homeFragment,jobFragment,mineFragment};
-        getSupportFragmentManager().beginTransaction().add(R.id.contents, opportunityFragment)
+        jobContentsFragment = new JobContentsFragment();
+        fragments = new Fragment[]{jobContentsFragment,homeFragment,jobFragment,mineFragment};
+        getSupportFragmentManager().beginTransaction().add(R.id.contents, jobContentsFragment)
                 .add(R.id.contents, homeFragment).hide(homeFragment).
                 add(R.id.contents, jobFragment).hide(jobFragment).
                 add(R.id.contents, mineFragment).hide(mineFragment).
-                show(opportunityFragment).commit();
+                show(jobContentsFragment).commit();
 
 
     }

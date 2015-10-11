@@ -28,10 +28,11 @@
         android:layout_height="200dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-         android:background="@color/white"
+         android:background="@drawable/has_greads_line_bg"
         android:layout_below="@+id/relativeLayout5"
+
         android:layout_centerHorizontal="true"
-        android:id="@+id/relativeLayout6">
+        android:id="@+id/rl_group_members">
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,7 +94,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:background="@color/white"
-        android:layout_below="@+id/relativeLayout6"
+        android:layout_below="@+id/rl_group_members"
         android:layout_centerHorizontal="true"
         android:id="@+id/rl_owner_reservation">
 

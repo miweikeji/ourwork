@@ -25,6 +25,8 @@ public class CraftsmanGroupActivity extends BaseActivity implements View.OnClick
 
         RelativeLayout rl_owner_reservation = (RelativeLayout) findViewById(R.id.rl_owner_reservation);
         rl_owner_reservation.setOnClickListener(this);
+        RelativeLayout rl_group_members = (RelativeLayout) findViewById(R.id.rl_group_members);
+        rl_group_members.setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +45,9 @@ public class CraftsmanGroupActivity extends BaseActivity implements View.OnClick
         switch (view.getId()){
             case R.id.rl_owner_reservation:
                 startActivity(new Intent(this,OwnerReservationActivity.class));
+                break;
+            case R.id.rl_group_members:
+                startActivity(new Intent(this,GroupMembersActivity.class));
                 break;
         }
     }

@@ -32,7 +32,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="app.activity.BasicInfoActivity"
+            android:name="app.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,7 @@
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="app.activity.MainActivity"
+            android:name="app.activity.BasicInfoActivity"
             android:label="@string/title_activity_register" >
         </activity>
         <activity
@@ -81,6 +81,14 @@
             android:name="app.activity.AllWorksActivity"
             android:label="@string/title_activity_all_works"
             android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="app.activity.GroupMembersActivity"
+            android:label="@string/title_activity_group_members" >
+        </activity>
+        <activity
+            android:name="app.activity.AddMembersActivity"
+            android:label="@string/title_activity_add_members" >
         </activity>
     </application>
 
