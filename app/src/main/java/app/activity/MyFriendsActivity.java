@@ -1,17 +1,24 @@
 package app.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.miweikeij.app.R;
 
+
+
+import app.adapter.MyFriendsAdapter;
+import app.views.AutoLoadListView;
 import app.views.NavigationBar;
 
-public class MyFriendsActivity extends BaseActivity {
+public class MyFriendsActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, AutoLoadListView.AutoLoadingListener {
 
 
+    private int count=9;
+    private MyFriendsAdapter adapter;
+    private SwipeRefreshLayout srl_refresh;
+    private AutoLoadListView listView;
+    private Handler handler = new Handler();
     @Override
     public void obtainData() {
 
@@ -19,6 +26,12 @@ public class MyFriendsActivity extends BaseActivity {
 
     @Override
     public void initUI() {
+        srl_refresh = (SwipeRefreshLayout)findViewById(R.id.srl_refresh);
+        listView = (AutoLoadListView)findViewById(R.id.listView);
+        srl_refresh.setOnRefreshListener(this);
+        adapter = new MyFriendsAdapter(this,count);
+        listView.setAdapter(adapter);
+        listView.setAutoLoadListener(this);
 
     }
 
@@ -32,5 +45,25 @@ public class MyFriendsActivity extends BaseActivity {
 
         mBar.setContexts(this);
         mBar.setTitle("我的好友");
+    }
+
+    @Override
+    public void onRefresh() {
+        srl_refresh.setRefreshing(false);
+
+        adapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onLoadMore() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                count+=6;
+                adapter.notifyDataSetChanged();
+                listView.setIsOver(true);
+            }
+        },4000);
     }
 }
