@@ -25,4 +25,30 @@
         <item name="android:layout_height">45dp</item>
     </style>
 
+    <style name="item_divide_nomargin" parent="FillContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#C7C7BB</item>
+    </style>
+
+    <style name="item_divider" parent="item_divide_nomargin">
+        <item name="android:layout_marginLeft">@dimen/margin_left_right</item>
+        <item name="android:layout_marginRight">@dimen/margin_left_right</item>
+    </style>
+
+    <style name="Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+
 </resources>

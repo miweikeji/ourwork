@@ -126,6 +126,19 @@
             android:screenOrientation="portrait"
             android:label="@string/title_activity_add_members" >
         </activity>
+
+        <activity
+            android:name="app.activity.user.ProtectMoneyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_add_members" >
+        </activity>
+        <activity
+            android:name="app.activity.user.IntegralActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_add_members" >
+        </activity>
     </application>
 
 </manifest>

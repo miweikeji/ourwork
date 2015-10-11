@@ -16,4 +16,9 @@
     <string name="title_activity_all_works">AllWorksActivity</string>
     <string name="title_activity_group_members">GroupMembersActivity</string>
     <string name="title_activity_add_members">AddMembersActivity</string>
+
+
+    <string name="refund">确定退款后，"一匠一家"工作人员会尽快确认您的信息，把款项退到您登记的银行账号</string>
+
+
 </resources>

@@ -21,7 +21,7 @@ import app.entity.MyWork;
 /**
  * Created by Administrator on 2015/10/11.
  */
-public class WorkConstructionFragment extends Fragment implements MyWorkAdapter.MyItemClickListener{
+public class WorkConstructionFragment extends Fragment implements MyWorkAdapter.MyItemClickListener {
 
     private RecyclerView recyclerView;
 
@@ -42,11 +42,11 @@ public class WorkConstructionFragment extends Fragment implements MyWorkAdapter.
         recyclerView.setLayoutManager(layoutManager);
         //设置间隔
 //        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).colorResId(R.color.line).size(1).marginResId(R.dimen.margin_left_right).build());
-        List<MyWork>  dataList=new ArrayList<>();
-        int  i;
-        for(i=0;i<10;i++){
-            MyWork  myWork=new MyWork();
-            myWork.setTitle("小屋"+i);
+        List<MyWork> dataList = new ArrayList<>();
+        int i;
+        for (i = 0; i < 10; i++) {
+            MyWork myWork = new MyWork();
+            myWork.setTitle("小屋" + i);
             dataList.add(myWork);
         }
 

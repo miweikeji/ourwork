@@ -2,9 +2,9 @@ package app.activity;
 
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.widget.ListView;
 
 import com.miweikeij.app.R;
-
 
 
 import app.adapter.MyFriendsAdapter;
@@ -14,11 +14,12 @@ import app.views.NavigationBar;
 public class MyFriendsActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, AutoLoadListView.AutoLoadingListener {
 
 
-    private int count=9;
+    private int count = 9;
     private MyFriendsAdapter adapter;
     private SwipeRefreshLayout srl_refresh;
-    private AutoLoadListView listView;
+    private ListView listView;
     private Handler handler = new Handler();
+
     @Override
     public void obtainData() {
 
@@ -26,12 +27,12 @@ public class MyFriendsActivity extends BaseActivity implements SwipeRefreshLayou
 
     @Override
     public void initUI() {
-        srl_refresh = (SwipeRefreshLayout)findViewById(R.id.srl_refresh);
-        listView = (AutoLoadListView)findViewById(R.id.listView);
+        srl_refresh = (SwipeRefreshLayout) findViewById(R.id.srl_refresh);
+        listView = (ListView) findViewById(R.id.listView);
         srl_refresh.setOnRefreshListener(this);
-        adapter = new MyFriendsAdapter(this,count);
+        adapter = new MyFriendsAdapter(this, count);
         listView.setAdapter(adapter);
-        listView.setAutoLoadListener(this);
+//        listView.setAutoLoadListener(this);
 
     }
 
@@ -60,10 +61,10 @@ public class MyFriendsActivity extends BaseActivity implements SwipeRefreshLayou
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                count+=6;
+                count += 6;
                 adapter.notifyDataSetChanged();
-                listView.setIsOver(true);
+//                listView.setIsOver(true);
             }
-        },4000);
+        }, 4000);
     }
 }
