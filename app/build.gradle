@@ -25,6 +25,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile files('libs/fastjson-1.1.26.jar')
     compile files('libs/image_loader_1.9.2.jar')
+    compile project(':library_pulltorefesh')
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.17'
 }

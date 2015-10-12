@@ -148,7 +148,25 @@
         </activity>
 
         <activity
-            android:name="app.activity.user.JobAuthentActivity"
+        android:name="app.activity.user.JobAuthentActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:screenOrientation="portrait"
+        >
+    </activity>
+        <activity
+            android:name="app.activity.WorkDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name="app.activity.HouseActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name="app.activity.MyWorkDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             >

@@ -3,6 +3,7 @@
 
     <color name="transparent">#00ffffff</color>
 
+    <color name="dialog_bg">#80000000</color>
     <color name="base_background">#F8F6F2</color>
     <color name="base_divider">#1e000000</color>
     <color name="base_green">#80cc29</color>

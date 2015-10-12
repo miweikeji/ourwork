@@ -37,8 +37,8 @@ public class MyJobFragment extends Fragment {
         CompletedFragment completedFragment = new CompletedFragment();
         ConstructionFragment constructionFragment = new ConstructionFragment();
         fragments = new ArrayList<Fragment>();
-        fragments.add(completedFragment);
         fragments.add(constructionFragment);
+        fragments.add(completedFragment);
        ViewPager pager = (ViewPager) layout.findViewById(R.id.pager);
        PagerSlidingTabStrip pagerSliding =(PagerSlidingTabStrip) layout.findViewById(R.id.pagerSliding);
         pager.setAdapter(new MyAdapter(getChildFragmentManager()));
