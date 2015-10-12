@@ -13,4 +13,8 @@
     <color name="tabs_tv">#949494</color>
     <color name="activity_bg">#f0f0f0</color>
 
+    <color name="black_1">#f0000000</color>
+    <color name="black_2">#e0000000</color>
+    <color name="black_3">#60000000</color>
+
 </resources>

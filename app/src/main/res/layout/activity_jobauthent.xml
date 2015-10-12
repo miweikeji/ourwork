@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/margin_left_right"
+    android:paddingRight="@dimen/margin_left_right">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ed_bg"
+        android:layout_marginTop="@dimen/margin_top"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_left_right"
+                android:text="身份证姓名"
+                android:textColor="@color/black_1"
+                android:textSize="@dimen/textsize_middle" />
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:hint="输入姓名"
+                android:paddingLeft="@dimen/margin_left_right"
+                android:singleLine="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/item_divide_nomargin"
+            android:background="#dcdcdc"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_left_right"
+                android:text="身份证号码"
+                android:textColor="@color/black_1"
+                android:textSize="@dimen/textsize_middle" />
+
+            <EditText
+                android:id="@+id/edit_authent"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:hint="输入身份证号码"
+                android:paddingLeft="@dimen/margin_left_right"
+                android:singleLine="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/item_divide_nomargin"
+            android:background="#dcdcdc"></View>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_left_right"
+                android:text="身份证正面"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black_1"
+                android:textSize="@dimen/textsize_middle" />
+
+            <ImageView
+                android:id="@+id/iv_position"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_left_right"
+                android:background="@mipmap/ic_launcher"/>
+
+            <ImageView
+                android:id="@+id/iv_me_position"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_position"
+                android:layout_marginRight="@dimen/margin_left_right"
+                android:background="@mipmap/ic_launcher"/>
+
+
+        </RelativeLayout>
+
+        <View
+            style="@style/item_divide_nomargin"
+            android:background="#dcdcdc"></View>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_left_right"
+                android:text="身份证反面"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black_1"
+                android:textSize="@dimen/textsize_middle" />
+
+            <ImageView
+                android:id="@+id/iv_nagetive"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_left_right"
+                android:background="@mipmap/ic_launcher"/>
+
+            <ImageView
+                android:id="@+id/iv_me_nagetive"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_nagetive"
+                android:layout_marginRight="@dimen/margin_left_right"
+                android:background="@mipmap/ic_launcher"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

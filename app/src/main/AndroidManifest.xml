@@ -139,6 +139,20 @@
             android:screenOrientation="portrait"
             android:label="@string/title_activity_add_members" >
         </activity>
+
+        <activity
+            android:name="app.activity.user.AboutUsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+          >
+        </activity>
+
+        <activity
+            android:name="app.activity.user.JobAuthentActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
     </application>
 
 </manifest>

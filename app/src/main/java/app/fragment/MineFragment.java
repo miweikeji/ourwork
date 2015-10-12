@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
+import app.activity.user.AboutUsActivity;
 import app.activity.user.FeekBackActivity;
 import app.activity.user.IntegralActivity;
+import app.activity.user.JobAuthentActivity;
 import app.activity.user.ProtectMoneyActivity;
 
 /**
@@ -66,9 +68,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             //关于
             case R.id.frame_me_about:
+                startActivity(new Intent(getActivity(), AboutUsActivity.class));
                 break;
             //工人认证
             case R.id.frame_me_authencation:
+                startActivity(new Intent(getActivity(), JobAuthentActivity.class));
                 break;
             //我的积分
             case R.id.frame_me_integral:
