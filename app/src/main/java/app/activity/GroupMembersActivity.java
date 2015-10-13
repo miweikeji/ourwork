@@ -5,9 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.ScrollView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.miweikeij.app.R;
 
+import app.adapter.GroupMemberAdapter;
+import app.views.MyGridView;
 import app.views.NavigationBar;
 
 public class GroupMembersActivity extends BaseActivity implements NavigationBar.RightOnClick {
@@ -20,6 +26,23 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
 
     @Override
     public void initUI() {
+        PullToRefreshScrollView pull_to_grid = (PullToRefreshScrollView)findViewById(R.id.pull_to_grid);
+        MyGridView grid_memeber = (MyGridView)findViewById(R.id.grid_memeber);
+        grid_memeber.setFocusable(false);
+        GroupMemberAdapter adapter = new GroupMemberAdapter(this);
+        grid_memeber.setAdapter(adapter);
+        pull_to_grid.setMode(PullToRefreshBase.Mode.BOTH);
+        pull_to_grid.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+            }
+        });
 
     }
 
