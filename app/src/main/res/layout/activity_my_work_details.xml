@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:id="@+id/scrollView6"
         android:layout_above="@+id/button"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" >
 
