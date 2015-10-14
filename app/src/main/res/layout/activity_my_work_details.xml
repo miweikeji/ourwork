@@ -315,6 +315,7 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/button"
         android:textColor="@color/white"
+        android:onClick="toProdDetails"
         android:text="查看施工项目"
         android:background="@drawable/sl_orgin"/>
 

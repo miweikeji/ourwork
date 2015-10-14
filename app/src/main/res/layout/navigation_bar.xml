@@ -55,5 +55,32 @@
             android:layout_marginRight="15dp"
             
             android:layout_alignParentRight="true" />
+
+        <LinearLayout
+            android:id="@+id/line_two_text"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"
+            android:layout_marginRight="15dp"
+
+            android:layout_alignParentRight="true">
+            <TextView
+                android:id="@+id/tv_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="看他"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/tv_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:text="看他"/>
+
+        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

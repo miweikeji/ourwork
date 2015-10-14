@@ -154,7 +154,13 @@
         >
     </activity>
         <activity
-            android:name="app.activity.WorkDetailsActivity"
+        android:name="app.activity.WorkDetailsActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:screenOrientation="portrait"
+        >
+    </activity>
+        <activity
+            android:name="app.activity.MyWorkDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             >
@@ -165,8 +171,15 @@
             android:screenOrientation="portrait"
             >
         </activity>
+
         <activity
-            android:name="app.activity.MyWorkDetailsActivity"
+            android:name="app.activity.CraftsmanZoneActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name="app.activity.SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             >

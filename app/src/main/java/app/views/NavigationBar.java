@@ -24,6 +24,9 @@ public class NavigationBar extends LinearLayout implements View.OnClickListener 
     private TextView tv_right_title;
     private ImageView img_back;
     private Context context;
+    private LinearLayout line_two_text;
+    private TextView tv_up;
+    private TextView tv_down;
 
     private RightOnClick rightOnClick;
 
@@ -45,6 +48,10 @@ public class NavigationBar extends LinearLayout implements View.OnClickListener 
         tv_center_title = (TextView)layout.findViewById(R.id.tv_center_title);
         tv_right_title = (TextView)layout.findViewById(R.id.tv_right_title);
         img_back = (ImageView)layout.findViewById(R.id.img_back);
+        line_two_text=(LinearLayout)layout.findViewById(R.id.line_two_text);
+        tv_up = (TextView)findViewById(R.id.tv_up);
+        tv_down = (TextView)findViewById(R.id.tv_down);
+        line_two_text.setOnClickListener(this);
         img_back.setOnClickListener(this);
         tv_right_title.setOnClickListener(this);
     }
@@ -68,6 +75,14 @@ public class NavigationBar extends LinearLayout implements View.OnClickListener 
         tv_right_title.setText(rightTitle);
     }
 
+    public void setRightTwoTitle(String title){
+        if(title.length()>3){
+            line_two_text.setVisibility(View.VISIBLE);
+            tv_up.setText(title.substring(0,2));
+            tv_down.setText(title.substring(2,4));
+        }
+    }
+
 
     public void setBarInVisibile(){
         rl_navigation_bar.setVisibility(View.GONE);
@@ -83,6 +98,9 @@ public class NavigationBar extends LinearLayout implements View.OnClickListener 
                 activity.finish();
                 break;
             case R.id.tv_right_title:
+                rightOnClick.setRightOnClick();
+                break;
+            case R.id.line_two_text:
                 rightOnClick.setRightOnClick();
                 break;
         }

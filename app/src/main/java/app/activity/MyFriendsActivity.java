@@ -14,7 +14,7 @@ import app.views.NavigationBar;
 public class MyFriendsActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, AutoLoadListView.AutoLoadingListener {
 
 
-    private int count = 9;
+      private int count = 9;
     private MyFriendsAdapter adapter;
     private SwipeRefreshLayout srl_refresh;
     private ListView listView;
