@@ -7,6 +7,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.entity.Crafts;
+import app.entity.CraftsResult;
 import app.entity.Meta;
 import app.entity.RegisterInfo;
 import app.entity.UserInfo;
@@ -133,7 +135,7 @@ public class HttpRequest {
         mList.add(new Param("id", id));
         mList.add(new Param("name", name));
         mList.add(new Param("age", age));
-        mList.add(new Param("wroktype", ""+wroktype));
+        mList.add(new Param("wroktype", "" + wroktype));
         mList.add(new Param("workage", workage));
         mList.add(new Param("workhome",workhome));
         MyLog.e("","请求参数=="+mList.toString());
@@ -143,6 +145,39 @@ public class HttpRequest {
             public void onSucceed(String result) {
 
                 Meta mate = JsonUtil.parseObject(result, Meta.class);
+                if (mate.getStatus() == 0) {
+                    callback.onSucceed(mate);
+                } else {
+                    callback.onFail(mate.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     * 工匠信息
+     */
+    public static void craftsmanInfoHttp(Context context, String cid,final ICallback<CraftsResult> callback
+    ) {
+        if (mList == null) {
+            mList = new ArrayList<Param>();
+        }
+        mList.clear();
+        mList.add(new Param("cid", cid));
+
+        MyLog.e("","请求参数=="+mList.toString());
+        new MyAsyncTask(context, Urls.craftsman_info, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("" ,"result=="+result.toString());
+                CraftsResult mate = JsonUtil.parseObject(result, CraftsResult.class);
+
                 if (mate.getStatus() == 0) {
                     callback.onSucceed(mate);
                 } else {

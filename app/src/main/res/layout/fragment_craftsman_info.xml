@@ -48,13 +48,14 @@
 
 
                         <RelativeLayout
+                            android:id="@+id/rl_normal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:visibility="gone">
 
                             <TextView
-                                android:id="@+id/textView9"
+                                android:id="@+id/tv_normal_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
@@ -65,6 +66,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:id="@+id/rl_foreman"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center">
@@ -253,7 +255,7 @@
                             android:layout_height="wrap_content"
                             android:text="哦较少的哦公司哦啊的简欧了圣诞节哦水井坊了圣诞节哦第"
                             android:lineSpacingMultiplier="1.5"
-                            android:id="@+id/textView82"
+                            android:id="@+id/tv_area_server"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true" />
@@ -289,7 +291,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="New Text"
-                            android:id="@+id/textView84"
+                            android:id="@+id/tv_me_Introduction"
                             android:layout_marginLeft="5dp"
                             android:lineSpacingMultiplier="1.5"
                             android:layout_alignParentTop="true"
@@ -327,7 +329,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="New Text"
-                            android:id="@+id/textView86"
+                            android:id="@+id/tv_ole_case"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true" />
@@ -369,7 +371,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="New Text"
-                                android:id="@+id/textView90"
+                                android:id="@+id/tv_Ordinary_vip"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />
@@ -383,7 +385,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="New Text"
-                                android:id="@+id/textView89"
+                                android:id="@+id/tv_Technology"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />
@@ -426,7 +428,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="New Text"
-                                android:id="@+id/textView91"
+                                android:id="@+id/tv_Authentication"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />
@@ -440,7 +442,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="New Text"
-                                android:id="@+id/textView92"
+                                android:id="@+id/tv_gold"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />
@@ -450,9 +452,11 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_is_foreman"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -469,7 +473,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="鲁班的工匠班组"
-                        android:id="@+id/textView28"
+                        android:id="@+id/tv_my_craftsman_group"
                         android:layout_marginTop="20dp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true" />
@@ -478,7 +482,7 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_below="@+id/textView28"
+                        android:layout_below="@+id/tv_my_craftsman_group"
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
@@ -490,7 +494,7 @@
                             android:text="New Text"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:id="@+id/textView29" />
+                            android:id="@+id/tv_creat_time" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -498,7 +502,7 @@
                             android:text="New Text"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:id="@+id/textView30" />
+                            android:id="@+id/tv_group_num" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -506,7 +510,7 @@
                             android:text="New Text"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:id="@+id/textView31" />
+                            android:id="@+id/tv_Construction_type" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -514,7 +518,7 @@
                             android:text="New Text"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:id="@+id/textView32" />
+                            android:id="@+id/tv_style" />
                     </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>
