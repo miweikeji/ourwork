@@ -19,5 +19,7 @@ public class Urls {
     public final static String BasicInfo = base_server+"App/Crafts/createCraftsBasicInfo";
     //获取工匠信息
     public final static String craftsman_info=base_server+"/App/Crafts/getCraftsInfoRelevant";
+    //获取工匠参与的所有案例
+    public final static String all_case = base_server+"App/House/getHouseListByCraftsId";
 
 }

@@ -28,7 +28,9 @@ public class BannerFragment extends Fragment{
         View layout = inflater.inflate(R.layout.fragment_banner,null);
 
         img_banner = (ImageView) layout.findViewById(R.id.img_banner);
-        imageLoader.displayImage(url,img_banner,option);
+        if(imageLoader!=null){
+            imageLoader.displayImage(url,img_banner,option);
+        }
         return layout;
     }
 

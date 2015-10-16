@@ -73,7 +73,7 @@ public class MyWorkAdapter extends RecyclerView.Adapter {
                     notifyDataSetChanged();
                 }
             });
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+            tvTitle = (TextView) itemView.findViewById(R.id.tv_name);
         }
     }
 

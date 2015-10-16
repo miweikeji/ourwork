@@ -89,7 +89,12 @@ public class CraftsmanInfoFragment extends Fragment {
                 foremanName.setText(crafts.getName());
                 normalName.setText(crafts.getName());
                 age.setText(""+crafts.getAge()+"岁");
-
+                introduction.setText(crafts.getDescription());
+                areaServer.setText(crafts.getServer_area());
+                area.setText(crafts.getCworkhome());
+                jobAge.setText(""+crafts.getCworkold());
+                jobType.setText(crafts.getProfession());
+                oldCase.setText(crafts.getWork());
                 imageLoader.displayImage(crafts.getCimg(), userImage, options);
 
             }
