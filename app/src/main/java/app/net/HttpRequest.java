@@ -16,6 +16,7 @@ import app.entity.GroupMemberResult;
 import app.entity.Meta;
 import app.entity.RegisterInfo;
 import app.entity.UserInfo;
+import app.entity.UserInfoResult;
 import app.tools.MyLog;
 import app.utils.JsonUtil;
 import app.utils.MobileOS;
@@ -26,15 +27,15 @@ import app.utils.MobileOS;
 public class HttpRequest {
 
     /**
-     * 测试
+     * 发送验证码
      */
-    public static void testHttp(Context context, final ICallback<Meta> callback, String mobile,
+    public static void sendCaptcha(Context context, final ICallback<Meta> callback, String mobile,
                                 String type) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("mobile", mobile));
         mList.add(new Param("type", type));
 
-        new MyAsyncTask(context, Urls.test, mList, new ICallback<String>() {
+        new MyAsyncTask(context, Urls.getMsgCode, mList, new ICallback<String>() {
 
             @Override
             public void onSucceed(String result) {
@@ -89,22 +90,22 @@ public class HttpRequest {
     /**
      * 登录
      */
-    public static void loginHttp(Context context, String mobile,String password, final ICallback<UserInfo> callback
+    public static void loginHttp(Context context, String mobile,String password, final ICallback<UserInfoResult> callback
                                     ) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("mobile", mobile));
         mList.add(new Param("password",password));
         MyLog.e("","请求参数=="+mList.toString());
-        new MyAsyncTask(context, Urls.BasicInfo, mList, new ICallback<String>() {
+        new MyAsyncTask(context, Urls.login, mList, new ICallback<String>() {
 
             @Override
             public void onSucceed(String result) {
 
-                UserInfo userInfo = JsonUtil.parseObject(result, UserInfo.class);
-                if (userInfo.getStatus() == 0) {
-                    callback.onSucceed(userInfo);
+                UserInfoResult userInfoResult = JsonUtil.parseObject(result, UserInfoResult.class);
+                if (userInfoResult.getStatus() == 0) {
+                    callback.onSucceed(userInfoResult);
                 } else {
-                    callback.onFail(userInfo.getMsg());
+                    callback.onFail(userInfoResult.getMsg());
                 }
             }
 
@@ -119,7 +120,7 @@ public class HttpRequest {
      * 基础信息
      */
     public static void infoHttp(Context context, String id,String name,String age,
-                                int wroktype,String workage,String workhome,final ICallback<Meta> callback
+                                String wroktype,String workage,String workhome,final ICallback<Meta> callback
     ) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("id", id));
@@ -295,6 +296,38 @@ public class HttpRequest {
                     callback.onSucceed(mate);
                 } else {
                     callback.onFail(mate.getMsg());
+
+                }
+
+            }
+                @Override
+                public void onFail(String error) {
+                    callback.onFail(error);
+                }
+            }).executeOnExecutor();
+        }
+
+    /**
+     * 找回密码
+     */
+    public static void findPsw(Context context, final ICallback<Meta> callback, String mobile,String password,
+                                    String code) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("mobile", mobile));
+        mList.add(new Param("code", code));
+        mList.add(new Param("password", password));
+        mList.add(new Param("deviceid", MobileOS.getDeviceId(context)));
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.forgetPassword, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
                 }
             }
 

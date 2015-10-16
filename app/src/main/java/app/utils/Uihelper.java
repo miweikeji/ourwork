@@ -41,7 +41,7 @@ public class Uihelper {
     public static void trace(String st) {
 
         if (Constants.Debug) {
-            Log.e("miqian_trace", st);
+            Log.e("miweikeji_trace", st);
         }
 
     }

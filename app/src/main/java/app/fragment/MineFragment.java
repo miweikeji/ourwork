@@ -12,11 +12,13 @@ import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
+import app.activity.LoginActivity;
 import app.activity.user.AboutUsActivity;
 import app.activity.user.FeekBackActivity;
 import app.activity.user.IntegralActivity;
 import app.activity.user.JobAuthentActivity;
 import app.activity.user.ProtectMoneyActivity;
+import app.utils.UserUtil;
 
 /**
  * Created by Administrator on 2015/10/2.
@@ -30,13 +32,27 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private TextView tvName;
     private TextView tvPosition;
     private ImageView ivUserImage;
+    private View layout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_mine, null);
+        layout = inflater.inflate(R.layout.fragment_mine, null);
         findView(layout);
         return layout;
+    }
+
+    @Override
+    public void onStart() {
+
+        if (UserUtil.hasLogin(getActivity())){
+            layout.findViewById(R.id.frame_logined).setVisibility(View.VISIBLE);
+            layout.findViewById(R.id.frame_noLogin).setVisibility(View.GONE);
+        }else {
+            layout.findViewById(R.id.frame_logined).setVisibility(View.GONE);
+            layout.findViewById(R.id.frame_noLogin).setVisibility(View.VISIBLE);
+        }
+        super.onStart();
     }
 
     private void findView(View layout) {
@@ -50,6 +66,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         tvPosition = (TextView) layout.findViewById(R.id.tv_me_position);
 
         ivUserImage = (ImageView) layout.findViewById(R.id.iv_me_userimage);
+        layout.findViewById(R.id.btn_exit).setOnClickListener(this);
 
         layout.findViewById(R.id.frame_me_about).setOnClickListener(this);
         layout.findViewById(R.id.frame_me_authencation).setOnClickListener(this);
@@ -58,6 +75,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         layout.findViewById(R.id.frame_me_suggestion).setOnClickListener(this);
 
         layout.findViewById(R.id.tv_sign).setOnClickListener(this);
+        layout.findViewById(R.id.tv_login).setOnClickListener(this);
 
 
     }
@@ -89,6 +107,18 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             //意见反馈
             case R.id.frame_me_suggestion:
                 startActivity(new Intent(getActivity(), FeekBackActivity.class));
+
+                break;
+                //退出
+            case R.id.btn_exit:
+
+                UserUtil.clearUserInfo(getActivity());
+                onStart();
+
+                break;
+            case R.id.tv_login:
+
+                LoginActivity.enterActivity(getActivity());
 
                 break;
             default:

@@ -36,10 +36,11 @@
     </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/frame_logined"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible">
 
 
         <LinearLayout
@@ -407,7 +408,7 @@
                 android:paddingRight="15dp">
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/btn_exit"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
@@ -420,6 +421,39 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/frame_noLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您还未登录呦"
+                android:textSize="@dimen/textsize_normal" />
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:text="点此登录"
+                android:textColor="@color/base_orange"
+                android:textSize="@dimen/textsize_normal" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

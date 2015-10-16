@@ -1,11 +1,9 @@
 package app.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,10 +13,13 @@ import android.widget.Toast;
 import com.miweikeij.app.R;
 
 import app.entity.UserInfo;
+import app.entity.UserInfoResult;
 import app.net.HttpRequest;
-import app.net.HttpUtils;
 import app.net.ICallback;
+import app.tools.MyLog;
 import app.utils.MobileOS;
+import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.NavigationBar;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -61,23 +62,33 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.toRegister:
-                startActivity(new Intent(this,RegisterActivity.class));
+                Intent intent=new Intent(this,SendCaptchaActivity.class);
+                intent.putExtra("isForgetPsw",false);
+                startActivity(intent);
                 break;
             case R.id.forget_psw:
-
+                Intent intent_psw=new Intent(this,SendCaptchaActivity.class);
+                intent_psw.putExtra("isForgetPsw",true);
+                startActivity(intent_psw);
                 break;
             case R.id.btn_login:
                String phone = et_phone.getText().toString().trim();
                String psw = et_psw.getText().toString().trim();
-                if(MobileOS.isMobileNO(phone)){
-                    if(!"".equals(psw)&&psw!=null){
-                        login(phone,psw);
-                    }else {
-                        Toast.makeText(this,"请输入密码",Toast.LENGTH_LONG).show();
+
+                if (!TextUtils.isEmpty(phone)){
+                    if(MobileOS.isMobileNO(phone)){
+                        if(!"".equals(psw)&&psw!=null){
+                            login(phone,psw);
+                        }else {
+                            Uihelper.showToast(this, "请输入密码");
+                        }
+                    }else{
+                        Uihelper.showToast(this, "您输入的电话号码有误");
                     }
-                }else{
-                    Toast.makeText(this,"您输入的电话号码有误",Toast.LENGTH_LONG).show();
+                }else {
+                    Uihelper.showToast(this, "电话号码不能为空");
                 }
+
 
                 break;
         }
@@ -85,19 +96,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void login(String phone,String psw) {
 
-        HttpRequest.loginHttp(this, phone, psw, new ICallback<UserInfo>() {
+        HttpRequest.loginHttp(this, phone, psw, new ICallback<UserInfoResult>() {
             @Override
-            public void onSucceed(UserInfo result) {
-
-                if(!result.isHasinfo()){
-                    startActivity(new Intent(LoginActivity.this,BasicInfoActivity.class));
+            public void onSucceed(UserInfoResult result) {
+                Uihelper.trace(result.getCrafts().toString());
+                UserUtil.saveUserId(LoginActivity.this, result.getCrafts().getId());
+                if (!result.getCrafts().isHasinfo()){
+                    BasicInfoActivity.startActivity(LoginActivity.this, result.getCrafts().getId());
                 }
+                finish();
             }
-
             @Override
             public void onFail(String error) {
-
+                Uihelper.showToast(mActivity,error);
             }
         });
+    }
+
+    public static void enterActivity(Activity activity) {
+
+        Intent intent = new Intent(activity, LoginActivity.class);
+        activity.startActivity(intent);
     }
 }
