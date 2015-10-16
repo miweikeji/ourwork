@@ -13,7 +13,7 @@ public class Urls {
     //    public static final String base_server = "http://172.20.8.11:8082/miqian-app/";
 
     //测试
-    public final static String test = base_server + "App/Signup/getMsgCode";
+    public final static String getMsgCode = base_server + "App/Signup/getMsgCode";
     public final static String register = base_server+"App/Signup/register";
     public final static String login = base_server+"App/Signin/login";
     public final static String BasicInfo = base_server+"App/Crafts/createCraftsBasicInfo";
@@ -21,5 +21,8 @@ public class Urls {
     public final static String craftsman_info=base_server+"/App/Crafts/getCraftsInfoRelevant";
     //获取工匠参与的所有案例
     public final static String all_case = base_server+"App/House/getHouseListByCraftsId";
+    //找回密码
+    public final static String forgetPassword = base_server+"App/Signup/forgetPassword";
+
 
 }

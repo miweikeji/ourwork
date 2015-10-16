@@ -24,13 +24,14 @@ public abstract class BaseActivity extends FragmentActivity {
     public static DisplayImageOptions options;
     public static LinkedList<Activity> sAllActivitys = new LinkedList<Activity>();
     public Activity mActivity;
+    public  NavigationBar mBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         mActivity=this;
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
-        NavigationBar mBar = (NavigationBar)findViewById(R.id.navigationBar);
+        mBar = (NavigationBar)findViewById(R.id.navigationBar);
         initCotentView();
         obtainData();
         initTitle(mBar);

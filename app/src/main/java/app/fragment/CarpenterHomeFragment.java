@@ -16,6 +16,7 @@ import app.activity.CraftsmanGroupActivity;
 import app.activity.FindFartnerActivity;
 import app.activity.MyFriendsActivity;
 import app.activity.WorkArrangementActivity;
+import app.utils.UserUtil;
 
 /**
  * Created by Administrator on 2015/10/8.
@@ -54,7 +55,9 @@ public class CarpenterHomeFragment extends Fragment implements View.OnClickListe
                 startActivity(new Intent(getActivity(), FindFartnerActivity.class));
                 break;
             case R.id.rl_my_friends:
-                startActivity(new Intent(getActivity(), MyFriendsActivity.class));
+                if (UserUtil.isLogin(getActivity())){
+                    startActivity(new Intent(getActivity(), MyFriendsActivity.class));
+                }
                 break;
             case R.id.rl_work_arrangement:
                 startActivity(new Intent(getActivity(), WorkArrangementActivity.class));

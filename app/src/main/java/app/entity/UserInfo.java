@@ -3,7 +3,7 @@ package app.entity;
 /**
  * Created by Administrator on 2015/10/10.
  */
-public class UserInfo extends Meta{
+public class UserInfo{
 
     private String cworkmobile;
     private String id;
