@@ -29,10 +29,10 @@ import app.views.CircleImageView;
  */
 public class CraftsmanInfoFragment extends Fragment {
 
-    private CircleImageView userImage;
     private RelativeLayout rl_normal;//普通工匠
     private RelativeLayout rl_foreman;//帶班班長
     private RelativeLayout rl_is_foreman;
+    private CircleImageView userImage;
     private TextView age;
     private TextView jobAge;
     private TextView jobType;
@@ -86,15 +86,16 @@ public class CraftsmanInfoFragment extends Fragment {
                     rl_normal.setVisibility(View.VISIBLE);
                     rl_is_foreman.setVisibility(View.GONE);
                 }
-                foremanName.setText(crafts.getName());
                 normalName.setText(crafts.getName());
-                age.setText(""+crafts.getAge()+"岁");
                 introduction.setText(crafts.getDescription());
                 areaServer.setText(crafts.getServer_area());
+                oldCase.setText(crafts.getWork());
+
+                foremanName.setText(crafts.getName());
+                age.setText(""+crafts.getAge()+"岁");
                 area.setText(crafts.getCworkhome());
                 jobAge.setText(""+crafts.getCworkold());
                 jobType.setText(crafts.getProfession());
-                oldCase.setText(crafts.getWork());
                 imageLoader.displayImage(crafts.getCimg(), userImage, options);
 
             }
@@ -110,23 +111,26 @@ public class CraftsmanInfoFragment extends Fragment {
     private void initUI(View layout) {
 
 
-        area = (TextView) layout.findViewById(R.id.tv_me_area);
         rl_normal = (RelativeLayout) layout.findViewById(R.id.rl_normal);
         rl_foreman = (RelativeLayout) layout.findViewById(R.id.rl_foreman);
-        userImage = (CircleImageView) layout.findViewById(R.id.iv_me_userimage);
         areaServer = (TextView) layout.findViewById(R.id.tv_area_server);
         rl_is_foreman = (RelativeLayout) layout.findViewById(R.id.rl_is_foreman);
         oldCase = (TextView) layout.findViewById(R.id.tv_ole_case);
+
+        userImage = (CircleImageView) layout.findViewById(R.id.iv_me_userimage);
+        area = (TextView) layout.findViewById(R.id.tv_me_area);
         age = (TextView) layout.findViewById(R.id.tv_me_age);
         jobAge = (TextView) layout.findViewById(R.id.tv_me_jobage);
         jobType = (TextView) layout.findViewById(R.id.tv_me_job);
         foremanName = (TextView) layout.findViewById(R.id.tv_me_name);
+
         ordinaryVIP = (TextView) layout.findViewById(R.id.tv_Ordinary_vip);
         introduction = (TextView) layout.findViewById(R.id.tv_me_Introduction);
         technology = (TextView) layout.findViewById(R.id.tv_Technology);
         normalName = (TextView) layout.findViewById(R.id.tv_normal_name);
         tv_gold = (TextView) layout.findViewById(R.id.tv_gold);
         Authentication = (TextView) layout.findViewById(R.id.tv_Authentication);
+
         tv_my_craftsman_group = (TextView) layout.findViewById(R.id.tv_my_craftsman_group);
         tv_creat_time = (TextView) layout.findViewById(R.id.tv_creat_time);
         tv_group_num = (TextView) layout.findViewById(R.id.tv_group_num);

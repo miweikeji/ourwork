@@ -21,5 +21,11 @@ public class Urls {
     public final static String craftsman_info=base_server+"/App/Crafts/getCraftsInfoRelevant";
     //获取工匠参与的所有案例
     public final static String all_case = base_server+"App/House/getHouseListByCraftsId";
+    //获取班组接口
+    public final static String getCraGroup=base_server+"App/Cragroup/getCraGroup";
+    //班组成员接口
+    public final static String getGroupCrafts=base_server+"App/Cragroup/getGroupCrafts";
+    //班组创建者接口
+    public final static String getGroupGanger=base_server+"App/Cragroup/getGroupGanger";
 
 }

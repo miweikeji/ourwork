@@ -28,8 +28,9 @@
         android:layout_height="200dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-         android:background="@drawable/has_greads_line_bg"
         android:layout_below="@+id/relativeLayout5"
+        android:background="@drawable/has_greads_line_bg"
+
 
         android:layout_centerHorizontal="true"
         android:id="@+id/rl_group_members">
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="鲁班的工匠班组"
-            android:id="@+id/textView28"
+            android:id="@+id/tv_my_craftsman_group"
             android:layout_marginTop="20dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
@@ -47,7 +48,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/textView28"
+            android:layout_below="@+id/tv_my_craftsman_group"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -59,7 +60,7 @@
                 android:text="New Text"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:id="@+id/textView29" />
+                android:id="@+id/tv_creat_time" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +68,7 @@
                 android:text="New Text"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:id="@+id/textView30" />
+                android:id="@+id/tv_group_num" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,7 +76,7 @@
                 android:text="New Text"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:id="@+id/textView31" />
+                android:id="@+id/tv_Construction_type" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,7 +84,7 @@
                 android:text="New Text"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:id="@+id/textView32" />
+                android:id="@+id/tv_style" />
         </LinearLayout>
     </RelativeLayout>
 

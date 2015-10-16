@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.entity.CaseResult;
+import app.entity.CraGroupResult;
 import app.entity.Crafts;
 import app.entity.CraftsResult;
+import app.entity.GroupGangerResult;
+import app.entity.GroupMemberResult;
 import app.entity.Meta;
 import app.entity.RegisterInfo;
 import app.entity.UserInfo;
@@ -182,6 +185,35 @@ public class HttpRequest {
     /**
      * 获取工匠参与的所有案例
      */
+    public static void craftsmanGroupHttp(Context context, String craftsId,final ICallback<CraGroupResult> callback
+    ) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("craftsId", craftsId));
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.getCraGroup, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "result==" + result.toString());
+                CraGroupResult mate = JsonUtil.parseObject(result, CraGroupResult.class);
+
+                if (mate.getStatus() == 0) {
+                    callback.onSucceed(mate);
+                } else {
+                    callback.onFail(mate.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     * 获取工匠参与的所有案例
+     */
     public static void allCaseHttp(Context context, String cid,int p,final ICallback<CaseResult> callback
     ) {
         ArrayList<Param> mList = new ArrayList<Param>();
@@ -195,6 +227,69 @@ public class HttpRequest {
             public void onSucceed(String result) {
                 MyLog.e("", "result==" + result.toString());
                 CaseResult mate = JsonUtil.parseObject(result, CaseResult.class);
+
+                if (mate.getStatus() == 0) {
+                    callback.onSucceed(mate);
+                } else {
+                    callback.onFail(mate.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     * 班组成员接口
+     */
+    public static void getGroupCraftsHttp(Context context, String gangerId,String groupId,int p,final ICallback<GroupMemberResult> callback
+    ) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("gangerId", gangerId));
+        mList.add(new Param("groupId", groupId));
+        mList.add(new Param("p", ""+p));
+
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.getGroupCrafts, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "result==" + result.toString());
+                GroupMemberResult mate = JsonUtil.parseObject(result, GroupMemberResult.class);
+
+                if (mate.getStatus() == 0) {
+                    callback.onSucceed(mate);
+                } else {
+                    callback.onFail(mate.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+
+    /**
+     * 班组成员接口
+     */
+    public static void getGroupGangerHttp(Context context, String gangerId,final ICallback<GroupGangerResult> callback
+    ) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("gangerId", gangerId));
+
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.getGroupGanger, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "result==" + result.toString());
+                GroupGangerResult mate = JsonUtil.parseObject(result, GroupGangerResult.class);
 
                 if (mate.getStatus() == 0) {
                     callback.onSucceed(mate);

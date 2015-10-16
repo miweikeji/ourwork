@@ -14,7 +14,7 @@
         <app.views.CircleImageView
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:id="@+id/view4"
+            android:id="@+id/img_head"
             android:src="@mipmap/test"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -25,8 +25,8 @@
             android:layout_height="wrap_content"
             android:text="习近平"
             android:textSize="18sp"
-            android:id="@+id/textView93"
-            android:layout_below="@+id/view4"
+            android:id="@+id/tv_name"
+            android:layout_below="@+id/img_head"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true" />
 
@@ -36,7 +36,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/line"
             android:id="@+id/textView94"
-            android:layout_below="@+id/textView93"
+            android:layout_below="@+id/tv_name"
             android:layout_centerHorizontal="true" />
 
         <LinearLayout
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
-                    android:id="@+id/textView97"
+                    android:id="@+id/tv_age"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
-                    android:id="@+id/textView98"
+                    android:id="@+id/tv_work_age"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
-                    android:id="@+id/textView95"
+                    android:id="@+id/tv_work_type"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
-                    android:id="@+id/textView96"
+                    android:id="@+id/tv_home"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
