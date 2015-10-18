@@ -37,8 +37,8 @@ public class WorkTypePopup extends PopupWindow{
 
         //设置宽度,若没有设置宽度为LayoutParams.WRAP_CONTENT
         int width = ScreenUtil.instance(mContext).getScreenWidth();
-        int w = ScreenUtil.instance(mContext).dip2px(30);
-        setWidth(width-w);
+//        int w = ScreenUtil.instance(mContext).dip2px(30);
+        setWidth(width);
         setHeight(LayoutParams.WRAP_CONTENT);
 
         //设置动画，也可以不设置。不设置则是显示默认的

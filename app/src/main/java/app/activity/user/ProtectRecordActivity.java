@@ -1,6 +1,5 @@
 package app.activity.user;
 
-import android.content.Intent;
 import android.widget.ListView;
 
 import com.miweikeij.app.R;
@@ -13,10 +12,8 @@ import app.adapter.ProtectRecordAdapter;
 import app.entity.ProtectRecord;
 import app.views.NavigationBar;
 
-/**
- * Created by tlt on 2015/10/11.
- */
-public class IntegralActivity extends BaseActivity {
+public class ProtectRecordActivity extends BaseActivity {
+
     private ProtectRecordAdapter adapter;
     private ListView listView;
     List<ProtectRecord> items=new ArrayList<>();
@@ -28,8 +25,6 @@ public class IntegralActivity extends BaseActivity {
 
     @Override
     public void initUI() {
-
-
         listView = (ListView) findViewById(R.id.listView);
 
         for (int i = 0; i < 10; i++) {
@@ -39,26 +34,18 @@ public class IntegralActivity extends BaseActivity {
         adapter = new ProtectRecordAdapter(mActivity, items);
         listView.setAdapter(adapter);
 
-
-
     }
 
     @Override
     public int onCreateMyView() {
-        return R.layout.activity_integral;
+        return R.layout.common_listview_show;
     }
 
     @Override
     public void initTitle(NavigationBar mBar) {
-        mBar.setContexts(this);
-        mBar.setTitle("我的积分");
-        mBar.setRightTitle("积分规则");
-        mBar.setRightOnClick(new NavigationBar.RightOnClick() {
-            @Override
-            public void setRightOnClick() {
-                startActivity(new Intent(mActivity,IntegralRuleActivity.class));
-            }
-        });
 
+        mBar.setContexts(this);
+        mBar.setTitle("保障金记录");
     }
+
 }

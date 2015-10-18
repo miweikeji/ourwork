@@ -1,6 +1,7 @@
 package app.fragment;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,14 @@ import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
+import app.activity.BasicInfoActivity;
 import app.activity.LoginActivity;
 import app.activity.user.AboutUsActivity;
 import app.activity.user.FeekBackActivity;
 import app.activity.user.IntegralActivity;
 import app.activity.user.JobAuthentActivity;
 import app.activity.user.ProtectMoneyActivity;
+import app.dialog.DialogSign;
 import app.utils.UserUtil;
 
 /**
@@ -33,6 +36,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private TextView tvPosition;
     private ImageView ivUserImage;
     private View layout;
+    private DialogSign dialogSign;
 
     @Nullable
     @Override
@@ -73,9 +77,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         layout.findViewById(R.id.frame_me_integral).setOnClickListener(this);
         layout.findViewById(R.id.frame_me_protect).setOnClickListener(this);
         layout.findViewById(R.id.frame_me_suggestion).setOnClickListener(this);
+        layout.findViewById(R.id.frame_userinfo).setOnClickListener(this);
 
         layout.findViewById(R.id.tv_sign).setOnClickListener(this);
-        layout.findViewById(R.id.tv_login).setOnClickListener(this);
+        TextView tvLogin=(TextView)layout.findViewById(R.id.tv_login);
+        tvLogin.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+        tvLogin.setOnClickListener(this);
 
 
     }
@@ -87,6 +94,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             //关于
             case R.id.frame_me_about:
                 startActivity(new Intent(getActivity(), AboutUsActivity.class));
+                break; //关于
+            case R.id.frame_userinfo:
+                startActivity(new Intent(getActivity(), BasicInfoActivity.class));
                 break;
             //工人认证
             case R.id.frame_me_authencation:
@@ -102,7 +112,16 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 break;
             //签到
             case R.id.tv_sign:
+                if (dialogSign==null){
+                    dialogSign=new DialogSign(getActivity()) {
+                        @Override
+                        public void positionBtnClick(String s) {
 
+                        }
+                    };
+                }
+
+                dialogSign.show();
                 break;
             //意见反馈
             case R.id.frame_me_suggestion:

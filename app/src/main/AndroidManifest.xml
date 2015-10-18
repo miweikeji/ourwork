@@ -184,6 +184,18 @@
             android:screenOrientation="portrait"
             >
         </activity>
+        <activity
+            android:name="app.activity.user.ProtectRecordActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name="app.activity.user.IntegralRuleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
     </application>
 
 </manifest>

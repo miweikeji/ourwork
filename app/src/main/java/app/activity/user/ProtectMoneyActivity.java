@@ -1,5 +1,6 @@
 package app.activity.user;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.miweikeij.app.R;
@@ -66,6 +67,13 @@ public class ProtectMoneyActivity extends BaseActivity {
     public void initTitle(NavigationBar mBar) {
         mBar.setContexts(this);
         mBar.setTitle("保证金");
+        mBar.setRightTitle("记录");
+        mBar.setRightOnClick(new NavigationBar.RightOnClick() {
+            @Override
+            public void setRightOnClick() {
+                startActivity(new Intent(mActivity,ProtectRecordActivity.class));
+            }
+        });
 
     }
 }

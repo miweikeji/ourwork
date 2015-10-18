@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/shape_dialog_background"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/base_green"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="每日签到" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_left_right"
+                android:background="@null"
+                android:text="天天签到拿积分,连续7天有惊喜！" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_sign"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="8dp"
+            android:layout_marginLeft="@dimen/margin_left_right"
+            android:layout_marginRight="@dimen/margin_left_right"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/line_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/base_orange"></View>
+
+                <TextView
+                    android:id="@+id/state_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/btn_circlepress"
+                    android:gravity="center"
+                    android:text="1天"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_normal" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/line_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/base_orange"></View>
+
+                <TextView
+                    android:id="@+id/state_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/btn_circlepress"
+                    android:gravity="center"
+                    android:text="2天"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_normal" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/line_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/grey_2"></View>
+
+                <TextView
+                    android:id="@+id/state_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/btn_circlenormal"
+                    android:gravity="center"
+                    android:text="3天"
+                    android:textColor="@color/black_3"
+                    android:textSize="@dimen/textsize_normal" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/line_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:background="@color/grey_2"></View>
+
+                <TextView
+                    android:id="@+id/state_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/btn_circlenormal"
+                    android:gravity="center"
+                    android:text="4天"
+                    android:textColor="@color/black_3"
+                    android:textSize="@dimen/textsize_normal" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/line_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/grey_2"></View>
+
+                <TextView
+                    android:id="@+id/state_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/btn_circlenormal"
+                    android:gravity="center"
+                    android:text="5天"
+                    android:textColor="@color/grey_2"
+                    android:textSize="@dimen/textsize_normal" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <View
+                    android:id="@+id/line_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/grey_2"></View>
+                <TextView
+                    android:id="@+id/state_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/btn_circlenormal"
+                    android:gravity="center"
+                    android:text="6天"
+                    android:textColor="@color/grey_2"
+                    android:textSize="@dimen/textsize_normal" />
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <View
+                    android:id="@+id/line_7"
+                    android:visibility="invisible"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/base_orange"></View>
+                <TextView
+                    android:id="@+id/state_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/btn_circlenormal"
+                    android:gravity="center"
+                    android:text="7天"
+                    android:textColor="@color/grey_2"
+                    android:textSize="@dimen/textsize_normal" />
+
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="14dp"
+            style="@style/FillContent"
+            android:layout_marginLeft="@dimen/margin_left_right"
+            android:layout_marginRight="@dimen/margin_left_right"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_sure"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:background="@color/base_orange"
+                android:text="签到"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_left_right"
+                android:background="@null"
+                android:text="你今天有施工项目" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="@dimen/margin_left_right"
+            android:layout_marginRight="@dimen/margin_left_right"
+            android:layout_marginBottom="@dimen/margin_left_right"
+            style="@style/FillContent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_haseCase"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:background="@color/base_orange"
+                android:text="查看施工项目"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

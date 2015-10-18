@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="gridview" type="id"/>
+
+    <item name="listview" type="id"/>
+
+    <item name="tv_title" type="id"/>
+
+    <item name="tv_money" type="id"/>
+
+    <item name="tv_time" type="id"/>
+
+    <item name="tv_content" type="id"/>
+
+</resources>
