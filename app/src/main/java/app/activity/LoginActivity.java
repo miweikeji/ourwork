@@ -95,10 +95,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void login(String phone,String psw) {
-
+        showWaitingDialog();
         HttpRequest.loginHttp(this, phone, psw, new ICallback<UserInfoResult>() {
             @Override
             public void onSucceed(UserInfoResult result) {
+                disMissWaitingDialog();
                 Uihelper.trace(result.getCrafts().toString());
                 UserUtil.saveUserId(LoginActivity.this, result.getCrafts().getId());
                 if (!result.getCrafts().isHasinfo()){
@@ -108,6 +109,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
             @Override
             public void onFail(String error) {
+                disMissWaitingDialog();
                 Uihelper.showToast(mActivity,error);
             }
         });

@@ -91,10 +91,11 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void complete(String name, String age, String worktype, String workage, String address) {
-
+        showWaitingDialog();
         HttpRequest.infoHttp(this, id, name, age, worktype, workage, address, new ICallback<Meta>() {
             @Override
             public void onSucceed(Meta result) {
+                disMissWaitingDialog();
                 Uihelper.showToast(mActivity, "设置信息成功");
                 finish();
 
@@ -102,6 +103,7 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             public void onFail(String error) {
+                disMissWaitingDialog();
                 Uihelper.showToast(mActivity, error);
 
             }
