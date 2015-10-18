@@ -18,4 +18,10 @@
     <color name="black_2">#e0000000</color>
     <color name="black_3">#60000000</color>
 
+    <color name="btn_red_left_false">#FAAF90</color>
+    <color name="btn_red_left_true">#F99C75</color>
+
+    <color name="btn_red_right_false">#F56C31</color>
+    <color name="btn_red_right_true">#F45B1A</color>
+
 </resources>

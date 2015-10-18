@@ -28,8 +28,8 @@ import app.utils.Uihelper;
  */
 public class CaseFragment extends Fragment {
 
-    private PullToRefreshListView pull_case;
     private int p=1;
+    private PullToRefreshListView pull_case;
     private ArrayList<Case> allCases = new ArrayList<Case>();
     private CaseAdapter adapter;
     @Nullable

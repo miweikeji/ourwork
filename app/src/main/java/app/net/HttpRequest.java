@@ -13,6 +13,7 @@ import app.entity.Crafts;
 import app.entity.CraftsResult;
 import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
+import app.entity.HousesByLyfResult;
 import app.entity.Meta;
 import app.entity.RegisterInfo;
 import app.entity.UserInfo;
@@ -319,6 +320,159 @@ public class HttpRequest {
         mList.add(new Param("deviceid", MobileOS.getDeviceId(context)));
         MyLog.e("", "请求参数==" + mList.toString());
         new MyAsyncTask(context, Urls.forgetPassword, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     * 预约中列表接口
+     */
+    public static void getHousesByLyf(Context context,String craftsId ,int p,final ICallback<HousesByLyfResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("craftsId", craftsId));
+        mList.add(new Param("p", ""+p));
+
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.getHousesByLyf, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+
+                HousesByLyfResult meta = JsonUtil.parseObject(result, HousesByLyfResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     * 确定预约列表接口
+     */
+    public static void getHousesByAppointmentLyf(Context context,String craftsId ,int p,final ICallback<HousesByLyfResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("craftsId", craftsId));
+        mList.add(new Param("p", ""+p));
+
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.getHousesByAppointmentLyf, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+
+                HousesByLyfResult meta = JsonUtil.parseObject(result, HousesByLyfResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+
+    /**
+     * 预约历史列表接口
+     */
+    public static void getHousesByHistoryLyf(Context context,String craftsId ,int p,final ICallback<HousesByLyfResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("craftsId", craftsId));
+        mList.add(new Param("p", ""+p));
+
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.getHousesByHistoryLyf, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+
+                HousesByLyfResult meta = JsonUtil.parseObject(result, HousesByLyfResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     * 婉拒预约接口
+     */
+    public static void refuseAppointmentLyf(Context context,String houseId ,String ownerId,String craftsId,
+                                            String craftsName,String yyTime,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("houseId", houseId));
+        mList.add(new Param("ownerId", ownerId));
+        mList.add(new Param("craftsId", craftsId));
+        mList.add(new Param("craftsName", craftsName));
+        mList.add(new Param("yyTime", yyTime));
+
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.refuseAppointmentLyf, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     * 获取接受预约日志接口
+     */
+    public static void acceptAppointmentLyf(Context context,String houseId ,String ownerId,String craftsId,
+                                            String craftsName,String yyTime,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("houseId", houseId));
+        mList.add(new Param("ownerId", ownerId));
+        mList.add(new Param("craftsId", craftsId));
+        mList.add(new Param("craftsName", craftsName));
+        mList.add(new Param("yyTime", yyTime));
+
+        MyLog.e("", "请求参数==" + mList.toString());
+        new MyAsyncTask(context, Urls.acceptAppointmentLyf, mList, new ICallback<String>() {
 
             @Override
             public void onSucceed(String result) {

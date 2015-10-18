@@ -18,7 +18,7 @@ public class Urls {
     public final static String login = base_server+"App/Signin/login";
     public final static String BasicInfo = base_server+"App/Crafts/createCraftsBasicInfo";
     //获取工匠信息
-    public final static String craftsman_info=base_server+"/App/Crafts/getCraftsInfoRelevant";
+    public final static String craftsman_info=base_server+"App/Crafts/getCraftsInfoRelevant";
     //获取工匠参与的所有案例
     public final static String all_case = base_server+"App/House/getHouseListByCraftsId";
 
@@ -31,7 +31,16 @@ public class Urls {
 
     //找回密码
     public final static String forgetPassword = base_server+"App/Signup/forgetPassword";
-
+    //预约中列表接口
+    public final static String getHousesByLyf = base_server+"App/House/getHousesByLyf";
+    //确定预约列表接口
+    public final static String getHousesByAppointmentLyf = base_server+"App/House/getHousesByAppointmentLyf";
+    //预约历史列表接口
+    public final static String getHousesByHistoryLyf = base_server+"App/House/getHousesByHistoryLyf";
+    //婉拒预约接口
+    public final static String refuseAppointmentLyf = base_server+"App/House/refuseAppointmentLyf";
+    //获取接受预约接口
+    public final static String acceptAppointmentLyf = base_server+"App/House/acceptAppointmentLyf";
 
 
 }

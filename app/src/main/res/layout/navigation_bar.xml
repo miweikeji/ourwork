@@ -82,5 +82,16 @@
                 android:text="看他"/>
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"
+            android:src="@mipmap/login_phone"/>
+
     </RelativeLayout>
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package app.activity;
 
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -18,9 +19,10 @@ import app.fragment.SureBespeakFragment;
 import app.views.NavigationBar;
 import app.views.PagerSlidingTabStrip;
 
-public class OwnerReservationActivity extends BaseActivity {
+public class OwnerReservationActivity extends BaseActivity implements NavigationBar.RightOnClick {
 
     private ArrayList<Fragment> fragments;
+
     @Override
     public void obtainData() {
 
@@ -42,6 +44,8 @@ public class OwnerReservationActivity extends BaseActivity {
         pager.setPageMargin(pageMargin);
         pagerSliding.setViewPager(pager);
     }
+
+
 
     class MyAdapter extends FragmentPagerAdapter {
         private final String[] TITLES = {"预约中","确定预约"};
@@ -74,5 +78,12 @@ public class OwnerReservationActivity extends BaseActivity {
     public void initTitle(NavigationBar mBar) {
         mBar.setContexts(this);
         mBar.setTitle("业主预约");
+        mBar.setRightTwoTitle("历史预约");
+        mBar.setRightOnClick(this);
+    }
+
+    @Override
+    public void setRightOnClick() {
+        startActivity(new Intent(OwnerReservationActivity.this,ReservationHistoryActivity.class));
     }
 }
