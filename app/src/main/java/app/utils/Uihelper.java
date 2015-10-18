@@ -53,4 +53,30 @@ public class Uihelper {
 
     }
 
+    /**
+     * dip2px
+     *
+     * @param context
+     * @param dipValue
+     * @return
+     */
+    public static int dip2px(Context context, float dipValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+
+        return (int) (dipValue * scale + 0.5 * (dipValue >= 0 ? 1 : -1));
+    }
+
+    /**
+     * px2dip
+     *
+     * @param context
+     * @param pxValue
+     * @return
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+
 }

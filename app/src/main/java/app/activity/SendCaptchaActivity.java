@@ -161,10 +161,11 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
 
     private void summit(String psw, String code) {
         if (isForgetPsw) {
-
+            showWaitingDialog();
             HttpRequest.findPsw(this, new ICallback<Meta>() {
                 @Override
                 public void onSucceed(Meta result) {
+                    disMissWaitingDialog();
                     MyLog.e("", "result=" + result.toString());
                     Uihelper.showToast(mActivity, "修改成功");
                     finish();
@@ -172,15 +173,17 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
 
                 @Override
                 public void onFail(String error) {
+                    disMissWaitingDialog();
                     Uihelper.showToast(mActivity, error);
 
                 }
             }, phone, psw, code);
         } else {
-
+             showWaitingDialog();
             HttpRequest.registerHttp(this, new ICallback<RegisterInfo>() {
                 @Override
                 public void onSucceed(RegisterInfo result) {
+                    disMissWaitingDialog();
                     MyLog.e("", "result=" + result.toString());
                     Toast.makeText(SendCaptchaActivity.this, "result.toString()", Toast.LENGTH_LONG).show();
                     BasicInfoActivity.startActivity(SendCaptchaActivity.this, result.getId());
@@ -189,6 +192,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
 
                 @Override
                 public void onFail(String error) {
+                    disMissWaitingDialog();
                     Uihelper.showToast(mActivity, error);
 
                 }
@@ -204,9 +208,11 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
         } else {
             type = "0";
         }
+        showWaitingDialog();
         HttpRequest.sendCaptcha(this, new ICallback<Meta>() {
             @Override
             public void onSucceed(Meta result) {
+                disMissWaitingDialog();
                 isSending = true;
 //                mWaitingDialog.dismiss();
                 btn_send_code.setEnabled(false);
@@ -219,6 +225,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void onFail(String error) {
+                disMissWaitingDialog();
                 Uihelper.showToast(mActivity, error);
 
             }

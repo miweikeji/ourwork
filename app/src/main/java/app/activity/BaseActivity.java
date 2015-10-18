@@ -1,6 +1,7 @@
 package app.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +18,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import java.util.LinkedList;
 
 import app.views.NavigationBar;
+import app.views.ProgressDialogView;
 
 public abstract class BaseActivity extends FragmentActivity {
 
@@ -25,6 +27,8 @@ public abstract class BaseActivity extends FragmentActivity {
     public static LinkedList<Activity> sAllActivitys = new LinkedList<Activity>();
     public Activity mActivity;
     public  NavigationBar mBar;
+    private Dialog mWaitingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,7 @@ public abstract class BaseActivity extends FragmentActivity {
         mActivity=this;
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
         mBar = (NavigationBar)findViewById(R.id.navigationBar);
+        mWaitingDialog = ProgressDialogView.create(mActivity);
         initCotentView();
         obtainData();
         initTitle(mBar);
@@ -55,6 +60,22 @@ public abstract class BaseActivity extends FragmentActivity {
     public abstract int onCreateMyView();
 
     public abstract void initTitle(NavigationBar mBar);
+    /**
+     * 显示 loading 对话框
+     */
+    protected void showWaitingDialog() {
+        if(mWaitingDialog != null) {
+            mWaitingDialog.show();
+        }
+    }
 
+    /**
+     * 隐藏 loading 对话框
+     */
+    protected void disMissWaitingDialog() {
+        if(mWaitingDialog != null && mWaitingDialog.isShowing()) {
+            mWaitingDialog.dismiss();
+        }
+    }
 
 }
