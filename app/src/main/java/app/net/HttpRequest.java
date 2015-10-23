@@ -7,6 +7,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.entity.ArrangeTaskResult;
 import app.entity.CaseResult;
 import app.entity.CraGroupResult;
 import app.entity.Crafts;
@@ -15,9 +16,12 @@ import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
 import app.entity.HousesByLyfResult;
 import app.entity.Meta;
+import app.entity.MyFriendsResult;
 import app.entity.RegisterInfo;
 import app.entity.UserInfo;
 import app.entity.UserInfoResult;
+import app.entity.craftsList;
+import app.entity.craftsListResult;
 import app.tools.MyLog;
 import app.utils.JsonUtil;
 import app.utils.MobileOS;
@@ -478,6 +482,95 @@ public class HttpRequest {
             public void onSucceed(String result) {
 
                 Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     * 所有工友
+     */
+    public static void getAllcrafts(Context context,String jiang ,int p,final ICallback<craftsListResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("jiang", jiang));
+        mList.add(new Param("p", "" + p));
+
+
+        new MyAsyncTask(context, Urls.getAllcrafts, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                craftsListResult meta = JsonUtil.parseObject(result, craftsListResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+
+    /**
+     * 好友接口
+     */
+    public static void getMyfriend (Context context,String cid ,int p,final ICallback<MyFriendsResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("p", "" + p));
+
+
+        new MyAsyncTask(context, Urls.getMyfriend, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                MyFriendsResult meta = JsonUtil.parseObject(result, MyFriendsResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+
+    /**
+     * 未安排任务接口
+     */
+    public static void unArrangeTask (Context context,String jiang ,int p,final ICallback<ArrangeTaskResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("jiang", jiang));
+        mList.add(new Param("p", "" + p));
+
+
+        new MyAsyncTask(context, Urls.unArrangeTask, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                ArrangeTaskResult meta = JsonUtil.parseObject(result, ArrangeTaskResult.class);
                 if (meta.getStatus() == 0) {
                     callback.onSucceed(meta);
                 } else {

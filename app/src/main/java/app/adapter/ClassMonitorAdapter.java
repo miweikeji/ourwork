@@ -1,6 +1,7 @@
 package app.adapter;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -11,26 +12,25 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
-import app.activity.MyFriendsActivity;
-import app.entity.MyFriends;
-import app.entity.MyFriendsResult;
-import app.net.ICallback;
+import app.entity.Allcrafts;
 import app.views.CircleImageView;
 
 /**
- * Created by Administrator on 2015/10/11.
+ * Created by Administrator on 2015/10/22.
  */
-public class MyFriendsAdapter extends AllAdapter{
-    Activity activity;
-    private List<MyFriends> allList;
-    private ImageLoader instance;
+public class ClassMonitorAdapter extends AllAdapter {
+    private Activity activity;
+    private List<Allcrafts> allList;
+    private ImageLoader imageLoader;
     private DisplayImageOptions options;
-    public MyFriendsAdapter(Activity activity, List<MyFriends> allList,
-                            ImageLoader instance, DisplayImageOptions options) {
+    private int type;
+    public ClassMonitorAdapter(FragmentActivity activity, List<Allcrafts> allList,
+                               ImageLoader imageLoader, DisplayImageOptions options, int type) {
         this.activity = activity;
         this.allList = allList;
-        this.instance =instance;
         this.options = options;
+        this.imageLoader = imageLoader;
+        this.type= type;
     }
 
     @Override
@@ -54,17 +54,14 @@ public class MyFriendsAdapter extends AllAdapter{
         }else{
             holder = (ViewHolder) layout.getTag();
         }
-        MyFriends friends = allList.get(position);
-//        instance.displayImage(friends.getFcimg(), holder.img_head, options);
-        holder.tv_name.setText(friends.getFname());
-        holder.tv_age.setText(friends.getFage()+"岁/"+friends.getFcworkold()+"年工龄");
-        holder.tv_home.setText(friends.getFcworkhome());
-        holder.tv_case.setText(friends.getFprofession());
-        holder.tv_type.setVisibility(View.INVISIBLE);
-        if(friends.getType().equals("0")){
+        Allcrafts allcrafts = allList.get(position);
+//        imageLoader.displayImage(allcrafts.getCimg(), holder.img_head, options);
+        holder.tv_name.setText(allcrafts.getName());
+        holder.tv_home.setText(allcrafts.getCworkhome());
+        holder.tv_case.setText(allcrafts.getProfession());
+        holder.tv_age.setText(allcrafts.getAge()+"岁/"+allcrafts.getCworkold()+"年工龄");
+        if(type==1){
             holder.tv_type.setVisibility(View.INVISIBLE);
-        }else {
-            holder.tv_type.setVisibility(View.VISIBLE);
         }
         return layout;
     }

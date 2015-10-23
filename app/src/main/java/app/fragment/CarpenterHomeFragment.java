@@ -55,9 +55,9 @@ public class CarpenterHomeFragment extends Fragment implements View.OnClickListe
                 startActivity(new Intent(getActivity(), FindFartnerActivity.class));
                 break;
             case R.id.rl_my_friends:
-                if (UserUtil.isLogin(getActivity())){
+//                if (UserUtil.isLogin(getActivity())){
                     startActivity(new Intent(getActivity(), MyFriendsActivity.class));
-                }
+//                }
                 break;
             case R.id.rl_work_arrangement:
                 startActivity(new Intent(getActivity(), WorkArrangementActivity.class));

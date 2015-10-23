@@ -41,6 +41,12 @@ public class Urls {
     public final static String refuseAppointmentLyf = base_server+"App/House/refuseAppointmentLyf";
     //获取接受预约接口
     public final static String acceptAppointmentLyf = base_server+"App/House/acceptAppointmentLyf";
+    //所有工友
+    public final static String getAllcrafts = base_server+"App/Crafts/getAllcrafts";
+    //好友接口
+    public final static String getMyfriend  = base_server+"App/Crafts/getMyfriend";
+    //未安排任务接口
+    public final static String unArrangeTask  = base_server+"App/Workplan/unArrangeTask";
 
 
 }
