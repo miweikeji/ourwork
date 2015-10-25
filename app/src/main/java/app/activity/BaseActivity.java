@@ -38,9 +38,9 @@ public abstract class BaseActivity extends FragmentActivity {
         mBar = (NavigationBar)findViewById(R.id.navigationBar);
         mWaitingDialog = ProgressDialogView.create(mActivity);
         initCotentView();
-        obtainData();
         initTitle(mBar);
         initUI();
+        obtainData();
         sAllActivitys.add(this);
     }
 

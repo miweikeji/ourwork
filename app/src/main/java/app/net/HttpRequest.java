@@ -7,6 +7,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.entity.AddMemberError;
+import app.entity.AdvertiseResult;
 import app.entity.ArrangeTaskResult;
 import app.entity.CaseResult;
 import app.entity.CraGroupResult;
@@ -25,6 +27,7 @@ import app.entity.craftsListResult;
 import app.tools.MyLog;
 import app.utils.JsonUtil;
 import app.utils.MobileOS;
+import app.utils.UserUtil;
 
 /**
  * Created by Jackie on 2015/9/4.
@@ -575,6 +578,92 @@ public class HttpRequest {
                     callback.onSucceed(meta);
                 } else {
                     callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     * 广告接口
+     */
+    public static void advertise (Context context,final ICallback<AdvertiseResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+
+
+        new MyAsyncTask(context, Urls.advertise, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                AdvertiseResult advertiseResult = JsonUtil.parseObject(result, AdvertiseResult.class);
+                if (advertiseResult.getStatus() == 0) {
+                    callback.onSucceed(advertiseResult);
+                } else {
+                    callback.onFail(advertiseResult.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     * 工头认证
+     */
+    public static void workHeadAudit (Context context,final ICallback<Meta> callback,String realname,String cworknum,String groupInfo,String cardImg,String cradBImg ) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+
+        mList.add(new Param("craftsId", UserUtil.getUserId(context)));
+        mList.add(new Param("realname", realname));
+        mList.add(new Param("cworknum", cworknum));
+        mList.add(new Param("groupInfo", groupInfo));
+        mList.add(new Param("cardImg", cardImg));
+        mList.add(new Param("cradBImg", cradBImg));
+
+
+        new MyAsyncTask(context, Urls.workHeadAudit, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     * 添加班组成员
+     */
+    public static void addGroupCrafts (Context context,final ICallback<Meta> callback,String groupId,String phones) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+
+        mList.add(new Param("phones", phones));
+        mList.add(new Param("groupId", groupId));
+
+
+        new MyAsyncTask(context, Urls.addGroupCrafts, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else if (meta.getStatus() == 1){
+                    AddMemberError addMemberError = JsonUtil.parseObject(result, AddMemberError.class);
+                    callback.onSucceed(addMemberError);
                 }
             }
 

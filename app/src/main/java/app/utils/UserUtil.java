@@ -39,7 +39,7 @@ public class UserUtil {
     }
 
     public static void saveUserId(Context context, String userId) {
-        Pref.saveString(Pref.USERID, userId, context);
+        Pref.saveString(Pref.USERID, "100", context);
     }
 
 }

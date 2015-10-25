@@ -208,6 +208,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true" />
 
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -225,14 +226,62 @@
                         android:layout_below="@+id/relativeLayout13"
                         android:layout_marginBottom="5dp"
                         android:layout_centerHorizontal="true"
-                        android:id="@+id/relativeLayout14"></RelativeLayout>
+                        android:id="@+id/relativeLayout14">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="服务态度"
+                            android:id="@+id/tv_service"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+
+                        <RatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="38dp"
+                            android:id="@+id/ratingBar_value"
+                            style="@style/valueRatingBar"
+                            android:rating="2"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/tv_service"
+                            android:layout_toEndOf="@+id/tv_service"
+                            android:layout_marginLeft="14dp"
+                            android:layout_marginStart="24dp" />
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@+id/relativeLayout14"
                         android:layout_centerHorizontal="true"
-                        android:id="@+id/relativeLayout15"></RelativeLayout>
+                        android:id="@+id/relativeLayout15">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="施工质量"
+                            android:id="@+id/tv_quality"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+
+                        <RatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="38dp"
+                            android:id="@+id/ratingBar_quality"
+                            style="@style/valueRatingBar"
+                            android:rating="2"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/tv_quality"
+                            android:layout_toEndOf="@+id/tv_quality"
+                            android:layout_marginLeft="14dp"
+                            android:layout_marginStart="24dp" />
+
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -243,7 +292,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="对哦京东扫洛杉矶的佛啊生活了撒娇都发阿里冬季"
+                            android:text="师傅施工质量不错"
                             android:layout_marginTop="5dp"
                             android:id="@+id/textView75"
                             android:layout_marginRight="10dp"
@@ -288,16 +337,11 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginStart="25dp" />
             </RelativeLayout>
-                <TextView
+                <LinearLayout
+                    android:id="@+id/linear_shigongrenwu"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/line"/>
-                <app.views.MyListView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/view"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
 
             </LinearLayout>
 
