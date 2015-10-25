@@ -196,6 +196,18 @@
             android:screenOrientation="portrait"
             >
         </activity>
+        <activity
+            android:name="app.activity.PublishDairyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name="app.activity.mywork.LocalAlbumPreActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
     </application>
 
 </manifest>

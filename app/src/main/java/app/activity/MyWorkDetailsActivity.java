@@ -27,9 +27,8 @@ public class MyWorkDetailsActivity extends BaseActivity implements NavigationBar
 
     @Override
     public void obtainData() {
-           View  item=mActivity.getLayoutInflater().inflate(R.layout.item_person_shigongrenwu,null);
+           View  item=LayoutInflater.from(mActivity).inflate(R.layout.item_person_shigongrenwu,null);
             linearDuty.addView(item);
-
     }
 
     @Override
@@ -37,7 +36,6 @@ public class MyWorkDetailsActivity extends BaseActivity implements NavigationBar
         //工作任务
         linearDuty=(LinearLayout)findViewById(R.id.linear_shigongrenwu);
         linearDuty.setOrientation(LinearLayout.VERTICAL);
-
     }
     //查看施工项目
     public void toProdDetails(View view){

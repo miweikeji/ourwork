@@ -21,9 +21,8 @@
 
         <Button
             style="@style/click_btn"
-            android:id="@+id/btn_summit"
+            android:id="@+id/btn_dairy"
             android:text="写装修日记"
-
             />
     </RelativeLayout>
 </RelativeLayout>

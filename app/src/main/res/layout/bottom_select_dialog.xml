@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="10dp" >
+
+    <LinearLayout
+        android:id="@+id/llOp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@mipmap/dairy_downarrow"/>
+
+        <Button
+            android:id="@+id/btn_write"
+           style="@style/click_btn"
+            android:layout_margin="5dp"
+            android:text="写装修日记"
+            />
+
+
+        <Button
+            android:id="@+id/btn_check"
+            style="@style/click_btn"
+            android:layout_margin="5dp"
+            android:text="预约验收"
+            />
+
+
+        <Button
+            android:id="@+id/btn_value"
+           style="@style/click_btn"
+            android:layout_margin="5dp"
+            android:text="工匠评价"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>

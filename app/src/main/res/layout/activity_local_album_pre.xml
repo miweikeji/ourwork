@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+    <GridView
+        android:id="@+id/media_in_folder_gv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:cacheColorHint="#202224"
+        android:numColumns="3"
+        android:descendantFocusability="blocksDescendants"
+        android:fadingEdgeLength="0.0dip"
+        android:gravity="center"
+        android:horizontalSpacing="2.0dip"
+        android:listSelector="#00ffffff"
+        android:overScrollMode="never"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2.0dip" 
+        android:scrollbars="vertical"
+        android:scrollbarSize="10dp"/>
+
+</LinearLayout>

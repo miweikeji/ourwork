@@ -2,9 +2,22 @@ package app.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+import app.entity.ImageEntity;
 
 
 /**
@@ -77,6 +90,63 @@ public class Uihelper {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
+    /**
+     * 获取单张本地图片的宽高
+     *
+     * @author yangsq
+     * @createDate 2014-9-17
+     * @param context
+     * @param imageEntity
+     */
+    public static void getImagesWH(Context context, ImageEntity imageEntity) {
+        try {
+            Uri uri = Uri.parse(imageEntity.getPath());
+            getThumbnail(context, uri, imageEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    /**
+     * 从一个已知的图片Uri中获得图片的bitmap对象的宽高
+     *
+     */
+    public static void getThumbnail(Context context, Uri uri,
+                                    ImageEntity imageEntity) throws FileNotFoundException, IOException {
+        InputStream input = context.getContentResolver().openInputStream(uri);
+        BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
+        onlyBoundsOptions.inJustDecodeBounds = true;// 当解码时避免内存分配
+        onlyBoundsOptions.inDither = true;// optional
+        onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;// optional
+        BitmapFactory.decodeStream(input, null, onlyBoundsOptions);
+        imageEntity.setHeight(onlyBoundsOptions.outHeight);
+        if (TextUtils.isEmpty(imageEntity.getPath())) {
+            String path = uri.getPath();
+            if (!TextUtils.isEmpty(path) && path.indexOf("file") < 0) {
+                path = "file://" + path;
+            }
+            imageEntity.setPath(path);
+        }
+        imageEntity.setWidth(onlyBoundsOptions.outWidth);
+        input.close();
+    }
+
+    /**
+     * 获得相册中图片的option
+     *
+     * @return
+     */
+    public static DisplayImageOptions getCameraPhotoOptions() {
+
+        return new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.color.transparent)
+                        // .showImageBackGroundColor(backgroundId)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .imageScaleType(ImageScaleType.EXACTLY).cacheInMemory(true)
+                        // .imageScaleType(ImageScaleType.EXACTLY).cacheInMemory(true).displayer(new
+                        // FadeInBitmapDisplayer(1000))
+                .cacheOnDisk(true).build();
+    }
 
 }

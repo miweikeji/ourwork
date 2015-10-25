@@ -1,5 +1,6 @@
 package app.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,20 +17,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.activity.MyWorkDetailsActivity;
+import app.activity.PublishDairyActivity;
 import app.adapter.MyWorkAdapter;
 import app.entity.MyWork;
+import app.utils.Config;
+import app.views.BottomSelectDialog;
 
 /**
  * Created by Administrator on 2015/10/12.
  */
-public class DecorationDiaryFragment extends Fragment implements MyWorkAdapter.MyItemClickListener{
+public class DecorationDiaryFragment extends Fragment implements MyWorkAdapter.MyItemClickListener,View.OnClickListener{
 
     private View layout;
     private RecyclerView recyclerView;
+    private Dialog bottomSelectDialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.fragment_construction,null);
+        layout = inflater.inflate(R.layout.fragment_decoration_diary,null);
         initUI();
         return layout;
     }
@@ -37,12 +43,12 @@ public class DecorationDiaryFragment extends Fragment implements MyWorkAdapter.M
     private void initUI() {
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerview);
+                                      layout.findViewById(R.id.btn_dairy).setOnClickListener(this);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         //设置间隔
-//        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).colorResId(R.color.line).size(1).marginResId(R.dimen.margin_left_right).build());
         List<MyWork> dataList = new ArrayList<>();
         int i;
         for (i = 0; i < 10; i++) {
@@ -61,5 +67,31 @@ public class DecorationDiaryFragment extends Fragment implements MyWorkAdapter.M
     public void onItemClick(View view, int postion) {
 //        startActivity(new Intent(getActivity(), HouseActivity.class));
         startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
+    }
+
+    @Override
+    public void onClick(View v) {
+          if (v.getId()==R.id.btn_dairy){
+              //写日记，弹框
+            Config.init(getActivity());
+             bottomSelectDialog=BottomSelectDialog.create(getActivity(), BottomSelectDialog.PopUpDialogPosition.bottom, new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      switch (v.getId()){
+                          case R.id.btn_write:
+                              startActivity(new Intent(getActivity(), PublishDairyActivity.class));
+                              break;
+                          case R.id.btn_check:
+                              break;
+                          case R.id.btn_value:
+                              break;
+                      }
+
+                  }
+              });
+              bottomSelectDialog.show();
+
+          }
+
     }
 }
