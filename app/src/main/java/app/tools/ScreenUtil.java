@@ -4,7 +4,9 @@ package app.tools;
  * Created by zhujian on 15/1/14.
  */
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.Display;
 
 import java.lang.reflect.Field;
 
@@ -28,6 +30,16 @@ public class ScreenUtil {
 
     public int getScreenWidth(){
         return mCtx.getResources().getDisplayMetrics().widthPixels;
+    }
+    /**
+     * 获取屏幕宽度
+     *
+     * @return
+     */
+    public static int getScreenWidth(Activity context) {
+        Display display = context.getWindowManager().getDefaultDisplay();
+        return display.getWidth();
+
     }
 
     public int dip2px(int dip){

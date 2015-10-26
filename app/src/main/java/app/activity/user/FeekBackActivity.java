@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
@@ -20,6 +21,7 @@ import app.views.NavigationBar;
  */
 public class FeekBackActivity extends BaseActivity{
     private EditText ed_feedback;
+    private TextView tvAccount;
 
     @Override
     public void obtainData() {
@@ -28,6 +30,7 @@ public class FeekBackActivity extends BaseActivity{
 
     @Override
     public void initUI() {
+        tvAccount=(TextView)findViewById(R.id.tv_account);
         ed_feedback = (EditText) findViewById(R.id.ed_feedback);
         ed_feedback.addTextChangedListener(new TextWatcher() {
             @Override
@@ -42,6 +45,13 @@ public class FeekBackActivity extends BaseActivity{
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                        String  text= s.toString();
+                        if(text.length()>140){
+                            Uihelper.showToast(mActivity,"最多输入100个字");
+                        }else{
+                            tvAccount.setText(text.length()+"");
+                        }
 
             }
         });

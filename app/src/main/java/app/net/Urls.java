@@ -9,13 +9,14 @@ public class Urls {
 
     //正式服务器
 //    public static final String base_server = "http://www.miweikj.cn/";
-    //    public static final String base_server = "http://172.20.8.143:8080/miqian-app/";
-    //    public static final String base_server = "http://172.20.8.11:8082/miqian-app/";
 
-    //测试
+    //发送验证码
     public final static String getMsgCode = base_server + "App/Signup/getMsgCode";
+    //注册
     public final static String register = base_server+"App/Signup/register";
+    //登录
     public final static String login = base_server+"App/Signin/login";
+    //提交工匠基本信息接口
     public final static String BasicInfo = base_server+"App/Crafts/createCraftsBasicInfo";
     //获取工匠信息
     public final static String craftsman_info=base_server+"App/Crafts/getCraftsInfoRelevant";
@@ -47,6 +48,12 @@ public class Urls {
     public final static String getMyfriend  = base_server+"App/Crafts/getMyfriend";
     //未安排任务接口
     public final static String unArrangeTask  = base_server+"App/Workplan/unArrangeTask";
+    //广告
+    public final static String advertise  = base_server+"/App/Server";
+    //工头认证
+    public final static String workHeadAudit  = base_server+"/App/Crafts/workHeadAudit";
+    //添加班组成员
+    public final static String addGroupCrafts  = base_server+"/App/Cragroup/addGroupCrafts";
 
 
 }

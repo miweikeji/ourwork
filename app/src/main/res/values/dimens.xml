@@ -22,4 +22,10 @@
     <dimen name="textsize_small">13sp</dimen>
     <dimen name="textsize_smaller">10sp</dimen>
 
+
+    <dimen name="footer_pic_height">150dp</dimen>
+    <dimen name="footer_pic_layout_width">111dp</dimen>
+    <dimen name="footer_pic_layout_height">168dp</dimen>
+
+
 </resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_main"
+    android:layout_width="@dimen/footer_pic_layout_width"
+    android:layout_height="@dimen/footer_pic_layout_height">
+
+    <ImageView
+        android:id="@+id/im_pic"
+        android:layout_width="86dp"
+        android:layout_height="@dimen/footer_pic_height"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="5dp"
+        android:scaleType="fitCenter"></ImageView>
+
+    <LinearLayout
+        android:id="@+id/layout_del"
+        android:layout_width="111dp"
+        android:layout_height="168dp"
+        android:gravity="right">
+
+        <ImageView
+            android:id="@+id/im_del"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/btn_add_photo_close_n"
+            android:gravity="center" />
+    </LinearLayout>
+
+</FrameLayout>
