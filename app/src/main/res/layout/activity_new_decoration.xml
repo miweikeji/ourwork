@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:text="业主"
+        android:id="@+id/textView30" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/white"
+            android:id="@+id/relativeLayout26">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tv_sir_and_lady"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+
+        <RadioGroup
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/relativeLayout26"
+            android:layout_marginLeft="15dp"
+
+            android:orientation="horizontal"
+            android:gravity="center"
+           >
+
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="先生"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@color/sl_radio_button_text"
+                android:background="@drawable/sl_radio_button_color"
+                android:id="@+id/rb_sir"
+                android:checked="true"
+                android:layout_gravity="center_horizontal" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="女士"
+                android:background="@drawable/sl_radio_button_color"
+                android:textColor="@color/sl_radio_button_text"
+                android:gravity="center"
+                android:id="@+id/rb_lady"
+                android:button="@null"
+                android:layout_gravity="center_horizontal" />
+        </RadioGroup>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="小区"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/textView31" />
+
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:layout_height="40dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/et_village"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:hint="请输入小区的名字"
+            android:textSize="14sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="房屋类型"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/textView33" />
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:layout_marginLeft="15dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true">
+
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="一居"
+
+                android:background="@drawable/sl_radio_button_color"
+                android:textColor="@color/sl_radio_button_text"
+                android:gravity="center"
+                android:button="@null"
+                android:checked="true"
+                android:id="@+id/rb_type_1" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/sl_radio_button_text"
+                android:background="@drawable/sl_radio_button_color"
+                android:text="二居"
+                android:gravity="center"
+                android:button="@null"
+                android:id="@+id/rb_type_2" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/sl_radio_button_text"
+                android:background="@drawable/sl_radio_button_color"
+                android:text="三居"
+                android:gravity="center"
+                android:button="@null"
+                android:id="@+id/rb_type_3" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/sl_radio_button_text"
+                android:background="@drawable/sl_radio_button_color"
+                android:text="四居"
+                android:gravity="center"
+                android:button="@null"
+                android:id="@+id/rb_type_4" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/sl_radio_button_text"
+                android:background="@drawable/sl_radio_button_color"
+                android:text="别墅"
+                android:button="@null"
+                android:gravity="center"
+                android:id="@+id/rb_type_5" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/sl_radio_button_text"
+                android:background="@drawable/sl_radio_button_color"
+                android:text="其他"
+                android:gravity="center"
+                android:button="@null"
+                android:id="@+id/rb_type_6" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:text="面积"
+        android:id="@+id/textView34" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/white"
+        android:id="@+id/relativeLayout27">
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/et_area"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="平方米"
+            android:id="@+id/textView35"
+            android:layout_toRightOf="@+id/relativeLayout27"
+            android:layout_toEndOf="@+id/relativeLayout27"
+
+            android:gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="施工方式"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+
+        android:id="@+id/textView36" />
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
+            android:layout_alignParentStart="true">
+
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="半包"
+                android:textColor="@color/sl_radio_button_text"
+                android:button="@null"
+                android:gravity="center"
+                android:checked="true"
+                android:background="@drawable/sl_radio_button_color"
+                android:id="@+id/rb_type_one" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="全包"
+                android:textColor="@color/sl_radio_button_text"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/sl_radio_button_color"
+                android:id="@+id/rb_type_two" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="清包"
+                android:gravity="center"
+                android:textColor="@color/sl_radio_button_text"
+                android:background="@drawable/sl_radio_button_color"
+                android:button="@null"
+                android:id="@+id/rb_type_three" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="新建专修计划"
+            android:background="@drawable/sl_rl_bg"
+            android:id="@+id/button4"
+            android:onClick="newDecoration"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp" />
+    </RelativeLayout>
+
+        </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

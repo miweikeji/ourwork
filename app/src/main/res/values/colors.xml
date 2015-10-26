@@ -30,6 +30,9 @@
     <color name="grey_1">#d0d0d0</color>
     <color name="grey_2">#90000000</color>
 
+    <color name="radio_button">#3C3C3C</color>
+    <color name="rl_true">#F7F7F7</color>
+
 
 
 
