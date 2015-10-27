@@ -62,7 +62,7 @@ public class WorkPlanDetailsActivity extends BaseActivity {
         StatusTools.setStatus(tv_status, constructPlan.getHouse_status());
 
         scrollView = (PullToRefreshScrollView) findViewById(R.id.pull_scroll);
-        listView = (MyListView) findViewById(R.id.listview);
+        listView = (MyListView) findViewById(R.id.listViewq);
         scrollView.setMode(PullToRefreshBase.Mode.BOTH);
         scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override

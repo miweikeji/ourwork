@@ -141,7 +141,7 @@
                     />
             </RelativeLayout>
             <app.views.MyListView
-                android:id="@+id/listView"
+                android:id="@+id/listViewq"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="15dp"

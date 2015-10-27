@@ -1,5 +1,6 @@
 package app.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,13 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
 import java.util.ArrayList;
 
+import app.activity.mywork.ParterMessageActivity;
 import app.views.PagerSlidingTabStrip;
 
 /**
@@ -24,6 +27,7 @@ public class MyJobFragment extends Fragment {
 
     private View layout;
     private ArrayList<Fragment> fragments;
+    private TextView tvNum;
 
     @Nullable
     @Override
@@ -47,6 +51,18 @@ public class MyJobFragment extends Fragment {
                         .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pagerSliding.setViewPager(pager);
+        //消息
+         tvNum=(TextView)layout.findViewById(R.id.tv_message_num);
+
+        layout.findViewById(R.id.frame_message).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //到消息页面
+
+                 startActivity(new Intent(getActivity(), ParterMessageActivity.class));
+            }
+        });
+
     }
 
      class MyAdapter extends FragmentPagerAdapter{
