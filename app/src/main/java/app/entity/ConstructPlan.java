@@ -1,9 +1,11 @@
 package app.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/10/27.
  */
-public class ConstructPlan {
+public class ConstructPlan implements Serializable{
 
     private String id;
     private String workplace;

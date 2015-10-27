@@ -22,7 +22,6 @@ public class Urls {
     public final static String craftsman_info=base_server+"App/Crafts/getCraftsInfoRelevant";
     //获取工匠参与的所有案例
     public final static String all_case = base_server+"App/House/getHouseListByCraftsId";
-
     //获取班组接口
     public final static String getCraGroup=base_server+"App/Cragroup/getCraGroup";
     //班组成员接口
@@ -58,6 +57,10 @@ public class Urls {
     public final static String searchcraftsByType  = base_server+"App/Crafts/searchcraftsByType";
     //工作安排施工中
     public final static String constructPlan  = base_server+"App/Workplan/constructPlan";
+    //工作安排完成
+    public final static String finishPlan  = base_server+"App/Workplan/finishPlan";
+    //工作安排详情接口
+    public final static String detailPlan  = base_server+"App/Workplan/detailPlan";
 
 
 }

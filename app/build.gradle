@@ -28,4 +28,5 @@ dependencies {
     compile project(':library_pulltorefesh')
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.17'
+    compile 'com.google.code.gson:gson:2.2.4'
 }
