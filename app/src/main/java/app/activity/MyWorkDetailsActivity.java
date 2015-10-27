@@ -19,7 +19,8 @@ import app.views.NavigationBar;
 /**
  * Created by Administrator on 2015/10/12.
  */
-public class MyWorkDetailsActivity extends BaseActivity implements NavigationBar.RightOnClick , MyWorkAdapter.MyItemClickListener{
+public class MyWorkDetailsActivity extends BaseActivity implements
+        NavigationBar.RightOnClick {
 
 
     private LinearLayout linearDuty;
@@ -60,8 +61,5 @@ public class MyWorkDetailsActivity extends BaseActivity implements NavigationBar
         startActivity(new Intent(MyWorkDetailsActivity.this,CraftsmanZoneActivity.class));
     }
 
-    @Override
-    public void onItemClick(View view, int postion) {
 
-    }
 }

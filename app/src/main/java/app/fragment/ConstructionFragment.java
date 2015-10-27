@@ -22,7 +22,7 @@ import app.entity.MyWork;
 /**
  * Created by Administrator on 2015/10/9.
  */
-public class ConstructionFragment extends Fragment implements MyWorkAdapter.MyItemClickListener {
+public class ConstructionFragment extends Fragment {
 
 
 
@@ -40,28 +40,13 @@ public class ConstructionFragment extends Fragment implements MyWorkAdapter.MyIt
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerview);
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        //设置间隔
-        List<MyWork> dataList = new ArrayList<>();
-        int i;
-        for (i = 0; i < 10; i++) {
-            MyWork myWork = new MyWork();
-            myWork.setTitle("小屋" + i);
-            dataList.add(myWork);
-        }
 
-        MyWorkAdapter adapterPacket = new MyWorkAdapter(dataList);
-        adapterPacket.setOnItemClickListener(this);
-//        adapterPacket.setPosition(position);
-        recyclerView.setAdapter(adapterPacket);
     }
 
-    @Override
-    public void onItemClick(View view, int postion) {
-//        startActivity(new Intent(getActivity(), HouseActivity.class));
-        startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
-    }
+//    @Override
+//    public void onItemClick(View view, int postion) {
+////        startActivity(new Intent(getActivity(), HouseActivity.class));
+//        startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
+//    }
 
 }

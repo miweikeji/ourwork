@@ -27,7 +27,7 @@ import app.views.BottomSelectDialog;
 /**
  * Created by Administrator on 2015/10/12.
  */
-public class DecorationDiaryFragment extends Fragment implements MyWorkAdapter.MyItemClickListener,View.OnClickListener{
+public class DecorationDiaryFragment extends Fragment implements View.OnClickListener{
 
     private View layout;
     private RecyclerView recyclerView;
@@ -46,29 +46,13 @@ public class DecorationDiaryFragment extends Fragment implements MyWorkAdapter.M
         recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerview);
                                       layout.findViewById(R.id.btn_dairy).setOnClickListener(this);
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        //设置间隔
-        List<MyWork> dataList = new ArrayList<>();
-        int i;
-        for (i = 0; i < 10; i++) {
-            MyWork myWork = new MyWork();
-            myWork.setTitle("小屋" + i);
-            dataList.add(myWork);
-        }
-
-        MyWorkAdapter adapterPacket = new MyWorkAdapter(dataList);
-        adapterPacket.setOnItemClickListener(this);
-//        adapterPacket.setPosition(position);
-        recyclerView.setAdapter(adapterPacket);
     }
 
-    @Override
-    public void onItemClick(View view, int postion) {
-//        startActivity(new Intent(getActivity(), HouseActivity.class));
-        startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
-    }
+//    @Override
+//    public void onItemClick(View view, int postion) {
+////        startActivity(new Intent(getActivity(), HouseActivity.class));
+//        startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
+//    }
 
     @Override
     public void onClick(View v) {

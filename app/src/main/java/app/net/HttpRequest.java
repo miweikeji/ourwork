@@ -11,6 +11,7 @@ import app.entity.AddMemberError;
 import app.entity.AdvertiseResult;
 import app.entity.ArrangeTaskResult;
 import app.entity.CaseResult;
+import app.entity.ConstructPlanResult;
 import app.entity.CraGroupResult;
 import app.entity.Crafts;
 import app.entity.CraftsResult;
@@ -707,4 +708,34 @@ public class HttpRequest {
         }).executeOnExecutor();
     }
 
+    /**
+     *
+     工作安排施工中
+
+     */
+    public static void constructPlan(Context context,String cid ,int p,final ICallback<ConstructPlanResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("p", "" + p));
+
+
+        new MyAsyncTask(context, Urls.constructPlan, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                ConstructPlanResult meta = JsonUtil.parseObject(result, ConstructPlanResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
 }

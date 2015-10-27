@@ -56,6 +56,8 @@ public class Urls {
     public final static String addGroupCrafts  = base_server+"/App/Cragroup/addGroupCrafts";
     //根据工种类型查询工匠列表
     public final static String searchcraftsByType  = base_server+"App/Crafts/searchcraftsByType";
+    //工作安排施工中
+    public final static String constructPlan  = base_server+"App/Workplan/constructPlan";
 
 
 }
