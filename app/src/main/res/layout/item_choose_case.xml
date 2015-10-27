@@ -4,22 +4,53 @@
     android:layout_height="match_parent"
     android:paddingBottom="5dp"
     android:orientation="vertical">
-    <app.views.MyListView
-        android:id="@+id/list_choose_case"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="45dp"
+        android:background="@drawable/sl_bg"
+        android:layout_below="@+id/relativeLayout30"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/rl_choose_type">
 
-    </app.views.MyListView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/add_item"
-        ></LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工种类型："
+            android:id="@+id/textView82"
+            android:layout_marginLeft="15dp"
+            android:textSize="16sp"
+
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/tv_case_title"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView82"
+            android:layout_toEndOf="@+id/textView82" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView25"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_arrow_drop_down_black"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="15dp"
         android:background="@color/white"
         >
 
@@ -93,27 +124,40 @@
             android:layout_toLeftOf="@+id/linearLayout6"
             android:layout_toStartOf="@+id/linearLayout6">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="@null"
                 android:id="@+id/et_name"
-                android:hint="通过平台找工匠"
+                android:text="通过平台找工匠"
                 android:textSize="14sp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
         </RelativeLayout>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical"
+        android:id="@+id/add_item"
+        ></LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:background="@color/line"/>
+
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:background="@color/white"
         >
 
@@ -162,10 +206,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:background="@color/line"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:background="@color/white"
         >
 
@@ -209,11 +257,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:background="@color/line"/>
     <RelativeLayout
         android:id="@+id/rl_to_time"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:background="@color/white"
         >
 
@@ -239,5 +291,18 @@
             android:layout_toRightOf="@+id/textView96"
             android:layout_toEndOf="@+id/textView96" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除工种"
+        android:textColor="@color/base_orange"
+        android:drawableLeft="@mipmap/ic_delete_black"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:id="@+id/tv_deleate_case"
+        android:layout_gravity="right" />
 
 </LinearLayout>

@@ -8,8 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollView8"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_add_case">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -102,58 +104,41 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/relativeLayout30"></RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@drawable/sl_bg"
-                android:layout_below="@+id/relativeLayout30"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/rl_choose_type">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="工种类型："
-                    android:id="@+id/textView82"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="16sp"
-
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/textView84"
-                    android:layout_marginLeft="5dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textView82"
-                    android:layout_toEndOf="@+id/textView82" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView25"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/ic_arrow_drop_down_black"
-                    android:layout_marginRight="10dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
-            </RelativeLayout>
-
             <LinearLayout
                 android:id="@+id/add_choose_case"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/rl_choose_type"
+                android:layout_below="@+id/relativeLayout30"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+
                 android:layout_centerHorizontal="true"></LinearLayout>
         </RelativeLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/sl_orgin"
+        android:textColor="@color/white"
+        android:text="确认发布邀请"
+        android:id="@+id/button7"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+添加工种"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/base_green"
+        android:id="@+id/tv_add_case"
+        android:layout_above="@+id/button7"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

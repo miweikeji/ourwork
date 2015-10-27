@@ -20,6 +20,7 @@ import app.entity.HousesByLyfResult;
 import app.entity.Meta;
 import app.entity.MyFriendsResult;
 import app.entity.RegisterInfo;
+import app.entity.SearchResult;
 import app.entity.UserInfo;
 import app.entity.UserInfoResult;
 import app.entity.craftsList;
@@ -673,4 +674,37 @@ public class HttpRequest {
             }
         }).executeOnExecutor();
     }
+
+
+    /**
+     *
+     根据工种类型查询工匠列表
+
+     */
+    public static void searchcraftsByType(Context context,String content ,int p,final ICallback<SearchResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("content", content));
+        mList.add(new Param("p", "" + p));
+
+
+        new MyAsyncTask(context, Urls.searchcraftsByType, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                SearchResult meta = JsonUtil.parseObject(result, SearchResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
 }

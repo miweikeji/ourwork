@@ -3,6 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/rl_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/all_title_bar_hight"
         android:layout_alignParentTop="true"
@@ -19,30 +20,33 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_marginRight="5dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:id="@+id/rl_find">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="查找"
             android:textColor="@color/white"
-            android:layout_marginRight="15dp"
             android:id="@+id/tv_search"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
+            android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="5dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginRight="15dp"
             android:background="@color/white"
             android:layout_toRightOf="@+id/imageView22"
-            android:layout_toLeftOf="@+id/tv_search"
-            android:layout_toStartOf="@+id/tv_search">
+            android:layout_toStartOf="@+id/rl_find"
+            android:layout_toLeftOf="@+id/rl_find">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -57,12 +61,20 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/editText5"
+                android:id="@+id/et_search_contents"
                 android:layout_marginLeft="5dp"
                 android:background="@null"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView23"
-                android:layout_toEndOf="@+id/imageView23" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
     </RelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pull_list"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rl_bar" />
 </RelativeLayout>

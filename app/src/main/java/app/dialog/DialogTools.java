@@ -99,6 +99,7 @@ public class DialogTools {
     public static  Dialog chooseCase(Activity activity,ArrayList<Integer> list){
        final CheckBox[] checkBox=new  CheckBox[6];
        final HashMap<Integer,String> hasMap = new HashMap<Integer,String>();
+        hasMap.clear();
         LayoutInflater inflater = LayoutInflater.from(activity);
         View layout = inflater.inflate(R.layout.dialog_choose_case, null);
         RelativeLayout layout_refuse_show = (RelativeLayout)layout.findViewById(R.id.layout_choose_case);
