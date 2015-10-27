@@ -1,10 +1,13 @@
 package app.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
+import android.view.View;
 
 import com.miweikeij.app.R;
 
@@ -20,8 +23,9 @@ import app.views.PagerSlidingTabStrip;
 /**
  * Created by Administrator on 2015/10/12.
  */
-public class CraftsmanZoneActivity extends BaseActivity{
+public class CraftsmanZoneActivity extends BaseActivity {
     private ArrayList<Fragment> fragments;
+
     @Override
     public void obtainData() {
 
@@ -37,8 +41,8 @@ public class CraftsmanZoneActivity extends BaseActivity{
         fragments.add(infoFragment);
         fragments.add(caseFragment);
         fragments.add(mouthFragment);
-        ViewPager pager = (ViewPager)findViewById(R.id.pager);
-        PagerSlidingTabStrip pagerSliding =(PagerSlidingTabStrip)findViewById(R.id.pagerSliding);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        PagerSlidingTabStrip pagerSliding = (PagerSlidingTabStrip) findViewById(R.id.pagerSliding);
         pager.setAdapter(new MyAdapter(getSupportFragmentManager()));
         final int pageMargin = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 2, getResources()
@@ -48,7 +52,8 @@ public class CraftsmanZoneActivity extends BaseActivity{
     }
 
     class MyAdapter extends FragmentPagerAdapter {
-        private final String[] TITLES = {"工匠信息","装修案例","口碑评价"};
+        private final String[] TITLES = {"工匠信息", "装修案例", "口碑评价"};
+
         public MyAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -79,5 +84,9 @@ public class CraftsmanZoneActivity extends BaseActivity{
     public void initTitle(NavigationBar mBar) {
         mBar.setContexts(this);
         mBar.setTitle("工匠主页");
+    }
+
+    public void btn_callphone(View v) {
+        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:10086")));
     }
 }

@@ -40,6 +40,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:text="给他打电话"
+         android:onClick="btn_callphone"
         android:layout_alignParentBottom="true"
         android:textColor="@color/white"
         android:background="@drawable/sl_orgin"/>

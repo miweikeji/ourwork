@@ -44,7 +44,6 @@ public class ConstructionFragment extends Fragment implements MyWorkAdapter.MyIt
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         //设置间隔
-//        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).colorResId(R.color.line).size(1).marginResId(R.dimen.margin_left_right).build());
         List<MyWork> dataList = new ArrayList<>();
         int i;
         for (i = 0; i < 10; i++) {

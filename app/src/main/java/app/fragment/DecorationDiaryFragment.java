@@ -18,6 +18,7 @@ import java.util.List;
 
 import app.activity.MyWorkDetailsActivity;
 import app.activity.PublishDairyActivity;
+import app.activity.mywork.ValueCraftActivity;
 import app.adapter.MyWorkAdapter;
 import app.entity.MyWork;
 import app.utils.Config;
@@ -80,10 +81,14 @@ public class DecorationDiaryFragment extends Fragment implements MyWorkAdapter.M
                       switch (v.getId()){
                           case R.id.btn_write:
                               startActivity(new Intent(getActivity(), PublishDairyActivity.class));
+                              bottomSelectDialog.dismiss();
                               break;
                           case R.id.btn_check:
+                              bottomSelectDialog.dismiss();
                               break;
                           case R.id.btn_value:
+                              startActivity(new Intent(getActivity(), ValueCraftActivity.class));
+                              bottomSelectDialog.dismiss();
                               break;
                       }
 

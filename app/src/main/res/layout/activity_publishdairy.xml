@@ -31,9 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_left_right"
             android:layout_marginTop="5dp"
             android:text="/100"
-            android:layout_marginRight="@dimen/margin_left_right"
             android:textAppearance="?android:attr/textAppearanceSmall"
 
             />
@@ -49,18 +49,19 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/base_orange" />
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/v_pics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <HorizontalScrollView
             android:id="@+id/scroll_h"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            >
+            android:scrollbars="none">
 
             <LinearLayout
                 android:id="@+id/lin_pics_h"
@@ -69,8 +70,7 @@
                 android:gravity="bottom"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp" >
-            </LinearLayout>
+                android:paddingRight="20dp"></LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
 
