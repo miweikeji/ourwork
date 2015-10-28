@@ -6,6 +6,22 @@ package app.entity;
 public class UserInfo {
 
 
+    private static UserInfo userInfo = null;
+    public static UserInfo getInstance(){
+
+        if(userInfo==null){
+            userInfo = new UserInfo();
+        }
+
+        return userInfo;
+    }
+
+
+    private UserInfo(){
+
+    }
+
+
     private String score;
     private String busername;
     private String protect;

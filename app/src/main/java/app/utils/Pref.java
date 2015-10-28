@@ -11,6 +11,9 @@ public class Pref {
 
 
 	public static final String USERID = "useId";
+	public static final String USERPSW = "usePsw";
+	public static final String USERPHONE = "usePhone";
+	public static final String USERPROFESSION= "useProfession";
 
 	// 首次开启
 	public static final String FIRST_LOAD = "FirstLoad";

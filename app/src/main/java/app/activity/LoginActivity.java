@@ -94,7 +94,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private void login(String phone,String psw) {
+    private void login(final String phone, final String psw) {
         showWaitingDialog();
         HttpRequest.loginHttp(this, phone, psw, new ICallback<UserInfoResult>() {
             @Override
@@ -102,6 +102,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 disMissWaitingDialog();
                 Uihelper.trace(result.getCrafts().toString());
                 UserUtil.saveUserId(LoginActivity.this, result.getCrafts().getId());
+                UserUtil.saveUserPsw(LoginActivity.this, psw);
+                UserUtil.saveUserPhone(LoginActivity.this,phone);
                 if (!result.getCrafts().isHasinfo()){
                     BasicInfoActivity.startActivity(LoginActivity.this, result.getCrafts().getId());
                 }

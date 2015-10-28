@@ -16,6 +16,8 @@ import java.util.List;
 import app.entity.AddMemberError;
 import app.entity.AdvertiseResult;
 import app.entity.ArrangeTaskResult;
+import app.entity.BuiltTask;
+import app.entity.BuiltTaskResult;
 import app.entity.CaseResult;
 import app.entity.ConstructPlanResult;
 import app.entity.CraGroupResult;
@@ -824,6 +826,56 @@ public class HttpRequest {
 //                            Gson gson = gb.create();
                             Gson gson = new Gson();
                             DetailPlanResult meta= gson.fromJson(result, DetailPlanResult.class);
+//                            DetailPlanResult meta = JsonUtil.parseObject(result, DetailPlanResult.class);
+                            callback.onSucceed(meta);
+
+                        }
+                    }else {
+                        callback.onFail(object.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     *
+     获取已建计划接口
+
+     */
+    public static void getTask(Context context,String cid ,int p,final ICallback<BuiltTaskResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("p", ""+p));
+
+
+        new MyAsyncTask(context, Urls.getTask, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                //{"houseList":null,"page":0,"status":0,"msg":"","sessionid":"40a5be61562f73454e372"}
+                try {
+                    JSONObject object = new JSONObject(result);
+                    int status = object.getInt("status");
+                    if(status==0){
+                        int page = object.getInt("page");
+                        if(page==0){
+                            callback.onFail(Constants.JSON_HAS_NULL);
+                        }else {
+//                            GsonBuilder gb = new GsonBuilder();
+//                            gb.registerTypeAdapter(String.class, new StringConverter());
+//                            Gson gson = gb.create();
+                            Gson gson = new Gson();
+                            BuiltTaskResult meta= gson.fromJson(result, BuiltTaskResult.class);
 //                            DetailPlanResult meta = JsonUtil.parseObject(result, DetailPlanResult.class);
                             callback.onSucceed(meta);
 

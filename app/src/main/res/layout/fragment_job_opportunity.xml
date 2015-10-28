@@ -110,6 +110,7 @@
                     android:layout_toEndOf="@+id/relativeLayout2">
 
                     <RelativeLayout
+                        android:id="@+id/rl_carpenter"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
@@ -140,6 +141,7 @@
                         android:background="#f0f0f0"></RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_painter"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
@@ -188,6 +190,7 @@
                     android:id="@+id/relativeLayout3"></RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_muddy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
@@ -217,6 +220,7 @@
                     android:layout_toEndOf="@+id/relativeLayout3">
 
                     <RelativeLayout
+                        android:id="@+id/rl_door"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
@@ -247,6 +251,7 @@
                         android:background="#f0f0f0"></RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_porter"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">

@@ -1,8 +1,10 @@
 package app.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -23,7 +25,7 @@ import app.utils.Uihelper;
 import app.views.AutoLoadListView;
 import app.views.NavigationBar;
 
-public class MyFriendsActivity extends BaseActivity {
+public class MyFriendsActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
 
     private MyFriendsAdapter adapter;
@@ -42,6 +44,7 @@ public class MyFriendsActivity extends BaseActivity {
         pull_list = (PullToRefreshListView) findViewById(R.id.pull_list);
         list = pull_list.getRefreshableView();
         pull_list.setMode(PullToRefreshBase.Mode.BOTH);
+        pull_list.setOnItemClickListener(this);
         pull_list.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -98,4 +101,8 @@ public class MyFriendsActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        startActivity(new Intent(this, CraftsmanZoneActivity.class));
+    }
 }

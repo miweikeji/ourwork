@@ -45,6 +45,21 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
             case R.id.rl_water:
                 delegate.getCraftsmanType("水电工");
                 break;
+            case R.id.rl_muddy:
+                delegate.getCraftsmanType("泥水工");
+                break;
+            case R.id.rl_carpenter:
+                delegate.getCraftsmanType("木工");
+                break;
+            case R.id.rl_painter:
+                delegate.getCraftsmanType("油漆工");
+                break;
+            case R.id.rl_door:
+                delegate.getCraftsmanType("门窗安装工");
+                break;
+            case R.id.rl_porter:
+                delegate.getCraftsmanType("敲打搬运工");
+                break;
         }
     }
 
@@ -81,7 +96,17 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
         indicator = (ViewpagerIndicator) layout.findViewById(R.id.viewpagerIndicator1);
 
         RelativeLayout rl_water = (RelativeLayout)layout.findViewById(R.id.rl_water);
+        RelativeLayout rl_muddy = (RelativeLayout)layout.findViewById(R.id.rl_muddy);
+        RelativeLayout rl_carpenter = (RelativeLayout)layout.findViewById(R.id.rl_carpenter);
+        RelativeLayout rl_painter = (RelativeLayout)layout.findViewById(R.id.rl_painter);
+        RelativeLayout rl_door = (RelativeLayout)layout.findViewById(R.id.rl_door);
+        RelativeLayout rl_porter = (RelativeLayout)layout.findViewById(R.id.rl_porter);
+        rl_porter.setOnClickListener(this);
         rl_water.setOnClickListener(this);
+        rl_painter.setOnClickListener(this);
+        rl_carpenter.setOnClickListener(this);
+        rl_muddy.setOnClickListener(this);
+        rl_door.setOnClickListener(this);
     }
     private void initViewPager() {
         fm = getFragmentManager();

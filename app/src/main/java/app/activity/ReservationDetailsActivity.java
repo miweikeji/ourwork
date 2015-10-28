@@ -1,7 +1,9 @@
 package app.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
@@ -23,12 +25,15 @@ public class ReservationDetailsActivity extends BaseActivity implements Navigati
     private HousesByLyf lyf;
     @Override
     public void obtainData() {
-        lyf = (HousesByLyf) getIntent().getSerializableExtra("ReservationDetailsActivity");
+
     }
 
     @Override
     public void initUI() {
+        lyf = (HousesByLyf) getIntent().getSerializableExtra("ReservationDetailsActivity");
 
+        RelativeLayout rl_house = (RelativeLayout) findViewById(R.id.rl_house);
+        rl_house.setOnClickListener(this);
         Button btn_refuse = (Button)findViewById(R.id.btn_refuse);
         Button btn_sure = (Button)findViewById(R.id.btn_sure);
         btn_sure.setOnClickListener(this);
@@ -98,6 +103,9 @@ public class ReservationDetailsActivity extends BaseActivity implements Navigati
                 break;
             case R.id.btn_sure:
                 accept();
+                break;
+            case R.id.rl_house:
+                startActivity(new Intent(this,HouseActivity.class));
                 break;
         }
     }

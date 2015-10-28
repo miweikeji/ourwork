@@ -1,8 +1,10 @@
 package app.activity;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -31,6 +33,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
     private String phone;
     private Button btn_summit;
     private Button btn_send_code;
+    private Button btn_getMyPhont;
     private boolean isTimer;// 是否可以计时
     private static Handler handler;
     private Thread thread;
@@ -61,11 +64,14 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initUI() {
+
         btn_send_code = (Button) findViewById(R.id.btn_send_code);
+        btn_getMyPhont = (Button) findViewById(R.id.btn_getMyPhont);
         btn_summit = (Button) findViewById(R.id.btn_summit);
         et_psw = (EditText) findViewById(R.id.et_psw);
         et_code = (EditText) findViewById(R.id.et_code);
         btn_summit.setOnClickListener(this);
+        btn_getMyPhont.setOnClickListener(this);
         et_phone = (EditText) findViewById(R.id.et_phone);
         btn_send_code.setOnClickListener(this);
         btnViewState = (ImageView) findViewById(R.id.tv_view_state);
@@ -99,6 +105,19 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
         phone = et_phone.getText().toString().trim();
 
         switch (view.getId()) {
+            case R.id.btn_getMyPhont:
+                String myPhone = getMyPhone();
+                if(myPhone!=null&&!"".equals(myPhone)){
+                    if(myPhone.length()>11) {
+                        String phone = myPhone.substring(myPhone.length() - 11, myPhone.length());
+                        et_phone.setText(phone);
+                    }else{
+                        et_phone.setText(myPhone);
+                    }
+                }else {
+                    Uihelper.showToast(this,"无法获取手机号码，请手动输入");
+                }
+                break;
             case R.id.btn_send_code:
                 if (!TextUtils.isEmpty(phone)) {
                     boolean isPhoneExit = MobileOS.isMobileNO(phone);
@@ -230,6 +249,11 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
 
             }
         }, phone, type);
+    }
+
+    public String getMyPhone() {
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getLine1Number();
     }
 
     class MyRunnable implements Runnable {

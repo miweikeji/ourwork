@@ -31,7 +31,19 @@ public class UserUtil {
     }
     public static String getUserId(Context context) {
         return Pref.getString(Pref.USERID, context, "");
-    };
+    }
+
+    public static String getUserPsw(Context context){
+        return Pref.getString(Pref.USERPSW, context, "");
+    }
+
+    public static String getUserPhone(Context context){
+        return Pref.getString(Pref.USERPHONE, context, "");
+    }
+
+    public static String getUserProfession(Context context){
+        return Pref.getString(Pref.USERPROFESSION, context, "");
+    }
 
     public static void clearUserInfo(Context context) {
 
@@ -39,7 +51,20 @@ public class UserUtil {
     }
 
     public static void saveUserId(Context context, String userId) {
-        Pref.saveString(Pref.USERID, "100", context);
+        Pref.saveString(Pref.USERID, userId, context);
     }
+
+    public static void saveUserPsw(Context context,String psw){
+        Pref.saveString(Pref.USERPSW,psw,context);
+    }
+
+    public static void saveUserPhone(Context context,String phone){
+        Pref.saveString(Pref.USERPHONE,phone,context);
+    }
+
+    public static void saveUserProfession(Context context,String profession){
+        Pref.saveString(Pref.USERPROFESSION,profession,context);
+    }
+
 
 }

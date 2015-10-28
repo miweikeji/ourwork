@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -18,6 +20,7 @@ import com.miweikeij.app.R;
 import app.activity.LoginActivity;
 import app.activity.WorkDetailsActivity;
 import app.adapter.JobAdapter;
+import app.utils.UserUtil;
 
 /**
  * Created by Administrator on 2015/10/10.
@@ -30,7 +33,7 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button:
+            case R.id.line_two_text:
                 delegate.toJobOpportunityFragment();
                 break;
         }
@@ -48,16 +51,21 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
         this.delegate = delegate;
     }
 
+    private  String profession;
+    private TextView tv_profession;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.fragment_login_job,null);
+        layout = inflater.inflate(R.layout.fragment_login_job, null);
+        profession = UserUtil.getUserProfession(getActivity());
         initUI();
         return layout;
     }
 
     private void initUI() {
-        Button button =(Button) layout.findViewById(R.id.button);
+        tv_profession = (TextView) layout.findViewById(R.id.tv_profession);
+        tv_profession.setText(profession);
+        LinearLayout button =(LinearLayout) layout.findViewById(R.id.line_two_text);
         button.setOnClickListener(this);
         PullToRefreshListView pull_to_list = (PullToRefreshListView) layout.findViewById(R.id.pull_to_list);
         JobAdapter adapter = new JobAdapter(getActivity());
@@ -78,5 +86,6 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
     }
 
     public void setCraftsmanType(String type) {
+        tv_profession.setText(type);
     }
 }
