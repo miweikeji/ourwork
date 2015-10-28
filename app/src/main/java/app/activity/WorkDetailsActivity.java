@@ -25,7 +25,7 @@ public class WorkDetailsActivity  extends BaseActivity implements View.OnClickLi
 
     @Override
     public int onCreateMyView() {
-        return R.layout.activity_message_a;
+        return R.layout.activity_work_details;
     }
 
     @Override

@@ -48,11 +48,11 @@ public class Urls {
     //未安排任务接口
     public final static String unArrangeTask  = base_server+"App/Workplan/unArrangeTask";
     //广告
-    public final static String advertise  = base_server+"/App/Server";
+    public final static String advertise  = base_server+"App/Server";
     //工头认证
-    public final static String workHeadAudit  = base_server+"/App/Crafts/workHeadAudit";
+    public final static String workHeadAudit  = base_server+"App/Crafts/workHeadAudit";
     //添加班组成员
-    public final static String addGroupCrafts  = base_server+"/App/Cragroup/addGroupCrafts";
+    public final static String addGroupCrafts  = base_server+"App/Cragroup/addGroupCrafts";
     //根据工种类型查询工匠列表
     public final static String searchcraftsByType  = base_server+"App/Crafts/searchcraftsByType";
     //工作安排施工中
@@ -61,6 +61,20 @@ public class Urls {
     public final static String finishPlan  = base_server+"App/Workplan/finishPlan";
     //工作安排详情接口
     public final static String detailPlan  = base_server+"App/Workplan/detailPlan";
+    //意见反馈
+    public final static String addSuggest  = base_server+"App/Suggest/add";
+    //退款接口
+    public final static String backMoney  = base_server+"App/Union/back";
+    //我的保障金记录接口
+    public final static String protectlist  = base_server+"App/Protect/protectlist";
+    //我接口
+    public final static String myInfo  = base_server+"App/Crafts/myInfo";
+    //修改我的信息
+    public final static String myInfoEdit  = base_server+"App/Crafts/myInfoEdit";
+    //我的积分
+    public final static String getMyScore  = base_server+"App/Score/getMyScore";
+    //我的积分列表
+    public final static String getScoreList  = base_server+"App/Score/getScoreList";
 
 
 }

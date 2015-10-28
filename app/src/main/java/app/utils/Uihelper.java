@@ -16,6 +16,9 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import app.entity.ImageEntity;
 
@@ -147,6 +150,26 @@ public class Uihelper {
                         // .imageScaleType(ImageScaleType.EXACTLY).cacheInMemory(true).displayer(new
                         // FadeInBitmapDisplayer(1000))
                 .cacheOnDisk(true).build();
+    }
+
+    /**
+     * 将时间戳转换成yyyy-MM-dd HH:mm:ss
+     *
+     * @author yangsq
+     * @date 2014-7-22
+     * @param timestamp
+     * @return
+     */
+    public static String timestampToDateStr(Double timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String date = sdf.format(new Date((long) (timestamp * 1000L)));
+        return date;
+    }
+
+    public static String timestampToDateStr_other(Double timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String date = sdf.format(new Date((long) (timestamp * 1L)));
+        return date;
     }
 
 }

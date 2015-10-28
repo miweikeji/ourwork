@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.miweikeij.app.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
@@ -28,12 +29,14 @@ public abstract class BaseActivity extends FragmentActivity {
     public Activity mActivity;
     public  NavigationBar mBar;
     private Dialog mWaitingDialog;
+    private ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         mActivity=this;
+        imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
         mBar = (NavigationBar)findViewById(R.id.navigationBar);
         mWaitingDialog = ProgressDialogView.create(mActivity);

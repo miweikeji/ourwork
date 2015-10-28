@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import app.activity.BasicInfoActivity;
 import app.activity.LoginActivity;
@@ -20,7 +23,13 @@ import app.activity.user.FeekBackActivity;
 import app.activity.user.IntegralActivity;
 import app.activity.user.JobAuthentActivity;
 import app.activity.user.ProtectMoneyActivity;
+import app.activity.user.UserInfoActivity;
 import app.dialog.DialogSign;
+import app.entity.Crafts;
+import app.entity.CraftsResult;
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.utils.Uihelper;
 import app.utils.UserUtil;
 
 /**
@@ -37,14 +46,21 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private ImageView ivUserImage;
     private View layout;
     private DialogSign dialogSign;
+    private ImageLoader imageLoader;
+    public static DisplayImageOptions options;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         layout = inflater.inflate(R.layout.fragment_mine, null);
+        imageLoader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
         findView(layout);
+
         return layout;
     }
+
+
 
     @Override
     public void onStart() {
@@ -52,6 +68,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         if (UserUtil.hasLogin(getActivity())){
             layout.findViewById(R.id.frame_logined).setVisibility(View.VISIBLE);
             layout.findViewById(R.id.frame_noLogin).setVisibility(View.GONE);
+            obtainData();
         }else {
             layout.findViewById(R.id.frame_logined).setVisibility(View.GONE);
             layout.findViewById(R.id.frame_noLogin).setVisibility(View.VISIBLE);
@@ -86,6 +103,38 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
 
     }
+    private void setData(Crafts crafts) {
+
+        tvAge.setText(crafts.getAge());
+        tvArea.setText(crafts.getAddress());
+        tvJob.setText(crafts.getProfession());
+        tvJobage.setText(crafts.getCworkold()+"年工龄");
+        tvName.setText(crafts.getBusername());
+        imageLoader.displayImage(crafts.getCard_bimg(),ivUserImage,options);
+
+
+
+    }
+    private void obtainData() {
+
+        HttpRequest.myInfo(getActivity(), new ICallback<CraftsResult>() {
+            @Override
+            public void onSucceed(CraftsResult result) {
+                Crafts crafts= result.getCrafts();
+                if (crafts!=null){
+                    setData(crafts);
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                Uihelper.showToast(getActivity(),error);
+            }
+        });
+
+    }
+
+
 
     @Override
     public void onClick(View v) {
@@ -96,7 +145,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), AboutUsActivity.class));
                 break; //关于
             case R.id.frame_userinfo:
-                startActivity(new Intent(getActivity(), BasicInfoActivity.class));
+                startActivity(new Intent(getActivity(), UserInfoActivity.class));
                 break;
             //工人认证
             case R.id.frame_me_authencation:

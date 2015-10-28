@@ -10,6 +10,10 @@ import java.util.List;
 import app.activity.BaseActivity;
 import app.adapter.ProtectRecordAdapter;
 import app.entity.ProtectRecord;
+import app.entity.ProtectRecordResult;
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.utils.Uihelper;
 import app.views.NavigationBar;
 
 public class ProtectRecordActivity extends BaseActivity {
@@ -21,19 +25,32 @@ public class ProtectRecordActivity extends BaseActivity {
     @Override
     public void obtainData() {
 
+          showWaitingDialog();
+        HttpRequest.protectlist(mActivity, 1, new ICallback<ProtectRecordResult>() {
+            @Override
+            public void onSucceed(ProtectRecordResult result) {
+                disMissWaitingDialog();
+                List<ProtectRecord> list= result.getMessage();
+                if (list!=null&&list.size()>0){
+                    items.addAll(list);
+                    adapter = new ProtectRecordAdapter(mActivity, items);
+                    listView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                disMissWaitingDialog();
+                Uihelper.showToast(mActivity,error);
+
+            }
+        });
+
     }
 
     @Override
     public void initUI() {
         listView = (ListView) findViewById(R.id.listView);
-
-        for (int i = 0; i < 10; i++) {
-            ProtectRecord protectRecord=new ProtectRecord();
-            items.add(protectRecord);
-        }
-        adapter = new ProtectRecordAdapter(mActivity, items);
-        listView.setAdapter(adapter);
-
     }
 
     @Override

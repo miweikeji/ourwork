@@ -26,7 +26,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500积分"
+                    android:text="--"
                     android:textColor="@color/base_orange"
                     android:textSize="50dp"
                     android:id="@+id/tv_integral" />

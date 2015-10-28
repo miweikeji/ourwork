@@ -57,7 +57,7 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public int onCreateMyView() {
-        return R.layout.activity_basic_info;
+        return R.layout.activity_first_info;
     }
 
     @Override

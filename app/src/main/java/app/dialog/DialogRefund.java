@@ -1,8 +1,10 @@
 package app.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,9 +12,12 @@ import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
+import app.utils.Uihelper;
+
 
 public abstract class DialogRefund extends Dialog {
 
+    private final Context mContext;
     private TextView titleText;
     private EditText editMoney;
 
@@ -23,6 +28,7 @@ public abstract class DialogRefund extends Dialog {
      */
     public DialogRefund(Context context) {
         super(context, R.style.Dialog);
+        this.mContext = context;
         this.setContentView(R.layout.dialog_refund);
         initViewCode();
     }
@@ -53,7 +59,12 @@ public abstract class DialogRefund extends Dialog {
         btn_sure.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
-                positionBtnClick(editMoney.getText().toString());
+                String money = editMoney.getText().toString();
+                if (TextUtils.isEmpty(money)) {
+                    Uihelper.showToast((Activity) mContext, "请输入退款金额");
+                    return;
+                }
+                positionBtnClick(money);
                 editMoney.setText("");
             }
         });
