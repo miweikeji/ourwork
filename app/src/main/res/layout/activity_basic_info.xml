@@ -48,6 +48,7 @@
                     android:layout_toRightOf="@+id/textView8"
                     android:background="@null"
                     android:hint="请输入您的姓名"
+                    android:maxLength="12"
                     android:inputType="text"
                     android:textSize="15sp" />
                 <View
@@ -89,6 +90,7 @@
                     android:background="@null"
                     android:hint="请输入您的年龄"
                     android:inputType="number"
+                    android:maxLength="3"
                     android:textSize="15sp" />
                 <View
                     style="@style/item_divide_nomargin"
@@ -173,6 +175,7 @@
                     android:layout_toRightOf="@+id/textView3"
                     android:background="@null"
                     android:hint="输入您的工龄"
+                    android:maxLength="3"
                     android:inputType="number"
                     android:textSize="15sp" />
                 <View
@@ -211,6 +214,7 @@
                     android:layout_toRightOf="@+id/textView4"
                     android:background="@null"
                     android:hint="如：安徽"
+                    android:maxLength="12"
                     android:inputType="text"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -245,7 +249,7 @@
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/et_adress"
+                    android:id="@+id/et_area"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
@@ -253,6 +257,7 @@
                     android:layout_toRightOf="@+id/tv_adress1"
                     android:background="@null"
                     android:hint="请输入您的居住地"
+                    android:maxLength="36"
                     android:inputType="text"
                     android:textSize="15sp" />
                 <View
@@ -284,6 +289,7 @@
                     android:id="@+id/et_case"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:maxLength="140"
                     android:layout_centerVertical="true"
 
                     android:layout_toEndOf="@+id/case1"
@@ -331,6 +337,8 @@
                     android:layout_toEndOf="@+id/tv_baseprice"
                     android:layout_toRightOf="@+id/tv_baseprice"
                     android:background="@null"
+                    android:hint="承接所有价位"
+                    android:maxLength="12"
                     android:inputType="number"
                     android:textSize="15sp" />
                 <View
@@ -371,6 +379,7 @@
                     android:layout_toRightOf="@+id/tv_servicezone"
                     android:background="@null"
                     android:inputType="text"
+                    android:maxLength="36"
                     android:textSize="15sp" />
                 <View
                     style="@style/item_divide_nomargin"
@@ -407,6 +416,7 @@
                     android:layout_toEndOf="@+id/tv_openbank"
                     android:layout_toRightOf="@+id/tv_openbank"
                     android:background="@null"
+                    android:maxLength="12"
                     android:inputType="text"
                     android:textSize="15sp" />
                 <View
@@ -443,6 +453,7 @@
                     android:layout_toRightOf="@+id/tv_bankname"
                     android:background="@null"
                     android:inputType="text"
+                    android:maxLength="12"
                     android:textSize="15sp" />
                 <View
                     style="@style/item_divide_nomargin"
@@ -479,6 +490,7 @@
                     android:layout_toRightOf="@+id/tv_cardNum"
                     android:background="@null"
                     android:inputType="number"
+                    android:maxLength="24"
                     android:textSize="15sp" />
                 <View
                     style="@style/item_divide_nomargin"
@@ -516,6 +528,7 @@
                     android:layout_toRightOf="@+id/tv_ceommend_telephone"
                     android:background="@null"
                     android:inputType="number"
+                    android:maxLength="11"
                     android:textSize="15sp" />
                 <View
                     style="@style/item_divide_nomargin"
@@ -550,13 +563,42 @@
                     android:layout_toEndOf="@+id/tv_introduce"
                     android:layout_toRightOf="@+id/tv_introduce"
                     android:background="@drawable/ed_bg"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:gravity="left|top"
+                    android:maxLength="140"
                     android:layout_margin="10dp"
                     android:textSize="15sp" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:paddingRight="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/tv_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_left_right"
+                    android:layout_marginTop="5dp"
+                    android:text="/140"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@+id/tv_percent"
+                    android:layout_toStartOf="@+id/tv_percent"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/base_orange" />
+            </RelativeLayout>
         </LinearLayout>
         <Button
             android:id="@+id/btn_complete"
@@ -568,7 +610,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/sl_orgin"
-            android:text="完成"
+            android:text="提交保存"
             android:textColor="@color/white" />
 
     </LinearLayout>

@@ -2,6 +2,7 @@ package app.activity.user;
 
 import android.content.Intent;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
@@ -10,36 +11,59 @@ import java.util.List;
 
 import app.activity.BaseActivity;
 import app.adapter.ProtectRecordAdapter;
+import app.adapter.ScoreAdapter;
+import app.entity.MyScore;
 import app.entity.ProtectRecord;
+import app.entity.ProtectRecordResult;
+import app.entity.Score;
+import app.entity.ScoreResult;
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.utils.Uihelper;
 import app.views.NavigationBar;
 
 /**
  * Created by tlt on 2015/10/11.
  */
 public class IntegralActivity extends BaseActivity {
-    private ProtectRecordAdapter adapter;
+    private ScoreAdapter adapter;
     private ListView listView;
-    List<ProtectRecord> items=new ArrayList<>();
+    List<Score> items=new ArrayList<>();
+    private TextView tv_score;
 
     @Override
     public void obtainData() {
+
+        showWaitingDialog();
+        HttpRequest.getScoreList(mActivity, 1, new ICallback<ScoreResult>() {
+            @Override
+            public void onSucceed(ScoreResult result) {
+                disMissWaitingDialog();
+                List<Score> list = result.getScorList();
+                if (list != null && list.size() > 0) {
+                    items.addAll(list);
+                    adapter = new ScoreAdapter(mActivity, items);
+                    listView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                disMissWaitingDialog();
+                Uihelper.showToast(mActivity, error);
+
+            }
+        });
+
+
 
     }
 
     @Override
     public void initUI() {
 
-
+         tv_score=(TextView)findViewById(R.id.tv_integral);
         listView = (ListView) findViewById(R.id.listView);
-
-        for (int i = 0; i < 10; i++) {
-            ProtectRecord protectRecord=new ProtectRecord();
-            items.add(protectRecord);
-        }
-        adapter = new ProtectRecordAdapter(mActivity, items);
-        listView.setAdapter(adapter);
-
-
 
     }
 

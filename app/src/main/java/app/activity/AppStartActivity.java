@@ -43,11 +43,11 @@ public class AppStartActivity extends BaseActivity {
     }
 
     private void splashFinish() {
+        Intent intent =new Intent(AppStartActivity.this,MainActivity.class);
         if(UserUtil.hasLogin(this)){
-            Intent intent =new Intent(AppStartActivity.this,MainActivity.class);
             intent.putExtra(Constants.USER_PROFESSION_TYPE, UserUtil.getUserProfession(AppStartActivity.this));
-            startActivity(intent);
         }
+        startActivity(intent);
 
     }
 

@@ -29,7 +29,10 @@ import app.entity.GroupMemberResult;
 import app.entity.HousesByLyfResult;
 import app.entity.Meta;
 import app.entity.MyFriendsResult;
+import app.entity.MyScore;
+import app.entity.ProtectRecordResult;
 import app.entity.RegisterInfo;
+import app.entity.ScoreResult;
 import app.entity.SearchResult;
 import app.entity.UserInfo;
 import app.entity.UserInfoResult;
@@ -895,4 +898,243 @@ public class HttpRequest {
             }
         }).executeOnExecutor();
     }
+                /**
+     *意见反馈
+     */
+    public static void feekBack(Context context,String  content,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+        mList.add(new Param("content", content));
+
+
+        new MyAsyncTask(context, Urls.addSuggest, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     *退款
+     */
+    public static void backMoney(Context context,String  money,String content,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+        mList.add(new Param("content", content));
+        mList.add(new Param("money", money));
+
+
+        new MyAsyncTask(context, Urls.backMoney, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     *我的保证金纪录
+     */
+    public static void protectlist(Context context,int p,final ICallback<ProtectRecordResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+        mList.add(new Param("p", "" + p));
+
+
+        new MyAsyncTask(context, Urls.protectlist, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                //{"houseList":null,"page":0,"status":0,"msg":"","sessionid":"40a5be61562f73454e372"}
+                try {
+                    JSONObject object = new JSONObject(result);
+                    int status = object.getInt("status");
+                    if(status==0){
+                        int page = object.getInt("page");
+                        if(page==0){
+                            callback.onFail(Constants.JSON_HAS_NULL);
+                        }else {
+//                            GsonBuilder gb = new GsonBuilder();
+//                            gb.registerTypeAdapter(String.class, new StringConverter());
+//                            Gson gson = gb.create();
+//                            DetailPlanResult meta = JsonUtil.parseObject(result, DetailPlanResult.class);
+                            ProtectRecordResult meta = JsonUtil.parseObject(result, ProtectRecordResult.class);
+                            callback.onSucceed(meta);
+
+                        }
+                    }else {
+                        callback.onFail(object.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     *我接口
+     */
+    public static void myInfo(Context context,final ICallback<CraftsResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+
+
+        new MyAsyncTask(context, Urls.myInfo, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                CraftsResult meta = JsonUtil.parseObject(result, CraftsResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     *修改我的信息
+     */
+    public static void myInfoEdit(Context context,String name,String age,String worktype,String workage,String cworkhome,String work,String adress,
+                                  String bankName,String bankNum,String bankUserName,String referee,String price,String serverArea,String des,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+        mList.add(new Param("name", name));
+        mList.add(new Param("age", age));
+        mList.add(new Param("worktype", worktype));
+        mList.add(new Param("workage", workage));
+        mList.add(new Param("work", work));
+        mList.add(new Param("cworkhome", cworkhome));
+        mList.add(new Param("adress", adress));
+        mList.add(new Param("bankName", bankName));
+        mList.add(new Param("bankNum", bankNum));
+        mList.add(new Param("bankUserName", bankUserName));
+        mList.add(new Param("referee", referee));
+        mList.add(new Param("price", price));
+        mList.add(new Param("serverArea", serverArea));
+        mList.add(new Param("des", des));
+
+
+        new MyAsyncTask(context, Urls.myInfoEdit, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     *我的积分
+     */
+    public static void getMyScore(Context context,final ICallback<MyScore> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+
+        new MyAsyncTask(context, Urls.getMyScore, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyScore meta = JsonUtil.parseObject(result, MyScore.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     *我的保证金纪录
+     */
+    public static void getScoreList(Context context,int p,final ICallback<ScoreResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+        mList.add(new Param("p", "" + p));
+
+
+        new MyAsyncTask(context, Urls.getScoreList, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                //{"houseList":null,"page":0,"status":0,"msg":"","sessionid":"40a5be61562f73454e372"}
+                try {
+                    JSONObject object = new JSONObject(result);
+                    int status = object.getInt("status");
+                    if(status==0){
+                        int page = object.getInt("page");
+                        if(page==0){
+                            callback.onFail(Constants.JSON_HAS_NULL);
+                        }else {
+                            ScoreResult meta = JsonUtil.parseObject(result, ScoreResult.class);
+                            callback.onSucceed(meta);
+
+                        }
+                    }else {
+                        callback.onFail(object.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
 }

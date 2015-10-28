@@ -8,6 +8,10 @@ import com.miweikeij.app.R;
 import app.activity.BaseActivity;
 import app.dialog.DialogCharge;
 import app.dialog.DialogRefund;
+import app.entity.Meta;
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.utils.Uihelper;
 import app.views.NavigationBar;
 
 /**
@@ -34,12 +38,27 @@ public class ProtectMoneyActivity extends BaseActivity {
     }
 
     //退款
-    public void  btn_refund(View v){
+    public void btn_refund(View v) {
 
-        if (dialogRefund==null){
-            dialogRefund=new DialogRefund(mActivity) {
+        if (dialogRefund == null) {
+            dialogRefund = new DialogRefund(mActivity) {
                 @Override
                 public void positionBtnClick(String s) {
+                    showWaitingDialog();
+                    HttpRequest.backMoney(mActivity, s, "", new ICallback<Meta>() {
+                        @Override
+                        public void onSucceed(Meta result) {
+                            disMissWaitingDialog();
+                            Uihelper.showToast(mActivity,"退款受理成功");
+                            finish();
+                        }
+                        @Override
+                        public void onFail(String error) {
+                            disMissWaitingDialog();
+                            Uihelper.showToast(mActivity, error);
+
+                        }
+                    });
 
                 }
             };
@@ -47,19 +66,20 @@ public class ProtectMoneyActivity extends BaseActivity {
         dialogRefund.show();
 
     }
+
     //充值
-    public void  btn_charge(View v){
+    public void btn_charge(View v) {
 
 
-        if (dialogCharge==null){
-            dialogCharge=new DialogCharge(mActivity) {
+        if (dialogCharge == null) {
+            dialogCharge = new DialogCharge(mActivity) {
                 @Override
                 public void positionBtnClick(String s) {
 
                 }
             };
         }
-       dialogCharge.show();
+        dialogCharge.show();
 
     }
 
@@ -71,7 +91,7 @@ public class ProtectMoneyActivity extends BaseActivity {
         mBar.setRightOnClick(new NavigationBar.RightOnClick() {
             @Override
             public void setRightOnClick() {
-                startActivity(new Intent(mActivity,ProtectRecordActivity.class));
+                startActivity(new Intent(mActivity, ProtectRecordActivity.class));
             }
         });
 

@@ -73,28 +73,28 @@ public class FeekBackActivity extends BaseActivity{
 
         String string_feekback = ed_feedback.getText().toString().trim();
 
+
         if (!TextUtils.isEmpty(string_feekback)) {
-//
-//            HttpRequest.feekback(mActivity, new ICallback<Meta>() {
-//
-//                @Override
-//                public void onSucceed(Meta result) {
-//                    dialog.dismiss();
-//                    finish();
-//                    Uihelper.showToast(mActivity, "提交成功");
-//
-//                }
-//
-//                @Override
-//                public void onFail(String error) {
-//                    dialog.dismis();
-//                    Uihelper.showToast(mActivity, error);
-//                }
-//            }, Encrypt.getGBK(string_feekback));
-//
-//        } else {
-//            Uihelper.showToast(mActivity, "请写下您的意见或建议");
-//        }
+            showWaitingDialog();
+            HttpRequest.feekBack(mActivity,string_feekback, new ICallback<Meta>() {
+
+                @Override
+                public void onSucceed(Meta result) {
+                    disMissWaitingDialog();
+                    finish();
+                    Uihelper.showToast(mActivity, "提交成功");
+
+                }
+
+                @Override
+                public void onFail(String error) {
+                    disMissWaitingDialog();
+                    Uihelper.showToast(mActivity, error);
+                }
+            });
+
+        } else {
+            Uihelper.showToast(mActivity, "请写下您的意见或建议");
         }
     }
 }

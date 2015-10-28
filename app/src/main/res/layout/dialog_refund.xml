@@ -55,6 +55,7 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/ed_bg"
                 android:hint="请输入退款金额"
+                android:maxLength="15"
                 android:inputType="numberDecimal"
                 android:paddingLeft="@dimen/margin_left_right"
                 android:layout_marginRight="20dp"
