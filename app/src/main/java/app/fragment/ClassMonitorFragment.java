@@ -1,11 +1,13 @@
 package app.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -18,6 +20,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.activity.CraftsmanZoneActivity;
 import app.adapter.ClassMonitorAdapter;
 import app.entity.Allcrafts;
 import app.entity.craftsList;
@@ -29,7 +32,7 @@ import app.utils.Uihelper;
 /**
  * Created by Administrator on 2015/10/10.
  */
-public class ClassMonitorFragment extends Fragment{
+public class ClassMonitorFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private PullToRefreshListView pull_list;
     private ListView list;
@@ -74,6 +77,7 @@ public class ClassMonitorFragment extends Fragment{
 
     private void initUI(View layout) {
         pull_list = (PullToRefreshListView)layout.findViewById(R.id.pull_list);
+        pull_list.setOnItemClickListener(this);
         list = pull_list.getRefreshableView();
         pull_list.setMode(PullToRefreshBase.Mode.BOTH);
         pull_list.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -92,5 +96,10 @@ public class ClassMonitorFragment extends Fragment{
             }
         });
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        startActivity(new Intent(getActivity(), CraftsmanZoneActivity.class));
     }
 }

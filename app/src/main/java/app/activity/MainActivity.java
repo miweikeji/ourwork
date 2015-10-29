@@ -18,6 +18,7 @@ import com.miweikeij.app.R;
 import app.entity.Meta;
 import app.net.HttpRequest;
 import app.net.ICallback;
+import app.utils.Constants;
 import app.views.NavigationBar;
 import app.fragment.MineFragment;
 
@@ -37,11 +38,13 @@ public class MainActivity extends FragmentActivity {
     // 当前fragment的index
     private int currentTabIndex;
     private RelativeLayout[] mTabs;
+    private String profession;
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            initUI();
+        profession = getIntent().getStringExtra(Constants.USER_PROFESSION_TYPE);//工匠的工种
+        initUI();
 
 
         }
@@ -62,6 +65,7 @@ public class MainActivity extends FragmentActivity {
         jobFragment = new MyJobFragment();
         homeFragment = new CarpenterHomeFragment();
         jobContentsFragment = new JobContentsFragment();
+        jobContentsFragment.setProfession(profession);
         fragments = new Fragment[]{jobContentsFragment,homeFragment,jobFragment,mineFragment};
         getSupportFragmentManager().beginTransaction().add(R.id.contents, jobContentsFragment)
                 .add(R.id.contents, homeFragment).hide(homeFragment).

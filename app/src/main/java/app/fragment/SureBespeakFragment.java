@@ -1,11 +1,13 @@
 package app.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -15,6 +17,7 @@ import com.miweikeij.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.activity.ReservationDetailsActivity;
 import app.adapter.HousesByLyfAdapter;
 import app.entity.HousesByLyf;
 import app.entity.HousesByLyfResult;
@@ -25,7 +28,7 @@ import app.utils.Uihelper;
 /**
  * Created by Administrator on 2015/10/10.
  */
-public class SureBespeakFragment extends Fragment{
+public class SureBespeakFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private int p=1;
     private PullToRefreshListView pull_case;
@@ -68,6 +71,7 @@ public class SureBespeakFragment extends Fragment{
 
         pull_case =(PullToRefreshListView)layout.findViewById(R.id.pull_case);
         pull_case.setMode(PullToRefreshBase.Mode.BOTH);
+        pull_case.setOnItemClickListener(this);
         pull_case.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -85,5 +89,15 @@ public class SureBespeakFragment extends Fragment{
 
 
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getActivity(),ReservationDetailsActivity.class);
+        Bundle bundle = new Bundle();
+        HousesByLyf byLyf = allCases.get(position-1);
+        bundle.putSerializable("ReservationDetailsActivity",byLyf);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

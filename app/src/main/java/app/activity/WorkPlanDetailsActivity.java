@@ -1,6 +1,9 @@
 package app.activity;
 
 import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -28,7 +31,7 @@ import app.views.NavigationBar;
 /**
  * Created by Administrator on 2015/10/27.
  */
-public class WorkPlanDetailsActivity extends BaseActivity {
+public class WorkPlanDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     private int p=1;
     private ConstructPlan constructPlan;
@@ -45,6 +48,9 @@ public class WorkPlanDetailsActivity extends BaseActivity {
     public void initUI() {
         Intent intent = getIntent();
         constructPlan = (ConstructPlan) intent.getSerializableExtra("ConstructPlan");
+
+        RelativeLayout rl_to_house = (RelativeLayout) findViewById(R.id.rl_to_house);
+        rl_to_house.setOnClickListener(this);
         TextView tv_name= (TextView)findViewById(R.id.tv_name);
         TextView tv_status= (TextView)findViewById(R.id.tv_status);
         TextView tv_type= (TextView)findViewById(R.id.tv_type);
@@ -78,6 +84,8 @@ public class WorkPlanDetailsActivity extends BaseActivity {
 
         netWorkData();
     }
+
+
 
     private void netWorkData() {
 
@@ -115,4 +123,14 @@ public class WorkPlanDetailsActivity extends BaseActivity {
         mBar.setContexts(this);
         mBar.setTitle("安排详情");
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.rl_to_house:
+                startActivity(new Intent(this,HouseActivity.class));
+                break;
+        }
+    }
+
 }

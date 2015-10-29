@@ -27,7 +27,7 @@
 
             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="phone"
                 android:ems="11"
                 android:background="@null"
@@ -42,10 +42,10 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:text="本机号码"
-                android:id="@+id/button6"
+                android:id="@+id/btn_getMyPhont"
                 android:textSize="14sp"
                 android:textColor="#757575"
-                android:background="@drawable/has_gread_line_bg"
+                android:background="@drawable/sl_get_myphone"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />

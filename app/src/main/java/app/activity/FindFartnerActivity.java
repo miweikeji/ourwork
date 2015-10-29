@@ -26,6 +26,8 @@ public class FindFartnerActivity extends BaseActivity implements View.OnClickLis
         rl_un_arrangeTask.setOnClickListener(this);
         RelativeLayout rl_new_decoration= (RelativeLayout)findViewById(R.id.rl_new_decoration);
         rl_new_decoration.setOnClickListener(this);
+        RelativeLayout rl_built_task= (RelativeLayout)findViewById(R.id.rl_built_task);
+        rl_built_task.setOnClickListener(this);
     }
 
     @Override
@@ -47,6 +49,9 @@ public class FindFartnerActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.rl_new_decoration:
                 startActivity(new Intent(this,NewDecorationActivity.class));
+                break;
+            case R.id.rl_built_task:
+                startActivity(new Intent(this,BuiltTaskActivity.class));
                 break;
         }
     }

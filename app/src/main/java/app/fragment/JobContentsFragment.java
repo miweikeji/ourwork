@@ -14,10 +14,13 @@ import com.miweikeij.app.R;
 /**
  * Created by Administrator on 2015/10/10.
  */
-public class JobContentsFragment extends Fragment implements JobOpportunityFragment.JobOpportunityFragmentDelegate, LoginJobFragment.LoginJobFragmentDelegate {
+public class JobContentsFragment extends Fragment implements
+        JobOpportunityFragment.JobOpportunityFragmentDelegate, LoginJobFragment.LoginJobFragmentDelegate {
 
     private JobOpportunityFragment opportunityFragment;
     private LoginJobFragment loginJobFragment;
+    private String profession;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,8 +33,13 @@ public class JobContentsFragment extends Fragment implements JobOpportunityFragm
         opportunityFragment = new JobOpportunityFragment();
         loginJobFragment = new LoginJobFragment();
         android.support.v4.app.FragmentManager manager = getChildFragmentManager();
-        manager.beginTransaction().add(R.id.childContents,opportunityFragment).hide(opportunityFragment).add(R.id.childContents,loginJobFragment)
-                .hide(loginJobFragment).show(opportunityFragment).commit();
+        if(profession!=null&&!"".equals(profession)){
+            manager.beginTransaction().add(R.id.childContents,loginJobFragment).hide(loginJobFragment).add(R.id.childContents,opportunityFragment)
+                    .hide(opportunityFragment).show(loginJobFragment).commit();
+        }else {
+            manager.beginTransaction().add(R.id.childContents,opportunityFragment).hide(opportunityFragment).add(R.id.childContents,loginJobFragment)
+                    .hide(loginJobFragment).show(opportunityFragment).commit();
+        }
         opportunityFragment.setJobOpportunityFragmentDelegate(this);
         loginJobFragment.setLoginJobFragmentDelegate(this);
     }
@@ -44,7 +52,10 @@ public class JobContentsFragment extends Fragment implements JobOpportunityFragm
 
     @Override
     public void toJobOpportunityFragment() {
-        Toast.makeText(getActivity(),"水电工",Toast.LENGTH_LONG).show();
         getChildFragmentManager().beginTransaction().hide(loginJobFragment).show(opportunityFragment).commit();
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 }

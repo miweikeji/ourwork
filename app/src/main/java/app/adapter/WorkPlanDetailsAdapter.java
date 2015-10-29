@@ -1,6 +1,7 @@
 package app.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import java.util.ArrayList;
 
+import app.activity.CraftsmanZoneActivity;
 import app.activity.WorkPlanDetailsActivity;
 import app.entity.DetailPlan;
 import app.tools.ImageLoadTools;
@@ -64,6 +66,12 @@ public class WorkPlanDetailsAdapter extends AllAdapter {
             holder.tv_pam.setText("未安排");
         }
 
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.startActivity(new Intent(activity, CraftsmanZoneActivity.class));
+            }
+        });
 //        ImageLoadTools.displayImage(plan.get);
         return layout;
     }
