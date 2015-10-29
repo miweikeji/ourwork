@@ -61,6 +61,9 @@ public class Urls {
     public final static String finishPlan = base_server + "App/Workplan/finishPlan";
     //工作安排详情接口
     public final static String detailPlan = base_server + "App/Workplan/detailPlan";
+    //获取已建计划接口
+    public final static String getTask  = base_server+"App/Workplan/getTask";
+
     //意见反馈
     public final static String addSuggest = base_server + "App/Suggest/add";
     //退款接口
