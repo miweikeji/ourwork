@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.adapter.CaseAdapter;
-import app.entity.Case;
+import app.entity.House;
 import app.entity.CaseResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
@@ -30,7 +30,7 @@ public class CaseFragment extends Fragment {
 
     private int p=1;
     private PullToRefreshListView pull_case;
-    private ArrayList<Case> allCases = new ArrayList<Case>();
+    private ArrayList<House> allHouses = new ArrayList<House>();
     private CaseAdapter adapter;
     @Nullable
     @Override
@@ -46,10 +46,10 @@ public class CaseFragment extends Fragment {
         HttpRequest.allCaseHttp(getActivity(), "101", p, new ICallback<CaseResult>() {
             @Override
             public void onSucceed(CaseResult result) {
-                List<Case> cases = result.getHouseList();
-                allCases.addAll(cases);
+                List<House> houses = result.getHouseList();
+                allHouses.addAll(houses);
                 if(p==1){
-                    adapter = new CaseAdapter(getActivity(),allCases);
+                    adapter = new CaseAdapter(getActivity(), allHouses);
                     pull_case.setAdapter(adapter);
                 }else {
                     adapter.notifyDataSetChanged();
@@ -72,7 +72,7 @@ public class CaseFragment extends Fragment {
         pull_case.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                allCases.clear();
+                allHouses.clear();
                 p=1;
                 netWorkData();
             }

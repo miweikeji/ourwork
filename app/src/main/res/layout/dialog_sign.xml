@@ -10,6 +10,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/shape_dialog_background"
+        android:paddingBottom="@dimen/margin_top"
         android:orientation="vertical">
 
         <View
@@ -64,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:layout_centerVertical="true"
-                    android:background="@color/base_orange"></View>
+                    android:background="@color/grey_2"></View>
 
                 <TextView
                     android:id="@+id/state_1"
@@ -72,10 +73,10 @@
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
-                    android:background="@drawable/btn_circlepress"
+                    android:background="@drawable/btn_circlenormal"
                     android:gravity="center"
                     android:text="1天"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black_3"
                     android:textSize="@dimen/textsize_normal" />
 
             </RelativeLayout>
@@ -90,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:layout_centerVertical="true"
-                    android:background="@color/base_orange"></View>
+                    android:background="@color/grey_2"></View>
 
                 <TextView
                     android:id="@+id/state_2"
@@ -98,10 +99,10 @@
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
-                    android:background="@drawable/btn_circlepress"
+                    android:background="@drawable/btn_circlenormal"
                     android:gravity="center"
                     android:text="2天"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black_3"
                     android:textSize="@dimen/textsize_normal" />
 
             </RelativeLayout>
@@ -249,47 +250,55 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_sure"
-                android:layout_width="0dp"
+                android:id="@+id/btn_sign"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="1"
                 android:background="@color/base_orange"
                 android:text="签到"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/frame_case"
+            android:visibility="visible"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="8dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="8dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_left_right"
+                    android:background="@null"
+                    android:text="你今天有施工项目" />
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_marginLeft="@dimen/margin_left_right"
-                android:background="@null"
-                android:text="你今天有施工项目" />
+                android:layout_marginRight="@dimen/margin_left_right"
+                android:layout_marginBottom="@dimen/margin_left_right"
+                style="@style/FillContent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_haseCase"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:background="@color/base_orange"
+                    android:text="查看施工项目"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_marginLeft="@dimen/margin_left_right"
-            android:layout_marginRight="@dimen/margin_left_right"
-            android:layout_marginBottom="@dimen/margin_left_right"
-            style="@style/FillContent"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_haseCase"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:background="@color/base_orange"
-                android:text="查看施工项目"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-        </LinearLayout>
 
     </LinearLayout>
 

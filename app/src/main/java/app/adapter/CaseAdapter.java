@@ -10,7 +10,7 @@ import com.miweikeij.app.R;
 
 import java.util.ArrayList;
 
-import app.entity.Case;
+import app.entity.House;
 
 /**
  * Created by Administrator on 2015/10/15.
@@ -18,16 +18,16 @@ import app.entity.Case;
 public class CaseAdapter extends AllAdapter {
 
 
-    private ArrayList<Case> allCases;
+    private ArrayList<House> allHouses;
     private Activity activity;
-    public CaseAdapter(Activity activity, ArrayList<Case> allCases) {
+    public CaseAdapter(Activity activity, ArrayList<House> allHouses) {
         this.activity = activity;
-        this.allCases = allCases;
+        this.allHouses = allHouses;
     }
 
     @Override
     public int getCount() {
-        return allCases.size();
+        return allHouses.size();
     }
 
     @Override
@@ -47,14 +47,14 @@ public class CaseAdapter extends AllAdapter {
         }else{
             holder = (ViewHolder)layout.getTag();
         }
-        Case mCase = allCases.get(position);
-        holder.tv_name.setText(mCase.getName());
-        holder.tv_type.setText(" "+mCase.getType()+" |");
-        holder.tv_area.setText(" "+mCase.getArea()+"平 |");
-        holder.tv_style.setText(" "+mCase.getStyle()+" |");
-        holder.tv_mode.setText(" "+mCase.getCraft_mode());
-        holder.tv_total_price.setText("￥"+mCase.getTotal_price());
-        setStatus(holder.tv_status, mCase.getStatus());
+        House mHouse = allHouses.get(position);
+        holder.tv_name.setText(mHouse.getName());
+        holder.tv_type.setText(" "+ mHouse.getType()+" |");
+        holder.tv_area.setText(" "+ mHouse.getArea()+"平 |");
+        holder.tv_style.setText(" "+ mHouse.getStyle()+" |");
+        holder.tv_mode.setText(" "+ mHouse.getCraft_mode());
+        holder.tv_total_price.setText("￥"+ mHouse.getTotal_price());
+        setStatus(holder.tv_status, mHouse.getStatus());
         return layout;
     }
 

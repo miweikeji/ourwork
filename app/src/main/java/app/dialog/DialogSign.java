@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import app.tools.ScreenUtil;
 import app.utils.Uihelper;
 
@@ -37,22 +40,32 @@ public abstract class DialogSign extends Dialog {
     private View line5;
     private View line6;
     private View line7;
+    private int signTime;
+    private boolean isSign;
+    private boolean isHasCase;
+    private List<TextView> mlistTextView = new ArrayList<TextView>();
+    private List<View> mListViewLine = new ArrayList<View>();
 
     /**
      * @param context 内容 * @param position_Text 取消按钮的内容 如：取消，或是其他操作等
      *                确定按钮的内容 如：去认证，确定等
      * @author Tuliangtan
      */
-    public DialogSign(Context context) {
+    public DialogSign(Context context, int signTime, boolean isSign, boolean isHasCase) {
         super(context, R.style.Dialog);
         this.setContentView(R.layout.dialog_sign);
         this.mContext = context;
+        this.signTime = signTime;
+        this.isSign = isSign;
+        this.isHasCase = isHasCase;
+
+
         initViewCode();
     }
 
-    public abstract void positionBtnClick(String s);
+    public abstract void sign();
 
-//    public abstract void negativeBtnClick();
+    public abstract void toCase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +75,36 @@ public abstract class DialogSign extends Dialog {
     private void initViewCode() {
 
         View layout = findViewById(R.id.linear_sign);
+        Button btnSign= (Button) findViewById(R.id.btn_sign);
+
+        btnSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sign();
+                dismiss();
+            }
+        });
+
+        if (isSign) {
+            btnSign.setBackgroundResource(R.color.grey_2);
+            btnSign.setEnabled(false);
+            btnSign.setText("已签到");
+        }
+
+        LinearLayout frameCase = (LinearLayout) findViewById(R.id.frame_case);
+
+        if (isHasCase) {
+            frameCase.setVisibility(View.VISIBLE);
+            findViewById(R.id.btn_haseCase).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toCase();
+                    dismiss();
+                }
+            });
+        }else {
+            frameCase.setVisibility(View.GONE);
+        }
 
         titleText = (TextView) findViewById(R.id.dialog_title);
         tv_state1 = (TextView) findViewById(R.id.state_1);
@@ -71,12 +114,19 @@ public abstract class DialogSign extends Dialog {
         tv_state5 = (TextView) findViewById(R.id.state_5);
         tv_state6 = (TextView) findViewById(R.id.state_6);
         tv_state7 = (TextView) findViewById(R.id.state_7);
+        mlistTextView.add(tv_state1);
+        mlistTextView.add(tv_state2);
+        mlistTextView.add(tv_state3);
+        mlistTextView.add(tv_state4);
+        mlistTextView.add(tv_state5);
+        mlistTextView.add(tv_state6);
+        mlistTextView.add(tv_state7);
 
         int srcreenWidth = ScreenUtil.instance(mContext).getScreenWidth();
 
         int size = (srcreenWidth - Uihelper.dip2px(mContext, 114)) / 7;
 
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(size,size
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(size, size
         );
         LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, size);
 
@@ -90,12 +140,6 @@ public abstract class DialogSign extends Dialog {
         tv_state6.setLayoutParams(layoutParams);
         tv_state7.setLayoutParams(layoutParams);
 
-        tv_state1.setBackgroundResource(R.drawable.btn_circlepress);
-        tv_state2.setBackgroundResource(R.drawable.btn_circlepress);
-
-        tv_state1.setTextColor(mContext.getResources().getColor(R.color.white));
-        tv_state2.setTextColor(mContext.getResources().getColor(R.color.white));
-
         line1 = findViewById(R.id.line_1);
         line2 = findViewById(R.id.line_2);
         line3 = findViewById(R.id.line_3);
@@ -104,6 +148,21 @@ public abstract class DialogSign extends Dialog {
         line6 = findViewById(R.id.line_6);
         line7 = findViewById(R.id.line_7);
 
+        mListViewLine.add(line1);
+        mListViewLine.add(line2);
+        mListViewLine.add(line3);
+        mListViewLine.add(line4);
+        mListViewLine.add(line5);
+        mListViewLine.add(line6);
+        mListViewLine.add(line7);
+        if (signTime == 0) {
+            return;
+        }
+        for (; signTime > 0; signTime--) {
+            mlistTextView.get(signTime - 1).setBackgroundResource(R.drawable.btn_circlepress);
+            mlistTextView.get(signTime - 1).setTextColor(mContext.getResources().getColor(R.color.white));
+            mListViewLine.get(signTime - 1).setBackgroundResource(R.color.base_orange);
+        }
 
     }
 

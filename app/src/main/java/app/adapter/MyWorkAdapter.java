@@ -2,22 +2,16 @@ package app.adapter;
 
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.miweikeij.app.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import app.entity.Case;
 import app.entity.ConstructPlan;
-import app.entity.MyWork;
 
 /**
  * Created by TuLiangTan on 2015/9/25.

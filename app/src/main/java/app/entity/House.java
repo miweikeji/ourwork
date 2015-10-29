@@ -3,7 +3,7 @@ package app.entity;
 /**
  * Created by Administrator on 2015/10/15.
  */
-public class Case {
+public class House {
 
     private String id;
     private String name;
@@ -29,6 +29,15 @@ public class Case {
     private String yyStatus;
     private String sort;
     private String xiaoqu;
+    private  Crafts crafts;
+
+    public Crafts getCrafts() {
+        return crafts;
+    }
+
+    public void setCrafts(Crafts crafts) {
+        this.crafts = crafts;
+    }
 
     public String getTime() {
         return time;

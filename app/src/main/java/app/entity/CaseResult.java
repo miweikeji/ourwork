@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class CaseResult extends Meta{
     private int totalpage;
-    private List<Case> houseList;
+    private List<House> houseList;
 
     public int getTotalpage() {
         return totalpage;
@@ -17,11 +17,11 @@ public class CaseResult extends Meta{
         this.totalpage = totalpage;
     }
 
-    public List<Case> getHouseList() {
+    public List<House> getHouseList() {
         return houseList;
     }
 
-    public void setHouseList(List<Case> houseList) {
+    public void setHouseList(List<House> houseList) {
         this.houseList = houseList;
     }
 }

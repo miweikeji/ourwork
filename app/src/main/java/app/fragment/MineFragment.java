@@ -27,6 +27,8 @@ import app.activity.user.UserInfoActivity;
 import app.dialog.DialogSign;
 import app.entity.Crafts;
 import app.entity.CraftsResult;
+import app.entity.Meta;
+import app.entity.SingInResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -48,6 +50,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private DialogSign dialogSign;
     private ImageLoader imageLoader;
     public static DisplayImageOptions options;
+    private int signTime;
+    private boolean isSign;
+    private boolean hasCase;
 
     @Nullable
     @Override
@@ -56,10 +61,31 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
         findView(layout);
+        obtainSign();
+        obtainData();
 
         return layout;
     }
 
+    private void obtainSign() {
+
+        HttpRequest.getSignIn(getActivity(), new ICallback<SingInResult>() {
+            @Override
+            public void onSucceed(SingInResult result) {
+
+                signTime=4;
+                isSign=true;
+                hasCase=true;
+
+            }
+
+            @Override
+            public void onFail(String error) {
+                Uihelper.showToast(getActivity(),error);
+
+            }
+        });
+    }
 
 
     @Override
@@ -68,7 +94,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         if (UserUtil.hasLogin(getActivity())){
             layout.findViewById(R.id.frame_logined).setVisibility(View.VISIBLE);
             layout.findViewById(R.id.frame_noLogin).setVisibility(View.GONE);
-            obtainData();
+
         }else {
             layout.findViewById(R.id.frame_logined).setVisibility(View.GONE);
             layout.findViewById(R.id.frame_noLogin).setVisibility(View.VISIBLE);
@@ -162,11 +188,33 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             //签到
             case R.id.tv_sign:
                 if (dialogSign==null){
-                    dialogSign=new DialogSign(getActivity()) {
+                    dialogSign=new DialogSign(getActivity(),signTime,isSign,hasCase) {
+
                         @Override
-                        public void positionBtnClick(String s) {
+                        public void sign() {
+
+                            HttpRequest.signIn(getActivity(), new ICallback<Meta>() {
+                                @Override
+                                public void onSucceed(Meta result) {
+
+                                      Uihelper.showToast(getActivity(),"签到成功");
+                                }
+
+                                @Override
+                                public void onFail(String error) {
+
+                                    Uihelper.showToast(getActivity(),error);
+
+                                }
+                            });
 
                         }
+
+                        @Override
+                        public void toCase() {
+
+                        }
+
                     };
                 }
 

@@ -24,6 +24,7 @@ import app.entity.CraftsResult;
 import app.entity.DetailPlanResult;
 import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
+import app.entity.HouseInfoResult;
 import app.entity.HousesByLyfResult;
 import app.entity.Meta;
 import app.entity.MyFriendsResult;
@@ -32,6 +33,7 @@ import app.entity.ProtectRecordResult;
 import app.entity.RegisterInfo;
 import app.entity.ScoreResult;
 import app.entity.SearchResult;
+import app.entity.SingInResult;
 import app.entity.UserInfo;
 import app.entity.UserInfoResult;
 import app.entity.craftsList;
@@ -1082,4 +1084,84 @@ public class HttpRequest {
         }).executeOnExecutor();
     }
 
+    /**
+     *签到
+     */
+    public static void signIn(Context context,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+
+
+        new MyAsyncTask(context, Urls.signIn, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     *签到
+     */
+    public static void getSignIn(Context context,final ICallback<SingInResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+
+
+        new MyAsyncTask(context, Urls.getSignIn, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                SingInResult meta = JsonUtil.parseObject(result, SingInResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     *获取房屋信息
+     */
+    public static void getHouseInfo(Context context,String craftsId,String houseId,final ICallback<HouseInfoResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("craftsId", craftsId));
+        mList.add(new Param("houseId", houseId));
+
+        new MyAsyncTask(context, Urls.getHouseInfo, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                HouseInfoResult meta = JsonUtil.parseObject(result, HouseInfoResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
 }

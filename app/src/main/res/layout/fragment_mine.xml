@@ -405,6 +405,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:background="#F0F0F0"
+                android:layout_marginBottom="@dimen/margin_top"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 

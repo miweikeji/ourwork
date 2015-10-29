@@ -18,10 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.activity.ReservationDetailsActivity;
-import app.activity.ReservationHistoryActivity;
-import app.adapter.CaseAdapter;
 import app.adapter.HousesByLyfAdapter;
-import app.entity.Case;
 import app.entity.HousesByLyf;
 import app.entity.HousesByLyfResult;
 import app.net.HttpRequest;
