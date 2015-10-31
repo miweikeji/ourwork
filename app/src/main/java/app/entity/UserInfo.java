@@ -1,12 +1,14 @@
 package app.entity;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by Administrator on 2015/10/10.
  */
 public class UserInfo {
 
 
-    private static UserInfo userInfo = null;
+    public static UserInfo userInfo = null;
     public static UserInfo getInstance(){
 
         if(userInfo==null){
@@ -17,130 +19,128 @@ public class UserInfo {
     }
 
 
-    private UserInfo(){
+    public UserInfo(){
 
     }
 
 
-    private String score;
-    private String busername;
-    private String protect;
-    private String realname;
-    private String mid;
-    private String work_tedian;
-    private String work_say;
-    private String work_text;
-    private String card_bimg;
-    private String card_img;
-    private String cworknum;
-    private String cworkmobile;
-    private String cworkpw;
-    private String address;
-    private String charge_type;
-    private String cworkhome;
-    private String experts;
-    private String cworkweixin;
-    private String cworkalipay;
-    private String role;
-    private String cworkbname;
-    private String cworkbank;
-    private boolean hasinfo;
-    private String deviceid;
-    private String umeng;
-    private String truecwork;
-    private String cworktime;
-    private String cworkserver;
-    private String serverprice;
-    private String cworktype;
-    private String cimg;
-    private String referee;
-    private String cname;
-    private String south;
-    private String north;
-    private String lastlogin;
-    private String jiang;
-    private String name;
-    private String id;
-    private String gender;
-    private String description;
-    private String price;
-    private String server_area;
-    private String vip;
-    private String gongyi;
-    private String renzheng;
-    private String baozhengjin;
-    private String cra_groupid;
-    private String cra_group;
-    private String is_show;
-    private String sort;
-    private String profession;
-    private String qualifications;
-    private String overallattitude;
-    private String overallquality;
+    public String score;
+    public String busername;
+    public String protect;
+    public String realname;
+    public String mid;
+    public String work_tedian;
+    public String work_say;
+    public String work_text;
+    public String card_bimg;
+    public String card_img;
+    public String cworknum;
+    public String cworkmobile;
+    public String cworkpw;
+    public String address;
+    public String charge_type;
+    public String cworkhome;
+    public String experts;
+    public String cworkweixin;
+    public String cworkalipay;
+    public String role;
+    public String cworkbname;
+    public String cworkbank;
+    public boolean hasinfo;
+    public String deviceid;
+    public String umeng;
+    public String truecwork;
+    public String cworktime;
+    public String cworkserver;
+    public String serverprice;
+    public String cworktype;
+    public String cimg;
+    public String referee;
+    public String cname;
+    public String south;
+    public String north;
+    public String lastlogin;
+    public String jiang;
+    public String name;
+    public String id;
+    public String gender;
+    public String description;
+    public String price;
+    public String server_area;
+    public String vip;
+    public String gongyi;
+    public String renzheng;
+    public String baozhengjin;
+    public String cra_groupid;
+    public String cra_group;
+    public String is_show;
+    public String sort;
+    public String profession;
+    public String qualifications;
+    public String overallattitude;
+    public String overallquality;
 
     // TODO: 2015/10/18
 
 
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "score='" + score + '\'' +
-                ", busername='" + busername + '\'' +
-                ", protect='" + protect + '\'' +
-                ", realname='" + realname + '\'' +
-                ", mid='" + mid + '\'' +
-                ", work_tedian='" + work_tedian + '\'' +
-                ", work_say='" + work_say + '\'' +
-                ", work_text='" + work_text + '\'' +
-                ", card_bimg='" + card_bimg + '\'' +
-                ", card_img='" + card_img + '\'' +
-                ", cworknum='" + cworknum + '\'' +
-                ", cworkmobile='" + cworkmobile + '\'' +
-                ", cworkpw='" + cworkpw + '\'' +
-                ", address='" + address + '\'' +
-                ", charge_type='" + charge_type + '\'' +
-                ", cworkhome='" + cworkhome + '\'' +
-                ", experts='" + experts + '\'' +
-                ", cworkweixin='" + cworkweixin + '\'' +
-                ", cworkalipay='" + cworkalipay + '\'' +
-                ", role='" + role + '\'' +
-                ", cworkbname='" + cworkbname + '\'' +
-                ", cworkbank='" + cworkbank + '\'' +
-                ", hasinfo=" + hasinfo +
-                ", deviceid='" + deviceid + '\'' +
-                ", umeng='" + umeng + '\'' +
-                ", truecwork='" + truecwork + '\'' +
-                ", cworktime='" + cworktime + '\'' +
-                ", cworkserver='" + cworkserver + '\'' +
-                ", serverprice='" + serverprice + '\'' +
-                ", cworktype='" + cworktype + '\'' +
-                ", cimg='" + cimg + '\'' +
-                ", referee='" + referee + '\'' +
-                ", cname='" + cname + '\'' +
-                ", south='" + south + '\'' +
-                ", north='" + north + '\'' +
-                ", lastlogin='" + lastlogin + '\'' +
-                ", jiang='" + jiang + '\'' +
-                ", name='" + name + '\'' +
-                ", id='" + id + '\'' +
-                ", gender='" + gender + '\'' +
-                ", description='" + description + '\'' +
-                ", price='" + price + '\'' +
-                ", server_area='" + server_area + '\'' +
-                ", vip='" + vip + '\'' +
-                ", gongyi='" + gongyi + '\'' +
-                ", renzheng='" + renzheng + '\'' +
-                ", baozhengjin='" + baozhengjin + '\'' +
-                ", cra_groupid='" + cra_groupid + '\'' +
-                ", cra_group='" + cra_group + '\'' +
-                ", is_show='" + is_show + '\'' +
-                ", sort='" + sort + '\'' +
-                ", profession='" + profession + '\'' +
-                ", qualifications='" + qualifications + '\'' +
-                ", overallattitude='" + overallattitude + '\'' +
-                ", overallquality='" + overallquality + '\'' +
-                '}';
+    public void clearUserInfo(){
+     setCworkweixin("");
+        setCworktype("");
+        setCworkbname("");
+        setCworktime("");
+        setAddress("");
+        setBaozhengjin("");
+        setBusername("");
+        setCard_bimg("");
+        setCard_img("");
+        setCharge_type("");
+        setCimg("");
+        setCname("");
+        setCra_group("");
+        setCra_groupid("");
+        setOverallquality("");
+        setOverallattitude("");
+        setQualifications("");
+        setProfession("");
+        setSort("");
+        setIs_show("");
+        setRealname("");
+        setProtect("");
+        setWork_tedian("");
+        setWork_text("");
+        setCworknum("");
+        setCworkmobile("");
+        setCworkhome("");
+        setCworkbank("");
+        setRole("");
+        setExperts("");
+        setDeviceid("");
+        setTruecwork("");
+        setHasinfo(false);
+        setUmeng("");
+        setCworkalipay("");
+        setCworkserver("");
+        setServerprice("");
+        setReferee("");
+        setRenzheng("");
+        setNorth("");
+        setJiang("");
+        setGongyi("");
+        setMid("");
+        setCworkpw("");
+        setSouth("");
+        setLastlogin("");
+        setGender("");
+        setPrice("");
+        setScore("");
+        setWork_say("");
+        setName("");
+        setId("");
+        setDescription("");
+        setServer_area("");
+        setVip("");
     }
+
 
     public String getScore() {
         return score;

@@ -8,6 +8,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import org.litepal.LitePalApplication;
+
 import app.utils.Config;
 
 /**

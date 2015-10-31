@@ -30,15 +30,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText1"
+            android:id="@+id/tv_work_area"
             android:background="@null"
             android:layout_marginLeft="10dp"
             android:textSize="15sp"
             android:text="泰和花园"
-
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView1"
-            android:layout_toEndOf="@+id/textView1" />
+            android:layout_toRightOf="@+id/tv_adress"
+            android:layout_toEndOf="@+id/tv_adress" />
     </RelativeLayout>
         <TextView
             android:layout_width="match_parent"

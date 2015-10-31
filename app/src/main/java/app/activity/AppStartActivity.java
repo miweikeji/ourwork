@@ -3,6 +3,7 @@ package app.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.miweikeij.app.R;
 
@@ -10,6 +11,7 @@ import app.entity.UserInfo;
 import app.entity.UserInfoResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
+import app.tools.MyLog;
 import app.utils.Constants;
 import app.utils.Uihelper;
 import app.utils.UserUtil;
@@ -48,14 +50,14 @@ public class AppStartActivity extends BaseActivity {
             intent.putExtra(Constants.USER_PROFESSION_TYPE, UserUtil.getUserProfession(AppStartActivity.this));
         }
         startActivity(intent);
-
+        finish();
     }
 
     private void getUserInfo(String phone, String psw) {//每次打开获取个人信息
         HttpRequest.loginHttp(this, phone, psw, new ICallback<UserInfoResult>() {
             @Override
             public void onSucceed(UserInfoResult result) {
-
+                MyLog.e("","UserInfoResult=="+result.getCrafts().toString());
             }
 
             @Override

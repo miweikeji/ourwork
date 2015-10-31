@@ -5,9 +5,12 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import app.entity.Meta;
+import app.utils.Constants;
 import app.utils.JsonUtil;
 import app.utils.MobileOS;
 
@@ -62,8 +65,18 @@ public class MyAsyncTask extends MultiVersionAsyncTask<Void, Void, String> {
 //                    TCAgent.onEvent(mContext, Pref.SERVER_ERROR_CODE, Pref.getString(Pref.USERID, mContext, Pref.VISITOR) + result);
                     callback.onFail(SERVER_ERROR);
                 } else {
-
-                    callback.onSucceed(result);
+                    JSONObject object = new JSONObject(result);
+                    int status = object.getInt("status");
+                    if(result.contains("page")){
+                        int page = object.getInt("page");
+                        if(page==0){
+                            callback.onFail(Constants.JSON_HAS_NULL);
+                        }else {
+                            callback.onSucceed(result);
+                        }
+                    }else {
+                        callback.onSucceed(result);
+                    }
                 }
             } else {
                 callback.onFail("请求失败");

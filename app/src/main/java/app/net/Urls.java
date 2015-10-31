@@ -85,5 +85,10 @@ public class Urls {
     //房屋信息接口
     public final static String getHouseInfo = base_server + "App/House/getHouseInfo";
 
+    //工作类型获取工作列表
+    public final static String getWorkList = base_server + "App/Work/getWorkList";
+    //工作详情
+    public final static String getWorkDetail  = base_server + "App/Work/getWorkDetail";
+
 
 }

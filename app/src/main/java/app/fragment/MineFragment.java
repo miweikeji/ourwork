@@ -10,11 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.miweikeij.app.R;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.miweikeij.app.R;
+
+import org.litepal.crud.DataSupport;
 
 import app.activity.BasicInfoActivity;
 import app.activity.LoginActivity;
@@ -29,6 +33,8 @@ import app.entity.Crafts;
 import app.entity.CraftsResult;
 import app.entity.Meta;
 import app.entity.SingInResult;
+import app.entity.UserInfo;
+import app.entity.UserInfoResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -63,7 +69,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         findView(layout);
         obtainSign();
         obtainData();
-
         return layout;
     }
 
@@ -229,11 +234,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_exit:
 
                 UserUtil.clearUserInfo(getActivity());
+                UserInfo.getInstance().clearUserInfo();
                 onStart();
 
                 break;
             case R.id.tv_login:
-
                 LoginActivity.enterActivity(getActivity());
 
                 break;

@@ -17,9 +17,21 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.miweikeij.app.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import app.activity.LoginActivity;
 import app.activity.WorkDetailsActivity;
 import app.adapter.JobAdapter;
+import app.entity.HouseInfoResult;
+import app.entity.UserInfo;
+import app.entity.WorkList;
+import app.entity.WorkListResult;
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.tools.StatusTools;
+import app.utils.Constants;
+import app.utils.Uihelper;
 import app.utils.UserUtil;
 
 /**
@@ -29,6 +41,11 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
 
     private View layout;
     LoginJobFragmentDelegate delegate;
+    private int p=1;
+    private int workType;
+    private PullToRefreshListView pull_to_list;
+    private JobAdapter adapter;
+    private List<WorkList> allList = new ArrayList<WorkList>();
 
     @Override
     public void onClick(View v) {
@@ -58,6 +75,8 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         layout = inflater.inflate(R.layout.fragment_login_job, null);
         profession = UserUtil.getUserProfession(getActivity());
+        String profession = UserInfo.getInstance().getProfession();
+        workType = StatusTools.getWorkType(profession);
         initUI();
         return layout;
     }
@@ -67,20 +86,48 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
         tv_profession.setText(profession);
         LinearLayout button =(LinearLayout) layout.findViewById(R.id.line_two_text);
         button.setOnClickListener(this);
-        PullToRefreshListView pull_to_list = (PullToRefreshListView) layout.findViewById(R.id.pull_to_list);
-        JobAdapter adapter = new JobAdapter(getActivity());
+        pull_to_list = (PullToRefreshListView) layout.findViewById(R.id.pull_to_list);
+
         pull_to_list.setAdapter(adapter);
         pull_to_list.setMode(PullToRefreshBase.Mode.BOTH);
         pull_to_list.setOnItemClickListener(this);
         pull_to_list.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                netWorkData();
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                netWorkData();
+            }
+        });
 
+
+        netWorkData();
+    }
+
+    private void netWorkData() {//UserInfo.getInstance().getId()//workType
+        HttpRequest.getWorkList(getActivity(), "101", p, 3, new ICallback<WorkListResult>() {
+            @Override
+            public void onSucceed(WorkListResult result) {
+                List<WorkList> workList = result.getWorkList();
+                allList.addAll(workList);
+                if(p==1){
+                    adapter = new JobAdapter(getActivity(),allList);
+                    pull_to_list.setAdapter(adapter);
+                }else {
+                    adapter.notifyDataSetChanged();
+                }
+                pull_to_list.onRefreshComplete();
+            }
+
+            @Override
+            public void onFail(String error) {
+                pull_to_list.onRefreshComplete();
+                if(!error.equals(Constants.JSON_HAS_NULL)){
+                    Uihelper.showToast(getActivity(),error);
+                }
             }
         });
     }

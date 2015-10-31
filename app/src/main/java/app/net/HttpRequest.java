@@ -38,11 +38,14 @@ import app.entity.SearchResult;
 import app.entity.SingInResult;
 import app.entity.UserInfo;
 import app.entity.UserInfoResult;
+import app.entity.WorkDetailResult;
+import app.entity.WorkListResult;
 import app.entity.craftsList;
 import app.entity.craftsListResult;
 import app.tools.MyLog;
 import app.tools.StatusTools;
 import app.tools.StringConverter;
+import app.tools.UserInfoJsonTools;
 import app.utils.Constants;
 import app.utils.JsonUtil;
 import app.utils.MobileOS;
@@ -127,9 +130,10 @@ public class HttpRequest {
 
             @Override
             public void onSucceed(String result) {
-
+                MyLog.e("","请求参数=="+result.toString());
                 UserInfoResult userInfoResult = JsonUtil.parseObject(result, UserInfoResult.class);
                 if (userInfoResult.getStatus() == 0) {
+                    UserInfoJsonTools.jsonUserInfo(result);
                     callback.onSucceed(userInfoResult);
                 } else {
                     callback.onFail(userInfoResult.getMsg());
@@ -1206,6 +1210,61 @@ public class HttpRequest {
             @Override
             public void onSucceed(String result) {
                 HouseInfoResult meta = JsonUtil.parseObject(result, HouseInfoResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     *工作类型获取工作列表
+     */
+    public static void getWorkList(Context context,String cid,int p,int worktype,final ICallback<WorkListResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("p", ""+p));
+        mList.add(new Param("worktype", ""+worktype));
+        mList.add(new Param("type", "1"));
+
+        new MyAsyncTask(context, Urls.getWorkList, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                WorkListResult meta = JsonUtil.parseObject(result, WorkListResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     *工作详情
+     */
+    public static void getWorkDetail(Context context,String cid,String workId,final ICallback<WorkDetailResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("workId", workId));
+
+        new MyAsyncTask(context, Urls.getWorkDetail, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                WorkDetailResult meta = JsonUtil.parseObject(result, WorkDetailResult.class);
                 if (meta.getStatus() == 0) {
                     callback.onSucceed(meta);
                 } else {

@@ -46,9 +46,13 @@ public class UserUtil {
     }
 
     public static void clearUserInfo(Context context) {
-
         Pref.saveString(Pref.USERID, "", context);
+        Pref.saveString(Pref.USERPHONE,"",context);
+        Pref.saveString(Pref.USERPSW,"",context);
+        Pref.saveString(Pref.USERPROFESSION,"",context);
     }
+
+
 
     public static void saveUserId(Context context, String userId) {
         Pref.saveString(Pref.USERID, userId, context);

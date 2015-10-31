@@ -32,7 +32,7 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
     private EditText et_age;
     private EditText et_name;
     private TextView tv_work_type;
-    private String workType;
+    private String workType="1";
     private String id;
     String[] items = {"水电工", "泥水工 ", "木工 ", "油漆工", "门窗安装工", "敲打搬运工"};
 

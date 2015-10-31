@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.miweikeij.app.R;
 
+import org.litepal.crud.DataSupport;
+
+import app.db.DBConversion;
 import app.entity.UserInfo;
 import app.entity.UserInfoResult;
 import app.net.HttpRequest;
@@ -103,7 +106,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Uihelper.trace(result.getCrafts().toString());
                 UserUtil.saveUserId(LoginActivity.this, result.getCrafts().getId());
                 UserUtil.saveUserPsw(LoginActivity.this, psw);
-                UserUtil.saveUserPhone(LoginActivity.this,phone);
+                UserUtil.saveUserPhone(LoginActivity.this, phone);
+                UserUtil.saveUserProfession(LoginActivity.this, result.getCrafts().getProfession());
                 if (!result.getCrafts().isHasinfo()){
                     BasicInfoActivity.startActivity(LoginActivity.this, result.getCrafts().getId());
                 }

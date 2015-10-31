@@ -15,6 +15,9 @@ import com.miweikeij.app.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import app.entity.Data;
 
 /**
  * Created by Administrator on 2015/10/12.
@@ -44,7 +47,7 @@ public class DialogTools {
         type = l;
     }
     private static Dialog dialog;
-    public static  Dialog timeShow(Activity activity){
+    public static  Dialog timeShow(Activity activity, List<Data> data){
         LayoutInflater inflater = LayoutInflater.from(activity);
         View layout = inflater.inflate(R.layout.dialog_time_show, null);
         RelativeLayout layout_time_show = (RelativeLayout)layout.findViewById(R.id.layout_time_show);
