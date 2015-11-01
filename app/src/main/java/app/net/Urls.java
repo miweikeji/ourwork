@@ -104,5 +104,8 @@ public class Urls {
     //工作详情（属于匠之家模块）
     public final static String myWorks = base_server + "App/Work/myWorks";
 
+    //申请加入
+    public final static String applyOder  = base_server + "App/Work/applyOder";
+
 
 }

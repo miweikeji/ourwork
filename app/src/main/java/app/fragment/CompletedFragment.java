@@ -26,6 +26,7 @@ import app.adapter.MyWorksAdapter;
 import app.entity.MyWork;
 import app.entity.MyWorks;
 import app.entity.MyWorksListResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;

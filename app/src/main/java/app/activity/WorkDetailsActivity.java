@@ -11,10 +11,13 @@ import java.util.List;
 import app.dialog.DialogTools;
 import app.entity.Data;
 import app.entity.Message;
+import app.entity.Meta;
+import app.entity.UserInfo;
 import app.entity.WorkDetailResult;
 import app.entity.WorkListResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
+import app.utils.Uihelper;
 import app.views.NavigationBar;
 
 /**
@@ -28,33 +31,38 @@ public class WorkDetailsActivity  extends BaseActivity implements View.OnClickLi
     private TextView tv_feestyle;
     private TextView tv_price;
     private List<Data> data;
+    private Message message;
     @Override
     public void obtainData() {
         netWorkData();
     }
 
     private void netWorkData() {
+        showWaitingDialog();
         HttpRequest.getWorkDetail(this, "102", "132", new ICallback<WorkDetailResult>() {
             @Override
             public void onSucceed(WorkDetailResult result) {
-                Message message = result.getMessage();
+
+                message = result.getMessage();
                 data = result.getData();
                 tv_work_area.setText(message.getS_addr());
                 tv_service.setText(message.getContent());
                 String type = message.getCharge_type();
-                if("0".equals(type)){
+                if ("0".equals(type)) {
                     tv_feestyle.setText("按次服务");
-                }else if("1".equals(type)) {
+                } else if ("1".equals(type)) {
                     tv_feestyle.setText("按平方");
-                }else if("2".equals(type)) {
+                } else if ("2".equals(type)) {
                     tv_feestyle.setText("承包价格");
                 }
                 tv_price.setText(message.getW_money());
+                disMissWaitingDialog();
             }
 
             @Override
             public void onFail(String error) {
 
+                disMissWaitingDialog();
             }
         });
     }
@@ -88,4 +96,26 @@ public class WorkDetailsActivity  extends BaseActivity implements View.OnClickLi
                 break;
         }
     }
+
+    public void apply(View view){
+        if(message!=null){
+            String id = message.getId();
+            showWaitingDialog();
+            HttpRequest.applyOder(this, UserInfo.getInstance().id, id, new ICallback<Meta>() {
+                @Override
+                public void onSucceed(Meta result) {
+                    Uihelper.showToast(WorkDetailsActivity.this,result.getMsg());
+                    disMissWaitingDialog();
+                }
+
+                @Override
+                public void onFail(String error) {
+                    Uihelper.showToast(WorkDetailsActivity.this,error);
+                    disMissWaitingDialog();
+                }
+            });
+        }
+    }
+
+
 }
