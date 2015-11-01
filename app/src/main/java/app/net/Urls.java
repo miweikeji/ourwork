@@ -49,8 +49,6 @@ public class Urls {
     public final static String unArrangeTask = base_server + "App/Workplan/unArrangeTask";
     //广告
     public final static String advertise = base_server + "App/Server";
-    //工头认证
-    public final static String workHeadAudit = base_server + "App/Crafts/workHeadAudit";
     //添加班组成员
     public final static String addGroupCrafts = base_server + "App/Cragroup/addGroupCrafts";
     //根据工种类型查询工匠列表
@@ -62,9 +60,11 @@ public class Urls {
     //工作安排详情接口
     public final static String detailPlan = base_server + "App/Workplan/detailPlan";
     //获取已建计划接口
-    public final static String getTask  = base_server+"App/Workplan/getTask";
+    public final static String getTask = base_server + "App/Workplan/getTask";
 
-    //意见反馈
+
+   /* ============================================我的接口==开始=================================*/
+
     public final static String addSuggest = base_server + "App/Suggest/add";
     //退款接口
     public final static String backMoney = base_server + "App/Union/back";
@@ -82,13 +82,20 @@ public class Urls {
     public final static String signIn = base_server + "App/Signin/signIn";
     //获取是否签到
     public final static String getSignIn = base_server + "App/Signin/getSignIn";
+    //工头认证
+    public final static String workHeadAudit = base_server + "App/Crafts/workHeadAudit";
+    //友盟推送devicetoken
+    public final static String addUmengDeviceToken = base_server + "App/Crafts/addUmengDeviceToken";
+
+     /* ============================================我的接口结束=================================*/
+
     //房屋信息接口
     public final static String getHouseInfo = base_server + "App/House/getHouseInfo";
 
     //工作类型获取工作列表
     public final static String getWorkList = base_server + "App/Work/getWorkList";
     //工作详情
-    public final static String getWorkDetail  = base_server + "App/Work/getWorkDetail";
+    public final static String getWorkDetail = base_server + "App/Work/getWorkDetail";
     //我的工作接口（施工中、已完工）
     public final static String myWorks  = base_server + "App/Work/myWorks";
     //工作详情(施工中, 已完工)
