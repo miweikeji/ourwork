@@ -31,6 +31,7 @@ import app.entity.HousesByLyfResult;
 import app.entity.Meta;
 import app.entity.MyFriendsResult;
 import app.entity.MyScore;
+import app.entity.MyWorksListResult;
 import app.entity.ProtectRecordResult;
 import app.entity.RegisterInfo;
 import app.entity.ScoreResult;
@@ -1270,6 +1271,50 @@ public class HttpRequest {
                 } else {
                     callback.onFail(meta.getMsg());
                 }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    /**
+     *我的工作接口（施工中、已完工）
+     */
+    public static void myWorks(Context context,String cid,String finish,int p,final ICallback<MyWorksListResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("finish", finish));
+        mList.add(new Param("p", "" + p));
+
+        new MyAsyncTask(context, Urls.myWorks, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(result);
+                    int status = object.getInt("status");
+                    if(result.contains("page")) {
+                        JSONObject message = object.getJSONObject("message");
+                        int page = message.getInt("page");
+                        if (page == 0) {
+                            callback.onFail(Constants.JSON_HAS_NULL);
+                        } else {
+                            MyWorksListResult meta = JsonUtil.parseObject(result, MyWorksListResult.class);
+                            if (meta.getStatus() == 0) {
+                                callback.onSucceed(meta);
+                            } else {
+                                callback.onFail(meta.getMsg());
+                            }
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override

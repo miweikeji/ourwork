@@ -89,6 +89,8 @@ public class Urls {
     public final static String getWorkList = base_server + "App/Work/getWorkList";
     //工作详情
     public final static String getWorkDetail  = base_server + "App/Work/getWorkDetail";
+    //我的工作接口（施工中、已完工）
+    public final static String myWorks  = base_server + "App/Work/myWorks";
 
 
 }
