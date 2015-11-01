@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:scaleType="fitXY"
-                android:id="@+id/imageView19"
+                android:id="@+id/iv_house"
                 android:src="@mipmap/house"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
@@ -28,7 +28,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_below="@+id/imageView19"
+                android:layout_below="@+id/iv_house"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/relativeLayout9">
                 <TextView
@@ -76,9 +76,10 @@
                                     android:layout_weight="1">
 
                                     <TextView
+                                        android:id="@+id/tv_houstype"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="New Text"
+                                        android:text="--"
 
                                         android:layout_centerVertical="true"
                                         android:layout_centerHorizontal="true" />
@@ -92,9 +93,10 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1">
                                     <TextView
+                                        android:id="@+id/tv_housearea"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="New Text"
+                                        android:text="--"
 
                                         android:layout_centerVertical="true"
                                         android:layout_centerHorizontal="true" />
@@ -109,9 +111,10 @@
                             android:layout_alignParentEnd="true"
                             android:layout_above="@+id/relativeLayout8">
                             <TextView
+                                android:id="@+id/tv_totalPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="New Text"
+                                android:text="合同总额："
                                 android:textSize="18sp"
                                 android:layout_centerVertical="true"
                                 android:layout_centerHorizontal="true" />
@@ -132,9 +135,10 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <TextView
+                                android:id="@+id/tv_designerPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="New Text"
+                                android:text="设计总额："
 
                                 android:layout_centerVertical="true"
                                 android:layout_centerHorizontal="true" />
@@ -149,9 +153,10 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <TextView
+                                android:id="@+id/tv_craftPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="New Text"
+                                android:text="施工总额："
 
                                 android:layout_centerVertical="true"
                                 android:layout_centerHorizontal="true" />
@@ -172,10 +177,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1">
                                 <TextView
+                                    android:id="@+id/tv_housestyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="New Text"
-
+                                    android:text="--"
                                     android:layout_centerVertical="true"
                                     android:layout_centerHorizontal="true" />
                             </RelativeLayout>
@@ -188,10 +193,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1">
                                 <TextView
+                                    android:id="@+id/tv_craftmode"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="New Text"
-
+                                    android:text="--"
                                     android:layout_centerVertical="true"
                                     android:layout_centerHorizontal="true" />
                             </RelativeLayout>
@@ -263,7 +268,7 @@
                         <ImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:id="@+id/imageView20"
+                            android:id="@+id/iv_house_designer"
                             android:src="@mipmap/test"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
@@ -273,12 +278,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="习近平"
-                            android:id="@+id/textView57"
+                            android:id="@+id/tv_designer_name"
                             android:textSize="18sp"
                             android:layout_alignParentTop="true"
                             android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@+id/imageView20"
-                            android:layout_toEndOf="@+id/imageView20" />
+                            android:layout_toRightOf="@+id/iv_house_designer"
+                            android:layout_toEndOf="@+id/iv_house_designer" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -286,29 +291,29 @@
                             android:text="设计师"
                             android:id="@+id/textView58"
                             android:layout_marginLeft="5dp"
-                            android:layout_alignBottom="@+id/textView57"
-                            android:layout_toRightOf="@+id/textView57"
-                            android:layout_toEndOf="@+id/textView57" />
+                            android:layout_alignBottom="@+id/tv_designer_name"
+                            android:layout_toRightOf="@+id/tv_designer_name"
+                            android:layout_toEndOf="@+id/tv_designer_name" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="34岁/10年设计经验"
-                            android:id="@+id/textView59"
+                            android:id="@+id/tv_house_age_workage"
                             android:layout_marginTop="5dp"
-                            android:layout_below="@+id/textView57"
-                            android:layout_alignLeft="@+id/textView57"
-                            android:layout_alignStart="@+id/textView57" />
+                            android:layout_below="@+id/tv_designer_name"
+                            android:layout_alignLeft="@+id/tv_designer_name"
+                            android:layout_alignStart="@+id/tv_designer_name" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="擅长：欧式，田园，美式乡村，古典"
-                            android:id="@+id/textView60"
-                            android:layout_below="@+id/textView59"
-                            android:layout_alignLeft="@+id/textView59"
+                            android:id="@+id/tv_house_expert"
+                            android:layout_below="@+id/tv_house_age_workage"
+                            android:layout_alignLeft="@+id/tv_house_age_workage"
                             android:layout_marginTop="5dp"
-                            android:layout_alignStart="@+id/textView59" />
+                            android:layout_alignStart="@+id/tv_house_age_workage" />
                     </RelativeLayout>
 
 
@@ -372,7 +377,7 @@
                         <ImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:id="@+id/imageView21"
+                            android:id="@+id/iv_house_craft"
                             android:src="@mipmap/test"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
@@ -382,12 +387,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="习近平"
-                            android:id="@+id/textView61"
+                            android:id="@+id/tv_craft_name"
                             android:textSize="18sp"
                             android:layout_alignParentTop="true"
                             android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@+id/imageView21"
-                            android:layout_toEndOf="@+id/imageView21" />
+                            android:layout_toRightOf="@+id/iv_house_craft"
+                            android:layout_toEndOf="@+id/iv_house_craft" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -395,29 +400,29 @@
                             android:text="设计师"
                             android:id="@+id/textView62"
                             android:layout_marginLeft="5dp"
-                            android:layout_alignBottom="@+id/textView61"
-                            android:layout_toRightOf="@+id/textView61"
-                            android:layout_toEndOf="@+id/textView61" />
+                            android:layout_alignBottom="@+id/tv_craft_name"
+                            android:layout_toRightOf="@+id/tv_craft_name"
+                            android:layout_toEndOf="@+id/tv_craft_name" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="34岁/10年设计经验"
-                            android:id="@+id/textView63"
+                            android:id="@+id/tv_house_age_workage_craft"
                             android:layout_marginTop="5dp"
-                            android:layout_below="@+id/textView61"
-                            android:layout_alignLeft="@+id/textView61"
-                            android:layout_alignStart="@+id/textView61" />
+                            android:layout_below="@+id/tv_craft_name"
+                            android:layout_alignLeft="@+id/tv_craft_name"
+                            android:layout_alignStart="@+id/tv_craft_name" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="擅长：欧式，田园，美式乡村，古典"
-                            android:id="@+id/textView64"
-                            android:layout_below="@+id/textView63"
-                            android:layout_alignLeft="@+id/textView63"
+                            android:id="@+id/tv_house_expert_craft"
+                            android:layout_below="@+id/tv_house_age_workage_craft"
+                            android:layout_alignLeft="@+id/tv_house_age_workage_craft"
                             android:layout_marginTop="5dp"
-                            android:layout_alignStart="@+id/textView63" />
+                            android:layout_alignStart="@+id/tv_house_age_workage_craft" />
 
                     </RelativeLayout>
                 </RelativeLayout>

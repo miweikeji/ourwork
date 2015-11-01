@@ -55,7 +55,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
                     isSending = false;
                     btn_send_code.setEnabled(true);
                     btn_send_code.setBackgroundResource(R.drawable.sl_get_code);
-                    btn_send_code.setText("重新获取");
+                    btn_send_code.setText("获取验证码");
                 }
                 super.handleMessage(msg);
             }

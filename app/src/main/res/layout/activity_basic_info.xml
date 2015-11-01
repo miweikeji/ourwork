@@ -608,6 +608,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/sl_orgin"
             android:text="提交保存"

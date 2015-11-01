@@ -27,7 +27,7 @@ import app.views.BottomSelectDialog;
 /**
  * Created by Administrator on 2015/10/12.
  */
-public class DecorationDiaryFragment extends Fragment implements View.OnClickListener{
+public class DecorationDiaryFragment extends Fragment implements View.OnClickListener {
 
     private View layout;
     private RecyclerView recyclerView;
@@ -36,7 +36,7 @@ public class DecorationDiaryFragment extends Fragment implements View.OnClickLis
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.fragment_decoration_diary,null);
+        layout = inflater.inflate(R.layout.fragment_decoration_diary, null);
         initUI();
         return layout;
     }
@@ -44,7 +44,7 @@ public class DecorationDiaryFragment extends Fragment implements View.OnClickLis
     private void initUI() {
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerview);
-                                      layout.findViewById(R.id.btn_dairy).setOnClickListener(this);
+        layout.findViewById(R.id.btn_dairy).setOnClickListener(this);
 
     }
 
@@ -56,31 +56,34 @@ public class DecorationDiaryFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-          if (v.getId()==R.id.btn_dairy){
-              //写日记，弹框
+        if (v.getId() == R.id.btn_dairy) {
+            //写日记，弹框
             Config.init(getActivity());
-             bottomSelectDialog=BottomSelectDialog.create(getActivity(), BottomSelectDialog.PopUpDialogPosition.bottom, new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-                      switch (v.getId()){
-                          case R.id.btn_write:
-                              startActivity(new Intent(getActivity(), PublishDairyActivity.class));
-                              bottomSelectDialog.dismiss();
-                              break;
-                          case R.id.btn_check:
-                              bottomSelectDialog.dismiss();
-                              break;
-                          case R.id.btn_value:
-                              startActivity(new Intent(getActivity(), ValueCraftActivity.class));
-                              bottomSelectDialog.dismiss();
-                              break;
-                      }
+            bottomSelectDialog = BottomSelectDialog.create(getActivity(), BottomSelectDialog.PopUpDialogPosition.bottom, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()) {
+                        case R.id.btn_write:
+                            startActivity(new Intent(getActivity(), PublishDairyActivity.class));
+                            bottomSelectDialog.dismiss();
+                            break;
+                        case R.id.btn_check:
+                            bottomSelectDialog.dismiss();
+                            break;
+                        case R.id.btn_value:
+                            startActivity(new Intent(getActivity(), ValueCraftActivity.class));
+                            bottomSelectDialog.dismiss();
+                            break;
+                        case R.id.iv_downarrow:
+                            bottomSelectDialog.dismiss();
+                            break;
+                    }
 
-                  }
-              });
-              bottomSelectDialog.show();
+                }
+            });
+            bottomSelectDialog.show();
 
-          }
+        }
 
     }
 }

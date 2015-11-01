@@ -29,15 +29,6 @@ public class House {
     private String yyStatus;
     private String sort;
     private String xiaoqu;
-    private  Crafts crafts;
-
-    public Crafts getCrafts() {
-        return crafts;
-    }
-
-    public void setCrafts(Crafts crafts) {
-        this.crafts = crafts;
-    }
 
     public String getTime() {
         return time;

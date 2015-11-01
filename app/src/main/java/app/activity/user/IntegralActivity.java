@@ -28,7 +28,7 @@ import app.views.NavigationBar;
 public class IntegralActivity extends BaseActivity {
     private ScoreAdapter adapter;
     private ListView listView;
-    List<Score> items=new ArrayList<>();
+    List<Score> items = new ArrayList<>();
     private TextView tv_score;
 
     @Override
@@ -55,6 +55,19 @@ public class IntegralActivity extends BaseActivity {
             }
         });
 
+        HttpRequest.getMyScore(mActivity, new ICallback<MyScore>() {
+            @Override
+            public void onSucceed(MyScore result) {
+                String score = result.getScore();
+                tv_score.setText(score);
+            }
+
+            @Override
+            public void onFail(String error) {
+                Uihelper.showToast(mActivity, error);
+
+            }
+        });
 
 
     }
@@ -62,7 +75,7 @@ public class IntegralActivity extends BaseActivity {
     @Override
     public void initUI() {
 
-         tv_score=(TextView)findViewById(R.id.tv_integral);
+        tv_score = (TextView) findViewById(R.id.tv_integral);
         listView = (ListView) findViewById(R.id.listView);
 
     }
@@ -80,7 +93,7 @@ public class IntegralActivity extends BaseActivity {
         mBar.setRightOnClick(new NavigationBar.RightOnClick() {
             @Override
             public void setRightOnClick() {
-                startActivity(new Intent(mActivity,IntegralRuleActivity.class));
+                startActivity(new Intent(mActivity, IntegralRuleActivity.class));
             }
         });
 

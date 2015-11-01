@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.miweikeij.app.R;
 
+import app.entity.Meta;
 import app.entity.UserInfo;
 import app.entity.UserInfoResult;
 import app.net.HttpRequest;
@@ -65,6 +66,19 @@ public class AppStartActivity extends BaseActivity {
 //                Uihelper.showToast(mActivity, error);
             }
         });
+        //传设备token到服务器，用于推送消息
+        HttpRequest.addUmengDeviceToken(this, new ICallback<Meta>() {
+            @Override
+            public void onSucceed(Meta result) {
+
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
+
     }
 
     @Override

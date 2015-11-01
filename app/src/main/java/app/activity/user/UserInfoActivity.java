@@ -147,7 +147,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
 
         showWaitingDialog();
-        HttpRequest.myInfoEdit(mActivity, name, age, worktype, workage, area, user_case, address, bankname,
+        HttpRequest.myInfoEdit(mActivity, name, age, worktype, workage, area, user_case, address, openbank,
                 cardnum, bankname, commendphone, baseprice, servicezone, introduce, new ICallback<Meta>() {
                     @Override
                     public void onSucceed(Meta result) {

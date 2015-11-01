@@ -13,6 +13,7 @@ import com.miweikeij.app.R;
 
 import java.util.List;
 
+import app.entity.Comment;
 import app.entity.Data;
 import app.entity.MyWorkDetailMessage;
 import app.entity.MyWorkDetailResult;
