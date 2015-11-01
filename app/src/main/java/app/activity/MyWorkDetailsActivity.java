@@ -50,7 +50,7 @@ public class
         View item = LayoutInflater.from(mActivity).inflate(R.layout.item_person_shigongrenwu, null);
         linearDuty.addView(item);
         showWaitingDialog();
-        HttpRequest.myWorkDetail(this, "101", "1", "133", new ICallback<MyWorkDetailResult>() {
+        HttpRequest.myWorkDetail(this, "101", "133", "1", new ICallback<MyWorkDetailResult>() {
             @Override
             public void onSucceed(MyWorkDetailResult result) {
                 disMissWaitingDialog();
@@ -71,7 +71,7 @@ public class
                 if (comment != null) {
                     if (!TextUtils.isEmpty(comment.getTime())) {
 
-                        tv_commentTime.setText(Uihelper.timestampToDateStr(Double.parseDouble(comment.getTime())));
+                        tv_commentTime.setText(comment.getTime());
                     }
                     tvCraft.setText(comment.getComment_craftsman_name());
                     tvValue.setText(comment.getAdvise());
