@@ -33,17 +33,18 @@ import app.utils.Uihelper;
 /**
  * Created by Administrator on 2015/10/9.
  */
-public class CompletedFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class CompletedFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private View layout;
-    private int p=1;
+    private int p = 1;
     private PullToRefreshListView pull_case;
     private ArrayList<MyWorks> allCases = new ArrayList<MyWorks>();
     private MyWorksAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.fragment_completed,null);
+        layout = inflater.inflate(R.layout.fragment_completed, null);
         initUI();
         netWorkData();
         return layout;
@@ -51,7 +52,7 @@ public class CompletedFragment extends Fragment implements AdapterView.OnItemCli
 
     private void netWorkData() {
 
-        HttpRequest.myWorks(getActivity(), "100", "1", p, new ICallback<MyWorksListResult>() {
+        HttpRequest.myWorks(getActivity(), "101", "1", p, new ICallback<MyWorksListResult>() {
             @Override
             public void onSucceed(MyWorksListResult result) {
                 List<MyWorks> myWorkses = result.getMessage().getList();
@@ -76,7 +77,7 @@ public class CompletedFragment extends Fragment implements AdapterView.OnItemCli
 
     private void initUI() {
 
-        pull_case =(PullToRefreshListView)layout.findViewById(R.id.pull_case);
+        pull_case = (PullToRefreshListView) layout.findViewById(R.id.pull_case);
         pull_case.setOnItemClickListener(this);
         pull_case.setMode(PullToRefreshBase.Mode.BOTH);
         pull_case.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -98,6 +99,10 @@ public class CompletedFragment extends Fragment implements AdapterView.OnItemCli
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
+
+        String workId = allCases.get(position-1).getWorkid();
+        Intent intent = new Intent(new Intent(getActivity(), MyWorkDetailsActivity.class));
+        intent.putExtra("workId", workId);
+        startActivity(intent);
     }
 }
