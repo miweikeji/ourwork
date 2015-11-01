@@ -27,6 +27,7 @@ import app.entity.ConstructPlanResult;
 import app.entity.MyWork;
 import app.entity.MyWorks;
 import app.entity.MyWorksListResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -52,7 +53,7 @@ public class ConstructionFragment extends Fragment implements AdapterView.OnItem
     }
     private void netWorkData() {
 
-        HttpRequest.myWorks(getActivity(), "100", "0",p, new ICallback<MyWorksListResult>() {
+        HttpRequest.myWorks(getActivity(), "101", "0",p, new ICallback<MyWorksListResult>() {
             @Override
             public void onSucceed(MyWorksListResult result) {
                 List<MyWorks> myWorkses = result.getMessage().getList();

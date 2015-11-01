@@ -24,7 +24,6 @@ public class MyWorkDetailsActivity extends BaseActivity implements
 
 
     private LinearLayout linearDuty;
-    private RecyclerView recyclerView;
 
     @Override
     public void obtainData() {

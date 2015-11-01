@@ -26,6 +26,7 @@ import app.adapter.MyWorksAdapter;
 import app.entity.MyWork;
 import app.entity.MyWorks;
 import app.entity.MyWorksListResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -51,7 +52,7 @@ public class CompletedFragment extends Fragment implements AdapterView.OnItemCli
 
     private void netWorkData() {
 
-        HttpRequest.myWorks(getActivity(), "100", "1", p, new ICallback<MyWorksListResult>() {
+        HttpRequest.myWorks(getActivity(), "101", "1", p, new ICallback<MyWorksListResult>() {
             @Override
             public void onSucceed(MyWorksListResult result) {
                 List<MyWorks> myWorkses = result.getMessage().getList();
@@ -98,6 +99,7 @@ public class CompletedFragment extends Fragment implements AdapterView.OnItemCli
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
         startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
     }
 }
