@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="班组成员"
+            android:textSize="16sp"
+            android:id="@+id/textView39"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView39"
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/has_greads_line_bg"
+            android:layout_toLeftOf="@+id/rl_deleate"
+            android:layout_toStartOf="@+id/rl_deleate">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:id="@+id/tv_memeber_phone"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_deleate"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/base_orange"
+                android:textSize="16sp"
+                android:id="@+id/textView41"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:text="一一"
+                android:textSize="16sp"
+                android:background="@color/base_orange"
+                android:id="@+id/textView42"
+                android:layout_below="@+id/textView41"
+                android:layout_alignRight="@+id/textView41"
+                android:layout_alignEnd="@+id/textView41" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

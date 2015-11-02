@@ -1407,4 +1407,34 @@ public class HttpRequest {
         }).executeOnExecutor();
     }
 
+
+    /**
+     *添加班组成员接口c
+     */
+
+    public static void addGroupCraf(Context context,String groupId,String phones,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("groupId", groupId));
+        mList.add(new Param("phones", phones));
+
+        new MyAsyncTask(context, Urls.addGroupCrafts, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
 }
