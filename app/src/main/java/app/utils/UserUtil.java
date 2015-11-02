@@ -52,7 +52,9 @@ public class UserUtil {
         Pref.saveString(Pref.USERPROFESSION,"",context);
     }
 
-
+    public static Boolean getIsFitst(Context context){
+        return Pref.getBoolean(Pref.IS_FITST_USER_APP,context,false);
+    }
 
     public static void saveUserId(Context context, String userId) {
         Pref.saveString(Pref.USERID, userId, context);
@@ -70,5 +72,8 @@ public class UserUtil {
         Pref.saveString(Pref.USERPROFESSION,profession,context);
     }
 
+    public static void saveIsFirst(Context context,Boolean isFirst){
+        Pref.saveBoolean(Pref.IS_FITST_USER_APP,isFirst,context);
+    }
 
 }

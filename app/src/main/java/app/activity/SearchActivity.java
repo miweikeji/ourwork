@@ -41,6 +41,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private EditText et_search_contents;
     private String from_Activity;
     private String contents;
+    private int view_id;
     @Override
     public void obtainData() {
         imageLoader = ImageLoader.getInstance();
@@ -48,6 +49,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         from_Activity = intent.getStringExtra("FROM_ConstructionTasksActivity");
         if("ConstructionTasksActivity".equals(from_Activity)){
             contents = intent.getStringExtra("CASE_TYPE");
+            view_id = intent.getIntExtra("VIEW_ID", 0);
             netWorkData();
         }
     }
@@ -135,7 +137,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         Allcrafts allcrafts = allList.get(position-1);
         if("ConstructionTasksActivity".equals(from_Activity)){
 
-            UIEventUpdate.getInstance().notifyUIUpdate(1,contents+"#"+allcrafts.getId()+"#"+allcrafts.getName());
+            UIEventUpdate.getInstance().notifyUIUpdate(1,contents+"#"+allcrafts.getId()+"#"+allcrafts.getName()+"#"+view_id);
             finish();
         }
     }

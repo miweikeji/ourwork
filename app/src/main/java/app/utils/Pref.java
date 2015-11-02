@@ -15,6 +15,8 @@ public class Pref {
 	public static final String USERPHONE = "usePhone";
 	public static final String USERPROFESSION= "useProfession";
 
+	public static final String IS_FITST_USER_APP = "IS_FITST_USER_APP";
+
 	// 首次开启
 	public static final String FIRST_LOAD = "FirstLoad";
 

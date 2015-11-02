@@ -63,7 +63,7 @@
                 android:layout_below="@+id/relativeLayout28"
                 android:background="@drawable/sl_bg"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/relativeLayout29">
+                android:id="@+id/rl_time_chose">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
-                    android:id="@+id/textView55"
+                    android:id="@+id/tv_time_choose"
                     android:layout_marginLeft="5dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textView46"
@@ -100,7 +100,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:layout_below="@+id/relativeLayout29"
+                android:layout_below="@+id/rl_time_chose"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/relativeLayout30"></RelativeLayout>
 
