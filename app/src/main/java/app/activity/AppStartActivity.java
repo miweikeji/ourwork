@@ -67,7 +67,7 @@ public class AppStartActivity extends BaseActivity  {
 
     private void splashFinish() {
         Boolean isFitst = UserUtil.getIsFitst(this);
-        if(isFitst){
+//        if(isFitst){
             Intent intent =new Intent(AppStartActivity.this,MainActivity.class);
             if(UserUtil.hasLogin(this)){
                 intent.putExtra(Constants.USER_PROFESSION_TYPE, UserUtil.getUserProfession(AppStartActivity.this));
@@ -76,9 +76,9 @@ public class AppStartActivity extends BaseActivity  {
 
             }
             startActivity(intent);
-        }else {
-            startActivity(new Intent(AppStartActivity.this,GuideActivity.class));
-        }
+//        }else {
+//            startActivity(new Intent(AppStartActivity.this,GuideActivity.class));
+//        }
 
         finish();
     }
