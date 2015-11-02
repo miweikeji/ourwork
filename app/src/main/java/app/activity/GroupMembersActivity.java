@@ -44,6 +44,7 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
     private TextView jobType;
     private TextView area;
     private TextView foremanName;
+    private String groupid;
     @Override
     public void obtainData() {
         imageLoader = ImageLoader.getInstance();
@@ -89,6 +90,7 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
             @Override
             public void onSucceed(GroupGangerResult result) {
                 GroupGanger crafts = result.getCrafts();
+                 groupid = crafts.getCra_groupid();
                 foremanName.setText(crafts.getName());
                 age.setText(""+crafts.getAge()+"岁");
                 area.setText(crafts.getCworkhome());
@@ -146,6 +148,8 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
 
     @Override
     public void setRightOnClick() {
-        startActivity(new Intent(GroupMembersActivity.this,AddMembersActivity.class));
+        Intent intent = new Intent(GroupMembersActivity.this,AddMembersActivity.class);
+        intent.putExtra("groupId",groupid);
+        startActivity(intent);
     }
 }
