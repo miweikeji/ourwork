@@ -75,6 +75,10 @@ public class
                     }
                     tvCraft.setText(comment.getComment_craftsman_name());
                     tvValue.setText(comment.getAdvise());
+                    ratingBarQuality.setNumStars(comment.getAttitude());
+                    ratingBarValue.setNumStars(comment.getQuality());
+
+
                 }
             }
 

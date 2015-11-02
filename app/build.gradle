@@ -30,4 +30,5 @@ dependencies {
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.17'
     compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/litepal-1.2.0-src.jar')
+    compile files('libs/xUtils-2.6.14.jar')
 }

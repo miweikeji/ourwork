@@ -1,285 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/activity_bg">
 
 
     <ScrollView
+        android:id="@+id/scrollView6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView6"
         android:layout_above="@+id/button"
-        android:layout_marginBottom="5dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:id="@+id/linearLayout3">
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
+                    android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="服务地点:"
                         android:id="@+id/textView1"
-                        android:textSize="17sp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="15dp"
-                        />
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:text="服务地点:"
+                        android:textSize="17sp" />
+
+                    <TextView
                         android:id="@+id/tv_mywork_name"
-                        android:background="@null"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="15sp"
-                        android:text="泰和花园"
-
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toEndOf="@+id/textView1"
                         android:layout_toRightOf="@+id/textView1"
-                        android:layout_toEndOf="@+id/textView1" />
+
+                        android:background="@null"
+                        android:text="泰和花园"
+                        android:textSize="15sp" />
                 </RelativeLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/line"/>
+                    android:background="@color/line" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
+                    android:layout_weight="1">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="服务内容:"
                         android:id="@+id/textView2"
-                        android:textSize="17sp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="15dp"
-                        />
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:text="服务内容:"
+                        android:textSize="17sp" />
+
+                    <TextView
                         android:id="@+id/tv_mywork_service"
-                        android:background="@null"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="15sp"
-                        android:text="房子装修—设计师"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toEndOf="@+id/textView2"
                         android:layout_toRightOf="@+id/textView2"
-                        android:layout_toEndOf="@+id/textView2" />
-                </RelativeLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/line"/>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="计费方式:"
-                        android:id="@+id/textView3"
-                        android:textSize="17sp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="15dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_mywork_style"
                         android:background="@null"
-                        android:textSize="15sp"
-                        android:text="按次数服务"
-                        android:layout_marginLeft="10dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/textView3"
-                        android:layout_toEndOf="@+id/textView3" />
-                </RelativeLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/line"/>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="服务价格:"
-                        android:id="@+id/textView4"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:textSize="17sp"
-                        android:layout_marginLeft="15dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_mywork_price"
-                        android:background="@null"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="15sp"
-                        android:text="300"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/textView4"
-                        android:layout_toEndOf="@+id/textView4" />
+                        android:text="房子装修—设计师"
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/line"/>
+                    android:background="@color/line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:text="计费方式:"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mywork_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toEndOf="@+id/textView3"
+                        android:layout_toRightOf="@+id/textView3"
+                        android:background="@null"
+                        android:text="按次数服务"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:text="服务价格:"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mywork_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toEndOf="@+id/textView4"
+                        android:layout_toRightOf="@+id/textView4"
+                        android:background="@null"
+                        android:text="300"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line" />
             </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/frame_comment"
                 android:layout_width="match_parent"
                 android:layout_height="235dp"
+                android:layout_centerHorizontal="true"
                 android:paddingLeft="15dp"
-                android:paddingTop="15dp"
                 android:paddingRight="15dp"
-                android:visibility="visible"
-                android:layout_centerHorizontal="true">
+                android:paddingTop="15dp"
+                android:visibility="visible">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_item"
-                    android:layout_centerHorizontal="true">
+                    android:background="@drawable/bg_item">
 
                     <RelativeLayout
+                        android:id="@+id/relativeLayout12"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/relativeLayout12">
+                        android:layout_centerHorizontal="true">
 
                         <TextView
+                            android:id="@+id/textView72"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="工匠评价"
-                            android:id="@+id/textView72"
+                            android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true" />
+                            android:text="工匠评价" />
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/relativeLayout13"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@+id/relativeLayout12"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/relativeLayout13">
+                        android:layout_centerHorizontal="true">
 
                         <TextView
+                            android:id="@+id/tv_mywork_craft"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="习近平"
-                            android:id="@+id/tv_mywork_craft"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
+                            android:text="习近平" />
 
 
                         <TextView
+                            android:id="@+id/tv_mywork_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2015-10-21"
-                            android:id="@+id/tv_mywork_time"
-                            android:layout_marginRight="10dp"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:text="2015-10-21" />
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/relativeLayout14"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@+id/relativeLayout13"
-                        android:layout_marginBottom="5dp"
                         android:layout_centerHorizontal="true"
-                        android:id="@+id/relativeLayout14">
+                        android:layout_marginBottom="5dp">
 
                         <TextView
+                            android:id="@+id/tv_service"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="服务态度"
-                            android:id="@+id/tv_service"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
+                            android:text="服务态度" />
 
                         <RatingBar
-                            android:layout_width="wrap_content"
-                            android:layout_height="28dp"
                             android:id="@+id/ratingBar_value"
                             style="@style/valueRatingBar"
-                            android:rating="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/tv_service"
-                            android:layout_toEndOf="@+id/tv_service"
                             android:layout_marginLeft="14dp"
-                            android:layout_marginStart="24dp" />
+                            android:layout_marginStart="24dp"
+                            android:layout_toEndOf="@+id/tv_service"
+                            android:layout_toRightOf="@+id/tv_service" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/relativeLayout15"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@+id/relativeLayout14"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/relativeLayout15">
+                        android:layout_centerHorizontal="true">
+
                         <TextView
+                            android:id="@+id/tv_quality"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="施工质量"
-                            android:id="@+id/tv_quality"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
+                            android:text="施工质量" />
 
                         <RatingBar
-                            android:layout_width="wrap_content"
-                            android:layout_height="28dp"
                             android:id="@+id/ratingBar_quality"
                             style="@style/valueRatingBar"
-                            android:rating="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/tv_quality"
-                            android:layout_toEndOf="@+id/tv_quality"
                             android:layout_marginLeft="14dp"
-                            android:layout_marginStart="24dp" />
+                            android:layout_marginStart="24dp"
+                            android:layout_toEndOf="@+id/tv_quality"
+                            android:layout_toRightOf="@+id/tv_quality" />
 
 
                     </RelativeLayout>
@@ -291,16 +295,16 @@
                         android:layout_centerHorizontal="true">
 
                         <TextView
+                            android:id="@+id/tv_mywork_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="师傅施工质量不错"
-                            android:layout_marginTop="5dp"
-                            android:id="@+id/tv_mywork_value"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:text="师傅施工质量不错" />
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>
@@ -308,43 +312,47 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="10dp"></RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingBottom="20dp"
+
                 android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
-                android:paddingRight="15dp"
-                android:paddingBottom="20dp">
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_item"
-
-                >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="施工任务"
-                    android:textSize="18sp"
-                    android:id="@+id/textView76"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginStart="25dp" />
-            </RelativeLayout>
                 <LinearLayout
-                    android:id="@+id/linear_shigongrenwu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></LinearLayout>
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_item"
+                    android:orientation="vertical"
 
-            </LinearLayout>
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <TextView
+                            android:id="@+id/textView76"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginStart="25dp"
+                            android:text="施工任务"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_shigongrenwu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></LinearLayout>
+
+                </LinearLayout>
 
 
             </RelativeLayout>
@@ -352,16 +360,16 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/button"
-        android:textColor="@color/white"
+        android:background="@drawable/sl_orgin"
         android:onClick="toProdDetails"
         android:text="查看施工项目"
-        android:background="@drawable/sl_orgin"/>
+        android:textColor="@color/white" />
 
 </RelativeLayout>

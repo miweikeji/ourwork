@@ -37,6 +37,7 @@ public class HttpUtils {
             stringBuffer.deleteCharAt(0);
         }
       String  realUrl=  url + "?" + stringBuffer;
+
         final Request request = new Request.Builder()
                 .url(realUrl)
                 .build();
@@ -54,6 +55,7 @@ public class HttpUtils {
             }
             return null;
         } catch (IOException e) {
+            Log.e("","===IOException===="+e.toString());
             return MyAsyncTask.SERVER_ERROR + e.getMessage();
         }
     }

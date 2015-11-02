@@ -6,11 +6,11 @@ package app.entity;
 public class SingIn {
 
     private String cid;
-    private String is_sign;
+    private int is_sign;
     private String houseId;
     private String status;
     private String hasTask;
-    private String signNum;
+    private int signNum;
     private String signtime;
 
     public String getCid() {
@@ -21,11 +21,11 @@ public class SingIn {
         this.cid = cid;
     }
 
-    public String getIs_sign() {
+    public int getIs_sign() {
         return is_sign;
     }
 
-    public void setIs_sign(String is_sign) {
+    public void setIs_sign(int is_sign) {
         this.is_sign = is_sign;
     }
 
@@ -53,11 +53,11 @@ public class SingIn {
         this.hasTask = hasTask;
     }
 
-    public String getSignNum() {
+    public int getSignNum() {
         return signNum;
     }
 
-    public void setSignNum(String signNum) {
+    public void setSignNum(int signNum) {
         this.signNum = signNum;
     }
 

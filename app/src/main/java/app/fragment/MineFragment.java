@@ -22,6 +22,7 @@ import org.litepal.crud.DataSupport;
 
 import app.activity.BasicInfoActivity;
 import app.activity.LoginActivity;
+import app.activity.MyWorkDetailsActivity;
 import app.activity.user.AboutUsActivity;
 import app.activity.user.FeekBackActivity;
 import app.activity.user.IntegralActivity;
@@ -32,6 +33,7 @@ import app.dialog.DialogSign;
 import app.entity.Crafts;
 import app.entity.CraftsResult;
 import app.entity.Meta;
+import app.entity.SingIn;
 import app.entity.SingInResult;
 import app.entity.UserInfo;
 import app.entity.UserInfoResult;
@@ -77,16 +79,22 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         HttpRequest.getSignIn(getActivity(), new ICallback<SingInResult>() {
             @Override
             public void onSucceed(SingInResult result) {
+                SingIn singIn = result.getSingIn();
+                if (singIn != null) {
+                    signTime = singIn.getSignNum();
+                    if (singIn.getIs_sign() == 1) {
+                        isSign = true;
+                    }
+                    hasCase = true;
+                }
 
-                signTime=4;
-                isSign=true;
-                hasCase=true;
+
 
             }
 
             @Override
             public void onFail(String error) {
-                Uihelper.showToast(getActivity(),error);
+                Uihelper.showToast(getActivity(), error);
 
             }
         });
@@ -197,18 +205,19 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                         @Override
                         public void sign() {
-
+                            dialogSign.dismiss();
                             HttpRequest.signIn(getActivity(), new ICallback<Meta>() {
                                 @Override
                                 public void onSucceed(Meta result) {
 
-                                      Uihelper.showToast(getActivity(),"签到成功");
+                                    Uihelper.showToast(getActivity(), "签到成功");
+                                    obtainSign();
                                 }
 
                                 @Override
                                 public void onFail(String error) {
 
-                                    Uihelper.showToast(getActivity(),error);
+                                    Uihelper.showToast(getActivity(), error);
 
                                 }
                             });
@@ -217,6 +226,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                         @Override
                         public void toCase() {
+                            dialogSign.dismiss();
+                            startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
 
                         }
 

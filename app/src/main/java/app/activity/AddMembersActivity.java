@@ -57,7 +57,6 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
         list.add(meta1);
         map.put("phones", list);
         String json = gson.toJson(map);
-        Toast.makeText(this,json,1).show();
         et_members_phone = (EditText) findViewById(R.id.et_members_phone);
         line_add_memebers = (LinearLayout) findViewById(R.id.line_add_memebers);
         RelativeLayout rl_add_member = (RelativeLayout) findViewById(R.id.rl_add_member);
@@ -149,7 +148,7 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
 
     private void netWorkData(String json) {
         showWaitingDialog();
-        HttpRequest.addGroupCraf(this, "", json, new ICallback<Meta>() {
+        HttpRequest.addGroupCraf(this, "", json.toString().trim(), new ICallback<Meta>() {
             @Override
             public void onSucceed(Meta result) {
                 disMissWaitingDialog();

@@ -8,8 +8,8 @@ public class Comment {
     private String id;
     private String is_designer;
     private String time;
-    private String attitude;
-    private String quality;
+    private int attitude;
+    private int quality;
     private String advise;
     private String craftsmanId;
     private String designerId;
@@ -45,19 +45,19 @@ public class Comment {
         this.time = time;
     }
 
-    public String getAttitude() {
+    public int getAttitude() {
         return attitude;
     }
 
-    public void setAttitude(String attitude) {
+    public void setAttitude(int attitude) {
         this.attitude = attitude;
     }
 
-    public String getQuality() {
+    public int getQuality() {
         return quality;
     }
 
-    public void setQuality(String quality) {
+    public void setQuality(int quality) {
         this.quality = quality;
     }
 

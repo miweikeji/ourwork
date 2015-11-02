@@ -11,7 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import app.entity.AddMemberError;
 import app.entity.AdvertiseResult;
@@ -1458,11 +1460,13 @@ public class HttpRequest {
      */
 
     public static void addGroupCraf(Context context,String groupId,String phones,final ICallback<Meta> callback) {
-        ArrayList<Param> mList = new ArrayList<Param>();
-        mList.add(new Param("groupId", groupId));
-        mList.add(new Param("phones", phones));
-
-        new MyAsyncTask(context, Urls.addGroupCrafts, mList, new ICallback<String>() {
+//        ArrayList<Param> mList = new ArrayList<Param>();
+//        mList.add(new Param("groupId", groupId));
+//        mList.add(new Param("phones", phones));
+        Map<String,String>  mList=new HashMap<String,String>();
+        mList.put("groupId",groupId);
+        mList.put("phones",phones);
+        new MyAsynctask_Post(context, Urls.addGroupCrafts, new ICallbackString() {
 
             @Override
             public void onSucceed(String result) {
@@ -1479,7 +1483,7 @@ public class HttpRequest {
             public void onFail(String error) {
                 callback.onFail(error);
             }
-        }).executeOnExecutor();
+        },mList).executeOnExecutor();
     }
 
 }
