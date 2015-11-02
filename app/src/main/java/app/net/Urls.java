@@ -94,12 +94,16 @@ public class Urls {
 
     //工作类型获取工作列表
     public final static String getWorkList = base_server + "App/Work/getWorkList";
-    //工作详情
+
+    //工作详情(属于工作机会模块)
     public final static String getWorkDetail = base_server + "App/Work/getWorkDetail";
-    //我的工作接口（施工中、已完工）
-    public final static String myWorks  = base_server + "App/Work/myWorks";
-    //工作详情(施工中, 已完工)
-    public final static String myWorkDetail  = base_server + "App/Work/myWorkDetail";
+
+    //我的工作接口（施工中、已完工）（属于我的工作模块）
+    public final static String myWorkDetail = base_server + "App/Work/myWorkDetail";
+
+    //工作详情（属于匠之家模块）
+    public final static String myWorks = base_server + "App/Work/myWorks";
+
     //申请加入
     public final static String applyOder  = base_server + "App/Work/applyOder";
 

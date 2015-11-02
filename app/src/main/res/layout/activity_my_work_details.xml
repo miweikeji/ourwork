@@ -45,7 +45,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText1"
+                        android:id="@+id/tv_mywork_name"
                         android:background="@null"
                         android:layout_marginLeft="10dp"
                         android:textSize="15sp"
@@ -79,7 +79,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText2"
+                        android:id="@+id/tv_mywork_service"
                         android:background="@null"
                         android:layout_marginLeft="10dp"
                         android:textSize="15sp"
@@ -111,7 +111,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText3"
+                        android:id="@+id/tv_mywork_style"
                         android:background="@null"
                         android:textSize="15sp"
                         android:text="按次数服务"
@@ -143,7 +143,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText4"
+                        android:id="@+id/tv_mywork_price"
                         android:background="@null"
                         android:layout_marginLeft="10dp"
                         android:textSize="15sp"
@@ -160,12 +160,13 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/frame_comment"
                 android:layout_width="match_parent"
                 android:layout_height="235dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
                 android:paddingRight="15dp"
-                android:layout_below="@+id/linearLayout3"
+                android:visibility="visible"
                 android:layout_centerHorizontal="true">
 
                 <RelativeLayout
@@ -202,7 +203,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="习近平"
-                            android:id="@+id/textView73"
+                            android:id="@+id/tv_mywork_craft"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
                             android:layout_alignParentLeft="true"
@@ -213,7 +214,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2015-10-21"
-                            android:id="@+id/textView74"
+                            android:id="@+id/tv_mywork_time"
                             android:layout_marginRight="10dp"
                             android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
@@ -294,7 +295,7 @@
                             android:layout_height="wrap_content"
                             android:text="师傅施工质量不错"
                             android:layout_marginTop="5dp"
-                            android:id="@+id/textView75"
+                            android:id="@+id/tv_mywork_value"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="10dp"
                             android:layout_alignParentTop="true"

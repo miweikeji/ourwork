@@ -12,6 +12,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.miweikeij.app.R;
@@ -48,9 +49,11 @@ public class BottomSelectDialog extends Activity {
 		Button btn_write = (Button) view.findViewById(R.id.btn_write);
 		Button btn_check = (Button) view.findViewById(R.id.btn_check);
 		Button btn_value = (Button) view.findViewById(R.id.btn_value);
+		ImageView iv_downarrow = (ImageView) view.findViewById(R.id.iv_downarrow);
 		btn_write.setOnClickListener(onClickListener);
 		btn_check.setOnClickListener(onClickListener);
 		btn_value.setOnClickListener(onClickListener);
+		iv_downarrow.setOnClickListener(onClickListener);
 		// 设置宽度
 		LinearLayout llOp = (LinearLayout) view.findViewById(R.id.llOp);
 		LinearLayout.LayoutParams para = (LinearLayout.LayoutParams) llOp.getLayoutParams();

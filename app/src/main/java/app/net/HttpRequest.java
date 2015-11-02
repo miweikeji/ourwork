@@ -31,7 +31,8 @@ import app.entity.HousesByLyfResult;
 import app.entity.Meta;
 import app.entity.MyFriendsResult;
 import app.entity.MyScore;
-import app.entity.MyWorkDetailsResult;
+import app.entity.MyWorkDetailMessage;
+import app.entity.MyWorkDetailResult;
 import app.entity.MyWorksListResult;
 import app.entity.ProtectRecordResult;
 import app.entity.RegisterInfo;
@@ -1174,6 +1175,35 @@ public class HttpRequest {
     }
 
     /**
+     传设备token 的接口
+     */
+    public static void addUmengDeviceToken(Context context,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+        mList.add(new Param("deviceid", MobileOS.getIMEI(context)));
+        mList.add(new Param("umeng", "umeng的token"));
+        mList.add(new Param("phoneType", "1"));
+
+        new MyAsyncTask(context, Urls.addUmengDeviceToken, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
      *签到
      */
     public static void getSignIn(Context context,final ICallback<SingInResult> callback) {
@@ -1282,7 +1312,7 @@ public class HttpRequest {
         }).executeOnExecutor();
     }
     /**
-     *我的工作接口（施工中、已完工）
+     *工作详情（属于匠之家模块）
      */
     public static void myWorks(Context context,String cid,String finish,int p,final ICallback<MyWorksListResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
@@ -1326,9 +1356,6 @@ public class HttpRequest {
         }).executeOnExecutor();
     }
 
-    /**
-     *申请加入
-     */
     public static void applyOder(Context context,String applyCraftsId,String workId,final ICallback<Meta> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("applyCraftsId", applyCraftsId));
@@ -1354,21 +1381,18 @@ public class HttpRequest {
         }).executeOnExecutor();
     }
 
-    /**
-     *工作详情(施工中, 已完工)
-     */
-    public static void myWorkDetail(Context context,String cid,String finish,String workId,final ICallback<MyWorkDetailsResult> callback) {
+    public static void myWorkDetail(Context context,String cid,String workId,String finish,final ICallback<MyWorkDetailResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("cid", cid));
-        mList.add(new Param("finish", finish));
         mList.add(new Param("workId", workId));
+        mList.add(new Param("finish", finish));
 
         new MyAsyncTask(context, Urls.myWorkDetail, mList, new ICallback<String>() {
 
             @Override
             public void onSucceed(String result) {
                 MyLog.e("", "请求参数==" + result.toString());
-                MyWorkDetailsResult meta = JsonUtil.parseObject(result, MyWorkDetailsResult.class);
+                MyWorkDetailResult meta = JsonUtil.parseObject(result, MyWorkDetailResult.class);
                 if (meta.getStatus() == 0) {
                     callback.onSucceed(meta);
                 } else {
@@ -1382,4 +1406,5 @@ public class HttpRequest {
             }
         }).executeOnExecutor();
     }
+
 }
