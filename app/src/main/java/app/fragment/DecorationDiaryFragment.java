@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.miweikeij.app.R;
 
@@ -19,18 +20,25 @@ import java.util.List;
 import app.activity.MyWorkDetailsActivity;
 import app.activity.PublishDairyActivity;
 import app.activity.mywork.ValueCraftActivity;
+import app.activity.mywork.adapter.DailyAdapter;
 import app.adapter.MyWorkAdapter;
+import app.entity.DailyListResult;
+import app.entity.DialyData;
+import app.entity.Dialylist;
 import app.entity.MyWork;
+import app.net.HttpRequest;
+import app.net.ICallback;
 import app.utils.Config;
+import app.utils.Uihelper;
 import app.views.BottomSelectDialog;
 
 /**
  * Created by Administrator on 2015/10/12.
  */
-public class DecorationDiaryFragment extends Fragment implements View.OnClickListener {
+public class DecorationDiaryFragment extends BaseFrament implements View.OnClickListener {
 
     private View layout;
-    private RecyclerView recyclerView;
+    private ListView listView;
     private Dialog bottomSelectDialog;
 
     @Nullable
@@ -38,12 +46,50 @@ public class DecorationDiaryFragment extends Fragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         layout = inflater.inflate(R.layout.fragment_decoration_diary, null);
         initUI();
+        obtainData();
         return layout;
+    }
+
+    private void obtainData() {
+        mWaitingDialog.show();
+        int page = 1;
+        HttpRequest.getDailyLogByHouseId(getActivity(), "753665", page, new ICallback<DailyListResult>() {
+            @Override
+            public void onSucceed(DailyListResult result) {
+                mWaitingDialog.dismiss();
+                Dialylist dialylist = result.getDialylist();
+                if (dialylist != null) {
+
+                    int totalPage = dialylist.getTotalpage();
+                    List<DialyData> dialyData = dialylist.getList();
+                    if (dialyData != null && dialyData.size() > 0) {
+                        setData(dialyData);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFail(String error) {
+                mWaitingDialog.dismiss();
+                Uihelper.showToast(getActivity(), error);
+
+            }
+        });
+
+
+    }
+
+    private void setData(List<DialyData> list) {
+        DailyAdapter dailyAdapter = new DailyAdapter(getActivity(), list, imageLoader, options);
+        listView.setAdapter(dailyAdapter);
+
     }
 
     private void initUI() {
 
-        recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerview);
+        listView = (ListView) layout.findViewById(R.id.listview);
+
         layout.findViewById(R.id.btn_dairy).setOnClickListener(this);
 
     }

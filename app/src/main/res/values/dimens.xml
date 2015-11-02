@@ -27,5 +27,10 @@
     <dimen name="footer_pic_layout_width">111dp</dimen>
     <dimen name="footer_pic_layout_height">168dp</dimen>
 
+    <dimen name="dairy_padding_h">10dp</dimen>
+
+
+
+
 
 </resources>

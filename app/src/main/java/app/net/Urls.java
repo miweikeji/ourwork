@@ -62,6 +62,14 @@ public class Urls {
     //获取已建计划接口
     public final static String getTask = base_server + "App/Workplan/getTask";
 
+      /* ============================================我的工作==开始=================================*/
+      //现场日志列表
+      public final static String getDailyLogByHouseId = base_server + "App/Dialy/getDailyLogByHouseId";
+
+
+
+      /* ============================================我的工作==结束=================================*/
+
 
    /* ============================================我的接口==开始=================================*/
 
@@ -105,7 +113,7 @@ public class Urls {
     public final static String myWorks = base_server + "App/Work/myWorks";
 
     //申请加入
-    public final static String applyOder  = base_server + "App/Work/applyOder";
+    public final static String applyOder = base_server + "App/Work/applyOder";
 
 
 

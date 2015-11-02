@@ -31,15 +31,17 @@
                  android:textAppearance="?android:attr/textAppearanceMedium"
                  android:text="2015-12-12"
                  android:layout_marginLeft="@dimen/margin_left_right"
+                 android:textColor="@color/black_1"
                  android:id="@+id/tv_time" />
 
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textAppearance="?android:attr/textAppearanceSmall"
-                 android:text="2015-12-12"
+                 android:text="量房"
                  android:layout_marginRight="@dimen/margin_left_right"
-                 android:id="@+id/tv_state"
+                 android:id="@+id/tv_title"
+                 android:textColor="@color/black_1"
                  android:layout_alignParentTop="true"
                  android:layout_alignParentRight="true"
                  android:layout_alignParentEnd="true" />
