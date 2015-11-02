@@ -23,6 +23,7 @@ import app.entity.ConstructPlanResult;
 import app.entity.CraGroupResult;
 import app.entity.Crafts;
 import app.entity.CraftsResult;
+import app.entity.DailyListResult;
 import app.entity.DetailPlanResult;
 import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
@@ -852,6 +853,50 @@ public class HttpRequest {
 
             }
 
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+
+    /**
+     *
+     现场日志接口
+
+     */
+    public static void getDailyLogByHouseId(Context context,String houseId,int p,final ICallback<DailyListResult> callback) {
+
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("houseId", houseId));
+        mList.add(new Param("p", "" + p));
+
+        new MyAsyncTask(context, Urls.getDailyLogByHouseId, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                try {
+                    JSONObject object = new JSONObject(result);
+                    int status = object.getInt("status");
+                    if(status==0){
+                        JSONObject dialylist = object.getJSONObject("dialylist");
+                        if(dialylist.getInt("totalpage")==0){
+                            callback.onFail(Constants.JSON_HAS_NULL);
+                        }else {
+                            Gson gson = new Gson();
+                            DailyListResult meta= gson.fromJson(result, DailyListResult.class);
+                            callback.onSucceed(meta);
+
+                        }
+                    }else {
+                        callback.onFail(object.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
             @Override
             public void onFail(String error) {
                 callback.onFail(error);
