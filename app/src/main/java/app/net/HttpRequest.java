@@ -1060,7 +1060,7 @@ public class HttpRequest {
      */
     public static void myInfo(Context context,final ICallback<CraftsResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
-        mList.add(new Param("cid", UserUtil.getUserId(context)));
+        mList.add(new Param("cid", "106"));
 
 
         new MyAsyncTask(context, Urls.myInfo, mList, new ICallback<String>() {
@@ -1087,7 +1087,7 @@ public class HttpRequest {
     public static void myInfoEdit(Context context,String name,String age,String worktype,String workage,String cworkhome,String work,String adress,
                                   String bankName,String bankNum,String bankUserName,String referee,String price,String serverArea,String des,final ICallback<Meta> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
-        mList.add(new Param("cid", UserUtil.getUserId(context)));
+        mList.add(new Param("id", "106"));
         mList.add(new Param("name", name));
         mList.add(new Param("age", age));
         mList.add(new Param("worktype", worktype));
