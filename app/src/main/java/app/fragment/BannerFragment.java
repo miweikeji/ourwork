@@ -12,6 +12,10 @@ import com.miweikeij.app.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.List;
+
+import app.entity.Advertise;
+
 /**
  * Created by Administrator on 2015/10/10.
  */
@@ -20,7 +24,8 @@ public class BannerFragment extends Fragment{
     private ImageView img_banner;
     private DisplayImageOptions option;
     private ImageLoader imageLoader;
-    private String url;
+    private List<Advertise> advert;
+    private int postion;
 
     @Nullable
     @Override
@@ -29,13 +34,13 @@ public class BannerFragment extends Fragment{
 
         img_banner = (ImageView) layout.findViewById(R.id.img_banner);
         if(imageLoader!=null){
-            imageLoader.displayImage(url,img_banner,option);
+            imageLoader.displayImage(advert.get(postion).getImgurl(),img_banner,option);
         }
         return layout;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrl(List<Advertise> advert) {
+        this.advert = advert;
     }
 
     public void setImageLoader(ImageLoader imageLoader) {
@@ -44,5 +49,9 @@ public class BannerFragment extends Fragment{
 
     public void setOption(DisplayImageOptions option) {
         this.option = option;
+    }
+
+    public void setPostion(int postion) {
+        this.postion = postion;
     }
 }

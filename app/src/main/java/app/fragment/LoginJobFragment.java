@@ -1,5 +1,6 @@
 package app.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,6 +34,7 @@ import app.tools.StatusTools;
 import app.utils.Constants;
 import app.utils.Uihelper;
 import app.utils.UserUtil;
+import app.views.ProgressDialogView;
 
 /**
  * Created by Administrator on 2015/10/10.
@@ -70,6 +72,7 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
 
     private  String profession;
     private TextView tv_profession;
+    private Dialog dialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +80,7 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
         profession = UserUtil.getUserProfession(getActivity());
         String profession = UserInfo.getInstance().getProfession();
         workType = StatusTools.getWorkType(profession);
+        dialog = ProgressDialogView.create(getActivity());
         initUI();
         return layout;
     }
@@ -107,8 +111,9 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
         netWorkData();
     }
 
-    private void netWorkData() {//UserInfo.getInstance().getId()//workType
-        HttpRequest.getWorkList(getActivity(), "101", p, 3, new ICallback<WorkListResult>() {
+    private void netWorkData() {
+        dialog.show();//UserInfo.getInstance().getId()//workType
+        HttpRequest.getWorkList(getActivity(), "101", p, workType, new ICallback<WorkListResult>() {
             @Override
             public void onSucceed(WorkListResult result) {
                 List<WorkList> workList = result.getWorkList();
@@ -120,6 +125,7 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
                     adapter.notifyDataSetChanged();
                 }
                 pull_to_list.onRefreshComplete();
+                dialog.dismiss();
             }
 
             @Override
@@ -128,11 +134,15 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
                 if(!error.equals(Constants.JSON_HAS_NULL)){
                     Uihelper.showToast(getActivity(),error);
                 }
+                dialog.dismiss();
             }
         });
     }
 
     public void setCraftsmanType(String type) {
         tv_profession.setText(type);
+        workType = StatusTools.getWorkType(type);
+        allList.clear();
+        netWorkData();
     }
 }

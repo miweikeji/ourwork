@@ -188,7 +188,7 @@
             android:background="@drawable/sl_orgin"
             android:text="申请接单"
             android:textColor="@color/white"
-            android:id="@+id/button3"
+            android:id="@+id/btn_apply"
             android:onClick="apply"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />

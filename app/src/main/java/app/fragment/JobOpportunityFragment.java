@@ -17,8 +17,15 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 
+import java.util.List;
+
 import app.activity.BaseActivity;
+import app.entity.Advertise;
+import app.entity.AdvertiseResult;
+import app.net.HttpRequest;
+import app.net.ICallback;
 import app.tools.ScreenUtil;
+import app.utils.Uihelper;
 import app.views.ViewpagerIndicator;
 
 /**
@@ -33,6 +40,7 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
     private boolean isDragging;
     private Handler mhandler;
     private ImageLoader imageLoader;
+    private List<Advertise> advert;
     private String[] url = new String[]{"http://mss-product.oss-cn-shenzhen.aliyuncs.com/picture/advert/p720/A720_1442919759965.jpg",
             "http://mss-product.oss-cn-shenzhen.aliyuncs.com/picture/advert/p720/A720_1442222369280.jpg",
             "http://mss-product.oss-cn-shenzhen.aliyuncs.com/picture/advert/p720/A720_1442919679412.jpg"};
@@ -75,12 +83,28 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
         layout = inflater.inflate(R.layout.fragment_job_opportunity, null);
         imageLoader = ImageLoader.getInstance();
         initUI();
-        initViewPager();
-        autoScroll();
+        netWorkData();
+
         return layout;
     }
 
+    private void netWorkData() {
+        HttpRequest.advertise(getActivity(), new ICallback<AdvertiseResult>() {
+            @Override
+            public void onSucceed(AdvertiseResult result) {
+                advert = result.getAdvert();
+                if(advert!=null&&advert.size()!=0){
+                    initViewPager();
+                    autoScroll();
+                }
+            }
 
+            @Override
+            public void onFail(String error) {
+                Uihelper.showToast(getActivity(), error);
+            }
+        });
+    }
     private void initUI() {
         int px = ScreenUtil.instance(getActivity()).dip2px(8);
         int width = ScreenUtil.instance(getActivity()).getScreenWidth();
@@ -168,8 +192,9 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
         @Override
         public Fragment getItem(int position) {
             BannerFragment fragment = new BannerFragment();
-            int index = (position) % url.length;
-            fragment.setUrl(url[index]);
+            int index = (position) % advert.size();
+            fragment.setPostion(index);
+            fragment.setUrl(advert);
             fragment.setImageLoader(imageLoader);
             fragment.setOption(BaseActivity.options);
             return fragment;

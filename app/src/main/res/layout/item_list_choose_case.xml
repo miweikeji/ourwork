@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:id="@+id/tv_name"
-                android:text="sd"
+                android:text="通过平台找工匠"
                 android:textSize="14sp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"

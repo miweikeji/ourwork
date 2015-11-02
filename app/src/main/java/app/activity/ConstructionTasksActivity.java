@@ -1,11 +1,13 @@
 package app.activity;
 
 import android.content.Intent;
+import android.text.Layout;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.miweikeij.app.R;
 
@@ -39,16 +41,19 @@ public class ConstructionTasksActivity extends BaseActivity implements
     private int count4;
     private int count5;
     private int count6;
-    private String name1,name2,name3,name4,name5,name6;
+    private String name1, name2, name3, name4, name5, name6;
     private HashMap<Integer, Integer> hasCount = new HashMap<Integer, Integer>();
-    private HashMap<String,String> hasID = new HashMap<String,String>();
-    private ArrayList<String> caseName1=new ArrayList<String>();
-    private ArrayList<String> caseName2=new ArrayList<String>();
-    private ArrayList<String> caseName3=new ArrayList<String>();
-    private ArrayList<String> caseName4=new ArrayList<String>();
-    private ArrayList<String> caseName5=new ArrayList<String>();
-    private ArrayList<String> caseName6=new ArrayList<String>();
+    private HashMap<String, String> hasID = new HashMap<String, String>();
+    private ArrayList<String> caseName1 = new ArrayList<String>();
+    private ArrayList<String> caseName2 = new ArrayList<String>();
+    private ArrayList<String> caseName3 = new ArrayList<String>();
+    private ArrayList<String> caseName4 = new ArrayList<String>();
+    private ArrayList<String> caseName5 = new ArrayList<String>();
+    private ArrayList<String> caseName6 = new ArrayList<String>();
+
+    private ArrayList<View> view1 = new ArrayList<View>();
     private String hint = "通过平台找工匠";
+
     @Override
     public void obtainData() {
 
@@ -58,7 +63,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
     public void initUI() {
 
         add_choose_case = (LinearLayout) findViewById(R.id.add_choose_case);
-        TextView tv_add_case= (TextView) findViewById(R.id.tv_add_case);
+        TextView tv_add_case = (TextView) findViewById(R.id.tv_add_case);
         tv_add_case.setOnClickListener(this);
         UIEventUpdate.getInstance().register(this);
     }
@@ -84,8 +89,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
     public void onClick(View v) {
         switch (v.getId()) {//surplusList
             case R.id.tv_add_case:
-                for (int i=0;i<list.size();i++){
-                    if(!removeList.contains(list.get(i))){
+                for (int i = 0; i < list.size(); i++) {
+                    if (!removeList.contains(list.get(i))) {
                         surplusList.add(list.get(i));
                     }
                 }
@@ -109,182 +114,230 @@ public class ConstructionTasksActivity extends BaseActivity implements
             case 106:
                 break;
             case 111:
-                DialogTools.billingType(this,1).show();
+                DialogTools.billingType(this, 1).show();
                 DialogTools.setTypeChoose(this);
                 break;
             case 112:
-                DialogTools.billingType(this,2).show();
+                DialogTools.billingType(this, 2).show();
                 DialogTools.setTypeChoose(this);
                 break;
             case 113:
-                DialogTools.billingType(this,3).show();
+                DialogTools.billingType(this, 3).show();
                 DialogTools.setTypeChoose(this);
                 break;
             case 114:
-                DialogTools.billingType(this,4).show();
+                DialogTools.billingType(this, 4).show();
                 DialogTools.setTypeChoose(this);
                 break;
             case 115:
-                DialogTools.billingType(this,5).show();
+                DialogTools.billingType(this, 5).show();
                 DialogTools.setTypeChoose(this);
                 break;
             case 116:
-                DialogTools.billingType(this,6).show();
+                DialogTools.billingType(this, 6).show();
                 DialogTools.setTypeChoose(this);
                 break;
             case 121://邀请
-                Intent intent1 = new Intent(this,SearchActivity.class);
-                intent1.putExtra("CASE_TYPE","水电工");
-                intent1.putExtra("FROM_ConstructionTasksActivity","ConstructionTasksActivity");
+                Intent intent1 = new Intent(this, SearchActivity.class);
+                intent1.putExtra("CASE_TYPE", "水电工");
+                intent1.putExtra("FROM_ConstructionTasksActivity", "ConstructionTasksActivity");
                 startActivity(intent1);
                 break;
             case 122:
-                Intent intent2 = new Intent(this,SearchActivity.class);
-                intent2.putExtra("CASE_TYPE","泥水工");
-                intent2.putExtra("FROM_ConstructionTasksActivity","ConstructionTasksActivity");
+                Intent intent2 = new Intent(this, SearchActivity.class);
+                intent2.putExtra("CASE_TYPE", "泥水工");
+                intent2.putExtra("FROM_ConstructionTasksActivity", "ConstructionTasksActivity");
                 startActivity(intent2);
                 break;
             case 123:
-                Intent intent3 = new Intent(this,SearchActivity.class);
-                intent3.putExtra("CASE_TYPE","木工");
-                intent3.putExtra("FROM_ConstructionTasksActivity","ConstructionTasksActivity");
+                Intent intent3 = new Intent(this, SearchActivity.class);
+                intent3.putExtra("CASE_TYPE", "木工");
+                intent3.putExtra("FROM_ConstructionTasksActivity", "ConstructionTasksActivity");
                 startActivity(intent3);
                 break;
             case 124:
-                Intent intent4 = new Intent(this,SearchActivity.class);
-                intent4.putExtra("CASE_TYPE","油漆工");
-                intent4.putExtra("FROM_ConstructionTasksActivity","ConstructionTasksActivity");
+                Intent intent4 = new Intent(this, SearchActivity.class);
+                intent4.putExtra("CASE_TYPE", "油漆工");
+                intent4.putExtra("FROM_ConstructionTasksActivity", "ConstructionTasksActivity");
                 startActivity(intent4);
                 break;
             case 125:
-                Intent intent5 = new Intent(this,SearchActivity.class);
-                intent5.putExtra("CASE_TYPE","门窗安装工");
-                intent5.putExtra("FROM_ConstructionTasksActivity","ConstructionTasksActivity");
+                Intent intent5 = new Intent(this, SearchActivity.class);
+                intent5.putExtra("CASE_TYPE", "门窗安装工");
+                intent5.putExtra("FROM_ConstructionTasksActivity", "ConstructionTasksActivity");
                 startActivity(intent5);
                 break;
             case 126:
-                Intent intent6 = new Intent(this,SearchActivity.class);
-                intent6.putExtra("CASE_TYPE","敲打搬运工");
-                intent6.putExtra("FROM_ConstructionTasksActivity","ConstructionTasksActivity");
+                Intent intent6 = new Intent(this, SearchActivity.class);
+                intent6.putExtra("CASE_TYPE", "敲打搬运工");
+                intent6.putExtra("FROM_ConstructionTasksActivity", "ConstructionTasksActivity");
                 startActivity(intent6);
                 break;
             case 131://rl_add_case
-                if(name1!=null){
-                    name1=null;
-                    count1++;
-                    name[1].setText(hint);
+//                if(name1!=null){
+                name1 = null;
+                count1++;
+//                    name[1].setText(hint);
+                if (add_item[1] != null) {
                     add_item[1].removeAllViews();
-                    for (int i = 0; i < caseName1.size(); i++) {
-                        View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                        RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                        RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
-                        TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
-                        TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
-                        tv_case_type.setText(strCase[0]);
-                        tv_name.setText(caseName1.get(i));
-                        add_item[1].addView(layout);
-                    }
-                }else {
-                    Uihelper.showToast(this,"请先在平台邀请工匠");
                 }
+                caseName1.add(hint);
+                view1.clear();
+                for (int i = 0; i < count1; i++) {
+                    View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
+                    view1.add(layout);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
+                    TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
+                    tv_case_type.setText(strCase[0]);
+                    rl_add_case.setId(1001 + i);
+                    final int finalI = i;
+                    rl_add_case.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            count1--;
+                            int id = v.getId();
+                            String strID = String.valueOf(id);
+                            String replace = strID.replace("100", "");
+//                            add_item[1].removeView(view1.get(Integer.valueOf(replace).intValue() - 1));
+                            view1.remove(count1);
+                            initData(view1);
+
+                        }
+                    });
+                    if (!caseName1.get(i).equals(hint)) {
+                        tv_name.setText(caseName1.get(i));
+                    }
+                    initData(view1);
+//                    add_item[1].addView(layout);
+                }
+//                }else {
+//                    Uihelper.showToast(this,"请先在平台邀请工匠");
+//                }
                 break;
             case 132:
-                if(name2!=null){
-                    name2=null;
-                    count2++;
-                    name[2].setText(hint);
+//                if(name2!=null){
+                name2 = null;
+                count2++;
+//                    name[2].setText(hint);
+                if (add_item[2] != null) {
                     add_item[2].removeAllViews();
-                    for (int i = 0; i < caseName2.size(); i++) {
-                        View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                        RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                        RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
-                        TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
-                        TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
-                        tv_case_type.setText(strCase[1]);
-                        tv_name.setText(caseName2.get(i));
-                        add_item[2].addView(layout);
-                    }
-                }else{
-                    Uihelper.showToast(this,"请先在平台邀请工匠");
                 }
+                caseName2.add(hint);
+                for (int i = 0; i < count2; i++) {
+                    View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
+                    TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
+                    tv_case_type.setText(strCase[1]);
+                    if (!caseName2.get(i).equals(hint)) {
+                        tv_name.setText(caseName2.get(i));
+                    }
+                    add_item[2].addView(layout);
+                }
+//                }else{
+//                    Uihelper.showToast(this,"请先在平台邀请工匠");
+//                }
                 break;
             case 133:
-                if(name3!=null){
-                    name3=null;
-                    count3++;
-                    name[3].setText(hint);
+//                if(name3!=null){
+                name3 = null;
+                count3++;
+//                    name[3].setText(hint);
+                if (add_item[3] != null) {
                     add_item[3].removeAllViews();
-                    for (int i = 0; i < caseName3.size(); i++) {
-                        View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                        RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                        RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
-                        TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
-                        TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
-                        tv_case_type.setText(strCase[2]);
-                        tv_name.setText(caseName3.get(i));
-                        add_item[3].addView(layout);
-                    }
                 }
+                caseName3.add(hint);
+                for (int i = 0; i < count3; i++) {
+                    View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
+                    TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
+                    tv_case_type.setText(strCase[2]);
+                    if (!caseName3.get(i).equals(hint)) {
+                        tv_name.setText(caseName3.get(i));
+                    }
+                    add_item[3].addView(layout);
+                }
+//                }
                 break;
             case 134:
-                if(name4!=null){
-                    name4=null;
-                    count4++;
-                    name[4].setText(hint);
+//                if(name4!=null){
+                name4 = null;
+                count4++;
+//                    name[4].setText(hint);
+                if (add_item[4] != null) {
                     add_item[4].removeAllViews();
-                    for (int i = 0; i < caseName4.size(); i++) {
-                        View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                        RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                        RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
-                        TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
-                        TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
-                        tv_case_type.setText(strCase[3]);
-                        tv_name.setText(caseName4.get(i));
-                        add_item[4].addView(layout);
-                    }
-                }else {
-                    Uihelper.showToast(this, "请先在平台邀请工匠");
                 }
+                caseName4.add(hint);
+                for (int i = 0; i < count4; i++) {
+                    View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
+                    TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
+                    tv_case_type.setText(strCase[3]);
+                    if (!caseName4.get(i).equals(hint)) {
+                        tv_name.setText(caseName4.get(i));
+                    }
+                    add_item[4].addView(layout);
+                }
+//                }else {
+//                    Uihelper.showToast(this, "请先在平台邀请工匠");
+//                }
                 break;
             case 135:
-                if(name5!=null){
-                    name5=null;
-                    count5++;
-                    name[5].setText(hint);
+//                if(name5!=null){
+                name5 = null;
+                count5++;
+//                    name[5].setText(hint);
+                if (add_item[5] != null) {
                     add_item[5].removeAllViews();
-                    for (int i = 0; i < caseName5.size(); i++) {
-                        View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                        RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                        RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
-                        TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
-                        TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
-                        tv_case_type.setText(strCase[4]);
-                        tv_name.setText(caseName5.get(i));
-                        add_item[5].addView(layout);
-                    }
-                }else{
-                    Uihelper.showToast(this, "请先在平台邀请工匠");
                 }
+                caseName5.add(hint);
+                for (int i = 0; i < count5; i++) {
+                    View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
+                    TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
+                    tv_case_type.setText(strCase[4]);
+                    if (!caseName5.get(i).equals(hint)) {
+                        tv_name.setText(caseName5.get(i));
+                    }
+                    add_item[5].addView(layout);
+                }
+//                }else{
+//                    Uihelper.showToast(this, "请先在平台邀请工匠");
+//                }
                 break;
             case 136:
-                if(name6!=null){
-                    name6=null;
-                    count6++;
-                    name[6].setText(hint);
+//                if(name6!=null){
+                name6 = null;
+                count6++;
+//                    name[6].setText(hint);
+                if (add_item[6] != null) {
                     add_item[6].removeAllViews();
-                    for (int i = 0; i < caseName6.size(); i++) {
-                        View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                        RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                        RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
-                        TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
-                        TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
-                        tv_case_type.setText(strCase[5]);
-                        tv_name.setText(caseName6.get(i));
-                        add_item[6].addView(layout);
-                    }
-                }else {
-                    Uihelper.showToast(this, "请先在平台邀请工匠");
                 }
+                caseName6.add(hint);
+                for (int i = 0; i < count6; i++) {
+                    View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
+                    TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
+                    tv_case_type.setText(strCase[5]);
+                    if (!caseName6.get(i).equals(hint)) {
+                        tv_name.setText(caseName6.get(i));
+                    }
+                    add_item[6].addView(layout);
+                }
+//                }else {
+//                    Uihelper.showToast(this, "请先在平台邀请工匠");
+//                }
                 break;
             case 141:
                 add_choose_case.removeView(layout[1]);
@@ -314,9 +367,16 @@ public class ConstructionTasksActivity extends BaseActivity implements
         }
     }
 
+    private void initData(ArrayList<View> view1) {
+        add_item[1].removeAllViews();
+        for (int i = 0; i < view1.size(); i++) {
+            add_item[1].addView(view1.get(i));
+        }
+    }
+
     private ChooseCaseAdapter[] adapter;
     private MyListView[] list_choose;
-    private LinearLayout[] add_item;
+    private LinearLayout[] add_item = new LinearLayout[7];
     private View[] layout = new View[7];
     private boolean isFirst;
     private TextView[] biling_type;
@@ -327,18 +387,19 @@ public class ConstructionTasksActivity extends BaseActivity implements
         if (hasMap != null) {
             removeList.clear();
             surplusList.clear();
-            isFirst = true;
+
             list.clear();
             EditText[] price = new EditText[7];
             name = new TextView[7];
             biling_type = new TextView[7];
             list_choose = new MyListView[7];
-            add_item = new LinearLayout[7];
+
             adapter = new ChooseCaseAdapter[7];
             for (int i = 1; i < 7; i++) {
                 if (hasMap.containsKey(i)) {
                     list.add(i);
                     if (!isFirst) {
+                        isFirst = true;
                         layout[i] = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_choose_case, null);
                         RelativeLayout rl_to_time = (RelativeLayout) layout[i].findViewById(R.id.rl_to_time);
                         price[i] = (EditText) layout[i].findViewById(R.id.et_price);
@@ -350,7 +411,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
                         TextView tv_case_type = (TextView) layout[i].findViewById(R.id.tv_case_type);
                         TextView tv_case_title = (TextView) layout[i].findViewById(R.id.tv_case_title);
                         TextView tv_deleate_case = (TextView) layout[i].findViewById(R.id.tv_deleate_case);
-                        tv_case_title.setText(strCase[i - 1].replace("："," "));
+                        tv_case_title.setText(strCase[i - 1].replace("：", " "));
                         biling_type[i] = (TextView) layout[i].findViewById(R.id.tv_biling_type);
                         add_item[i] = (LinearLayout) layout[i].findViewById(R.id.add_item);
                         tv_case_type.setText(strCase[i - 1]);
@@ -358,11 +419,12 @@ public class ConstructionTasksActivity extends BaseActivity implements
                         rl_biling_type.setId(110 + i);
                         rl_invitation.setId(120 + i);
                         rl_add_case.setId(130 + i);
-                        tv_deleate_case.setId(140+i);
+                        tv_deleate_case.setId(140 + i);
                         rl_to_time.setOnClickListener(this);
                         rl_biling_type.setOnClickListener(this);
                         rl_invitation.setOnClickListener(this);
                         rl_add_case.setOnClickListener(this);
+                        tv_deleate_case.setOnClickListener(this);
 
                         add_choose_case.addView(layout[i]);
                     } else {
@@ -379,13 +441,13 @@ public class ConstructionTasksActivity extends BaseActivity implements
                             biling_type[i] = (TextView) layout[i].findViewById(R.id.tv_biling_type);
                             add_item[i] = (LinearLayout) layout[i].findViewById(R.id.add_item);
                             TextView tv_case_title = (TextView) layout[i].findViewById(R.id.tv_case_title);
-                            tv_case_title.setText(strCase[i - 1].replace("："," "));
+                            tv_case_title.setText(strCase[i - 1].replace("：", " "));
                             tv_case_type.setText(strCase[i - 1]);
                             rl_to_time.setId(100 + i);
                             rl_biling_type.setId(110 + i);
                             rl_invitation.setId(120 + i);
                             rl_add_case.setId(130 + i);
-                            tv_deleate_case.setId(140+i);
+                            tv_deleate_case.setId(140 + i);
                             rl_to_time.setOnClickListener(this);
                             rl_biling_type.setOnClickListener(this);
                             rl_invitation.setOnClickListener(this);
@@ -396,12 +458,12 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
                     }
 
-                }else {
-                    if(save.contains(i)){
+                } else {
+                    if (save.contains(i)) {
                         add_choose_case.removeView(layout[i]);
                     }
                 }
-                if(i==6){
+                if (i == 6) {
                     save.clear();
                     save.addAll(list);
                 }
@@ -413,49 +475,75 @@ public class ConstructionTasksActivity extends BaseActivity implements
     }
 
     @Override
-    public void onTypeChoose(String type,int i) {
+    public void onDismiss(HashMap<Integer, String> hasMap) {
+        if (hasMap != null) {
+            removeList.clear();
+            surplusList.clear();
+            list.clear();
+            for (int i = 0; i < 7; i++) {
+                if (hasMap.containsKey(i)) {
+                    list.add(i);
+                }
+
+                if (i == 6) {
+                    save.clear();
+                    save.addAll(list);
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public void onTypeChoose(String type, int i) {
         biling_type[i].setText(type);
     }
 
     @Override
     public void setUIUpdate(int positionKey, Object object) {
-       switch (positionKey){
-           case UIEventUpdate.PositionKey.INVITATION_CASE:
-               String backData = (String) object;
-               MyLog.e("","backData="+backData);
-               String[] split = backData.split("#");
-               if(!hasID.containsKey(split[1])){
-                   hasID.put(split[1], split[0]);
-                   if("水电工".equals(split[0])){
-                       name1=split[2];
-                       name[1].setText(split[2]);
-                       caseName1.add(split[2]);
-                   }else if("泥水工".equals(split[0])){
-                       name2=split[2];
-                       caseName2.add(split[2]);
-                       name[2].setText(split[2]);
-                   }else if("木工".equals(split[0])){
-                       name3=split[2];
-                       caseName3.add(split[2]);
-                       name[3].setText(split[2]);
-                   }else if("油漆工".equals(split[0])){
-                       name4=split[2];
-                       caseName4.add(split[2]);
-                       name[4].setText(split[2]);
-                   }else  if("门窗安装工".equals(split[0])){
-                       name5=split[2];
-                       caseName5.add(split[2]);
-                       name[5].setText(split[2]);
-                   }else  if("敲打搬运工".equals(split[0])){
-                       name6=split[2];
-                       caseName6.add(split[2]);
-                       name[6].setText(split[2]);
-                   }
-               }else {
-                   Uihelper.showToast(ConstructionTasksActivity.this,"您已经邀请过了");
-               }
-               MyLog.e("","backData="+backData);
-               break;
-       }
+        switch (positionKey) {
+            case UIEventUpdate.PositionKey.INVITATION_CASE:
+                String backData = (String) object;
+                MyLog.e("", "backData=" + backData);
+                String[] split = backData.split("#");
+                if (!hasID.containsKey(split[1])) {
+                    hasID.put(split[1], split[0]);
+                    if ("水电工".equals(split[0])) {
+                        name1 = split[2];
+                        name[1].setText(split[2]);
+                        caseName1.add(split[2]);
+                        count1++;
+                    } else if ("泥水工".equals(split[0])) {
+                        name2 = split[2];
+                        caseName2.add(split[2]);
+                        name[2].setText(split[2]);
+                        count2++;
+                    } else if ("木工".equals(split[0])) {
+                        name3 = split[2];
+                        caseName3.add(split[2]);
+                        name[3].setText(split[2]);
+                        count3++;
+                    } else if ("油漆工".equals(split[0])) {
+                        name4 = split[2];
+                        caseName4.add(split[2]);
+                        name[4].setText(split[2]);
+                        count4++;
+                    } else if ("门窗安装工".equals(split[0])) {
+                        name5 = split[2];
+                        caseName5.add(split[2]);
+                        name[5].setText(split[2]);
+                        count5++;
+                    } else if ("敲打搬运工".equals(split[0])) {
+                        name6 = split[2];
+                        caseName6.add(split[2]);
+                        name[6].setText(split[2]);
+                        count6++;
+                    }
+                } else {
+                    Uihelper.showToast(ConstructionTasksActivity.this, "您已经邀请过了");
+                }
+                MyLog.e("", "backData=" + backData);
+                break;
+        }
     }
 }

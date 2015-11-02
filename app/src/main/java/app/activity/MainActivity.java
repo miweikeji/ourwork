@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import app.entity.UserInfo;
 import app.fragment.CarpenterHomeFragment;
 import app.fragment.JobContentsFragment;
 import app.fragment.JobOpportunityFragment;
@@ -19,6 +20,7 @@ import app.entity.Meta;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Constants;
+import app.utils.UserUtil;
 import app.views.NavigationBar;
 import app.fragment.MineFragment;
 
@@ -42,6 +44,11 @@ public class MainActivity extends FragmentActivity {
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+                if(UserUtil.hasLogin(this)){
+                    if(!UserInfo.getInstance().hasinfo){
+                        BasicInfoActivity.startActivity(this, UserInfo.getInstance().getId());
+                    }
+                }
             setContentView(R.layout.activity_main);
         profession = getIntent().getStringExtra(Constants.USER_PROFESSION_TYPE);//工匠的工种
         initUI();

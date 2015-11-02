@@ -166,6 +166,12 @@ public class Uihelper {
         return date;
     }
 
+    public static String longToDateStr(Double timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日", Locale.getDefault());
+        String date = sdf.format(new Date((long) (timestamp * 1000L)));
+        return date;
+    }
+
     public static String timestampToDateStr_other(Double timestamp) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String date = sdf.format(new Date((long) (timestamp * 1L)));

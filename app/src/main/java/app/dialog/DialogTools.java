@@ -11,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.miweikeij.app.R;
 
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import app.entity.Data;
+import app.tools.TimeTools;
+import app.utils.Uihelper;
 
 /**
  * Created by Administrator on 2015/10/12.
@@ -36,6 +40,7 @@ public class DialogTools {
     public static DialogOnClickChockedListens listen;
     public static interface DialogOnClickChockedListens{
         void onCheckedChoose(HashMap<Integer,String> hasMap);
+        void onDismiss(HashMap<Integer,String> hasMap);
     }
     public static void setDialogOnClick(DialogOnClickListens l){
         listens = l;
@@ -51,6 +56,33 @@ public class DialogTools {
         LayoutInflater inflater = LayoutInflater.from(activity);
         View layout = inflater.inflate(R.layout.dialog_time_show, null);
         RelativeLayout layout_time_show = (RelativeLayout)layout.findViewById(R.id.layout_time_show);
+        LinearLayout add_schedule_item = (LinearLayout) layout.findViewById(R.id.add_schedule_item);
+        add_schedule_item.removeAllViews();
+        if(data!=null){
+            for (int i=0;i<data.size();i++){
+                Data msg = data.get(i);
+                View inflate = activity.getLayoutInflater().inflate(R.layout.item_schedule, null);
+                TextView tv_time = (TextView) inflate.findViewById(R.id.tv_time);
+                ImageView img_am = (ImageView) inflate.findViewById(R.id.img_am);
+                ImageView img_pm = (ImageView) inflate.findViewById(R.id.img_pm);
+//                tv_time.setText(TimeTools.longToDate(msg.getDatatime()));
+                tv_time.setText(Uihelper.longToDateStr(Double.valueOf(msg.getDatatime())));
+                String am = msg.getAm();
+                String pm = msg.getPm();
+                if("0".equals(am)){
+                    img_am.setVisibility(View.INVISIBLE);
+                }else {
+                    img_am.setVisibility(View.VISIBLE);
+                }
+                if("0".equals(pm)){
+                    img_pm.setVisibility(View.INVISIBLE);
+                }else {
+                    img_pm.setVisibility(View.VISIBLE);
+                }
+
+                add_schedule_item.addView(inflate);
+            }
+        }
 
         dialog = new Dialog(activity, R.style.FullScreenDialog);
         Window window = dialog.getWindow();
@@ -127,6 +159,49 @@ public class DialogTools {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkBox[0].isChecked()){
+                    hasMap.put(1,"水电工");
+                }else {
+                    if(hasMap.containsKey(1)){
+                        hasMap.remove(1);
+                    }
+                }
+                if(checkBox[1].isChecked()){
+                    hasMap.put(2,"泥水工");
+                }else {
+                    if(hasMap.containsKey(2)){
+                        hasMap.remove(2);
+                    }
+                }
+                if(checkBox[2].isChecked()){
+                    hasMap.put(3,"木工");
+                }else {
+                    if(hasMap.containsKey(3)){
+                        hasMap.remove(3);
+                    }
+                }
+                if(checkBox[3].isChecked()){
+                    hasMap.put(4,"油漆工");
+                }else {
+                    if(hasMap.containsKey(4)){
+                        hasMap.remove(4);
+                    }
+                }
+                if(checkBox[4].isChecked()){
+                    hasMap.put(5,"门窗安装工");
+                }else {
+                    if(hasMap.containsKey(5)){
+                        hasMap.remove(5);
+                    }
+                }
+                if(checkBox[5].isChecked()){
+                    hasMap.put(6,"敲打搬运工");
+                }else {
+                    if(hasMap.containsKey(6)){
+                        hasMap.remove(6);
+                    }
+                }
+                listen.onDismiss(hasMap);
                 dialog.dismiss();
             }
         });

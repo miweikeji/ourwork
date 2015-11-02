@@ -623,6 +623,7 @@ public class HttpRequest {
 
             @Override
             public void onSucceed(String result) {
+                MyLog.e("","result="+result.toString());
                 AdvertiseResult advertiseResult = JsonUtil.parseObject(result, AdvertiseResult.class);
                 if (advertiseResult.getStatus() == 0) {
                     callback.onSucceed(advertiseResult);

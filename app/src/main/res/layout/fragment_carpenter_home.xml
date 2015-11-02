@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#F0F0F0"
+    android:background="@color/activity_bg"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -53,7 +53,7 @@
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/white"
+                        android:background="@drawable/sl_bg"
                         android:id="@+id/rl_all_craftsman">
 
                         <TextView
@@ -79,7 +79,7 @@
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/white"
+                        android:background="@drawable/sl_bg"
                         android:id="@+id/rl_find_craftsman">
 
                         <TextView
@@ -102,7 +102,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/white"
+                android:background="@drawable/sl_bg"
                 android:id="@+id/rl_carftsman_group">
 
                 <TextView
@@ -123,7 +123,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="@color/white"
+                android:background="@drawable/sl_bg"
                 android:id="@+id/rl_my_friends">
 
                 <ImageView
@@ -161,7 +161,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="@color/white"
+                android:background="@drawable/sl_bg"
                 android:id="@+id/rl_work_arrangement">
 
                 <ImageView

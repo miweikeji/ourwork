@@ -1,5 +1,6 @@
 package app.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,6 +29,7 @@ import app.entity.craftsListResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.views.ProgressDialogView;
 
 /**
  * Created by Administrator on 2015/10/10.
@@ -41,18 +43,21 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
     private int p=1;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
+    private Dialog dialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_class_monitor, null);
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
+        dialog = ProgressDialogView.create(getActivity());
         initUI(layout);
         netWorkData();
         return layout;
     }
 
     private void netWorkData() {
+        dialog.show();
         HttpRequest.getAllcrafts(getActivity(), "0", p, new ICallback<craftsListResult>() {
             @Override
             public void onSucceed(craftsListResult result) {
@@ -65,12 +70,14 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
                 }else {
                     adapter.notifyDataSetChanged();
                 }
+                dialog.dismiss();
             }
 
             @Override
             public void onFail(String error) {
                 pull_list.onRefreshComplete();
                 Uihelper.showToast(getActivity(),error);
+                dialog.dismiss();
             }
         });
     }

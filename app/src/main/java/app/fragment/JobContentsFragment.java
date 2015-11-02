@@ -11,6 +11,14 @@ import android.widget.Toast;
 
 import com.miweikeij.app.R;
 
+import java.util.List;
+
+import app.entity.Advertise;
+import app.entity.AdvertiseResult;
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.utils.Uihelper;
+
 /**
  * Created by Administrator on 2015/10/10.
  */
@@ -26,8 +34,11 @@ public class JobContentsFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_job_contents,null);
         initUI();
+
         return layout;
     }
+
+
 
     private void initUI() {
         opportunityFragment = new JobOpportunityFragment();

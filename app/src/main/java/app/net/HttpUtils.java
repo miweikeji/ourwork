@@ -34,8 +34,8 @@ public class HttpUtils {
             for (Param param : list) {
                 stringBuffer.append("&").append(param.key).append("=" + param.value);
             }
+            stringBuffer.deleteCharAt(0);
         }
-        stringBuffer.deleteCharAt(0);
       String  realUrl=  url + "?" + stringBuffer;
         final Request request = new Request.Builder()
                 .url(realUrl)

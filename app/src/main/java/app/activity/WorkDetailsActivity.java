@@ -1,6 +1,7 @@
 package app.activity;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class WorkDetailsActivity  extends BaseActivity implements View.OnClickLi
     private TextView tv_price;
     private List<Data> data;
     private Message message;
+    private Button btn_apply;
     @Override
     public void obtainData() {
         netWorkData();
@@ -45,6 +47,17 @@ public class WorkDetailsActivity  extends BaseActivity implements View.OnClickLi
 
                 message = result.getMessage();
                 data = result.getData();
+                String apply = result.getApply();
+                if("1".equals(apply)){
+                    btn_apply.setText("接单成功");
+                    btn_apply.setEnabled(false);
+                    btn_apply.setClickable(false);
+                    btn_apply.setBackgroundResource(R.drawable.grey_bg_false);
+                }else if("2".equals(apply)){
+                    btn_apply.setText("接单失败");
+                }
+
+
                 tv_work_area.setText(message.getS_addr());
                 tv_service.setText(message.getContent());
                 String type = message.getCharge_type();
@@ -69,6 +82,7 @@ public class WorkDetailsActivity  extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initUI() {
+        Button btn_apply = (Button)findViewById(R.id.btn_apply);
         tv_work_area = (TextView)findViewById(R.id.tv_work_area);
         tv_service = (TextView)findViewById(R.id.tv_service);
         tv_feestyle = (TextView)findViewById(R.id.tv_feestyle);
