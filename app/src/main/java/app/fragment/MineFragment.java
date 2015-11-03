@@ -107,7 +107,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         if (UserUtil.hasLogin(getActivity())){
             layout.findViewById(R.id.frame_logined).setVisibility(View.VISIBLE);
             layout.findViewById(R.id.frame_noLogin).setVisibility(View.GONE);
-
+            tvAge.setText(UserInfo.getInstance().getAge());
+            tvArea.setText(UserInfo.getInstance().getAddress());
+            tvJob.setText(UserInfo.getInstance().getProfession());
+            tvJobage.setText(UserInfo.getInstance().getCworkold()+"年工龄");
+            tvName.setText(UserInfo.getInstance().getBusername());
+            imageLoader.displayImage(UserInfo.getInstance().getCard_bimg(), ivUserImage, options);
         }else {
             layout.findViewById(R.id.frame_logined).setVisibility(View.GONE);
             layout.findViewById(R.id.frame_noLogin).setVisibility(View.VISIBLE);
@@ -149,7 +154,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         tvJob.setText(crafts.getProfession());
         tvJobage.setText(crafts.getCworkold()+"年工龄");
         tvName.setText(crafts.getBusername());
-        imageLoader.displayImage(crafts.getCard_bimg(),ivUserImage,options);
+        imageLoader.displayImage(crafts.getCard_bimg(), ivUserImage, options);
 
 
 

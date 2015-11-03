@@ -73,6 +73,9 @@ public class UserInfoJsonTools {
             info.setScore(s.getString("score"));
             info.setDescription(s.getString("description"));
             info.setId(s.getString("id"));
+            info.setAge(s.getString("age"));
+            info.setCworkold(s.getString("cworkold"));
+            info.setWork("work");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,8 @@
 package app.activity;
 
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -9,6 +11,9 @@ import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
+import app.entity.JsonData;
+import app.entity.UserInfo;
+import app.utils.Uihelper;
 import app.views.NavigationBar;
 
 /**
@@ -19,7 +24,7 @@ public class NewDecorationActivity extends BaseActivity implements CompoundButto
     private RadioButton rb_lady,
             rb_sir,rb_type_1,rb_type_2,rb_type_3,rb_type_4,
             rb_type_5,rb_type_6,rb_type_one,rb_type_two,rb_type_three;
-    private TextView tv_sir_and_lady;
+    private EditText tv_sir_and_lady;
     private EditText et_village,et_area;
     private String house_type;
     private String house_craftmode;
@@ -34,7 +39,7 @@ public class NewDecorationActivity extends BaseActivity implements CompoundButto
 
         et_village = (EditText) findViewById(R.id.et_village);
         et_area = (EditText) findViewById(R.id.et_area);
-        tv_sir_and_lady = (TextView) findViewById(R.id.tv_sir_and_lady);
+        tv_sir_and_lady = (EditText) findViewById(R.id.tv_sir_and_lady);
 
         rb_lady = (RadioButton) findViewById(R.id.rb_lady);
         rb_sir = (RadioButton) findViewById(R.id.rb_sir);
@@ -100,14 +105,57 @@ public class NewDecorationActivity extends BaseActivity implements CompoundButto
         }
         String house_xiaoqu = et_village.getText().toString().trim();
         String house_area = et_area.getText().toString().trim();
-        String owner_sex = tv_sir_and_lady.getText().toString().trim();
-        if("先生".equals(owner_sex)){
+        String owner_name = tv_sir_and_lady.getText().toString().trim();
+
+        if(rb_sir.isChecked()){
             owner_sex="1";
-        }else if("女士".equals(owner_sex)){
+        }else if(rb_lady.isChecked()){
             owner_sex="2";
         }
 
-        startActivity(new Intent(this,ConstructionTasksActivity.class));
+        JsonData jsonData = new JsonData();
+        jsonData.setHouse_area(house_area);
+        jsonData.setHouse_craftmode(house_craftmode);
+        jsonData.setHouse_type(house_type);
+        jsonData.setHouse_xiaoqu(house_xiaoqu);
+        jsonData.setOwner_sex(owner_sex);
+        jsonData.setOwner_name(owner_name);
+        jsonData.setType("1");
+        jsonData.setServertype("0");
+        jsonData.setWho("0");
+        jsonData.setWhoid(UserInfo.getInstance().getId());
+        Intent intent = new Intent(this, ConstructionTasksActivity.class);
+        startActivity(intent);
+        if(house_xiaoqu!=null){
+            if(house_area!=null){
+                if(owner_sex!=null){
+                    if(house_type!=null){
+                        if(house_craftmode!=null){
+                            if(owner_name!=null){
+//                                Bundle bundle = new Bundle();
+//                                bundle.putSerializable("NewDecorationActivity", jsonData);
+//                                Intent intent = new Intent(this, ConstructionTasksActivity.class);
+//                                intent.putExtras(bundle);
+//                                startActivity(intent);
+                            }else {
+                                Uihelper.showToast(this,"请填写业主的名字");
+                            }
+                        }else {
+                            Uihelper.showToast(this,"请选择房屋施工方式");
+                        }
+                    }else {
+                        Uihelper.showToast(this,"请选择房屋的户型");
+                    }
+                }else {
+                    Uihelper.showToast(this,"请选择性别");
+                }
+            }else {
+                Uihelper.showToast(this,"请填写房屋面积");
+            }
+        }else {
+            Uihelper.showToast(this,"请填写小区");
+        }
+
     }
 
     @Override
@@ -115,12 +163,12 @@ public class NewDecorationActivity extends BaseActivity implements CompoundButto
         switch (buttonView.getId()){
             case R.id.rb_sir:
                 if(isChecked){
-                    tv_sir_and_lady.setText("先生");
+//                    tv_sir_and_lady.setText("先生");
                 }
                 break;
             case R.id.rb_lady:
                 if(isChecked){
-                    tv_sir_and_lady.setText("女士");
+//                    tv_sir_and_lady.setText("女士");
                 }
                 break;
 

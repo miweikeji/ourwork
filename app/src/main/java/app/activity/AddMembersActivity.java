@@ -21,6 +21,7 @@ import app.entity.GroupMembe;
 import app.entity.GroupMemberResult;
 import app.entity.Meta;
 import app.entity.Phone;
+import app.entity.Test;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.MobileOS;
@@ -46,7 +47,12 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
     public void initUI() {
 
 
+        Test test = new Test();
+        test.setWho("1");
+        test.setServertype("11");
+        test.setType("111");
         Map<String,List<Meta>> map =new HashMap<String,List<Meta>>();
+        Map<String,Meta> map1 =new HashMap<String,Meta>();
         Gson gson = new Gson();
         Meta meta = new Meta();
         Meta meta1 = new Meta();
@@ -55,8 +61,16 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
         List<Meta> list = new ArrayList<Meta>();
         list.add(meta);
         list.add(meta1);
+        test.setPhone(list);
+        map1.put("Meta", meta);
+        map1.put("Meta1",meta1);
         map.put("phones", list);
         String json = gson.toJson(map);
+        String json1 = gson.toJson(map1);
+        String json2= gson.toJson(meta1);
+        String json3= gson.toJson(test);
+//        Uihelper.showToast(this,json);
+        Uihelper.showToast(this,json3);
         et_members_phone = (EditText) findViewById(R.id.et_members_phone);
         line_add_memebers = (LinearLayout) findViewById(R.id.line_add_memebers);
         RelativeLayout rl_add_member = (RelativeLayout) findViewById(R.id.rl_add_member);

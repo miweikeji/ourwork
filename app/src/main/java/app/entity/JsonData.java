@@ -1,20 +1,23 @@
 package app.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/3.
  */
-public class JsonData {
+public class JsonData implements Serializable{
 
     private List<Info> info;
     private String checktime;
+
     private String workplace;
-    private String type;
-    private String who;
+
     private String whoid;
-    private String servertype;
     private String owner_name;
+    private String who;
+    private String type;
+    private String servertype;
     private String owner_sex;
     private String house_xiaoqu;
     private String house_type;
