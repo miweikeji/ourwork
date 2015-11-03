@@ -24,6 +24,10 @@ public class UserInfo {
     }
 
 
+    public String cworkold;
+
+
+
     public String score;
     public String busername;
     public String protect;
@@ -40,6 +44,9 @@ public class UserInfo {
     public String address;
     public String charge_type;
     public String cworkhome;
+
+    public String work;
+
     public String experts;
     public String cworkweixin;
     public String cworkalipay;
@@ -63,6 +70,7 @@ public class UserInfo {
     public String jiang;
     public String name;
     public String id;
+    public String age;
     public String gender;
     public String description;
     public String price;
@@ -139,8 +147,35 @@ public class UserInfo {
         setDescription("");
         setServer_area("");
         setVip("");
+        setWork("");
+        setAge("");
+        setCworkold("");
     }
 
+
+    public String getCworkold() {
+        return cworkold;
+    }
+
+    public void setCworkold(String cworkold) {
+        this.cworkold = cworkold;
+    }
+
+    public String getWork() {
+        return work;
+    }
+
+    public void setWork(String work) {
+        this.work = work;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public String getScore() {
         return score;

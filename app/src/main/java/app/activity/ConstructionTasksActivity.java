@@ -13,11 +13,16 @@ import android.widget.Toast;
 
 import com.miweikeij.app.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import app.adapter.ChooseCaseAdapter;
 import app.dialog.DialogTools;
+import app.entity.Info;
+import app.entity.JsonData;
+import app.entity.Meta;
 import app.tools.MyLog;
 import app.tools.UIEventUpdate;
 import app.utils.Uihelper;
@@ -76,17 +81,24 @@ public class ConstructionTasksActivity extends BaseActivity implements
     private HashMap<String,String> removeDI5 =new HashMap<String,String>();
     private HashMap<String,String> removeDI6 =new HashMap<String,String>();
 
+    private HashMap<Integer, String> hasType = new HashMap<Integer, String>();
+
     private String hint = "通过平台找工匠";
     private TextView tv_time_choose;
+    private EditText et_workplace;
 
+    private JsonData jsonData;
+    private List<Info> info;
     @Override
     public void obtainData() {
-
+//        jsonData = (JsonData) getIntent().getSerializableExtra("NewDecorationActivity");
+//        info = jsonData.getInfo();
     }
 
     @Override
     public void initUI() {
 
+        et_workplace = (EditText) findViewById(R.id.et_workplace);
         add_choose_case = (LinearLayout) findViewById(R.id.add_choose_case);
         TextView tv_add_case = (TextView) findViewById(R.id.tv_add_case);
         tv_time_choose = (TextView) findViewById(R.id.tv_time_choose);
@@ -609,7 +621,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
         if (hasMap != null) {
             removeList.clear();
             surplusList.clear();
-
+            hasType.clear();
+            hasType = (HashMap<Integer, String>) hasMap.clone();
             list.clear();
             EditText[] price = new EditText[7];
             name = new TextView[7];
@@ -818,5 +831,19 @@ public class ConstructionTasksActivity extends BaseActivity implements
             }
         }, 2013, 7, 20);
         datePicker.show();
+    }
+
+    private ArrayList<String> wtype = new ArrayList<>();
+    public void release(View view){
+        List<Info> list = new ArrayList<Info>();
+        for (int i=1;i<7;i++){
+            if(hasType.containsKey(i)){
+                wtype.add(hasType.get(i));
+            }
+        }
+
+        for (int j=0;j<wtype.size();j++){
+            Info info = new Info();
+        }
     }
 }

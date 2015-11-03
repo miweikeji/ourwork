@@ -298,6 +298,12 @@
         >
     </activity>
         <activity
+            android:name="app.activity.ServerTimeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
             android:name="app.activity.MyWorkDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
