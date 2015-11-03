@@ -31,6 +31,7 @@ import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
 import app.entity.HouseInfoResult;
 import app.entity.HousesByLyfResult;
+import app.entity.MessageResult;
 import app.entity.Meta;
 import app.entity.MyFriendsResult;
 import app.entity.MyScore;
@@ -1240,6 +1241,47 @@ public class HttpRequest {
                     callback.onSucceed(meta);
                 } else {
                     callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    /**
+     *消息列表
+     */
+    public static void getMessages(Context context,String cid,int p,final ICallback<MessageResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("p", "" + p));
+
+        new MyAsyncTask(context, Urls.getMessages, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                //{"houseList":null,"page":0,"status":0,"msg":"","sessionid":"40a5be61562f73454e372"}
+                try {
+                    JSONObject object = new JSONObject(result);
+                    int status = object.getInt("status");
+                    if(status==0){
+                        int page = object.getInt("page");
+                        if(page==0){
+                            callback.onFail(Constants.JSON_HAS_NULL);
+                        }else {
+                            MessageResult meta = JsonUtil.parseObject(result, MessageResult.class);
+                            callback.onSucceed(meta);
+
+                        }
+                    }else {
+                        callback.onFail(object.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
 
