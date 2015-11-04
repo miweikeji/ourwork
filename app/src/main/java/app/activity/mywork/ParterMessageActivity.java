@@ -13,7 +13,12 @@ import app.activity.BaseActivity;
 import app.activity.mywork.adapter.MessageAdapter;
 import app.adapter.ProtectRecordAdapter;
 import app.entity.Message;
+import app.entity.MessageItem;
+import app.entity.MessageResult;
 import app.entity.ProtectRecord;
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.utils.Uihelper;
 import app.views.NavigationBar;
 
 /**
@@ -23,23 +28,41 @@ public class ParterMessageActivity extends BaseActivity {
 
     private MessageAdapter adapter;
     private ListView listView;
-    List<Message> items=new ArrayList<>();
+    List<MessageItem> items = new ArrayList<>();
+    private int page;
+
     @Override
     public void obtainData() {
 
+        showWaitingDialog();
+        page = 1;
+        HttpRequest.getMessages(mActivity, "101", page, new ICallback<MessageResult>() {
+            @Override
+            public void onSucceed(MessageResult result) {
+                disMissWaitingDialog();
+                items = result.getMessages();
+                if (items != null && items.size() > 0) {
+                    adapter = new MessageAdapter(mActivity, items);
+                    listView.setAdapter(adapter);
+                }
+
+            }
+
+            @Override
+            public void onFail(String error) {
+
+                disMissWaitingDialog();
+                Uihelper.showToast(mActivity, error);
+            }
+        });
     }
 
     @Override
     public void initUI() {
 
+
         listView = (ListView) findViewById(R.id.listView);
 
-        for (int i = 0; i < 10; i++) {
-            Message message=new Message();
-            items.add(message);
-        }
-        adapter = new MessageAdapter(mActivity, items);
-        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

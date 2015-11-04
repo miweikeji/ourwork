@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.umeng.message.PushAgent;
 
 import java.util.LinkedList;
 
@@ -27,7 +28,7 @@ public abstract class BaseActivity extends FragmentActivity {
     public static DisplayImageOptions options;
     public static LinkedList<Activity> sAllActivitys = new LinkedList<Activity>();
     public Activity mActivity;
-    public  NavigationBar mBar;
+    public NavigationBar mBar;
     private Dialog mWaitingDialog;
     private ImageLoader imageLoader;
 
@@ -35,16 +36,16 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        mActivity=this;
+        mActivity = this;
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
-        mBar = (NavigationBar)findViewById(R.id.navigationBar);
-        mWaitingDialog = ProgressDialogView.create(mActivity);
+        mBar = (NavigationBar) findViewById(R.id.navigationBar);
         initCotentView();
         initTitle(mBar);
         initUI();
         obtainData();
         sAllActivitys.add(this);
+        PushAgent.getInstance(this).onAppStart();
     }
 
     private void initCotentView() {
@@ -63,20 +64,22 @@ public abstract class BaseActivity extends FragmentActivity {
     public abstract int onCreateMyView();
 
     public abstract void initTitle(NavigationBar mBar);
+
     /**
      * 显示 loading 对话框
      */
     protected void showWaitingDialog() {
-        if(mWaitingDialog != null) {
-            mWaitingDialog.show();
+        if (mWaitingDialog == null) {
+            mWaitingDialog = ProgressDialogView.create(mActivity);
         }
+        mWaitingDialog.show();
     }
 
     /**
      * 隐藏 loading 对话框
      */
     protected void disMissWaitingDialog() {
-        if(mWaitingDialog != null && mWaitingDialog.isShowing()) {
+        if (mWaitingDialog != null && mWaitingDialog.isShowing()) {
             mWaitingDialog.dismiss();
         }
     }

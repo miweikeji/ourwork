@@ -94,6 +94,11 @@ public class Urls {
     public final static String workHeadAudit = base_server + "App/Crafts/workHeadAudit";
     //友盟推送devicetoken
     public final static String addUmengDeviceToken = base_server + "App/Crafts/addUmengDeviceToken";
+    //消息列表
+    public final static String getMessages = base_server + "/App/Crafts/getMessages";
+
+
+
 
      /* ============================================我的接口结束=================================*/
 
