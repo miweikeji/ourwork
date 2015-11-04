@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,8 @@ import app.dialog.DialogTools;
 import app.entity.Info;
 import app.entity.JsonData;
 import app.entity.Meta;
+import app.entity.Name;
+import app.entity.Time;
 import app.tools.MyLog;
 import app.tools.TimeTools;
 import app.tools.UIEventUpdate;
@@ -38,7 +41,7 @@ import app.views.NavigationBar;
  */
 public class ConstructionTasksActivity extends BaseActivity implements
         View.OnClickListener, DialogTools.DialogOnClickChockedListens,
-        DialogTools.DialogCountTypeListens, UIEventUpdate.UIEventUpdateListener {
+        DialogTools.DialogCountTypeListens, UIEventUpdate.UIEventUpdateListener, UIEventUpdate.DataListener {
     private ArrayList<Integer> list = new ArrayList<Integer>();
     private ArrayList<Integer> removeList = new ArrayList<Integer>();
     private ArrayList<Integer> surplusList = new ArrayList<Integer>();
@@ -87,6 +90,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
     private HashMap<Integer, String> hasType = new HashMap<Integer, String>();
 
+    private List<Name> listName = new ArrayList<Name>();
+
     private String hint = "通过平台找工匠";
     private TextView tv_time_choose;
     private EditText et_workplace;
@@ -110,12 +115,14 @@ public class ConstructionTasksActivity extends BaseActivity implements
         rl_time_chose.setOnClickListener(this);
         tv_add_case.setOnClickListener(this);
         UIEventUpdate.getInstance().register(this);
+        UIEventUpdate.getInstance().registerData(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         UIEventUpdate.getInstance().unregister(this);
+        UIEventUpdate.getInstance().unregisterData(this);
     }
 
     @Override
@@ -882,6 +889,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 }
                 MyLog.e("", "backData=" + backData);
                 break;
+
         }
     }
 
@@ -905,6 +913,11 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
     private void ShowBirthdayTime() {
         // TODO Auto-generated method stub
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int date = c.get(Calendar.DATE);
+
         DatePickerDialog datePicker = new DatePickerDialog(
                 ConstructionTasksActivity.this, new DatePickerDialog.OnDateSetListener() {
 
@@ -921,7 +934,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
 //                Date d1=sdf.parse("2012-09-08 10:10:10");
 //                Date d2=sdf.parse("2012-09-15 00:00:00");
             }
-        }, 2013, 7, 20);
+        }, year, month, date);
         datePicker.show();
     }
 
@@ -936,6 +949,40 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
         for (int j=0;j<wtype.size();j++){
             Info info = new Info();
+        }
+    }
+
+    private List<Time> listShui = new ArrayList<>();
+    private List<Time> listNi = new ArrayList<>();
+    private List<Time> listMu = new ArrayList<>();
+    private List<Time> listYou = new ArrayList<>();
+    private List<Time> listMen = new ArrayList<>();
+    private List<Time> listQiao = new ArrayList<>();
+
+    @Override
+    public void setSendDate(int positionKey, List<Time> list, String type) {
+        switch (positionKey){
+            case UIEventUpdate.PositionKey.INVITATION_SERVERTIME:
+                if("水电工".equals(type)){
+                    listShui.clear();
+                    listShui.addAll(list);
+                }else if("泥水工".equals(type)){
+                    listNi.clear();
+                    listNi.addAll(list);
+                }else if("木工".equals(type)){
+                    listMu.clear();
+                    listMu.addAll(list);
+                }else if("油漆工".equals(type)){
+                    listYou.clear();
+                    listYou.addAll(list);
+                }else if("门窗安装工".equals(type)){
+                    listMen.clear();
+                    listMen.addAll(list);
+                }else if("敲打搬运工".equals(type)){
+                    listQiao.clear();
+                    listQiao.addAll(list);
+                }
+                break;
         }
     }
 }
