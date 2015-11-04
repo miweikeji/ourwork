@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -53,6 +54,8 @@ public class CraftsmanInfoFragment extends Fragment {
     private TextView tv_style;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
+    private RatingBar ratingBarQuality;
+    private RatingBar ratingBarValue;
 
     @Nullable
     @Override
@@ -97,6 +100,8 @@ public class CraftsmanInfoFragment extends Fragment {
                 jobAge.setText(""+crafts.getCworkold());
                 jobType.setText(crafts.getProfession());
                 imageLoader.displayImage(crafts.getCimg(), userImage, options);
+                ratingBarValue.setRating(crafts.getOverallattitude());
+                ratingBarQuality.setRating(crafts.getOverallquality());
 
             }
 
@@ -136,6 +141,9 @@ public class CraftsmanInfoFragment extends Fragment {
         tv_group_num = (TextView) layout.findViewById(R.id.tv_group_num);
         constructionType = (TextView) layout.findViewById(R.id.tv_Construction_type);
         tv_style = (TextView) layout.findViewById(R.id.tv_style);
+
+        ratingBarQuality = (RatingBar)layout.findViewById(R.id.ratingBar_quality);
+        ratingBarValue = (RatingBar) layout.findViewById(R.id.ratingBar_value);
 
 
     }

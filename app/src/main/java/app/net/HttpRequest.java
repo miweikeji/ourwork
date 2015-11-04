@@ -31,6 +31,7 @@ import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
 import app.entity.HouseInfoResult;
 import app.entity.HousesByLyfResult;
+import app.entity.MessageDetailResult;
 import app.entity.MessageResult;
 import app.entity.Meta;
 import app.entity.MyFriendsResult;
@@ -1291,6 +1292,35 @@ public class HttpRequest {
             }
         }).executeOnExecutor();
     }
+
+    /**
+     消息详情
+     */
+    public static void getMessageOrderDetail(Context context,String  cid,String workId,String enterDetail,final ICallback<MessageDetailResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("workId", workId));
+        mList.add(new Param("enterDetail", "enterDetail"));
+        new MyAsyncTask(context, Urls.getMessageOrderDetail, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MessageDetailResult meta = JsonUtil.parseObject(result, MessageDetailResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+
 
     /**
      *签到

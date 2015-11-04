@@ -194,6 +194,17 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/textView77"
                         android:layout_toEndOf="@+id/textView77" />
+                    <RatingBar
+                        android:id="@+id/ratingBar_value"
+                        style="@style/valueRatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_toEndOf="@+id/textView78"
+                        android:layout_toRightOf="@+id/textView78" />
+
 
 
                 </RelativeLayout>
@@ -218,11 +229,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="服务态度："
+                        android:text="服务质量："
                         android:id="@+id/textView80"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/textView79"
                         android:layout_toEndOf="@+id/textView79" />
+                    <RatingBar
+                        android:id="@+id/ratingBar_quality"
+                        style="@style/valueRatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_toEndOf="@+id/textView80"
+                        android:layout_toRightOf="@+id/textView80" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -253,7 +274,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="哦较少的哦公司哦啊的简欧了圣诞节哦水井坊了圣诞节哦第"
+                            android:text="--"
                             android:lineSpacingMultiplier="1.5"
                             android:id="@+id/tv_area_server"
                             android:layout_alignParentTop="true"
@@ -290,7 +311,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="New Text"
+                            android:text="--"
                             android:id="@+id/tv_me_Introduction"
                             android:layout_marginLeft="5dp"
                             android:lineSpacingMultiplier="1.5"
@@ -328,7 +349,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="New Text"
+                            android:text="--"
                             android:id="@+id/tv_ole_case"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
@@ -370,7 +391,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="New Text"
+                                android:text="--"
                                 android:id="@+id/tv_Ordinary_vip"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
@@ -384,7 +405,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="New Text"
+                                android:text="--"
                                 android:id="@+id/tv_Technology"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
@@ -427,7 +448,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="New Text"
+                                android:text="--"
                                 android:id="@+id/tv_Authentication"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
@@ -441,7 +462,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="New Text"
+                                android:text="--"
                                 android:id="@+id/tv_gold"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
@@ -491,7 +512,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="New Text"
+                            android:text="--"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:id="@+id/tv_creat_time" />
@@ -499,7 +520,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="New Text"
+                            android:text="--"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:id="@+id/tv_group_num" />
@@ -507,7 +528,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="New Text"
+                            android:text="--"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:id="@+id/tv_Construction_type" />
@@ -515,7 +536,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="New Text"
+                            android:text="--"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:id="@+id/tv_style" />

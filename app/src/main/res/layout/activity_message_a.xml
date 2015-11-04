@@ -35,12 +35,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText1"
+            android:id="@+id/tv_work_area"
             android:background="@null"
             android:layout_marginLeft="10dp"
             android:textSize="15sp"
-            android:text="泰和花园"
-
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView1"
             android:layout_toEndOf="@+id/textView1" />
@@ -69,11 +67,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
+            android:id="@+id/tv_service"
             android:background="@null"
             android:layout_marginLeft="10dp"
             android:textSize="15sp"
-            android:text="房子装修—设计师"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView2"
             android:layout_toEndOf="@+id/textView2" />
@@ -101,10 +98,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText3"
+            android:id="@+id/tv_feestyle"
             android:background="@null"
             android:textSize="15sp"
-            android:text="按次数服务"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView3"
@@ -133,11 +129,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText4"
+            android:id="@+id/tv_price"
             android:background="@null"
             android:layout_marginLeft="10dp"
             android:textSize="15sp"
-            android:text="300"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView4"
             android:layout_toEndOf="@+id/textView4" />

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -28,7 +29,11 @@ import java.util.Calendar;
 
 import app.activity.AppStartActivity;
 import app.activity.mywork.ParterMessageActivity;
+import app.entity.CraftsResult;
+import app.entity.UmengMessageResult;
+import app.entity.UmentMessage;
 import app.utils.Config;
+import app.utils.JsonUtil;
 import app.utils.Pref;
 import app.utils.Uihelper;
 
@@ -115,6 +120,17 @@ public class MyApplication extends Application {
 
     private void processCustomMessage(Context context, UMessage msg) {
 
+        String custom = msg.custom;
+        if (TextUtils.isEmpty(custom)) {
+            return;
+        }
+        UmengMessageResult mate = JsonUtil.parseObject(custom, UmengMessageResult.class);
+        if (mate == null) {
+            return;
+        }
+        String title = mate.getCustom().getTitle();
+        String content = mate.getCustom().getText();
+
         if (!MyApplication.getInstance().isCurrent()) {
             notificationIntent = new Intent(context, AppStartActivity.class);
             Pref.saveBoolean(Pref.PUSH, true, context);
@@ -138,8 +154,8 @@ public class MyApplication extends Application {
         int mMinuts = mCalendar.get(Calendar.MINUTE);
 
         // 通过控件的Id设置属性
-        contentViews.setTextViewText(R.id.titleNo, "标题");
-        contentViews.setTextViewText(R.id.textNo, "内容");
+        contentViews.setTextViewText(R.id.titleNo, title);
+        contentViews.setTextViewText(R.id.textNo, content);
         String string_Minutes = "" + mMinuts;
         if (mMinuts < 10) {
             string_Minutes = "0" + mMinuts;

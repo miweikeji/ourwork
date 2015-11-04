@@ -96,8 +96,8 @@ public class Urls {
     public final static String addUmengDeviceToken = base_server + "App/Crafts/addUmengDeviceToken";
     //消息列表
     public final static String getMessages = base_server + "/App/Crafts/getMessages";
-
-
+     //获取消息列表的订单详情
+    public final static String getMessageOrderDetail = base_server + "/App/Crafts/getMessageOrderDetail";
 
 
      /* ============================================我的接口结束=================================*/

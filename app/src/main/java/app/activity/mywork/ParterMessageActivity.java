@@ -1,5 +1,7 @@
 package app.activity.mywork;
 
+import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -66,8 +68,37 @@ public class ParterMessageActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MessageItem messageItem = items.get(position);
+                String enterDetail = messageItem.getEnterDetail();
+                if (!TextUtils.isEmpty(enterDetail)) {
+                    switch (enterDetail) {
+//        0 表示点击详情进入“有人申请加入”界面
+//        1表示点击详情进入“申请接单成功”界面
+//        2表示点击详情进入“申请接单失败”界面
+//        3表示点击详情进入“邀请施工”界面
+//        4表示点击详情进入“邀请施工人员成功”界面
+//        5表示点击详情进入“邀请施工人员失败”界面
+//        6表示点击详情进入“业主预约”界面
+//        7表示点击详情进入“系统消息”界面
+                        case "0":
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                            startActivity(new Intent(mActivity,MessageA_Activity.class));
+                            break;
+                        case "6":
+                            break;
+                        case "7":
+                            break;
+                        default:
+                            break;
 
-                //消息详情
+                    }
+                }
+
+
             }
         });
 
