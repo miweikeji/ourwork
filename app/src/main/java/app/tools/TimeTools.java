@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2015/11/1.
@@ -19,7 +20,9 @@ public class TimeTools {
      * @throws ParseException
      */
     public static int daysBetween(Date smdate,Date bdate) throws ParseException
+
     {
+
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         smdate=sdf.parse(sdf.format(smdate));
         bdate=sdf.parse(sdf.format(bdate));
@@ -32,6 +35,24 @@ public class TimeTools {
 
         return Integer.parseInt(String.valueOf(between_days));
     }
+    public static String longToDateStr(Double timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日", Locale.getDefault());
+        String date = sdf.format(new Date((long) (timestamp * 1000L)));
+        return date;
+    }
 
+    public static String getDayTime(Date today,int day) throws ParseException {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        today=sdf.parse(sdf.format(today));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        long time1 = cal.getTimeInMillis();
+
+        long item_day =(day*3600*24*1000)+time1;
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
+        String date = sdf1.format(new Date((long) ((double)item_day)));
+        return date;
+    }
 
 }

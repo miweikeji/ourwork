@@ -14,7 +14,10 @@ import android.widget.Toast;
 import com.miweikeij.app.R;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,6 +27,7 @@ import app.entity.Info;
 import app.entity.JsonData;
 import app.entity.Meta;
 import app.tools.MyLog;
+import app.tools.TimeTools;
 import app.tools.UIEventUpdate;
 import app.utils.Uihelper;
 import app.views.MyListView;
@@ -145,20 +149,89 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 DialogTools.setCheckedChoose(this);
                 break;
             case 101:
-//                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                Date d1=sdf.parse("2012-09-08 10:10:10");
-//                Date d2=sdf.parse("2012-09-15 00:00:00");
 
+                if(hint_time!=null){
+                    Intent intent1 = new Intent(this, ServerTimeActivity.class);
+                    intent1.putExtra("CASE_TYPE", "水电工");
+                    intent1.putExtra("time_day",getDay(hint_time));
+                    if(getDay(hint_time)>1){
+                        startActivity(intent1);
+                    }else {
+                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    }
+                }else {
+                    Uihelper.showToast(this,"请先选择验收时间");
+                }
                 break;
             case 102:
+                if(hint_time!=null){
+                    Intent intent2 = new Intent(this, ServerTimeActivity.class);
+                    intent2.putExtra("CASE_TYPE", "泥水工");
+                    intent2.putExtra("time_day", getDay(hint_time));
+                    if(getDay(hint_time)>1){
+                        startActivity(intent2);
+                    }else {
+                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    }
+                }else {
+                    Uihelper.showToast(this,"请先选择验收时间");
+                }
                 break;
             case 103:
+                if(hint_time!=null){
+                    Intent intent3 = new Intent(this, ServerTimeActivity.class);
+                    intent3.putExtra("CASE_TYPE", "木工");
+                    intent3.putExtra("time_day", getDay(hint_time));
+                    if(getDay(hint_time)>1){
+                        startActivity(intent3);
+                    }else {
+                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    }
+                }else {
+                    Uihelper.showToast(this,"请先选择验收时间");
+                }
                 break;
             case 104:
+                if(hint_time!=null){
+                    Intent intent4 = new Intent(this, ServerTimeActivity.class);
+                    intent4.putExtra("CASE_TYPE", "油漆工");
+                    intent4.putExtra("time_day", getDay(hint_time));
+                    if(getDay(hint_time)>1){
+                        startActivity(intent4);
+                    }else {
+                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    }
+                }else {
+                    Uihelper.showToast(this,"请先选择验收时间");
+                }
                 break;
             case 105:
+                if(hint_time!=null){
+                    Intent intent5 = new Intent(this, ServerTimeActivity.class);
+                    intent5.putExtra("CASE_TYPE", "门窗安装工");
+                    intent5.putExtra("time_day", getDay(hint_time));
+                    if(getDay(hint_time)>1){
+                        startActivity(intent5);
+                    }else {
+                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    }
+                }else {
+                    Uihelper.showToast(this,"请先选择验收时间");
+                }
                 break;
             case 106:
+                if(hint_time!=null){
+                    Intent intent6 = new Intent(this, ServerTimeActivity.class);
+                    intent6.putExtra("CASE_TYPE", "敲打搬运工");
+                    intent6.putExtra("time_day", getDay(hint_time));
+                    if(getDay(hint_time)>1){
+                        startActivity(intent6);
+                    }else {
+                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    }
+                }else {
+                    Uihelper.showToast(this,"请先选择验收时间");
+                }
                 break;
             case 111:
                 DialogTools.billingType(this, 1).show();
@@ -813,6 +886,23 @@ public class ConstructionTasksActivity extends BaseActivity implements
     }
 
 
+    private int getDay(String hint_time){
+        SimpleDateFormat sDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+        String    date    =    sDateFormat.format(new java.util.Date());
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date d1=sdf.parse(date);
+            Date d2=sdf.parse(hint_time);
+            return TimeTools.daysBetween(d1, d2);
+//                    Uihelper.showToast(this,""+date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    private String hint_time;
+
     private void ShowBirthdayTime() {
         // TODO Auto-generated method stub
         DatePickerDialog datePicker = new DatePickerDialog(
@@ -825,6 +915,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 String time = year + "年" + (monthOfYear + 1) + "月"
                         + dayOfMonth+"日";
                 tv_time_choose.setText(time);
+                hint_time=year + "-" + (monthOfYear + 1) + "-"
+                        + dayOfMonth;
 //                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //                Date d1=sdf.parse("2012-09-08 10:10:10");
 //                Date d2=sdf.parse("2012-09-15 00:00:00");
