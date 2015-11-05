@@ -1,5 +1,6 @@
 package app.activity.mywork.adapter;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,75 +11,51 @@ import com.miweikeij.app.R;
 
 import java.util.List;
 
+import app.adapter.AllAdapter;
+import app.entity.Comment;
 import app.entity.MyWork;
 
 /**
  * Created by TuLiangTan on 2015/9/25.
  */
-public class CraftValueAdapter extends RecyclerView.Adapter {
+public class CraftValueAdapter extends AllAdapter {
 
-    private List<MyWork> dataList;
-    private MyItemClickListener onItemClickListener;
-    private int mPosition = -1;
-
-
-    public CraftValueAdapter(List<MyWork> dataList) {
-        this.dataList = dataList;
-    }
-
-    public void setPosition(int position) {
-        mPosition = position;
+    FragmentActivity activity;
+    List<Comment> commentList;
+    public CraftValueAdapter(FragmentActivity activity, List<Comment> commentList) {
+        this.activity = activity;
+        this.commentList = commentList;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_craft_value, parent, false);
-        return new ViewHolder(view);
+    public int getCount() {
+        return commentList==null?0:commentList.size();
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MyWork myWork = dataList.get(position);
-    }
-
-    @Override
-    public int getItemCount() {
-        if (dataList != null) {
-            return dataList.size();
+    public View getView(int position, View layout, ViewGroup parent) {
+        ViewHolder holder=null;
+        if(layout==null){
+            holder = new ViewHolder();
+             layout = activity.getLayoutInflater().inflate(R.layout.item_craft_value, null);
+            holder.tv_content = (TextView) layout.findViewById(R.id.tv_content);
+            holder.tv_name = (TextView) layout.findViewById(R.id.tv_name);
+            holder.tv_time = (TextView) layout.findViewById(R.id.tv_time);
+            layout.setTag(holder);
+        }else {
+            holder = (ViewHolder) layout.getTag();
         }
-        return 0;
+        Comment comment = commentList.get(position);
+        holder.tv_content.setText(comment.getAdvise());
+        holder.tv_time.setText(comment.getTime());
+
+        holder.tv_name.setText(comment.getComment_craftsman_name());
+        return layout;
     }
 
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView tvTitle;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mPosition != getLayoutPosition()) {
-                        mPosition = getLayoutPosition();
-                    } else {
-                        mPosition = -1;
-                    }
-                    onItemClickListener.onItemClick(v, mPosition);
-                    notifyDataSetChanged();
-                }
-            });
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_name);
-        }
-    }
-
-
-    public void setOnItemClickListener(MyItemClickListener listener) {
-        this.onItemClickListener = listener;
-    }
-
-    public interface MyItemClickListener {
-        void onItemClick(View view, int postion);
+    public class ViewHolder{
+        TextView tv_content;
+        TextView tv_name;
+        TextView tv_time;
     }
 }
