@@ -124,19 +124,19 @@ public class NewDecorationActivity extends BaseActivity implements CompoundButto
         jsonData.setServertype("0");
         jsonData.setWho("0");
         jsonData.setWhoid(UserInfo.getInstance().getId());
-        Intent intent = new Intent(this, ConstructionTasksActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, ConstructionTasksActivity.class);
+//        startActivity(intent);
         if(house_xiaoqu!=null){
             if(house_area!=null){
                 if(owner_sex!=null){
                     if(house_type!=null){
                         if(house_craftmode!=null){
                             if(owner_name!=null){
-//                                Bundle bundle = new Bundle();
-//                                bundle.putSerializable("NewDecorationActivity", jsonData);
-//                                Intent intent = new Intent(this, ConstructionTasksActivity.class);
-//                                intent.putExtras(bundle);
-//                                startActivity(intent);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("NewDecorationActivity", jsonData);
+                                Intent intent = new Intent(this, ConstructionTasksActivity.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
                             }else {
                                 Uihelper.showToast(this,"请填写业主的名字");
                             }

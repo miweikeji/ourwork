@@ -5,7 +5,7 @@ package app.entity;
  */
 public class DailyListResult extends Meta {
 
-    private     Dialylist  dialylist;
+    private  Dialylist  dialylist;
 
     public Dialylist getDialylist() {
         return dialylist;

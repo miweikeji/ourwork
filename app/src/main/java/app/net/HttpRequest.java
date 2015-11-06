@@ -21,6 +21,7 @@ import app.entity.ArrangeTaskResult;
 import app.entity.BuiltTask;
 import app.entity.BuiltTaskResult;
 import app.entity.CaseResult;
+import app.entity.CommentResult;
 import app.entity.ConstructPlanResult;
 import app.entity.CraGroupResult;
 import app.entity.Crafts;
@@ -31,6 +32,7 @@ import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
 import app.entity.HouseInfoResult;
 import app.entity.HousesByLyfResult;
+import app.entity.JsonDataResult;
 import app.entity.MessageDetailResult;
 import app.entity.MessageResult;
 import app.entity.Meta;
@@ -1536,8 +1538,8 @@ public class HttpRequest {
 //        mList.add(new Param("groupId", groupId));
 //        mList.add(new Param("phones", phones));
         Map<String,String>  mList=new HashMap<String,String>();
-        mList.put("groupId",groupId);
-        mList.put("phones",phones);
+        mList.put("groupId", groupId);
+        mList.put("phones", phones);
         new MyAsynctask_Post(context, Urls.addGroupCrafts, new ICallbackString() {
 
             @Override
@@ -1558,4 +1560,147 @@ public class HttpRequest {
         },mList).executeOnExecutor();
     }
 
+
+
+
+    /**
+     *新建接口
+     */
+
+    public static void createTask(Context context,String message,final ICallback<Meta> callback) {
+//        ArrayList<Param> mList = new ArrayList<Param>();
+//        mList.add(new Param("groupId", groupId));
+//        mList.add(new Param("phones", phones));
+        Map<String,String>  mList=new HashMap<String,String>();
+        mList.put("message",message);
+        new MyAsynctask_Post(context, Urls.createTask, new ICallbackString() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        },mList).executeOnExecutor();
+    }
+
+
+
+    public static void myImgEdit(Context context,String id,String img,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("id", id));
+        mList.add(new Param("img", img));
+
+        new MyAsyncTask(context, Urls.myImgEdit, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //获取工匠的所有口碑评价
+    public static void getCommentByCrafts(Context context,String cid,int p,final ICallback<CommentResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("p", ""+p));
+
+        new MyAsyncTask(context, Urls.getCommentByCrafts, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                CommentResult meta = JsonUtil.parseObject(result, CommentResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+    //发起预约验收
+    public static void addYSDailyLog(Context context,String cid,String cname,int housestate,
+                                     String houseid,String ownerid,String ysTime,
+                                            String titleState,final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("cname", cname));
+        mList.add(new Param("housestate", ""+housestate));
+        mList.add(new Param("houseid", houseid));
+        mList.add(new Param("ownerid", ownerid));
+        mList.add(new Param("ysTime", ysTime));
+        mList.add(new Param("titleState", titleState));
+
+        new MyAsyncTask(context, Urls.addYSDailyLog, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //获取已建计划详情接口
+    public static void getDetailTask(Context context,String houseId,final ICallback<JsonDataResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("houseId", houseId));
+
+
+        new MyAsyncTask(context, Urls.getDetailTask, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                JsonDataResult meta = JsonUtil.parseObject(result, JsonDataResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
 }

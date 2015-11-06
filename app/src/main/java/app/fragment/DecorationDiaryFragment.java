@@ -26,6 +26,7 @@ import app.entity.DailyListResult;
 import app.entity.DialyData;
 import app.entity.Dialylist;
 import app.entity.MyWork;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Config;
@@ -40,7 +41,7 @@ public class DecorationDiaryFragment extends BaseFrament implements View.OnClick
     private View layout;
     private ListView listView;
     private Dialog bottomSelectDialog;
-
+    private Dialylist dialylist;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -115,6 +116,7 @@ public class DecorationDiaryFragment extends BaseFrament implements View.OnClick
                             break;
                         case R.id.btn_check:
                             bottomSelectDialog.dismiss();
+                            check();
                             break;
                         case R.id.btn_value:
                             startActivity(new Intent(getActivity(), ValueCraftActivity.class));
@@ -126,10 +128,17 @@ public class DecorationDiaryFragment extends BaseFrament implements View.OnClick
                     }
 
                 }
+
+
             });
             bottomSelectDialog.show();
 
         }
 
+    }
+
+    private void check() {
+
+//        HttpRequest.addYSDailyLog(getActivity(), UserInfo.getInstance().getId(),);
     }
 }

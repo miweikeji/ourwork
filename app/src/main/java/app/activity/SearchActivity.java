@@ -136,6 +136,13 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Allcrafts allcrafts = allList.get(position-1);
         if("ConstructionTasksActivity".equals(from_Activity)){
+            String craftsName;
+            String name = allcrafts.getName();
+            if(name!=null&&!"".equals(name)){
+                craftsName=name;
+            }else {
+                craftsName="  ";
+            }
 
             UIEventUpdate.getInstance().notifyUIUpdate(1,contents+"#"+allcrafts.getId()+"#"+allcrafts.getName()+"#"+view_id);
             finish();

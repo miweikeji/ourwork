@@ -1,5 +1,6 @@
 package app.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -96,6 +97,6 @@ public class BuiltTaskActivity extends BaseActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            startActivity(new Intent(this,ChangeTasksActivity.class));
     }
 }

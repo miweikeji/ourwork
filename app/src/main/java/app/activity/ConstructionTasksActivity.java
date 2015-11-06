@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.miweikeij.app.R;
 
 import java.io.Serializable;
@@ -29,7 +30,10 @@ import app.entity.JsonData;
 import app.entity.Meta;
 import app.entity.Name;
 import app.entity.Time;
+import app.net.HttpRequest;
+import app.net.ICallback;
 import app.tools.MyLog;
+import app.tools.StatusTools;
 import app.tools.TimeTools;
 import app.tools.UIEventUpdate;
 import app.utils.Uihelper;
@@ -67,30 +71,29 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
     private ArrayList<View> view1 = new ArrayList<View>();
 
-    private HashMap<Integer,View> has1 = new HashMap<Integer,View>();
-    private HashMap<Integer,View> has2 = new HashMap<Integer,View>();
-    private HashMap<Integer,View> has3 = new HashMap<Integer,View>();
-    private HashMap<Integer,View> has4 = new HashMap<Integer,View>();
-    private HashMap<Integer,View> has5 = new HashMap<Integer,View>();
-    private HashMap<Integer,View> has6 = new HashMap<Integer,View>();
+    private HashMap<Integer, View> has1 = new HashMap<Integer, View>();
+    private HashMap<Integer, View> has2 = new HashMap<Integer, View>();
+    private HashMap<Integer, View> has3 = new HashMap<Integer, View>();
+    private HashMap<Integer, View> has4 = new HashMap<Integer, View>();
+    private HashMap<Integer, View> has5 = new HashMap<Integer, View>();
+    private HashMap<Integer, View> has6 = new HashMap<Integer, View>();
 
-    private HashMap<Integer,TextView> tvhas1 = new HashMap<Integer,TextView>();
-    private HashMap<Integer,TextView> tvhas2 = new HashMap<Integer,TextView>();
-    private HashMap<Integer,TextView> tvhas3 = new HashMap<Integer,TextView>();
-    private HashMap<Integer,TextView> tvhas4 = new HashMap<Integer,TextView>();
-    private HashMap<Integer,TextView> tvhas5 = new HashMap<Integer,TextView>();
-    private HashMap<Integer,TextView> tvhas6 = new HashMap<Integer,TextView>();
+    private HashMap<Integer, TextView> tvhas1 = new HashMap<Integer, TextView>();
+    private HashMap<Integer, TextView> tvhas2 = new HashMap<Integer, TextView>();
+    private HashMap<Integer, TextView> tvhas3 = new HashMap<Integer, TextView>();
+    private HashMap<Integer, TextView> tvhas4 = new HashMap<Integer, TextView>();
+    private HashMap<Integer, TextView> tvhas5 = new HashMap<Integer, TextView>();
+    private HashMap<Integer, TextView> tvhas6 = new HashMap<Integer, TextView>();
 
-    private HashMap<String,String> removeDI1 =new HashMap<String,String>();
-    private HashMap<String,String> removeDI2 =new HashMap<String,String>();
-    private HashMap<String,String> removeDI3 =new HashMap<String,String>();
-    private HashMap<String,String> removeDI4 =new HashMap<String,String>();
-    private HashMap<String,String> removeDI5 =new HashMap<String,String>();
-    private HashMap<String,String> removeDI6 =new HashMap<String,String>();
+    private HashMap<String, String> removeDI1 = new HashMap<String, String>();
+    private HashMap<String, String> removeDI2 = new HashMap<String, String>();
+    private HashMap<String, String> removeDI3 = new HashMap<String, String>();
+    private HashMap<String, String> removeDI4 = new HashMap<String, String>();
+    private HashMap<String, String> removeDI5 = new HashMap<String, String>();
+    private HashMap<String, String> removeDI6 = new HashMap<String, String>();
 
     private HashMap<Integer, String> hasType = new HashMap<Integer, String>();
 
-    private List<Name> listName = new ArrayList<Name>();
 
     private String hint = "通过平台找工匠";
     private TextView tv_time_choose;
@@ -98,10 +101,11 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
     private JsonData jsonData;
     private List<Info> info;
+
     @Override
     public void obtainData() {
-//        jsonData = (JsonData) getIntent().getSerializableExtra("NewDecorationActivity");
-//        info = jsonData.getInfo();
+        jsonData = (JsonData) getIntent().getSerializableExtra("NewDecorationActivity");
+        info = jsonData.getInfo();
     }
 
     @Override
@@ -141,7 +145,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
         switch (v.getId()) {//surplusList
             case R.id.rl_time_chose:
                 ShowBirthdayTime();
-            break;
+                break;
             case R.id.tv_add_case:
                 for (int i = 0; i < list.size(); i++) {
                     if (!removeList.contains(list.get(i))) {
@@ -157,87 +161,87 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 break;
             case 101:
 
-                if(hint_time!=null){
+                if (hint_time != null) {
                     Intent intent1 = new Intent(this, ServerTimeActivity.class);
                     intent1.putExtra("CASE_TYPE", "水电工");
-                    intent1.putExtra("time_day",getDay(hint_time));
-                    if(getDay(hint_time)>1){
+                    intent1.putExtra("time_day", getDay(hint_time));
+                    if (getDay(hint_time) > 1) {
                         startActivity(intent1);
-                    }else {
-                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    } else {
+                        Uihelper.showToast(this, "请先选择验收时间要大于当前时间");
                     }
-                }else {
-                    Uihelper.showToast(this,"请先选择验收时间");
+                } else {
+                    Uihelper.showToast(this, "请先选择验收时间");
                 }
                 break;
             case 102:
-                if(hint_time!=null){
+                if (hint_time != null) {
                     Intent intent2 = new Intent(this, ServerTimeActivity.class);
                     intent2.putExtra("CASE_TYPE", "泥水工");
                     intent2.putExtra("time_day", getDay(hint_time));
-                    if(getDay(hint_time)>1){
+                    if (getDay(hint_time) > 1) {
                         startActivity(intent2);
-                    }else {
-                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    } else {
+                        Uihelper.showToast(this, "请先选择验收时间要大于当前时间");
                     }
-                }else {
-                    Uihelper.showToast(this,"请先选择验收时间");
+                } else {
+                    Uihelper.showToast(this, "请先选择验收时间");
                 }
                 break;
             case 103:
-                if(hint_time!=null){
+                if (hint_time != null) {
                     Intent intent3 = new Intent(this, ServerTimeActivity.class);
                     intent3.putExtra("CASE_TYPE", "木工");
                     intent3.putExtra("time_day", getDay(hint_time));
-                    if(getDay(hint_time)>1){
+                    if (getDay(hint_time) > 1) {
                         startActivity(intent3);
-                    }else {
-                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    } else {
+                        Uihelper.showToast(this, "请先选择验收时间要大于当前时间");
                     }
-                }else {
-                    Uihelper.showToast(this,"请先选择验收时间");
+                } else {
+                    Uihelper.showToast(this, "请先选择验收时间");
                 }
                 break;
             case 104:
-                if(hint_time!=null){
+                if (hint_time != null) {
                     Intent intent4 = new Intent(this, ServerTimeActivity.class);
                     intent4.putExtra("CASE_TYPE", "油漆工");
                     intent4.putExtra("time_day", getDay(hint_time));
-                    if(getDay(hint_time)>1){
+                    if (getDay(hint_time) > 1) {
                         startActivity(intent4);
-                    }else {
-                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    } else {
+                        Uihelper.showToast(this, "请先选择验收时间要大于当前时间");
                     }
-                }else {
-                    Uihelper.showToast(this,"请先选择验收时间");
+                } else {
+                    Uihelper.showToast(this, "请先选择验收时间");
                 }
                 break;
             case 105:
-                if(hint_time!=null){
+                if (hint_time != null) {
                     Intent intent5 = new Intent(this, ServerTimeActivity.class);
                     intent5.putExtra("CASE_TYPE", "门窗安装工");
                     intent5.putExtra("time_day", getDay(hint_time));
-                    if(getDay(hint_time)>1){
+                    if (getDay(hint_time) > 1) {
                         startActivity(intent5);
-                    }else {
-                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    } else {
+                        Uihelper.showToast(this, "请先选择验收时间要大于当前时间");
                     }
-                }else {
-                    Uihelper.showToast(this,"请先选择验收时间");
+                } else {
+                    Uihelper.showToast(this, "请先选择验收时间");
                 }
                 break;
             case 106:
-                if(hint_time!=null){
+                if (hint_time != null) {
                     Intent intent6 = new Intent(this, ServerTimeActivity.class);
                     intent6.putExtra("CASE_TYPE", "敲打搬运工");
                     intent6.putExtra("time_day", getDay(hint_time));
-                    if(getDay(hint_time)>1){
+                    if (getDay(hint_time) > 1) {
                         startActivity(intent6);
-                    }else {
-                        Uihelper.showToast(this,"请先选择验收时间要大于当前时间");
+                    } else {
+                        Uihelper.showToast(this, "请先选择验收时间要大于当前时间");
                     }
-                }else {
-                    Uihelper.showToast(this,"请先选择验收时间");
+                } else {
+                    Uihelper.showToast(this, "请先选择验收时间");
                 }
                 break;
             case 111:
@@ -319,7 +323,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
                     RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
                     TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
                     TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
-                    tvhas1.put(10001+i,tv_name);
+                    tvhas1.put(10001 + i, tv_name);
                     tv_case_type.setText(strCase[0]);
                     rl_add_case.setId(1001 + i);
                     has1.put(i + 1, layout);
@@ -329,7 +333,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
                         public void onClick(View view) {
                             Intent intent1 = new Intent(ConstructionTasksActivity.this, SearchActivity.class);
                             intent1.putExtra("CASE_TYPE", "水电工");
-                            intent1.putExtra("VIEW_ID",view.getId());
+                            intent1.putExtra("VIEW_ID", view.getId());
                             intent1.putExtra("FROM_ConstructionTasksActivity", "ConstructionTasksActivity");
                             startActivity(intent1);
                         }
@@ -345,8 +349,9 @@ public class ConstructionTasksActivity extends BaseActivity implements
                             add_item[1].removeView(view);
                             String reid = strID.replace("100", "1000");
                             String caseid = removeDI1.get(reid);
-                            if(hasID.containsKey(caseid)){
+                            if (hasID.containsKey(caseid)) {
                                 hasID.remove(caseid);
+                                hasShui.remove(reid);
                             }
                         }
                     });
@@ -381,7 +386,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
                     tv_case_type.setText(strCase[1]);
                     rl_add_case.setId(1101 + i);
                     has2.put(i + 1, layout);
-                    tvhas2.put(11001+i,tv_name);
+                    tvhas2.put(11001 + i, tv_name);
                     rl_invitation.setId(11001 + i);
                     rl_invitation.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -404,8 +409,9 @@ public class ConstructionTasksActivity extends BaseActivity implements
                             add_item[2].removeView(view);
                             String reid = strID.replace("110", "1100");
                             String caseid = removeDI2.get(reid);
-                            if(hasID.containsKey(caseid)){
+                            if (hasID.containsKey(caseid)) {
                                 hasID.remove(caseid);
+                                hasNi.remove(reid);
                             }
 
                         }
@@ -462,8 +468,9 @@ public class ConstructionTasksActivity extends BaseActivity implements
                             add_item[3].removeView(view);
                             String reid = strID.replace("120", "1200");
                             String caseid = removeDI3.get(reid);
-                            if(hasID.containsKey(caseid)){
+                            if (hasID.containsKey(caseid)) {
                                 hasID.remove(caseid);
+                                hasMu.remove(reid);
                             }
 
                         }
@@ -519,8 +526,9 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
                             String reid = strID.replace("130", "1300");
                             String caseid = removeDI4.get(reid);
-                            if(hasID.containsKey(caseid)){
+                            if (hasID.containsKey(caseid)) {
                                 hasID.remove(caseid);
+                                hasYou.remove(reid);
                             }
 
                         }
@@ -578,8 +586,9 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
                             String reid = strID.replace("140", "1400");
                             String caseid = removeDI5.get(reid);
-                            if(hasID.containsKey(caseid)){
+                            if (hasID.containsKey(caseid)) {
                                 hasID.remove(caseid);
+                                hasMen.remove(reid);
                             }
 
                         }
@@ -637,8 +646,9 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
                             String reid = strID.replace("150", "1500");
                             String caseid = removeDI6.get(reid);
-                            if(hasID.containsKey(caseid)){
+                            if (hasID.containsKey(caseid)) {
                                 hasID.remove(caseid);
+                                hasQiao.remove(reid);
                             }
 
                         }
@@ -687,14 +697,15 @@ public class ConstructionTasksActivity extends BaseActivity implements
     }
 
 
-
     private ChooseCaseAdapter[] adapter;
     private MyListView[] list_choose;
     private LinearLayout[] add_item = new LinearLayout[7];
     private View[] layout = new View[7];
     private boolean isFirst;
-    private TextView[] biling_type;
+    private TextView[] biling_type = new TextView[7];
     private TextView[] name;
+
+    private EditText[] price = new EditText[7];
 
     @Override
     public void onCheckedChoose(HashMap<Integer, String> hasMap) {
@@ -703,10 +714,10 @@ public class ConstructionTasksActivity extends BaseActivity implements
             surplusList.clear();
             hasType.clear();
             hasType = (HashMap<Integer, String>) hasMap.clone();
+            MyLog.e("", "hasType=" + hasType.size());
             list.clear();
-            EditText[] price = new EditText[7];
             name = new TextView[7];
-            biling_type = new TextView[7];
+
             list_choose = new MyListView[7];
 
             adapter = new ChooseCaseAdapter[7];
@@ -814,6 +825,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
         biling_type[i].setText(type);
     }
 
+
     @Override
     public void setUIUpdate(int positionKey, Object object) {
         switch (positionKey) {
@@ -828,59 +840,65 @@ public class ConstructionTasksActivity extends BaseActivity implements
 //                        name[1].setText(split[2]);
                         caseName1.add(split[2]);
                         count1++;
-                        if(tvhas1.containsKey(Integer.valueOf(split[3]).intValue())){
+                        if (tvhas1.containsKey(Integer.valueOf(split[3]).intValue())) {
                             TextView textView = tvhas1.get(Integer.valueOf(split[3]).intValue());
                             textView.setText(split[2]);
-                            removeDI1.put(split[3],split[1]);
+                            removeDI1.put(split[3], split[1]);
+                            hasShui.put(split[3], split[1] + "#" + split[2]);
                         }
                     } else if ("泥水工".equals(split[0])) {
                         name2 = split[2];
                         caseName2.add(split[2]);
 //                        name[2].setText(split[2]);
-                        if(tvhas2.containsKey(Integer.valueOf(split[3]).intValue())){
+                        if (tvhas2.containsKey(Integer.valueOf(split[3]).intValue())) {
                             TextView textView = tvhas2.get(Integer.valueOf(split[3]).intValue());
                             textView.setText(split[2]);
                             removeDI2.put(split[3], split[1]);
+                            hasNi.put(split[3], split[1] + "#" + split[2]);
                         }
                         count2++;
                     } else if ("木工".equals(split[0])) {
                         name3 = split[2];
                         caseName3.add(split[2]);
 //                        name[3].setText(split[2]);
-                        if(tvhas3.containsKey(Integer.valueOf(split[3]).intValue())){
+                        if (tvhas3.containsKey(Integer.valueOf(split[3]).intValue())) {
                             TextView textView = tvhas3.get(Integer.valueOf(split[3]).intValue());
                             textView.setText(split[2]);
                             removeDI3.put(split[3], split[1]);
+                            hasMu.put(split[3], split[1] + "#" + split[2]);
                         }
                         count3++;
                     } else if ("油漆工".equals(split[0])) {
                         name4 = split[2];
                         caseName4.add(split[2]);
 //                        name[4].setText(split[2]);
-                        if(tvhas4.containsKey(Integer.valueOf(split[3]).intValue())){
+                        if (tvhas4.containsKey(Integer.valueOf(split[3]).intValue())) {
                             TextView textView = tvhas4.get(Integer.valueOf(split[3]).intValue());
                             textView.setText(split[2]);
                             removeDI4.put(split[3], split[1]);
+                            hasYou.put(split[3], split[1] + "#" + split[2]);
                         }
                         count4++;
                     } else if ("门窗安装工".equals(split[0])) {
                         name5 = split[2];
                         caseName5.add(split[2]);
                         name[5].setText(split[2]);
-                        if(tvhas5.containsKey(Integer.valueOf(split[3]).intValue())){
+                        if (tvhas5.containsKey(Integer.valueOf(split[3]).intValue())) {
                             TextView textView = tvhas5.get(Integer.valueOf(split[3]).intValue());
                             textView.setText(split[2]);
                             removeDI5.put(split[3], split[1]);
+                            hasMen.put(split[3], split[1] + "#" + split[2]);
                         }
                         count5++;
                     } else if ("敲打搬运工".equals(split[0])) {
                         name6 = split[2];
                         caseName6.add(split[2]);
 //                        name[6].setText(split[2]);
-                        if(tvhas6.containsKey(Integer.valueOf(split[3]).intValue())){
+                        if (tvhas6.containsKey(Integer.valueOf(split[3]).intValue())) {
                             TextView textView = tvhas6.get(Integer.valueOf(split[3]).intValue());
                             textView.setText(split[2]);
                             removeDI6.put(split[3], split[1]);
+                            hasQiao.put(split[3], split[1] + "#" + split[2]);
                         }
                         count6++;
                     }
@@ -894,13 +912,13 @@ public class ConstructionTasksActivity extends BaseActivity implements
     }
 
 
-    private int getDay(String hint_time){
-        SimpleDateFormat sDateFormat =new SimpleDateFormat("yyyy-MM-dd");
-        String    date    =    sDateFormat.format(new java.util.Date());
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+    private int getDay(String hint_time) {
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sDateFormat.format(new java.util.Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date d1=sdf.parse(date);
-            Date d2=sdf.parse(hint_time);
+            Date d1 = sdf.parse(date);
+            Date d2 = sdf.parse(hint_time);
             return TimeTools.daysBetween(d1, d2);
 //                    Uihelper.showToast(this,""+date);
         } catch (ParseException e) {
@@ -926,9 +944,9 @@ public class ConstructionTasksActivity extends BaseActivity implements
                                   int monthOfYear, int dayOfMonth) {
                 // TODO Auto-generated method stub
                 String time = year + "年" + (monthOfYear + 1) + "月"
-                        + dayOfMonth+"日";
+                        + dayOfMonth + "日";
                 tv_time_choose.setText(time);
-                hint_time=year + "-" + (monthOfYear + 1) + "-"
+                hint_time = year + "-" + (monthOfYear + 1) + "-"
                         + dayOfMonth;
 //                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //                Date d1=sdf.parse("2012-09-08 10:10:10");
@@ -938,19 +956,240 @@ public class ConstructionTasksActivity extends BaseActivity implements
         datePicker.show();
     }
 
+    private HashMap<String, String> hasShui = new HashMap<>();
+    private HashMap<String, String> hasNi = new HashMap<>();
+    private HashMap<String, String> hasMu = new HashMap<>();
+    private HashMap<String, String> hasYou = new HashMap<>();
+    private HashMap<String, String> hasMen = new HashMap<>();
+    private HashMap<String, String> hasQiao = new HashMap<>();
     private ArrayList<String> wtype = new ArrayList<>();
-    public void release(View view){
-        List<Info> list = new ArrayList<Info>();
-        for (int i=1;i<7;i++){
-            if(hasType.containsKey(i)){
-                wtype.add(hasType.get(i));
-            }
-        }
 
-        for (int j=0;j<wtype.size();j++){
-            Info info = new Info();
+    public void release(View view) {
+
+        String workpalce = et_workplace.getText().toString().trim();
+        if (workpalce != null && !"".equals(workpalce)&&hint_time!=null&&list.size()!=0) {
+            Date dt = new Date();
+            Long time = dt.getTime();
+
+            for (int i = 10001; i < 10050; i++) {//10001
+
+                if (hasShui.containsKey("" + i)) {
+                    Name name = new Name();
+                    String s = hasShui.get("" + i);
+                    String[] split = s.split("#");
+                    name.setUid(split[0]);
+                    name.setName(split[1]);
+                    nameShui.add(name);
+                }
+            }
+
+            for (int i = 11001; i < 11050; i++) {
+
+                if (hasNi.containsKey("" + i)) {
+                    Name name = new Name();
+                    String s = hasNi.get("" + i);
+                    String[] split = s.split("#");
+                    name.setUid(split[0]);
+                    name.setName(split[1]);
+                    nameNi.add(name);
+                }
+            }
+
+            for (int i = 12001; i < 12050; i++) {
+
+                if (hasMu.containsKey("" + i)) {
+                    Name name = new Name();
+                    String s = hasMu.get("" + i);
+                    String[] split = s.split("#");
+                    name.setUid(split[0]);
+                    name.setName(split[1]);
+                    nameMu.add(name);
+                }
+            }
+
+            for (int i = 13001; i < 13050; i++) {
+
+                if (hasYou.containsKey("" + i)) {
+                    Name name = new Name();
+                    String s = hasYou.get("" + i);
+                    String[] split = s.split("#");
+                    name.setUid(split[0]);
+                    name.setName(split[1]);
+                    nameYou.add(name);
+                }
+            }
+
+            for (int i = 14001; i < 14050; i++) {
+
+                if (hasMu.containsKey("" + i)) {
+                    Name name = new Name();
+                    String s = hasMu.get("" + i);
+                    String[] split = s.split("#");
+                    name.setUid(split[0]);
+                    name.setName(split[1]);
+                    nameMen.add(name);
+                }
+            }
+
+            for (int i = 15001; i < 15050; i++) {
+
+                if (hasQiao.containsKey("" + i)) {
+                    Name name = new Name();
+                    String s = hasQiao.get("" + i);
+                    String[] split = s.split("#");
+                    name.setUid(split[0]);
+                    name.setName(split[1]);
+                    nameQiao.add(name);
+                }
+            }
+
+            List<Info> lists = new ArrayList<Info>();
+            for (int k = 1; k < 7; k++) {
+                if (list.contains(k)) {
+                    wtype.add(StatusTools.workType("" + k));
+                }
+            }
+
+
+            for (int j = 1; j < 7; j++) {
+                if (list.contains(j)) {
+                    Info info = new Info();
+                    if (StatusTools.workType("" + j).equals("水电工")) {
+                        info.setName(nameShui);
+                        info.setTime(listShui);
+                        lists.add(info);
+                        info.setNum("" + count1);
+                        info.setUserid("0");
+                        info.setWtype("" + StatusTools.getWorkType("水电工"));
+                        String charge_type = biling_type[1].getText().toString();
+                        if (charge_type.equals("按次计算")) {
+                            info.setCharge_type("0");
+                        } else if (charge_type.equals("按平计算")) {
+                            info.setCharge_type("1");
+                        } else if (charge_type.equals("按承包价")) {
+                            info.setCharge_type("2");
+                        }
+
+                        info.setCharge(price[1].getText().toString().trim());
+                    }
+                    if (StatusTools.workType("" + j).equals("泥水工")) {
+                        info.setName(nameNi);
+                        info.setTime(listNi);
+                        lists.add(info);
+                        info.setNum("" + count2);
+                        info.setWtype("" + StatusTools.getWorkType("泥水工"));
+                        String charge_type = biling_type[2].getText().toString();
+                        if (charge_type.equals("按次计算")) {
+                            info.setCharge_type("0");
+                        } else if (charge_type.equals("按平计算")) {
+                            info.setCharge_type("1");
+                        } else if (charge_type.equals("按承包价")) {
+                            info.setCharge_type("2");
+                        }
+                        info.setCharge(price[2].getText().toString().trim());
+                    }
+                    if (StatusTools.workType("" + j).equals("木工")) {
+                        info.setName(nameMu);
+                        info.setTime(listMu);
+                        lists.add(info);
+                        info.setNum("" + count3);
+                        info.setUserid("0");
+                        info.setWtype("" + StatusTools.getWorkType("木工"));
+                        String charge_type = biling_type[3].getText().toString();
+                        if (charge_type.equals("按次计算")) {
+                            info.setCharge_type("0");
+                        } else if (charge_type.equals("按平计算")) {
+                            info.setCharge_type("1");
+                        } else if (charge_type.equals("按承包价")) {
+                            info.setCharge_type("2");
+                        }
+                        info.setCharge(price[3].getText().toString().trim());
+                    }
+                    if (StatusTools.workType("" + j).equals("油漆工")) {
+                        info.setName(nameYou);
+                        info.setTime(listYou);
+                        lists.add(info);
+                        info.setNum("" + count4);
+                        info.setUserid("0");
+                        info.setWtype("" + StatusTools.getWorkType("油漆工"));
+                        String charge_type = biling_type[4].getText().toString();
+                        if (charge_type.equals("按次计算")) {
+                            info.setCharge_type("0");
+                        } else if (charge_type.equals("按平计算")) {
+                            info.setCharge_type("1");
+                        } else if (charge_type.equals("按承包价")) {
+                            info.setCharge_type("2");
+                        }
+                        info.setCharge(price[4].getText().toString().trim());
+                    }
+                    if (StatusTools.workType("" + j).equals("门窗安装工")) {
+                        info.setName(nameMen);
+                        info.setTime(listMen);
+                        lists.add(info);
+                        info.setNum("" + count5);
+                        info.setUserid("0");
+                        info.setWtype("" + StatusTools.getWorkType("门窗安装工"));
+                        String charge_type = biling_type[5].getText().toString();
+                        if (charge_type.equals("按次计算")) {
+                            info.setCharge_type("0");
+                        } else if (charge_type.equals("按平计算")) {
+                            info.setCharge_type("1");
+                        } else if (charge_type.equals("按承包价")) {
+                            info.setCharge_type("2");
+                        }
+                        info.setCharge(price[5].getText().toString().trim());
+                    }
+                    if (StatusTools.workType("" + j).equals("敲打搬运工")) {
+                        info.setName(nameQiao);
+                        info.setTime(listQiao);
+                        lists.add(info);
+                        info.setNum("" + count6);
+                        info.setUserid("0");
+                        info.setWtype("" + StatusTools.getWorkType("敲打搬运工"));
+                        String charge_type = biling_type[6].getText().toString();
+                        if (charge_type.equals("按次计算")) {
+                            info.setCharge_type("0");
+                        } else if (charge_type.equals("按平计算")) {
+                            info.setCharge_type("1");
+                        } else if (charge_type.equals("按承包价")) {
+                            info.setCharge_type("2");
+                        }
+                        info.setCharge(price[6].getText().toString().trim());
+                    }
+                }
+            }
+
+            jsonData.setInfo(lists);
+            jsonData.setChecktime(String.valueOf(time));
+            Gson gson = new Gson();
+            String json = gson.toJson(jsonData);
+            netWorkData(json);
+        }else {
+            Uihelper.showToast(this,"资料填写未完成");
         }
     }
+
+    private void netWorkData(String json) {
+        HttpRequest.createTask(this, json, new ICallback<Meta>() {
+            @Override
+            public void onSucceed(Meta result) {
+                finish();
+            }
+
+            @Override
+            public void onFail(String error) {
+                Uihelper.showToast(ConstructionTasksActivity.this,error);
+            }
+        });
+
+    }
+
+    private List<Name> nameShui = new ArrayList<Name>();
+    private List<Name> nameNi = new ArrayList<Name>();
+    private List<Name> nameMu = new ArrayList<Name>();
+    private List<Name> nameYou = new ArrayList<Name>();
+    private List<Name> nameMen = new ArrayList<Name>();
+    private List<Name> nameQiao = new ArrayList<Name>();
 
     private List<Time> listShui = new ArrayList<>();
     private List<Time> listNi = new ArrayList<>();
@@ -961,24 +1200,24 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
     @Override
     public void setSendDate(int positionKey, List<Time> list, String type) {
-        switch (positionKey){
+        switch (positionKey) {
             case UIEventUpdate.PositionKey.INVITATION_SERVERTIME:
-                if("水电工".equals(type)){
+                if ("水电工".equals(type)) {
                     listShui.clear();
                     listShui.addAll(list);
-                }else if("泥水工".equals(type)){
+                } else if ("泥水工".equals(type)) {
                     listNi.clear();
                     listNi.addAll(list);
-                }else if("木工".equals(type)){
+                } else if ("木工".equals(type)) {
                     listMu.clear();
                     listMu.addAll(list);
-                }else if("油漆工".equals(type)){
+                } else if ("油漆工".equals(type)) {
                     listYou.clear();
                     listYou.addAll(list);
-                }else if("门窗安装工".equals(type)){
+                } else if ("门窗安装工".equals(type)) {
                     listMen.clear();
                     listMen.addAll(list);
-                }else if("敲打搬运工".equals(type)){
+                } else if ("敲打搬运工".equals(type)) {
                     listQiao.clear();
                     listQiao.addAll(list);
                 }

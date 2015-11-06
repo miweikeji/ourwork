@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#70393939">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/btn_from_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="#5353FF"
+            android:background="@drawable/sl_head_pic"
+            android:textSize="15sp"
+            android:text="从手机相册获取" />
+
+        <Button
+            android:id="@+id/btn_from_Camera"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/btn_from_phone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textColor="#5353FF"
+            android:textSize="15sp"
+            android:background="@drawable/sl_head_pic"
+            android:text="拍照" />
+
+        <Button
+            android:id="@+id/btn_cancel_"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/btn_from_Camera"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+              android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textColor="#5353FF"
+            android:textSize="15sp"
+            android:background="@drawable/sl_head_pic"
+            android:text="取消" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_usre_head_dismiss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relativeLayout1"
+        android:layout_centerHorizontal="true"
+        >
+    </RelativeLayout>
+
+</RelativeLayout>
