@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="#40000000">
+    android:background="#70393939">
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="190dp"
-        android:background="@color/white"
+
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" >
 
@@ -21,9 +21,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:background="@drawable/sl_bg"
-            android:textSize="20sp"
+            android:textColor="#5353FF"
+            android:background="@drawable/sl_head_pic"
+            android:textSize="15sp"
             android:text="从手机相册获取" />
 
         <Button
@@ -35,9 +35,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/sl_bg"
+            android:textColor="#5353FF"
+            android:textSize="15sp"
+            android:background="@drawable/sl_head_pic"
             android:text="拍照" />
 
         <Button
@@ -49,9 +49,9 @@
             android:layout_marginTop="10dp"
               android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/sl_bg"
+            android:textColor="#5353FF"
+            android:textSize="15sp"
+            android:background="@drawable/sl_head_pic"
             android:text="取消" />
 
     </RelativeLayout>

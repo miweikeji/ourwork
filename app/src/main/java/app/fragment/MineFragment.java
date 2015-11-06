@@ -73,6 +73,8 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
     private boolean isSign;
     private boolean hasCase;
 
+    private String picPath;
+
 
     private File tempFile;
     private static final int PHOTO_REQUEST_CAREMA = 1;// 拍照
@@ -343,12 +345,14 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
             if (data != null) {
                 // 得到图片的全路径
                 Uri uri = data.getData();
+                picPath = uri.toString();
                 crop(uri);
             }
 
         } else if (requestCode == PHOTO_REQUEST_CAREMA) {
             // 从相机返回的数据
             if (hasSdcard()) {
+                picPath = Uri.fromFile(tempFile).toString();
                 crop(Uri.fromFile(tempFile));
             } else {
                 Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", 0)
