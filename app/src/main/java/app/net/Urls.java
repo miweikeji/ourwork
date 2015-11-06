@@ -66,6 +66,9 @@ public class Urls {
       //现场日志列表
       public final static String getDailyLogByHouseId = base_server + "App/Dialy/getDailyLogByHouseId";
 
+      //添加日志
+      public final static String addDailyLog = base_server + "App/Dialy/addDailyLog";
+
 
 
       /* ============================================我的工作==结束=================================*/
@@ -98,6 +101,12 @@ public class Urls {
     public final static String getMessages = base_server + "/App/Crafts/getMessages";
      //获取消息列表的订单详情
     public final static String getMessageOrderDetail = base_server + "/App/Crafts/getMessageOrderDetail";
+     //申请人列表
+    public final static String getMessageOrderApplyCrafts = base_server + "/App/Crafts/getMessageOrderApplyCrafts";
+    //获取工匠的所有评价（不传房屋id）
+    public final static String getCommentByCrafts = base_server + "/App/Comment/getCommentByCrafts";
+    //获取（传房屋id）
+    public final static String getCommentByHouseAndCrafts = base_server + "App/Comment/getCommentByHouseAndCrafts";
 
 
      /* ============================================我的接口结束=================================*/

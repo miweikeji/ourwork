@@ -425,6 +425,13 @@
             android:screenOrientation="portrait"
             >
         </activity>
+        <activity
+            android:name="app.activity.mywork.MessageA_Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            >
+        </activity>
     </application>
 
 </manifest>
