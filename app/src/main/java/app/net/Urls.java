@@ -129,6 +129,7 @@ public class Urls {
     //发起预约验收
     public final static String addYSDailyLog= base_server+"App/Dialy/addYSDailyLog";
 
-
+    //获取已建计划详情接口
+    public final static String getDetailTask= base_server+"App/Workplan/getDetailTask";
 
 }

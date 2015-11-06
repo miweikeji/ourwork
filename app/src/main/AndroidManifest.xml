@@ -220,6 +220,13 @@
             android:screenOrientation="portrait"
             android:label="@string/title_activity_find_fartner" >
         </activity>
+
+        <activity
+            android:name="app.activity.ChangeTasksActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_find_fartner" >
+        </activity>
         <activity
             android:name="app.activity.MyFriendsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

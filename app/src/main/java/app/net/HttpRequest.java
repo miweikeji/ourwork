@@ -32,6 +32,7 @@ import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
 import app.entity.HouseInfoResult;
 import app.entity.HousesByLyfResult;
+import app.entity.JsonDataResult;
 import app.entity.MessageDetailResult;
 import app.entity.MessageResult;
 import app.entity.Meta;
@@ -1663,6 +1664,32 @@ public class HttpRequest {
             public void onSucceed(String result) {
                 MyLog.e("", "请求参数==" + result.toString());
                 Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //获取已建计划详情接口
+    public static void getDetailTask(Context context,String houseId,final ICallback<JsonDataResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("houseId", houseId));
+
+
+        new MyAsyncTask(context, Urls.getDetailTask, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                JsonDataResult meta = JsonUtil.parseObject(result, JsonDataResult.class);
                 if (meta.getStatus() == 0) {
                     callback.onSucceed(meta);
                 } else {
