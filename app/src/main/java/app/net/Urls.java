@@ -101,13 +101,8 @@ public class Urls {
     public final static String getMessages = base_server + "/App/Crafts/getMessages";
      //获取消息列表的订单详情
     public final static String getMessageOrderDetail = base_server + "/App/Crafts/getMessageOrderDetail";
-     //申请人列表
-    public final static String getMessageOrderApplyCrafts = base_server + "/App/Crafts/getMessageOrderApplyCrafts";
-    //获取工匠的所有评价（不传房屋id）
-    public final static String getCommentByCrafts = base_server + "/App/Comment/getCommentByCrafts";
-    //获取（传房屋id）
-    public final static String getCommentByHouseAndCrafts = base_server + "App/Comment/getCommentByHouseAndCrafts";
-
+     //修改头像接口
+    public final static String myImgEdit = base_server + "App/Crafts/myImgEdit";
 
      /* ============================================我的接口结束=================================*/
 
@@ -129,6 +124,14 @@ public class Urls {
     //申请加入
     public final static String applyOder = base_server + "App/Work/applyOder";
 
+    //新建接口
+    public final static String createTask= base_server+"App/Workplan/createTask";
+    //获取工匠的所有口碑评价
+    public final static String getCommentByCrafts= base_server+"App/Comment/getCommentByCrafts";
+    //发起预约验收
+    public final static String addYSDailyLog= base_server+"App/Dialy/addYSDailyLog";
 
+    //获取已建计划详情接口
+    public final static String getDetailTask= base_server+"App/Workplan/getDetailTask";
 
 }
