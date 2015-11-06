@@ -87,7 +87,7 @@
                                 android:layout_alignRight="@+id/textView10"
                                 android:layout_centerVertical="true"
                                 android:layout_marginRight="3dp"
-                                android:text="匠太郎"
+                                android:text="--"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -98,7 +98,6 @@
                                 android:layout_marginLeft="3dp"
                                 android:layout_toEndOf="@+id/textView10"
                                 android:layout_toRightOf="@+id/textView10"
-                                android:text="带班工长"
                                 android:textSize="17sp" />
                         </RelativeLayout>
                     </FrameLayout>
@@ -122,7 +121,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_weight="1"
                                 android:gravity="top"
-                                android:text="25岁" />
+                                />
 
                             <TextView
                                 android:id="@+id/tv_me_job"
@@ -131,7 +130,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_weight="1"
                                 android:gravity="top"
-                                android:text="水电工" />
+                                android:text="--" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -147,7 +146,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_weight="1"
                                 android:gravity="top"
-                                android:text="12年的工龄" />
+                                />
 
                             <TextView
                                 android:id="@+id/tv_me_area"
@@ -156,7 +155,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_weight="1"
                                 android:gravity="top"
-                                android:text="四川成都" />
+                                android:text="--" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -202,6 +201,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="14dp"
                         android:layout_marginStart="24dp"
+                        android:isIndicator="true"
                         android:layout_toEndOf="@+id/textView78"
                         android:layout_toRightOf="@+id/textView78" />
 
@@ -239,6 +239,7 @@
                         style="@style/valueRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="28dp"
+                        android:isIndicator="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="14dp"
                         android:layout_marginStart="24dp"
@@ -393,6 +394,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="--"
                                 android:id="@+id/tv_Ordinary_vip"
+                                android:drawableLeft="@mipmap/vip"
+                                android:drawablePadding="3dp"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />
@@ -407,6 +410,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="--"
                                 android:id="@+id/tv_Technology"
+                                android:drawableLeft="@mipmap/ji"
+                                android:drawablePadding="3dp"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />
@@ -450,6 +455,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="--"
                                 android:id="@+id/tv_Authentication"
+                                android:drawableLeft="@mipmap/zheng"
+                                android:drawablePadding="3dp"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />
@@ -464,6 +471,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="--"
                                 android:id="@+id/tv_gold"
+                                android:drawableLeft="@mipmap/protectmoney"
+                                android:drawablePadding="3dp"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />

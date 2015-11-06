@@ -61,7 +61,8 @@ public class UserUtil {
     }
 
     public static void saveUserPsw(Context context,String psw){
-        Pref.saveString(Pref.USERPSW,psw,context);
+        String md5_psw= MD5Util.getMD5String(psw);
+        Pref.saveString(Pref.USERPSW,md5_psw,context);
     }
 
     public static void saveUserPhone(Context context,String phone){

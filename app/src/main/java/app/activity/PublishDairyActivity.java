@@ -3,6 +3,7 @@ package app.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -11,14 +12,22 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 import com.miweikeij.app.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import app.activity.mywork.LocalAlbumPreActivity;
 import app.activity.mywork.adapter.FooterSelectedPicAdapter;
 import app.entity.ImageEntity;
+import app.net.Urls;
 import app.utils.Constants;
 import app.utils.Uihelper;
 import app.views.NavigationBar;
@@ -34,6 +43,7 @@ public class PublishDairyActivity extends BaseActivity {
     private FooterSelectedPicAdapter picAdapter;
     private ArrayList<ImageEntity> selectedAlbumImages = new ArrayList<ImageEntity>();
     private int imageTotalCount = Constants.MAX_SELECT_PHOTO_NUM;
+    private HttpUtils http;
 
     @Override
     public void obtainData() {
@@ -68,7 +78,7 @@ public class PublishDairyActivity extends BaseActivity {
 
     @Override
     public void initUI() {
-
+        http = new HttpUtils();
         lin_pics_h = (LinearLayout) findViewById(R.id.lin_pics_h);
         scroll_h = (HorizontalScrollView) findViewById(R.id.scroll_h);
         // 图片
@@ -164,6 +174,59 @@ public class PublishDairyActivity extends BaseActivity {
         intent.putExtra("selectedAlbumImages", selectedAlbumImages);
         startActivityForResult(intent, 1);
 
+    }
+
+    public void btn_pubLish(View v) {
+       String  content= etDairy.getText().toString();
+        if (TextUtils.isEmpty(content)){
+            Uihelper.showToast(mActivity,"内容不能为空");
+            return;
+        }
+        String uploadHost = Urls.addDailyLog;
+        RequestParams params = new RequestParams();
+        params.addBodyParameter("cid", "101");
+        params.addBodyParameter("content", content);
+        params.addBodyParameter("housestate", "2");
+        params.addBodyParameter("houseid", "753665");
+        params.addBodyParameter("ownerid", "");
+        for (int i = 0; i < selectedAlbumImages.size(); i++) {
+            String path = selectedAlbumImages.get(i).getPath();
+            String newPath = path.substring(7, path.length());
+            File file = new File(newPath);
+            if (file != null) {
+                params.addBodyParameter("image_" + (i + 1), file);
+            }
+        }
+        uploadMethod(params, uploadHost);
+    }
+
+    public void uploadMethod(final RequestParams params, final String uploadHost) {
+        showWaitingDialog();
+        http.send(HttpRequest.HttpMethod.POST, uploadHost, params, new RequestCallBack<String>() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onLoading(long total, long current, boolean isUploading) {
+                if (isUploading) {
+                } else {
+                }
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                disMissWaitingDialog();
+                Uihelper.showToast(mActivity, "发布成功");
+                finish();
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                disMissWaitingDialog();
+                Uihelper.showToast(mActivity, "发布失败");
+            }
+        });
     }
 
     @Override

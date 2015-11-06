@@ -249,7 +249,8 @@
                             android:layout_marginLeft="14dp"
                             android:layout_marginStart="24dp"
                             android:layout_toEndOf="@+id/tv_service"
-                            android:layout_toRightOf="@+id/tv_service" />
+                            android:layout_toRightOf="@+id/tv_service"
+                            android:isIndicator="true" />
 
                     </RelativeLayout>
 
@@ -279,7 +280,8 @@
                             android:layout_marginLeft="14dp"
                             android:layout_marginStart="24dp"
                             android:layout_toEndOf="@+id/tv_quality"
-                            android:layout_toRightOf="@+id/tv_quality" />
+                            android:layout_toRightOf="@+id/tv_quality"
+                            android:isIndicator="true" />
 
 
                     </RelativeLayout>

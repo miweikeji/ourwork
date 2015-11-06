@@ -109,6 +109,8 @@ public class
 
         ratingBarQuality = (RatingBar) findViewById(R.id.ratingBar_quality);
         ratingBarValue = (RatingBar) findViewById(R.id.ratingBar_value);
+        ratingBarQuality.setClickable(false);
+        ratingBarQuality.setClickable(false);
 
         //评论模块
         tvCraft = (TextView) findViewById(R.id.tv_mywork_craft);

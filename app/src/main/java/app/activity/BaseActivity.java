@@ -41,8 +41,8 @@ public abstract class BaseActivity extends FragmentActivity {
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
         mBar = (NavigationBar) findViewById(R.id.navigationBar);
         initCotentView();
-        initTitle(mBar);
         initUI();
+        initTitle(mBar);
         obtainData();
         sAllActivitys.add(this);
         PushAgent.getInstance(this).onAppStart();

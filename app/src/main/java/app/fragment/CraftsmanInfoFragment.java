@@ -3,6 +3,7 @@ package app.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,6 +103,16 @@ public class CraftsmanInfoFragment extends Fragment {
                 imageLoader.displayImage(crafts.getCimg(), userImage, options);
                 ratingBarValue.setRating(crafts.getOverallattitude());
                 ratingBarQuality.setRating(crafts.getOverallquality());
+                if (!TextUtils.isEmpty(crafts.getVip())){
+                    ordinaryVIP.setText(crafts.getVip());
+                } if (!TextUtils.isEmpty(crafts.getGongyi())){
+                    technology.setText(crafts.getGongyi());
+                } if (!TextUtils.isEmpty(crafts.getBaozhengjin())){
+                    tv_gold.setText(crafts.getBaozhengjin());
+                } if (!TextUtils.isEmpty(crafts.getRenzheng())){
+                    Authentication.setText(crafts.getRenzheng());
+                }
+
 
             }
 
@@ -144,6 +155,8 @@ public class CraftsmanInfoFragment extends Fragment {
 
         ratingBarQuality = (RatingBar)layout.findViewById(R.id.ratingBar_quality);
         ratingBarValue = (RatingBar) layout.findViewById(R.id.ratingBar_value);
+        ratingBarQuality.setEnabled(false);
+        ratingBarValue.setEnabled(false);
 
 
     }

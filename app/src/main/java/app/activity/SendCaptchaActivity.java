@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -20,6 +21,7 @@ import app.entity.RegisterInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.MyLog;
+import app.utils.MD5Util;
 import app.utils.MobileOS;
 import app.utils.Uihelper;
 import app.views.NavigationBar;
@@ -43,6 +45,12 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
     private boolean isView;
     private boolean isForgetPsw;
 
+    @Override
+    public void onCreate(Bundle bundle) {
+        isForgetPsw = getIntent().getBooleanExtra("isForgetPsw", false);
+        super.onCreate(bundle);
+
+    }
 
     @Override
     public void obtainData() {
@@ -77,13 +85,6 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
         btnViewState = (ImageView) findViewById(R.id.tv_view_state);
         btnViewState.setOnClickListener(this);
 
-        isForgetPsw = getIntent().getBooleanExtra("isForgetPsw", false);
-        if (isForgetPsw) {
-            btn_summit.setText("完成");
-            et_psw.setHint("输入新密码");
-            mBar.setTitle("修改密码");
-        }
-
     }
 
     @Override
@@ -95,6 +96,11 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
     public void initTitle(NavigationBar mBar) {
         mBar.setContexts(this);
         mBar.setTitle("注册");
+        if (isForgetPsw) {
+            btn_summit.setText("完成");
+            et_psw.setHint("输入新密码");
+            mBar.setTitle("修改密码");
+        }
     }
 
     @Override
@@ -179,6 +185,8 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void summit(String psw, String code) {
+
+        String md5_psw= MD5Util.getMD5String(psw);
         if (isForgetPsw) {
             showWaitingDialog();
             HttpRequest.findPsw(this, new ICallback<Meta>() {
@@ -196,7 +204,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
                     Uihelper.showToast(mActivity, error);
 
                 }
-            }, phone, psw, code);
+            }, phone, md5_psw, code);
         } else {
              showWaitingDialog();
             HttpRequest.registerHttp(this, new ICallback<RegisterInfo>() {
@@ -215,7 +223,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
                     Uihelper.showToast(mActivity, error);
 
                 }
-            }, phone, psw, code);
+            }, phone, md5_psw, code);
         }
 
     }

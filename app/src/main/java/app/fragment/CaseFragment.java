@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -68,6 +69,14 @@ public class CaseFragment extends Fragment {
 
     private void initUI(View layout) {
          pull_case =(PullToRefreshListView)layout.findViewById(R.id.pull_case);
+        pull_case.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //跳到项目
+
+            }
+        });
         pull_case.setMode(PullToRefreshBase.Mode.BOTH);
         pull_case.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override

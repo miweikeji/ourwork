@@ -20,6 +20,7 @@ import app.entity.UserInfoResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.MyLog;
+import app.utils.MD5Util;
 import app.utils.MobileOS;
 import app.utils.Uihelper;
 import app.utils.UserUtil;
@@ -98,8 +99,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void login(final String phone, final String psw) {
+
+        String md5_psw= MD5Util.getMD5String(psw);
         showWaitingDialog();
-        HttpRequest.loginHttp(this, phone, psw, new ICallback<UserInfoResult>() {
+        HttpRequest.loginHttp(this, phone, md5_psw, new ICallback<UserInfoResult>() {
             @Override
             public void onSucceed(UserInfoResult result) {
                 disMissWaitingDialog();

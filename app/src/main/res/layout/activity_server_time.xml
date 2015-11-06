@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="405dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/radius_wither"
+        android:background="@mipmap/ic_launcher"
         android:orientation="vertical">
 
         <LinearLayout
