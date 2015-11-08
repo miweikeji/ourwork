@@ -99,7 +99,7 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
         layout = inflater.inflate(R.layout.fragment_mine, null);
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
-        httpUtils=new HttpUtils();
+        httpUtils = new HttpUtils();
         findView(layout);
         obtainSign();
         obtainData();
@@ -120,8 +120,6 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
                     }
                     hasCase = true;
                 }
-
-
             }
 
             @Override
@@ -363,7 +361,7 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
                 picPath = Uri.fromFile(tempFile).toString();
                 crop(Uri.fromFile(tempFile));
             } else {
-                Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", 0)
+                Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_SHORT)
                         .show();
             }
 
@@ -399,7 +397,7 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
         ImageViewUtil.writeBitmap(getActivity(), new ICallbackUri<Uri>() {
             @Override
             public void onSucceedUri(Uri uri) {
-                      netWorkData(uri);
+                netWorkData(uri);
             }
 
             @Override
@@ -467,8 +465,8 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         // 裁剪后输出图片的尺寸大小
-        intent.putExtra("outputX", 250);
-        intent.putExtra("outputY", 250);
+        intent.putExtra("outputX", 100);
+        intent.putExtra("outputY", 100);
 
         intent.putExtra("outputFormat", "JPEG");// 图片格式
         intent.putExtra("noFaceDetection", true);// 取消人脸识别

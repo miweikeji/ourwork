@@ -33,6 +33,7 @@ import app.entity.MessageDetailResult;
 import app.entity.MessageResult;
 import app.entity.Meta;
 import app.entity.MyFriendsResult;
+import app.entity.MyProtect;
 import app.entity.MyScore;
 import app.entity.MyWorkDetailResult;
 import app.entity.MyWorksListResult;
@@ -1259,6 +1260,31 @@ public class HttpRequest {
             @Override
             public void onSucceed(String result) {
                 Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }/**
+     * 我的保证金
+     */
+    public static void getMyProtect(Context context, final ICallback<MyProtect> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", UserUtil.getUserId(context)));
+
+
+        new MyAsyncTask(context, Urls.getMyProtect, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyProtect meta = JsonUtil.parseObject(result, MyProtect.class);
                 if (meta.getStatus() == 0) {
                     callback.onSucceed(meta);
                 } else {

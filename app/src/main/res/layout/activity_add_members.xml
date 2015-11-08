@@ -52,7 +52,7 @@
             android:ems="11"
             android:id="@+id/et_members_phone"
             android:hint="请输入手机号码"
-
+            android:maxLength="11"
             android:layout_marginLeft="15dp"
             android:layout_centerVertical="true"
              />

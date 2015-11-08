@@ -83,6 +83,8 @@ public class Urls {
     public final static String backMoney = base_server + "App/Union/back";
     //我的保障金记录接口
     public final static String protectlist = base_server + "App/Protect/protectlist";
+    //我的保障金
+    public final static String getMyProtect = base_server + "App/Protect/getMyProtect";
     //我接口
     public final static String myInfo = base_server + "App/Crafts/myInfo";
     //修改我的信息
