@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,18 +19,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.miweikeij.app.R;
 
-import org.litepal.crud.DataSupport;
-
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
-import app.activity.BasicInfoActivity;
 import app.activity.LoginActivity;
 import app.activity.MyWorkDetailsActivity;
 import app.activity.user.AboutUsActivity;
@@ -46,17 +51,18 @@ import app.entity.Meta;
 import app.entity.SingIn;
 import app.entity.SingInResult;
 import app.entity.UserInfo;
-import app.entity.UserInfoResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
-import app.tools.Base64TOString;
+import app.net.Urls;
+import app.utils.ICallbackUri;
+import app.utils.ImageViewUtil;
 import app.utils.Uihelper;
 import app.utils.UserUtil;
 
 /**
  * Created by Administrator on 2015/10/2.
  */
-public class MineFragment extends Fragment implements View.OnClickListener, UserHeadPopup.UserHeadPopupDelegate {
+public class MineFragment extends BaseFrament implements View.OnClickListener, UserHeadPopup.UserHeadPopupDelegate {
 
     private TextView tvJobage;
     private TextView tvAge;
@@ -84,6 +90,8 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
     private static final int PCINFOALTER_FAILED = 5;
     private static final String PHOTO_FILE_NAME = "temp_photo.jpg";
     public static String bitmap2Byte;
+    private Bitmap bitmap;
+    private HttpUtils httpUtils;
 
     @Nullable
     @Override
@@ -91,9 +99,11 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
         layout = inflater.inflate(R.layout.fragment_mine, null);
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
+        httpUtils=new HttpUtils();
         findView(layout);
         obtainSign();
         obtainData();
+
         return layout;
     }
 
@@ -126,16 +136,16 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
     @Override
     public void onStart() {
 
-        if (UserUtil.hasLogin(getActivity())){
+        if (UserUtil.hasLogin(getActivity())) {
             layout.findViewById(R.id.frame_logined).setVisibility(View.VISIBLE);
             layout.findViewById(R.id.frame_noLogin).setVisibility(View.GONE);
             tvAge.setText(UserInfo.getInstance().getAge());
             tvArea.setText(UserInfo.getInstance().getAddress());
             tvJob.setText(UserInfo.getInstance().getProfession());
-            tvJobage.setText(UserInfo.getInstance().getCworkold()+"年工龄");
+            tvJobage.setText(UserInfo.getInstance().getCworkold() + "年工龄");
             tvName.setText(UserInfo.getInstance().getBusername());
             imageLoader.displayImage(UserInfo.getInstance().getCard_bimg(), ivUserImage, options);
-        }else {
+        } else {
             layout.findViewById(R.id.frame_logined).setVisibility(View.GONE);
             layout.findViewById(R.id.frame_noLogin).setVisibility(View.VISIBLE);
         }
@@ -163,25 +173,26 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
         layout.findViewById(R.id.frame_userinfo).setOnClickListener(this);
 
         layout.findViewById(R.id.tv_sign).setOnClickListener(this);
-        TextView tvLogin=(TextView)layout.findViewById(R.id.tv_login);
+        TextView tvLogin = (TextView) layout.findViewById(R.id.tv_login);
         tvLogin.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
         tvLogin.setOnClickListener(this);
         ivUserImage.setOnClickListener(this);
 
 
     }
+
     private void setData(Crafts crafts) {
 
         tvAge.setText(crafts.getAge());
         tvArea.setText(crafts.getAddress());
         tvJob.setText(crafts.getProfession());
-        tvJobage.setText(crafts.getCworkold()+"年工龄");
+        tvJobage.setText(crafts.getCworkold() + "年工龄");
         tvName.setText(crafts.getBusername());
         imageLoader.displayImage(crafts.getCard_bimg(), ivUserImage, options);
 
 
-
     }
+
     private void obtainData() {
 
         HttpRequest.myInfo(getActivity(), new ICallback<CraftsResult>() {
@@ -200,7 +211,6 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
         });
 
     }
-
 
 
     @Override
@@ -228,8 +238,8 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
                 break;
             //签到
             case R.id.tv_sign:
-                if (dialogSign==null){
-                    dialogSign=new DialogSign(getActivity(),signTime,isSign,hasCase) {
+                if (dialogSign == null) {
+                    dialogSign = new DialogSign(getActivity(), signTime, isSign, hasCase) {
 
                         @Override
                         public void sign() {
@@ -269,7 +279,7 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
                 startActivity(new Intent(getActivity(), FeekBackActivity.class));
 
                 break;
-                //退出
+            //退出
             case R.id.btn_exit:
 
                 UserUtil.clearUserInfo(getActivity());
@@ -298,10 +308,6 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
                 Gravity.BOTTOM, 0, 0);
 
     }
-
-
-
-
 
     private void fromCamera() {
         // TODO Auto-generated method stub
@@ -336,7 +342,9 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
             return false;
         }
     }
+
     String encode;
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
@@ -362,16 +370,17 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
         } else if (requestCode == PHOTO_REQUEST_CUT) {
             // 从剪切图片返回的数据
             if (data != null) {
-                Bitmap bitmap = data.getParcelableExtra("data");
-                ivUserImage.setImageBitmap(bitmap);
-                bitmap2Byte = Base64TOString.Bitmap2Byte(bitmap);
-
-                try {
-                    encode = URLEncoder.encode(bitmap2Byte, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                netWorkData(encode);
+                bitmap = data.getParcelableExtra("data");
+                writebitMaptoUri(bitmap);
+//                ivUserImage.setImageBitmap(bitmap);
+//                bitmap2Byte = Base64TOString.Bitmap2Byte(bitmap);
+//
+//                try {
+//                    encode = URLEncoder.encode(bitmap2Byte, "UTF-8");
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//                netWorkData(encode);
                 // getSharedPreferences("bitmap2Byte",0).edit().putString("bitmap2Byte",
                 // bitmap2Byte).commit();
             }
@@ -385,18 +394,63 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void netWorkData(String bitmap2Byte) {
+    private void writebitMaptoUri(Bitmap bitmap) {
 
-        HttpRequest.myImgEdit(getActivity(), UserInfo.getInstance().getId(), bitmap2Byte, new ICallback<Meta>() {
+        ImageViewUtil.writeBitmap(getActivity(), new ICallbackUri<Uri>() {
             @Override
-            public void onSucceed(Meta result) {
-                Uihelper.showToast(getActivity(),"上传头像成功");
+            public void onSucceedUri(Uri uri) {
+                      netWorkData(uri);
             }
 
             @Override
-            public void onFail(String error) {
-                    Uihelper.showToast(getActivity(),error);
+            public void onFailUri(String error) {
+                Uihelper.showToast(getActivity(), error);
+            }
+        }, bitmap);
+    }
 
+    private void netWorkData(Uri uri) {
+
+        try {
+            File file = new File(new URI(uri.toString()));
+            String uploadHost = Urls.myImgEdit;
+            RequestParams params = new RequestParams();
+            params.addBodyParameter("id", UserUtil.getUserId(getActivity()));
+            if (file != null) {
+                params.addBodyParameter("img", file);
+            }
+            uploadMethod(params, uploadHost);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void uploadMethod(final RequestParams params, final String uploadHost) {
+        mWaitingDialog.show();
+        httpUtils.send(com.lidroid.xutils.http.client.HttpRequest.HttpMethod.POST, uploadHost, params, new RequestCallBack<String>() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onLoading(long total, long current, boolean isUploading) {
+                if (isUploading) {
+                } else {
+                }
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                mWaitingDialog.dismiss();
+                Uihelper.showToast(getActivity(), "修改成功");
+                ivUserImage.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                mWaitingDialog.dismiss();
+                Uihelper.showToast(getActivity(), "修改失败");
             }
         });
     }
@@ -426,9 +480,9 @@ public class MineFragment extends Fragment implements View.OnClickListener, User
 
     @Override
     public void getUserHeadPopupSuccess(int type) {
-        if(type==0){
+        if (type == 0) {
             fromAlbum();
-        }else if(type==1){
+        } else if (type == 1) {
             fromCamera();
         }
     }

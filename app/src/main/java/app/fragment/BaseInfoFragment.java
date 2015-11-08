@@ -1,10 +1,7 @@
 package app.fragment;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +13,13 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
-import java.util.LinkedList;
-
 import app.entity.Crafts;
 import app.entity.Designer;
-import app.entity.House;
 import app.entity.HouseInfo;
 import app.entity.HouseInfoResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
-import app.views.NavigationBar;
-import app.views.ProgressDialogView;
 
 /**
  * Created by Administrator on 2015/10/12.

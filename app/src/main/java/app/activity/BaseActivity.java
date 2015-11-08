@@ -30,7 +30,7 @@ public abstract class BaseActivity extends FragmentActivity {
     public Activity mActivity;
     public NavigationBar mBar;
     private Dialog mWaitingDialog;
-    private ImageLoader imageLoader;
+    public ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -24,7 +24,6 @@ import java.util.List;
 import app.activity.CraftsmanZoneActivity;
 import app.adapter.ClassMonitorAdapter;
 import app.entity.Allcrafts;
-import app.entity.craftsList;
 import app.entity.craftsListResult;
 import app.net.HttpRequest;
 import app.net.ICallback;

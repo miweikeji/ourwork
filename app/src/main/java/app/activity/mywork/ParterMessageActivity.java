@@ -13,11 +13,8 @@ import java.util.List;
 
 import app.activity.BaseActivity;
 import app.activity.mywork.adapter.MessageAdapter;
-import app.adapter.ProtectRecordAdapter;
-import app.entity.Message;
 import app.entity.MessageItem;
 import app.entity.MessageResult;
-import app.entity.ProtectRecord;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;

@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +27,6 @@ import java.io.InputStream;
 
 import app.activity.AddMembersActivity;
 import app.activity.BaseActivity;
-import app.activity.GroupMembersActivity;
 import app.entity.Meta;
 import app.net.HttpRequest;
 import app.net.ICallback;

@@ -1,7 +1,5 @@
 package app.activity.user;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;

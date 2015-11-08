@@ -15,7 +15,6 @@ import app.entity.Message;
 import app.entity.Meta;
 import app.entity.UserInfo;
 import app.entity.WorkDetailResult;
-import app.entity.WorkListResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;

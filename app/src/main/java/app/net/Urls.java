@@ -68,8 +68,10 @@ public class Urls {
 
       //添加日志
       public final static String addDailyLog = base_server + "App/Dialy/addDailyLog";
-
-
+      //评价工匠
+      public final static String addComment = base_server + "App/Comment/addComment";
+        //获取参与房屋装修的所有工匠
+      public final static String getCraftsByHouseId = base_server + "App/House/getCraftsByHouseId";
 
       /* ============================================我的工作==结束=================================*/
 

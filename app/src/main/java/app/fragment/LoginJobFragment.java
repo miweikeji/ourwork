@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,10 +20,8 @@ import com.miweikeij.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.activity.LoginActivity;
 import app.activity.WorkDetailsActivity;
 import app.adapter.JobAdapter;
-import app.entity.HouseInfoResult;
 import app.entity.UserInfo;
 import app.entity.WorkList;
 import app.entity.WorkListResult;

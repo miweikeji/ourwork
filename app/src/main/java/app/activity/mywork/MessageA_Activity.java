@@ -10,18 +10,12 @@ import com.miweikeij.app.R;
 import java.util.List;
 
 import app.activity.BaseActivity;
-import app.activity.WorkDetailsActivity;
 import app.dialog.DialogTools;
 import app.entity.Data;
-import app.entity.Message;
 import app.entity.MessageDetail;
 import app.entity.MessageDetailResult;
-import app.entity.Meta;
-import app.entity.UserInfo;
-import app.entity.WorkDetailResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
-import app.utils.Uihelper;
 import app.views.NavigationBar;
 
 /**

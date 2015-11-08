@@ -11,9 +11,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.miweikeij.app.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,6 @@ import java.util.List;
 import app.adapter.ClassMonitorAdapter;
 import app.entity.Allcrafts;
 import app.entity.SearchResult;
-import app.entity.craftsListResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.UIEventUpdate;

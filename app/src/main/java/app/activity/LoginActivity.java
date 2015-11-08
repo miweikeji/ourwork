@@ -8,18 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.miweikeij.app.R;
 
-import org.litepal.crud.DataSupport;
-
-import app.db.DBConversion;
-import app.entity.UserInfo;
 import app.entity.UserInfoResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
-import app.tools.MyLog;
 import app.utils.MD5Util;
 import app.utils.MobileOS;
 import app.utils.Uihelper;

@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.adapter.BuiltTaskAdapter;
-import app.adapter.MyWorkAdapter;
 import app.entity.BuiltTask;
 import app.entity.BuiltTaskResult;
-import app.entity.ConstructPlan;
-import app.entity.ConstructPlanResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;

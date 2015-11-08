@@ -5,7 +5,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.miweikeij.app.R;
@@ -16,15 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.adapter.GroupMemberAdapter;
-import app.entity.GroupMembe;
-import app.entity.GroupMemberResult;
 import app.entity.Info;
 import app.entity.JsonData;
 import app.entity.Meta;
 import app.entity.Name;
 import app.entity.Phone;
-import app.entity.Test;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.MobileOS;

@@ -1,6 +1,5 @@
 package app.activity;
 
-import android.view.View;
 import android.widget.ScrollView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
