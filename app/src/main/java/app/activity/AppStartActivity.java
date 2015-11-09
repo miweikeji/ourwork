@@ -58,7 +58,7 @@ public class AppStartActivity extends BaseActivity  {
             public void run() {
                 splashFinish();
             }
-        }, 1500);
+        }, 2000);
 
 
 
