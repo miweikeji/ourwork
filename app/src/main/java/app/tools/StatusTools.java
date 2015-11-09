@@ -7,6 +7,31 @@ import android.widget.TextView;
  */
 public class StatusTools {
 
+
+    public static String setChargeType(String type){
+
+        if("0".equals(type)){
+            return "按次计算";
+        }else if("1".equals(type)){
+            return "按平方计算";
+        }else if ("2".equals(type)){
+            return "按承包价";
+        }
+        return "";
+    }
+
+    public static String setChargeTypes(String type){
+
+        if("按次计算".equals(type)){
+            return "0";
+        }else if("按平计算".equals(type)){
+            return "1";
+        }else if ("按承包价".equals(type)){
+            return "2";
+        }
+        return "";
+    }
+
     public static void setStatus(TextView tv_status, String status) {
         if("0".equals(status)){
             tv_status.setText("量房阶段");
@@ -66,6 +91,24 @@ public class StatusTools {
             return "门窗安装工";
         }else if("6".equals(type)){
             return "敲打搬运工";
+        }
+        return "";
+    }
+
+    public static String workTypes(String type){
+        //1水电工  2 泥水工 3 木工 4  油漆工5  门窗安装工  6敲打搬运工
+        if("1".equals(type)){
+            return "水电工：　　";
+        }else if("2".equals(type)){
+            return "泥水工：　　";
+        }else if("3".equals(type)){
+            return "木工：　　　";
+        }else if("4".equals(type)){
+            return "油漆工：　　";
+        }else if("5".equals(type)){
+            return "门窗安装工：";
+        }else if("6".equals(type)){
+            return "敲打搬运工：";
         }
         return "";
     }

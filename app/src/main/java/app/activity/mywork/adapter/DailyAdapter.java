@@ -23,6 +23,7 @@ import app.tools.StatusTools;
 import app.utils.MobileOS;
 import app.utils.Uihelper;
 import app.views.CircleImageView;
+import app.views.SodukuGridView;
 
 /**
  * Created by Administrator on 2015/10/13.
@@ -55,7 +56,7 @@ public class DailyAdapter extends AllAdapter {
         if (layout == null) {
             holder = new ViewHolder();
             layout = activity.getLayoutInflater().inflate(R.layout.item_dairy, null);
-            holder.gv_images = (GridView) layout.findViewById(R.id.gv_images);
+            holder.gv_images = (SodukuGridView) layout.findViewById(R.id.gv_images);
             holder.tv_title = (TextView) layout.findViewById(R.id.tv_title);
             holder.tv_time = (TextView) layout.findViewById(R.id.tv_time);
             holder.tv_content = (TextView) layout.findViewById(R.id.tv_content);
@@ -111,7 +112,7 @@ public class DailyAdapter extends AllAdapter {
     }
 
     public class ViewHolder {
-        GridView gv_images;
+        SodukuGridView gv_images;
         TextView tv_title;
         TextView tv_time;
         TextView tv_content;

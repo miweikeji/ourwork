@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.miweikeij.app" >
+    package="com.miweikeij.app">
 
     <!-- 必选 -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -32,18 +32,17 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <!-- 监听通知点击或者忽略处理的广播 -->
         <receiver
             android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
-            android:exported="false" >
-        </receiver>
+            android:exported="false"></receiver>
 
         <!-- 监听开机运行、网络连接变化、卸载的广播 -->
         <receiver
             android:name="com.umeng.message.SystemReceiver"
-            android:process=":push" >
+            android:process=":push">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -60,7 +59,7 @@
         <receiver
             android:name="com.umeng.message.MessageReceiver"
             android:exported="false"
-            android:process=":push" >
+            android:process=":push">
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.RECEIVE" />
             </intent-filter>
@@ -69,7 +68,7 @@
         <!-- 监听宿主选举的广播 -->
         <receiver
             android:name="com.umeng.message.ElectionReceiver"
-            android:process=":push" >
+            android:process=":push">
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.ELECTION_RESULT_V4" />
                 <category android:name="umeng" />
@@ -80,12 +79,12 @@
         <!-- 【应用包名】字符串需要替换成本应用的应用包名 -->
         <receiver
             android:name="com.umeng.message.RegistrationReceiver"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.miweikeij.app.intent.action.COMMAND" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.umeng.message.UmengMessageBootReceiver" >
+        <receiver android:name="com.umeng.message.UmengMessageBootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -94,9 +93,9 @@
         <!-- 【应用包名】字符串需要替换成本应用的应用包名 -->
         <service
             android:name="com.umeng.message.UmengService"
-            android:label="PushService"
             android:exported="true"
-            android:process=":push" >
+            android:label="PushService"
+            android:process=":push">
             <intent-filter>
                 <action android:name="com.miweikeij.app.intent.action.START" />
             </intent-filter>
@@ -110,14 +109,15 @@
         </service>
 
         <!-- Umeng的消息接收服务 -->
-        <service android:name="com.umeng.message.UmengIntentService"
+        <service
+            android:name="com.umeng.message.UmengIntentService"
             android:process=":push" />
 
         <!-- Umeng的消息路由服务 -->
         <service
             android:name="com.umeng.message.UmengMessageIntentReceiverService"
-            android:process=":push"
-            android:exported="true" >
+            android:exported="true"
+            android:process=":push">
             <intent-filter>
                 <action android:name="org.android.agoo.client.MessageReceiverService" />
             </intent-filter>
@@ -127,19 +127,20 @@
         </service>
 
         <!-- v2.4.1添加的Service，Umeng的消息接收后的处理服务 -->
-        <service android:name="com.umeng.message.UmengMessageCallbackHandlerService"
+        <service
+            android:name="com.umeng.message.UmengMessageCallbackHandlerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.umeng.messge.registercallback.action" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.umeng.message.unregistercallback.action"/>
+                <action android:name="com.umeng.message.unregistercallback.action" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.umeng.message.message.handler.action"/>
+                <action android:name="com.umeng.message.message.handler.action" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.umeng.message.autoupdate.handler.action"/>
+                <action android:name="com.umeng.message.autoupdate.handler.action" />
             </intent-filter>
         </service>
 
@@ -148,25 +149,23 @@
 
         <!-- V2.5.0添加的Service，用于本地通知 -->
         <!-- 如果不使用本地通知，可以注释掉本地通知服务的配置 -->
-        <service android:name="com.umeng.message.local.UmengLocalNotificationService"
+        <service
+            android:name="com.umeng.message.local.UmengLocalNotificationService"
             android:exported="false" />
+
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5637269de0f55a6ee9001c7c" >
-        </meta-data>
+            android:value="5637269de0f55a6ee9001c7c"></meta-data>
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="913e252dbad2ed41433a09af044acddf" >
-        </meta-data>
-
-
+            android:value="913e252dbad2ed41433a09af044acddf"></meta-data>
 
 
         <activity
             android:name="app.activity.AppStartActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -178,267 +177,210 @@
         <activity
             android:name="app.activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name="app.activity.SendCaptchaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="app.activity.mywork.CraftsByHouseIdActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name="app.activity.BasicInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_register" >
-        </activity>
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_basic_info" >
+            android:label="@string/title_activity_basic_info"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name="app.activity.CraftsmanGroupActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_craftsman_group" >
-        </activity>
+            android:label="@string/title_activity_craftsman_group"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.CraftsmanFriendsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_craftsman_friends" >
-        </activity>
+            android:label="@string/title_activity_craftsman_friends"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.FindFartnerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_find_fartner" >
-        </activity>
+            android:label="@string/title_activity_find_fartner"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name="app.activity.ChangeTasksActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_find_fartner" >
-        </activity>
+            android:label="@string/title_activity_find_fartner"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.MyFriendsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_my_friends" >
-        </activity>
+            android:label="@string/title_activity_my_friends"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.WorkArrangementActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_work_arrangement" >
-        </activity>
+            android:label="@string/title_activity_work_arrangement"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.OwnerReservationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_owner_reservation"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name="app.activity.AllWorksActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_all_works"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name="app.activity.GroupMembersActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_group_members" >
-        </activity>
+            android:label="@string/title_activity_group_members"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.AddMembersActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_add_members" >
-        </activity>
+            android:label="@string/title_activity_add_members"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.user.FeekBackActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_add_members" >
-        </activity>
+            android:label="@string/title_activity_add_members"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name="app.activity.user.ProtectMoneyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_add_members" >
-        </activity>
+            android:label="@string/title_activity_add_members"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.user.IntegralActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_add_members" >
-        </activity>
+            android:label="@string/title_activity_add_members"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name="app.activity.user.AboutUsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-          >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <activity
-        android:name="app.activity.user.JobAuthentActivity"
-        android:configChanges="orientation|keyboardHidden|screenSize"
-        android:screenOrientation="portrait"
-        >
-    </activity>
+            android:name="app.activity.user.JobAuthentActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"></activity>
         <activity
-        android:name="app.activity.WorkDetailsActivity"
-        android:configChanges="orientation|keyboardHidden|screenSize"
-        android:screenOrientation="portrait"
-        >
-    </activity>
+            android:name="app.activity.WorkDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.ServerTimeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.MyWorkDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.HouseActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name="app.activity.CraftsmanZoneActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.user.ProtectRecordActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.user.IntegralRuleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.UnArrangeTaskActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.PublishDairyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.GuideActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.NewDecorationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.ConstructionTasksActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.BuiltTaskActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.ReservationDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.ReservationHistoryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.mywork.LocalAlbumPreActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.mywork.ValueCraftActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.mywork.CraftValueDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.WorkPlanDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.mywork.ParterMessageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.user.UserInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="app.activity.mywork.MessageA_Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

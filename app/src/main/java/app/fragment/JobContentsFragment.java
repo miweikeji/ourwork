@@ -1,23 +1,13 @@
 package app.fragment;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.miweikeij.app.R;
-
-import java.util.List;
-
-import app.entity.Advertise;
-import app.entity.AdvertiseResult;
-import app.net.HttpRequest;
-import app.net.ICallback;
-import app.utils.Uihelper;
 
 /**
  * Created by Administrator on 2015/10/10.

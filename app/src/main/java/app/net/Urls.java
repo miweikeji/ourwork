@@ -68,8 +68,10 @@ public class Urls {
 
       //添加日志
       public final static String addDailyLog = base_server + "App/Dialy/addDailyLog";
-
-
+      //评价工匠
+      public final static String addComment = base_server + "App/Comment/addComment";
+        //获取参与房屋装修的所有工匠
+      public final static String getCraftsByHouseId = base_server + "App/House/getCraftsByHouseId";
 
       /* ============================================我的工作==结束=================================*/
 
@@ -81,6 +83,8 @@ public class Urls {
     public final static String backMoney = base_server + "App/Union/back";
     //我的保障金记录接口
     public final static String protectlist = base_server + "App/Protect/protectlist";
+    //我的保障金
+    public final static String getMyProtect = base_server + "App/Protect/getMyProtect";
     //我接口
     public final static String myInfo = base_server + "App/Crafts/myInfo";
     //修改我的信息

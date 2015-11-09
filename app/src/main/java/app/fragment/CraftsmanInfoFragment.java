@@ -19,10 +19,8 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import app.entity.Crafts;
 import app.entity.CraftsResult;
 import app.entity.GroupInfo;
-import app.entity.Meta;
 import app.net.HttpRequest;
 import app.net.ICallback;
-import app.tools.MyLog;
 import app.utils.Uihelper;
 import app.views.CircleImageView;
 

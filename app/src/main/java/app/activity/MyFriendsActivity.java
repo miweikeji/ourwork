@@ -1,8 +1,6 @@
 package app.activity;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -22,7 +20,6 @@ import app.entity.MyFriendsResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
-import app.views.AutoLoadListView;
 import app.views.NavigationBar;
 
 public class MyFriendsActivity extends BaseActivity implements AdapterView.OnItemClickListener {

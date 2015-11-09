@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="工种类型："
-            android:id="@+id/textView82"
+            android:id="@+id/tv_wtype"
             android:layout_marginLeft="15dp"
             android:textSize="16sp"
 
@@ -31,8 +31,8 @@
             android:id="@+id/tv_case_title"
             android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView82"
-            android:layout_toEndOf="@+id/textView82" />
+            android:layout_toRightOf="@+id/tv_wtype"
+            android:layout_toEndOf="@+id/tv_wtype" />
 
         <ImageView
             android:layout_width="wrap_content"

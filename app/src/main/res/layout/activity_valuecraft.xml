@@ -123,6 +123,7 @@
                 android:layout_marginTop="@dimen/margin_left_right">
 
                 <RelativeLayout
+                    android:id="@+id/frame_selectcraft"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginLeft="@dimen/margin_left_right"
@@ -141,6 +142,7 @@
                         android:textSize="@dimen/textsize_normal" />
 
                     <TextView
+                        android:id="@+id/tv_craft_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -150,14 +152,22 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="@dimen/textsize_normal" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_left_right"
+                        android:src="@mipmap/ic_arrow_drop" />
+
                 </RelativeLayout>
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="@dimen/margin_left_right"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_left_right">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -165,96 +175,106 @@
                     android:layout_marginLeft="@dimen/margin_left_right"
                     android:layout_marginRight="@dimen/margin_left_right"
                     android:background="@drawable/ed_bg">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
-                            android:layout_margin="@dimen/margin_left_right"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="@dimen/margin_left_right"
                             android:layout_marginLeft="@dimen/margin_left_right"
                             android:text="工作评价"
-                            android:layout_gravity="center_horizontal"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="@dimen/textsize_middle"
-                            />
+                            android:textSize="@dimen/textsize_middle" />
+
                         <View
-                            android:layout_marginTop="5dp"
                             style="@style/item_divide_nomargin"
-                            ></View>
+                            android:layout_marginTop="5dp"></View>
+
                         <RelativeLayout
-                            android:layout_marginTop="5dp"
+                            android:id="@+id/relativeLayout14"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:layout_marginBottom="5dp"
                             android:layout_centerHorizontal="true"
-                            android:id="@+id/relativeLayout14">
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp">
 
                             <TextView
+                                android:id="@+id/tv_service"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="服务态度"
-                                android:id="@+id/tv_service"
-                                android:textSize="@dimen/textsize_normal"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="10dp"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true" />
+                                android:text="服务态度"
+                                android:textSize="@dimen/textsize_normal" />
 
                             <RatingBar
-                                android:layout_width="wrap_content"
-                                android:layout_height="28dp"
                                 android:id="@+id/ratingBar_value"
                                 style="@style/valueRatingBar"
-                                android:rating="2"
-                                android:layout_centerVertical="true"
-                                android:layout_toRightOf="@+id/tv_service"
-                                android:layout_toEndOf="@+id/tv_service"
-                                android:layout_marginLeft="14dp"
-                                android:layout_marginStart="24dp" />
-
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_centerHorizontal="true"
-                            >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="施工质量"
-                                android:id="@+id/tv_quality"
-                                android:textSize="@dimen/textsize_normal"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true" />
-
-                            <RatingBar
                                 android:layout_width="wrap_content"
                                 android:layout_height="28dp"
-                                android:id="@+id/ratingBar_quality"
-                                style="@style/valueRatingBar"
-                                android:rating="2"
                                 android:layout_centerVertical="true"
-                                android:layout_toRightOf="@+id/tv_quality"
-                                android:layout_toEndOf="@+id/tv_quality"
                                 android:layout_marginLeft="14dp"
-                                android:layout_marginStart="24dp" />
+                                android:layout_marginStart="24dp"
+                                android:layout_toEndOf="@+id/tv_service"
+                                android:layout_toRightOf="@+id/tv_service"
+                                android:stepSize="1" />
 
                         </RelativeLayout>
+
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                           >
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp">
 
-                        <EditText
-                                android:id="@+id/ed_dairy"
+                            <TextView
+                                android:id="@+id/tv_quality"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:text="施工质量"
+                                android:textSize="@dimen/textsize_normal" />
+
+                            <RatingBar
+                                android:id="@+id/ratingBar_quality"
+                                style="@style/valueRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="28dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="14dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_toEndOf="@+id/tv_quality"
+                                android:layout_toRightOf="@+id/tv_quality"
+                                android:stepSize="1" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout_focus"
+                                android:layout_width="0px"
+                                android:layout_height="0px"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:orientation="horizontal"></LinearLayout>
+
+                            <EditText
+                                android:id="@+id/et_valuecraft"
                                 android:layout_width="match_parent"
                                 android:layout_height="80dp"
                                 android:layout_alignParentLeft="true"
@@ -262,16 +282,16 @@
                                 android:layout_below="@+id/textView38"
                                 android:layout_marginLeft="@dimen/margin_left_right"
                                 android:layout_marginRight="@dimen/margin_left_right"
+                                android:background="@color/grey_1"
                                 android:gravity="top"
                                 android:hint="写下您对施工工匠的评价"
                                 android:maxLength="140"
                                 android:minHeight="150dp"
                                 android:padding="14dp"
-                                android:textSize="16sp"
-                                android:background="@color/grey_1">
-                            </EditText>
+                                android:textSize="16sp"></EditText>
 
                         </RelativeLayout>
+
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
@@ -299,15 +319,16 @@
                                 android:textAppearance="?android:attr/textAppearanceSmall"
                                 android:textColor="@color/base_orange" />
                         </RelativeLayout>
-                   <RelativeLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content">
 
-                     <Button
-                        style="@style/click_btn"
-                         android:text="提交评价"
-                         />
-                   </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <Button
+                                style="@style/click_btn"
+                                android:onClick="btn_value"
+                                android:text="提交评价" />
+                        </RelativeLayout>
 
                     </LinearLayout>
 

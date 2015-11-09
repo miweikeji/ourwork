@@ -11,14 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import app.MyApplication;
 import app.activity.mywork.ParterMessageActivity;
 import app.entity.UserInfo;
 import app.fragment.CarpenterHomeFragment;
 import app.fragment.JobContentsFragment;
-import app.fragment.JobOpportunityFragment;
 import app.fragment.MyJobFragment;
 
 import com.miweikeij.app.R;
@@ -27,15 +25,10 @@ import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.MsgConstant;
 import com.umeng.message.PushAgent;
 
-import app.entity.Meta;
-import app.net.HttpRequest;
-import app.net.ICallback;
-import app.tools.TimeTools;
 import app.utils.Constants;
 import app.utils.Pref;
 import app.utils.Uihelper;
 import app.utils.UserUtil;
-import app.views.NavigationBar;
 import app.fragment.MineFragment;
 
 public class MainActivity extends FragmentActivity {

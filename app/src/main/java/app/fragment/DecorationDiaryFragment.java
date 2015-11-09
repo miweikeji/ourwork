@@ -4,9 +4,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +11,14 @@ import android.widget.ListView;
 
 import com.miweikeij.app.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import app.activity.MyWorkDetailsActivity;
 import app.activity.PublishDairyActivity;
 import app.activity.mywork.ValueCraftActivity;
 import app.activity.mywork.adapter.DailyAdapter;
-import app.adapter.MyWorkAdapter;
 import app.entity.DailyListResult;
 import app.entity.DialyData;
 import app.entity.Dialylist;
-import app.entity.MyWork;
-import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Config;

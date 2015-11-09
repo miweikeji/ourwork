@@ -10,11 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.activity.BaseActivity;
-import app.adapter.ProtectRecordAdapter;
 import app.adapter.ScoreAdapter;
 import app.entity.MyScore;
-import app.entity.ProtectRecord;
-import app.entity.ProtectRecordResult;
 import app.entity.Score;
 import app.entity.ScoreResult;
 import app.net.HttpRequest;

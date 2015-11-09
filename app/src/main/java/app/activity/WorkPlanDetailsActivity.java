@@ -2,7 +2,6 @@ package app.activity;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -11,14 +10,11 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.miweikeij.app.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.adapter.MyWorkAdapter;
 import app.adapter.WorkPlanDetailsAdapter;
 import app.entity.ConstructPlan;
-import app.entity.ConstructPlanResult;
 import app.entity.DetailPlan;
 import app.entity.DetailPlanResult;
 import app.net.HttpRequest;

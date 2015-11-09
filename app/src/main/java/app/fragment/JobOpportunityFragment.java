@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.miweikeij.app.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 

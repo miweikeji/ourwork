@@ -6,7 +6,6 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.miweikeij.app.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,9 @@
 package app.activity.user;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
@@ -9,6 +11,7 @@ import app.activity.BaseActivity;
 import app.dialog.DialogCharge;
 import app.dialog.DialogRefund;
 import app.entity.Meta;
+import app.entity.MyProtect;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -20,14 +23,35 @@ import app.views.NavigationBar;
 public class ProtectMoneyActivity extends BaseActivity {
     private DialogCharge dialogCharge;
     private DialogRefund dialogRefund;
+    private TextView tvMoney;
 
     @Override
     public void obtainData() {
+
+        showWaitingDialog();
+        HttpRequest.getMyProtect(mActivity, new ICallback<MyProtect>() {
+            @Override
+            public void onSucceed(MyProtect result) {
+              disMissWaitingDialog();
+              String myProtect=result.getProtect();
+                if (!TextUtils.isEmpty(myProtect))
+                tvMoney.setText("￥"+myProtect);
+            }
+
+            @Override
+            public void onFail(String error) {
+                disMissWaitingDialog();
+                Uihelper.showToast(mActivity,error);
+
+            }
+        });
+
 
     }
 
     @Override
     public void initUI() {
+        tvMoney=(TextView)findViewById(R.id.tv_money);
 
 
     }

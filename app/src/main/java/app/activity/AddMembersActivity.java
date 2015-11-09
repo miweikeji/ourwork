@@ -1,11 +1,12 @@
 package app.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.miweikeij.app.R;
@@ -16,15 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.adapter.GroupMemberAdapter;
-import app.entity.GroupMembe;
-import app.entity.GroupMemberResult;
 import app.entity.Info;
 import app.entity.JsonData;
 import app.entity.Meta;
 import app.entity.Name;
 import app.entity.Phone;
-import app.entity.Test;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.MobileOS;
@@ -35,15 +32,28 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
 
 
     private LinearLayout line_add_memebers;
-    private  EditText et_members_phone;
+    private EditText et_members_phone;
     private int count;
-    private HashMap<Integer,String> phoneMap = new HashMap<Integer,String>();
-    private ArrayList<String> listPhone=new ArrayList<String>();
-    private HashMap<Integer,View> viewMap = new HashMap<Integer,View>();
-    private  String groupId;
+    private HashMap<Integer, String> phoneMap = new HashMap<Integer, String>();
+    private ArrayList<String> listPhone = new ArrayList<String>();
+    private HashMap<Integer, View> viewMap = new HashMap<Integer, View>();
+    private String groupId;
+    private boolean isJobAuthent;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        isJobAuthent = intent.getBooleanExtra("isJobAuthent", false);
+        ArrayList<String> listPhone = (ArrayList<String>) intent.getSerializableExtra("listPhone");
+        if (listPhone != null && listPhone.size() > 0) {
+            listPhone.addAll(listPhone);
+        }
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public void obtainData() {
-        groupId =  getIntent().getStringExtra("groupId");
+        groupId = getIntent().getStringExtra("groupId");
     }
 
     @Override
@@ -54,8 +64,8 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
         test.setWho("1");
         test.setServertype("11");
         test.setType("111");
-        Map<String,List<Info>> map =new HashMap<String,List<Info>>();
-        Map<String,Info> map1 =new HashMap<String,Info>();
+        Map<String, List<Info>> map = new HashMap<String, List<Info>>();
+        Map<String, Info> map1 = new HashMap<String, Info>();
         Gson gson = new Gson();
         Info meta = new Info();
         Info meta1 = new Info();
@@ -77,13 +87,13 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
         list.add(meta1);
         test.setInfo(list);
         map1.put("Meta", meta);
-        map1.put("Meta1",meta1);
+        map1.put("Meta1", meta1);
         map.put("phones", list);
         String json = gson.toJson(map);//==
         String json1 = gson.toJson(map1);
-        String json2= gson.toJson(meta1);
-        String json3= gson.toJson(test);
-        Uihelper.showToast(this,json);
+        String json2 = gson.toJson(meta1);
+        String json3 = gson.toJson(test);
+        Uihelper.showToast(this, json);
 //        Uihelper.showToast(this,json3);
         et_members_phone = (EditText) findViewById(R.id.et_members_phone);
         line_add_memebers = (LinearLayout) findViewById(R.id.line_add_memebers);
@@ -105,17 +115,17 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.rl_add_member:
                 String phone = et_members_phone.getText().toString();
-                if(MobileOS.isMobileNO(phone)){
-                    if(!listPhone.contains(phone)){
+                if (MobileOS.isMobileNO(phone)) {
+                    if (!listPhone.contains(phone)) {
                         addMembers(phone);
-                    }else {
-                        Uihelper.showToast(this,"您已添加写过了");
+                    } else {
+                        Uihelper.showToast(this, "您已添加写过了");
                     }
-                }else {
-                    Uihelper.showToast(this,"手机号码不正确");
+                } else {
+                    Uihelper.showToast(this, "手机号码不正确");
                 }
                 break;
         }
@@ -127,7 +137,7 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
         count++;
         phoneMap.clear();
         line_add_memebers.removeAllViews();
-        for (int i=0;i<count;i++){
+        for (int i = 0; i < count; i++) {
             View layout = getLayoutInflater().inflate(R.layout.item_add_members, null);
             RelativeLayout rl_deleate = (RelativeLayout) layout.findViewById(R.id.rl_deleate);
             TextView tv_memeber_phone = (TextView) layout.findViewById(R.id.tv_memeber_phone);
@@ -155,20 +165,30 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    public void addComplete(View view){
-        if(listPhone.size()!=0){
-            Map<String,List<Phone>> map =new HashMap<String,List<Phone>>();
+    public void addComplete(View view) {
+        if (listPhone.size() != 0) {
+            Map<String, List<Phone>> map = new HashMap<String, List<Phone>>();
             List<Phone> list = new ArrayList<Phone>();
-            for (int i=0;i<listPhone.size();i++){
-                Phone  phones = new Phone();
+            for (int i = 0; i < listPhone.size(); i++) {
+                Phone phones = new Phone();
                 phones.setPhone(listPhone.get(i));
                 list.add(phones);
             }
-            map.put("phones",list);
+            map.put("phones", list);
             Gson gson = new Gson();
             String json = gson.toJson(map);
-            netWorkData(json);
-        }else {
+            //回到工头认证
+            if (isJobAuthent) {
+                Intent intent = new Intent();
+                intent.putExtra("listPhone", json);
+                setResult(3, intent);
+                finish();
+
+            } else {
+                netWorkData(json);
+            }
+
+        } else {
             Uihelper.showToast(AddMembersActivity.this, "请添加班组成员");
         }
 

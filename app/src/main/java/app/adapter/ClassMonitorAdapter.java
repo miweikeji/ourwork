@@ -24,7 +24,7 @@ public class ClassMonitorAdapter extends AllAdapter {
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
     private int type;
-    public ClassMonitorAdapter(FragmentActivity activity, List<Allcrafts> allList,
+    public ClassMonitorAdapter(Activity activity, List<Allcrafts> allList,
                                ImageLoader imageLoader, DisplayImageOptions options, int type) {
         this.activity = activity;
         this.allList = allList;

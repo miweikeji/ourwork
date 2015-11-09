@@ -11,10 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
-import app.activity.MyFriendsActivity;
 import app.entity.MyFriends;
-import app.entity.MyFriendsResult;
-import app.net.ICallback;
 import app.views.CircleImageView;
 
 /**

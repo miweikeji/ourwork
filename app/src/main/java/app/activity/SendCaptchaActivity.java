@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.text.TextUtils;
