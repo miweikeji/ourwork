@@ -1,11 +1,14 @@
 package app.activity;
 
+import android.os.Bundle;
 import android.widget.ScrollView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,14 @@ public class UnArrangeTaskActivity extends BaseActivity{
     private int p=1;
     private List<ArrangeTask> allList= new ArrayList<ArrangeTask>();
     private ImageLoader instance ;
+    private DisplayImageOptions options;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public void obtainData() {
 

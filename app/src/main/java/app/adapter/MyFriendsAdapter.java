@@ -3,6 +3,7 @@ package app.adapter;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
@@ -12,7 +13,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 import app.entity.MyFriends;
-import app.views.CircleImageView;
 
 /**
  * Created by Administrator on 2015/10/11.
@@ -41,7 +41,7 @@ public class MyFriendsAdapter extends AllAdapter{
         if(layout==null){
             holder = new ViewHolder();
             layout =  activity.getLayoutInflater().inflate(R.layout.item_my_friends,null);
-            holder.img_head = (CircleImageView)layout.findViewById(R.id.img_head);
+            holder.img_head = (ImageView)layout.findViewById(R.id.img_head);
             holder.tv_name = (TextView)layout.findViewById(R.id.tv_name);
             holder.tv_age = (TextView)layout.findViewById(R.id.tv_age);
             holder.tv_case = (TextView)layout.findViewById(R.id.tv_case);
@@ -67,7 +67,7 @@ public class MyFriendsAdapter extends AllAdapter{
     }
 
     public class ViewHolder{
-        CircleImageView img_head;
+        ImageView img_head;
         TextView tv_name;
         TextView tv_age;
         TextView tv_case;

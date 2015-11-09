@@ -23,6 +23,7 @@ import app.tools.MyLog;
 import app.utils.MD5Util;
 import app.utils.MobileOS;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.NavigationBar;
 
 public class SendCaptchaActivity extends BaseActivity implements View.OnClickListener {
@@ -212,6 +213,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
                     disMissWaitingDialog();
                     MyLog.e("", "result=" + result.toString());
                     Toast.makeText(SendCaptchaActivity.this, "result.toString()", Toast.LENGTH_LONG).show();
+                    UserUtil.saveUserId(mActivity, result.getId());
                     BasicInfoActivity.startActivity(SendCaptchaActivity.this, result.getId());
                     finish();
                 }

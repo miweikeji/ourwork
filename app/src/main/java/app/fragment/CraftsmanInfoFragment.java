@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ import app.entity.GroupInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
-import app.views.CircleImageView;
+import app.views.CircleBitmapDisplayer;
 
 /**
  * Created by Administrator on 2015/10/12.
@@ -32,7 +33,7 @@ public class CraftsmanInfoFragment extends Fragment {
     private RelativeLayout rl_normal;//普通工匠
     private RelativeLayout rl_foreman;//帶班班長
     private RelativeLayout rl_is_foreman;
-    private CircleImageView userImage;
+    private ImageView userImage;
     private TextView age;
     private TextView jobAge;
     private TextView jobType;
@@ -61,7 +62,8 @@ public class CraftsmanInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_craftsman_info, null);
         imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
+        options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
+                .displayer(new CircleBitmapDisplayer()).build();
         initUI(layout);
         netWorkData();
         return layout;
@@ -131,7 +133,7 @@ public class CraftsmanInfoFragment extends Fragment {
         rl_is_foreman = (RelativeLayout) layout.findViewById(R.id.rl_is_foreman);
         oldCase = (TextView) layout.findViewById(R.id.tv_ole_case);
 
-        userImage = (CircleImageView) layout.findViewById(R.id.iv_me_userimage);
+        userImage = (ImageView) layout.findViewById(R.id.iv_me_userimage);
         area = (TextView) layout.findViewById(R.id.tv_me_area);
         age = (TextView) layout.findViewById(R.id.tv_me_age);
         jobAge = (TextView) layout.findViewById(R.id.tv_me_jobage);

@@ -25,14 +25,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <view
+                    <ImageView
                         android:id="@+id/iv_me_userimage"
-                        class="app.views.CircleImageView"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="5dp"
+                        android:background="@color/transparent"
                         android:src="@mipmap/test" />
                 </RelativeLayout>
 

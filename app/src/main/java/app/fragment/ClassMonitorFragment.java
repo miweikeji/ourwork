@@ -28,6 +28,7 @@ import app.entity.craftsListResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.views.CircleBitmapDisplayer;
 import app.views.ProgressDialogView;
 
 /**
@@ -48,7 +49,8 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_class_monitor, null);
         imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
+        options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
+                .displayer(new CircleBitmapDisplayer()).build();
         dialog = ProgressDialogView.create(getActivity());
         initUI(layout);
         netWorkData();

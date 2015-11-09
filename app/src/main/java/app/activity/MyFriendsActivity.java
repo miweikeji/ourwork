@@ -1,6 +1,7 @@
 package app.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -8,7 +9,9 @@ import android.widget.ListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 
 import java.util.ArrayList;
@@ -30,10 +33,16 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
     private  PullToRefreshListView pull_list;
     private int p=1;
     private List<MyFriends> allList = new ArrayList<MyFriends>();
-    private  ImageLoader instance;
+    private DisplayImageOptions options;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public void obtainData() {
-        instance = ImageLoader.getInstance();
     }
 
     @Override
@@ -69,7 +78,7 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
                 List<MyFriends> message = result.getMessage();
                 allList.addAll(message);
                 if(p==1){
-                    adapter = new MyFriendsAdapter(MyFriendsActivity.this, allList,instance,options);
+                    adapter = new MyFriendsAdapter(MyFriendsActivity.this, allList,imageLoader,options);
                     list.setAdapter(adapter);
                 }else {
                     adapter.notifyDataSetChanged();

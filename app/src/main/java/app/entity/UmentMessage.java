@@ -10,6 +10,15 @@ public class UmentMessage {
     private String text;
     private String afte_open;
     private String activity;
+    private int messageId;
+
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
 
     public String getTitle() {
         return title;

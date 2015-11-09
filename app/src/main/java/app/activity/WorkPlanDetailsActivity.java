@@ -1,6 +1,7 @@
 package app.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,14 @@ public class WorkPlanDetailsActivity extends BaseActivity implements View.OnClic
     private WorkPlanDetailsAdapter adapter;
     private PullToRefreshScrollView scrollView;
     private ArrayList<DetailPlan> allCases = new ArrayList<DetailPlan>();
+    private DisplayImageOptions options;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public void obtainData() {
 

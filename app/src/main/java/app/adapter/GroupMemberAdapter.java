@@ -3,6 +3,7 @@ package app.adapter;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 
 import app.activity.GroupMembersActivity;
 import app.entity.GroupMembe;
-import app.views.CircleImageView;
 
 /**
  * Created by Administrator on 2015/10/13.
@@ -42,7 +42,7 @@ public class GroupMemberAdapter extends AllAdapter{
         if(layout==null){
             holder = new ViewHolder();
            layout = activity.getLayoutInflater().inflate(R.layout.item_group_member, null);
-            holder.img_head=(CircleImageView)layout.findViewById(R.id.img_head);
+            holder.img_head=(ImageView)layout.findViewById(R.id.img_head);
             holder.tv_name = (TextView)layout.findViewById(R.id.tv_name);
             holder.tv_age = (TextView)layout.findViewById(R.id.tv_age);
             holder.tv_work_age = (TextView)layout.findViewById(R.id.tv_work_age);
@@ -63,7 +63,7 @@ public class GroupMemberAdapter extends AllAdapter{
     }
 
     public class ViewHolder{
-        CircleImageView img_head;
+        ImageView img_head;
         TextView tv_name;
         TextView tv_age;
         TextView tv_work_age;

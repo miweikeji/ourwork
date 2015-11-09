@@ -10,10 +10,11 @@
         android:background="@color/white"
         android:layout_centerHorizontal="true">
 
-        <app.views.CircleImageView
+        <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/img_head"
+            android:background="@color/transparent"
             android:src="@mipmap/test"
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"
