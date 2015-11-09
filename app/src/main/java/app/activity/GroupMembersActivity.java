@@ -74,7 +74,7 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
             }
         });
 
-//        gangerData();
+        gangerData();
         netWorkData();
 
     }

@@ -48,6 +48,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             contents = intent.getStringExtra("CASE_TYPE");
             view_id = intent.getIntExtra("VIEW_ID", 0);
             netWorkData();
+        }else if("ChangeTasksActivity".equals(from_Activity)){
+            contents = intent.getStringExtra("CASE_TYPE");
+            view_id = intent.getIntExtra("VIEW_ID", 0);
+            netWorkData();
         }
     }
 
@@ -140,8 +144,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             }else {
                 craftsName="  ";
             }
-
             UIEventUpdate.getInstance().notifyUIUpdate(1,contents+"#"+allcrafts.getId()+"#"+allcrafts.getName()+"#"+view_id);
+            finish();
+        }else if("ChangeTasksActivity".equals(from_Activity)){
+            UIEventUpdate.getInstance().notifyUIUpdate(3,contents+"#"+allcrafts.getId()+"#"+allcrafts.getName()+"#"+view_id);
             finish();
         }
     }
