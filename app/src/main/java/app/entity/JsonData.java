@@ -24,6 +24,11 @@ public class JsonData implements Serializable{
     private String house_area;
     private String house_craftmode;
 
+
+    //注意：上传的信息  如果有某个工总或工作被接
+    // 如果没有删除或者改变修改原来上传上去，
+    // 如果增加工种那么把新的上传上去与新建上传是一样的
+
     public List<Info> getInfo() {
         return info;
     }

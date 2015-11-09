@@ -5,29 +5,74 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/6.
  */
-public class JsonDataResult extends Meta {
-    private List<Info> info;
-    private String checktime;
+public class JsonDataResult {
+    private List<HouseData> info ;
 
-    private String workplace;
-
-    private String whoid;
-    private String owner_name;
-    private String who;
-    private String type;
-    private String servertype;
-    private String owner_sex;
-    private String house_xiaoqu;
-    private String house_type;
-    private String house_area;
-    private String house_craftmode;
-
-    public List<Info> getInfo() {
+    public List<HouseData> getInfo() {
         return info;
     }
 
-    public void setInfo(List<Info> info) {
+    public void setInfo(List<HouseData> info) {
         this.info = info;
+    }
+    private String servertime;
+    private String addtime;
+    private String status;
+    private String bao;
+    private String checktime;
+    private String workplace;
+    private String whoid;
+    private String who;
+    private String type;
+    private String servertype;
+    private String id;
+    private String house_id;
+    private String house_name;
+    private String house_type;
+    private String house_area;
+    private String house_style;
+    private String craft_mode;
+    private String total_price;
+
+    public String getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(String total_price) {
+        this.total_price = total_price;
+    }
+
+
+    public String getServertime() {
+        return servertime;
+    }
+
+    public void setServertime(String servertime) {
+        this.servertime = servertime;
+    }
+
+    public String getAddtime() {
+        return addtime;
+    }
+
+    public void setAddtime(String addtime) {
+        this.addtime = addtime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getBao() {
+        return bao;
+    }
+
+    public void setBao(String bao) {
+        this.bao = bao;
     }
 
     public String getChecktime() {
@@ -46,12 +91,12 @@ public class JsonDataResult extends Meta {
         this.workplace = workplace;
     }
 
-    public String getType() {
-        return type;
+    public String getWhoid() {
+        return whoid;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setWhoid(String whoid) {
+        this.whoid = whoid;
     }
 
     public String getWho() {
@@ -62,12 +107,12 @@ public class JsonDataResult extends Meta {
         this.who = who;
     }
 
-    public String getWhoid() {
-        return whoid;
+    public String getType() {
+        return type;
     }
 
-    public void setWhoid(String whoid) {
-        this.whoid = whoid;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getServertype() {
@@ -78,28 +123,28 @@ public class JsonDataResult extends Meta {
         this.servertype = servertype;
     }
 
-    public String getOwner_name() {
-        return owner_name;
+    public String getId() {
+        return id;
     }
 
-    public void setOwner_name(String owner_name) {
-        this.owner_name = owner_name;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getOwner_sex() {
-        return owner_sex;
+    public String getHouse_id() {
+        return house_id;
     }
 
-    public void setOwner_sex(String owner_sex) {
-        this.owner_sex = owner_sex;
+    public void setHouse_id(String house_id) {
+        this.house_id = house_id;
     }
 
-    public String getHouse_xiaoqu() {
-        return house_xiaoqu;
+    public String getHouse_name() {
+        return house_name;
     }
 
-    public void setHouse_xiaoqu(String house_xiaoqu) {
-        this.house_xiaoqu = house_xiaoqu;
+    public void setHouse_name(String house_name) {
+        this.house_name = house_name;
     }
 
     public String getHouse_type() {
@@ -118,11 +163,20 @@ public class JsonDataResult extends Meta {
         this.house_area = house_area;
     }
 
-    public String getHouse_craftmode() {
-        return house_craftmode;
+    public String getHouse_style() {
+        return house_style;
     }
 
-    public void setHouse_craftmode(String house_craftmode) {
-        this.house_craftmode = house_craftmode;
+    public void setHouse_style(String house_style) {
+        this.house_style = house_style;
     }
+
+    public String getCraft_mode() {
+        return craft_mode;
+    }
+
+    public void setCraft_mode(String craft_mode) {
+        this.craft_mode = craft_mode;
+    }
+
 }

@@ -709,10 +709,10 @@ public class ConstructionTasksActivity extends BaseActivity implements
         if (hasMap != null) {
             removeList.clear();
             surplusList.clear();
+            list.clear();
             hasType.clear();
             hasType = (HashMap<Integer, String>) hasMap.clone();
             MyLog.e("", "hasType=" + hasType.size());
-            list.clear();
             name = new TextView[7];
 
             list_choose = new MyListView[7];
