@@ -1,6 +1,7 @@
 package app.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.UIEventUpdate;
 import app.utils.Uihelper;
+import app.views.CircleBitmapDisplayer;
 import app.views.NavigationBar;
 
 /**
@@ -39,6 +43,15 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private String from_Activity;
     private String contents;
     private int view_id;
+    private DisplayImageOptions options;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
+                .displayer(new CircleBitmapDisplayer()).build();
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public void obtainData() {
         imageLoader = ImageLoader.getInstance();

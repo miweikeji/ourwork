@@ -58,6 +58,7 @@ import app.utils.ICallbackUri;
 import app.utils.ImageViewUtil;
 import app.utils.Uihelper;
 import app.utils.UserUtil;
+import app.views.CircleBitmapDisplayer;
 
 /**
  * Created by Administrator on 2015/10/2.
@@ -98,10 +99,12 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         layout = inflater.inflate(R.layout.fragment_mine, null);
         imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
+        options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
+
+                .displayer(new CircleBitmapDisplayer()).build();
         httpUtils = new HttpUtils();
         findView(layout);
-        obtainSign();
+//        obtainSign();
         obtainData();
 
         return layout;
@@ -180,13 +183,13 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
     }
 
     private void setData(Crafts crafts) {
-
-        tvAge.setText(crafts.getAge());
-        tvArea.setText(crafts.getAddress());
+//
+        tvAge.setText(crafts.getAge()+"");
+        tvArea.setText(crafts.getCworkhome());
         tvJob.setText(crafts.getProfession());
         tvJobage.setText(crafts.getCworkold() + "年工龄");
-        tvName.setText(crafts.getBusername());
-        imageLoader.displayImage(crafts.getCard_bimg(), ivUserImage, options);
+        tvName.setText(crafts.getName());
+        imageLoader.displayImage(crafts.getCimg(), ivUserImage, options);
 
 
     }
@@ -199,6 +202,7 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
                 Crafts crafts = result.getCrafts();
                 if (crafts != null) {
                     setData(crafts);
+
                 }
             }
 
@@ -236,41 +240,39 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
                 break;
             //签到
             case R.id.tv_sign:
-                if (dialogSign == null) {
-                    dialogSign = new DialogSign(getActivity(), signTime, isSign, hasCase) {
+                if (UserUtil.isLogin(getActivity())) {
+                    if (dialogSign == null) {
+                        dialogSign = new DialogSign(getActivity(), signTime, isSign, hasCase) {
 
-                        @Override
-                        public void sign() {
-                            dialogSign.dismiss();
-                            HttpRequest.signIn(getActivity(), new ICallback<Meta>() {
-                                @Override
-                                public void onSucceed(Meta result) {
+                            @Override
+                            public void sign() {
+                                dialogSign.dismiss();
+                                HttpRequest.signIn(getActivity(), new ICallback<Meta>() {
+                                    @Override
+                                    public void onSucceed(Meta result) {
 
-                                    Uihelper.showToast(getActivity(), "签到成功");
-                                    obtainSign();
-                                }
+                                        Uihelper.showToast(getActivity(), "签到成功");
+                                        obtainSign();
+                                    }
 
-                                @Override
-                                public void onFail(String error) {
+                                    @Override
+                                    public void onFail(String error) {
 
-                                    Uihelper.showToast(getActivity(), error);
+                                        Uihelper.showToast(getActivity(), error);
+                                    }
+                                });
+                            }
 
-                                }
-                            });
-
-                        }
-
-                        @Override
-                        public void toCase() {
-                            dialogSign.dismiss();
-                            startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
-
-                        }
-
-                    };
+                            @Override
+                            public void toCase() {
+                                dialogSign.dismiss();
+                                startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
+                            }
+                        };
+                    }
+                    dialogSign.show();
                 }
 
-                dialogSign.show();
                 break;
             //意见反馈
             case R.id.frame_me_suggestion:

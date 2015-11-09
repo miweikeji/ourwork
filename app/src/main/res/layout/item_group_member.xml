@@ -11,10 +11,11 @@
         android:background="@drawable/bg_item"
         >
 
-        <app.views.CircleImageView
+        <ImageView
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:id="@+id/img_head"
+            android:background="@color/transparent"
             android:src="@mipmap/test"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"

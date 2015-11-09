@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 
 import java.util.List;
@@ -45,6 +47,7 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
             "http://mss-product.oss-cn-shenzhen.aliyuncs.com/picture/advert/p720/A720_1442919679412.jpg"};
 
     JobOpportunityFragmentDelegate delegate;
+    private DisplayImageOptions options;
 
     @Override
     public void onClick(View v) {
@@ -83,6 +86,7 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
         imageLoader = ImageLoader.getInstance();
         initUI();
         netWorkData();
+        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
 
         return layout;
     }
@@ -195,7 +199,7 @@ public class JobOpportunityFragment extends Fragment implements ViewPager.OnPage
             fragment.setPostion(index);
             fragment.setUrl(advert);
             fragment.setImageLoader(imageLoader);
-            fragment.setOption(BaseActivity.options);
+            fragment.setOption(options);
             return fragment;
         }
 

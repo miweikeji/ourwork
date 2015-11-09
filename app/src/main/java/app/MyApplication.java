@@ -124,12 +124,12 @@ public class MyApplication extends Application {
         if (TextUtils.isEmpty(custom)) {
             return;
         }
-        UmengMessageResult mate = JsonUtil.parseObject(custom, UmengMessageResult.class);
-        if (mate == null) {
+        UmengMessageResult message = JsonUtil.parseObject(custom, UmengMessageResult.class);
+        if (message == null) {
             return;
         }
-        String title = mate.getCustom().getTitle();
-        String content = mate.getCustom().getText();
+        String title = message.getCustom().getTitle();
+        String content = message.getCustom().getText();
 
         if (!MyApplication.getInstance().isCurrent()) {
             notificationIntent = new Intent(context, AppStartActivity.class);
@@ -172,7 +172,7 @@ public class MyApplication extends Application {
         // 定义NotificationManager
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
-        mNotificationManager.notify(4646, mBuilder.build());
+        mNotificationManager.notify(message.getCustom().getMessageId(), mBuilder.build());
 
     }
 

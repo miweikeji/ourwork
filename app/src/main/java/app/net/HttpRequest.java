@@ -1115,9 +1115,7 @@ public class HttpRequest {
      */
     public static void myInfo(Context context, final ICallback<CraftsResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
-        mList.add(new Param("cid", UserUtil.getUserId(context)));
-
-
+        mList.add(new Param("id", UserUtil.getUserId(context)));
         new MyAsyncTask(context, Urls.myInfo, mList, new ICallback<String>() {
 
             @Override

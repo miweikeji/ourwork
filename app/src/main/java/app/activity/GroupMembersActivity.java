@@ -1,13 +1,15 @@
 package app.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.miweikeij.app.R;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ import app.entity.GroupMemberResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
-import app.views.CircleImageView;
+import app.views.CircleBitmapDisplayer;
 import app.views.MyGridView;
 import app.views.NavigationBar;
 
@@ -32,23 +34,30 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
     private MyGridView grid_memeber;
     private GroupMemberAdapter adapter;
     private ArrayList<GroupMembe> AllList = new ArrayList<GroupMembe>();
-    private ImageLoader imageLoader;
-    private CircleImageView userImage;
+    private ImageView userImage;
     private TextView age;
     private TextView jobAge;
     private TextView jobType;
     private TextView area;
     private TextView foremanName;
     private String groupid;
+    public static DisplayImageOptions options;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
+                .displayer(new CircleBitmapDisplayer()).build();
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public void obtainData() {
-        imageLoader = ImageLoader.getInstance();
     }
 
     @Override
     public void initUI() {
 
-        userImage = (CircleImageView)findViewById(R.id.iv_me_userimage);
+        userImage = (ImageView)findViewById(R.id.iv_me_userimage);
         area = (TextView)findViewById(R.id.tv_me_area);
         age = (TextView)findViewById(R.id.tv_me_age);
         jobAge = (TextView)findViewById(R.id.tv_me_jobage);
@@ -99,12 +108,9 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
 
             }
         });
-
     }
 
     private void netWorkData() {
-
-
         HttpRequest.getGroupCraftsHttp(this, "100", "1", p, new ICallback<GroupMemberResult>() {
             @Override
             public void onSucceed(GroupMemberResult result) {

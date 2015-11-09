@@ -25,7 +25,6 @@ import app.views.ProgressDialogView;
 public abstract class BaseActivity extends FragmentActivity {
 
     private LinearLayout mContentView;
-    public static DisplayImageOptions options;
     public static LinkedList<Activity> sAllActivitys = new LinkedList<Activity>();
     public Activity mActivity;
     public NavigationBar mBar;
@@ -38,7 +37,6 @@ public abstract class BaseActivity extends FragmentActivity {
         setContentView(R.layout.activity_base);
         mActivity = this;
         imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
         mBar = (NavigationBar) findViewById(R.id.navigationBar);
         initCotentView();
         initUI();

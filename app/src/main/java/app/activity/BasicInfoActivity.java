@@ -16,6 +16,7 @@ import app.net.HttpRequest;
 import app.net.ICallback;
 import app.popupwindow.WorkTypePopup;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.NavigationBar;
 
 public class BasicInfoActivity extends BaseActivity implements View.OnClickListener,
@@ -88,7 +89,7 @@ public class BasicInfoActivity extends BaseActivity implements View.OnClickListe
 
     private void complete(String name, String age, String worktype, String workage, String address) {
         showWaitingDialog();
-        HttpRequest.infoHttp(this, id, name, age, worktype, workage, address, new ICallback<Meta>() {
+        HttpRequest.infoHttp(this, UserUtil.getUserId(mActivity), name, age, worktype, workage, address, new ICallback<Meta>() {
             @Override
             public void onSucceed(Meta result) {
                 disMissWaitingDialog();

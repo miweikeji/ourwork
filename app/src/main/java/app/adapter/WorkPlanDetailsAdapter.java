@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
@@ -16,7 +17,6 @@ import app.activity.WorkPlanDetailsActivity;
 import app.entity.DetailPlan;
 import app.tools.ImageLoadTools;
 import app.tools.StatusTools;
-import app.views.CircleImageView;
 
 /**
  * Created by Administrator on 2015/10/27.
@@ -47,7 +47,7 @@ public class WorkPlanDetailsAdapter extends AllAdapter {
             holder.tv_name_and_case = (TextView) layout.findViewById(R.id.tv_name_and_case);
             holder.tv_time = (TextView) layout.findViewById(R.id.tv_time);
             holder.tv_pam = (TextView) layout.findViewById(R.id.tv_pam);
-            holder.img_head = (CircleImageView) layout.findViewById(R.id.img_head);
+            holder.img_head = (ImageView) layout.findViewById(R.id.img_head);
             layout.setTag(holder);
         }else {
              holder = (ViewHolder) layout.getTag();
@@ -80,6 +80,6 @@ public class WorkPlanDetailsAdapter extends AllAdapter {
         TextView tv_name_and_case;
         TextView tv_time;
         TextView tv_pam;
-        CircleImageView img_head;
+        ImageView img_head;
     }
 }

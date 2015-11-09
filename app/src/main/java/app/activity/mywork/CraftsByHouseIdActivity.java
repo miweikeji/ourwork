@@ -1,11 +1,14 @@
 package app.activity.mywork;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,7 @@ import app.entity.CraftsByHouseIdResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.views.CircleBitmapDisplayer;
 import app.views.NavigationBar;
 
 /**
@@ -26,6 +30,14 @@ public class CraftsByHouseIdActivity extends BaseActivity {
     private CraftsAdapter adapter;
     private ListView listView;
     List<Allcrafts> items = new ArrayList<>();
+    private DisplayImageOptions options;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
+                .displayer(new CircleBitmapDisplayer()).build();
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void obtainData() {

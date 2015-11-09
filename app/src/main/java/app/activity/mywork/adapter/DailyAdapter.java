@@ -22,7 +22,6 @@ import app.entity.GroupMembe;
 import app.tools.StatusTools;
 import app.utils.MobileOS;
 import app.utils.Uihelper;
-import app.views.CircleImageView;
 import app.views.SodukuGridView;
 
 /**
