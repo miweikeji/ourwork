@@ -38,7 +38,7 @@ public class TimeTools {
         return Integer.parseInt(String.valueOf(between_days));
     }
     public static String longToDateStr(Double timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
         String date = sdf.format(new Date((long) (timestamp * 1000L)));
         return date;
     }

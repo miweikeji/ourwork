@@ -225,6 +225,7 @@
 
         <activity
             android:name="app.activity.ChangeTasksActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_find_fartner"
             android:screenOrientation="portrait"></activity>
@@ -295,6 +296,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"></activity>
         <activity
+            android:name="app.activity.ServerTimesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"></activity>
+        <activity
             android:name="app.activity.MyWorkDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"></activity>
@@ -337,6 +342,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.ConstructionTasksActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"></activity>
         <activity

@@ -30,6 +30,12 @@ public class ChangeTaskAdapter extends AllAdapter {
     removeNameItem removeNameListens;
     addNameItem addNameListens;
     billingTypeItem billingTypeListens;
+    addCaseNmae addCaseNmaeListens;
+    changeTime changeTimeListens;
+
+    public void setChangeTimeListens(changeTime changeTimeListens) {
+        this.changeTimeListens = changeTimeListens;
+    }
 
     public void setData(List<HouseData> infoList) {
         this.infoList = infoList;
@@ -38,6 +44,13 @@ public class ChangeTaskAdapter extends AllAdapter {
     public interface removeItem{
         void removePosition(int position,String wtype);
     }
+    public interface changeTime{
+        void changeTimePosition(int position,String wtype);
+    }
+    public interface addCaseNmae{
+        void addCaseNmaePosition(int position,String wtype,int id);
+    }
+
     public interface removeNameItem{
         void removeNamePosition(int position,String wtype,int id);
     }
@@ -50,6 +63,10 @@ public class ChangeTaskAdapter extends AllAdapter {
 
     public void setBillingTypeListens(billingTypeItem billingTypeListens) {
         this.billingTypeListens = billingTypeListens;
+    }
+
+    public void setAddCaseNmaeListens(addCaseNmae addCaseNmaeListens) {
+        this.addCaseNmaeListens = addCaseNmaeListens;
     }
 
     public void setRemoveNameListens(removeNameItem removeNameListens) {
@@ -119,6 +136,13 @@ public class ChangeTaskAdapter extends AllAdapter {
                 tv_name.setText("通过平台找工匠");
             }
             tv_case_type.setText(StatusTools.workTypes(info.getWtype()));
+            rl_invitation.setId(i);
+            rl_invitation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addCaseNmaeListens.addCaseNmaePosition(position,info.getWtype(),v.getId());
+                }
+            });
             rl_del_case.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -151,6 +175,12 @@ public class ChangeTaskAdapter extends AllAdapter {
                         billingTypeListens.billingTypePosition(position, "" + i, type);
                     }
                 });
+            }
+        });
+        holder.rl_to_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeTimeListens.changeTimePosition(position,info.getWtype());
             }
         });
         return layout;

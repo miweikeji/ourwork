@@ -12,6 +12,7 @@ public class UIEventUpdate {
 	public interface PositionKey{
 		public static final int INVITATION_CASE = 1;
 		public static final int INVITATION_SERVERTIME=2;
+		public static final int INVIATION_CHANGEtASKS=3;
 	}
 	
 
