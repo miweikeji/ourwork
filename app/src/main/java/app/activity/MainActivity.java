@@ -54,11 +54,11 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (UserUtil.hasLogin(this)) {
-            if (!UserInfo.getInstance().hasinfo) {
-                BasicInfoActivity.startActivity(this, UserInfo.getInstance().getId());
-            }
-        }
+//        if (UserUtil.hasLogin(this)) {
+//            if (!UserInfo.getInstance().hasinfo) {
+//                BasicInfoActivity.startActivity(this, UserInfo.getInstance().getId());
+//            }
+//        }
         setContentView(R.layout.activity_main);
         profession = getIntent().getStringExtra(Constants.USER_PROFESSION_TYPE);//工匠的工种
         initUI();

@@ -30,7 +30,7 @@
 
             <RelativeLayout
                 android:layout_weight="1"
-                android:id="@+id/rl_invitation"
+                android:id="@+id/rl_invitation_"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

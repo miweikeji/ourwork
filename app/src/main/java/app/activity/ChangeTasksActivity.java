@@ -2,6 +2,7 @@ package app.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.miweikeij.app.R;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,7 +79,7 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
         RelativeLayout rl_time_chose = (RelativeLayout) findViewById(R.id.rl_time_chose);
         list_task = (ListView) findViewById(R.id.list_task);
         tv_add_case.setOnClickListener(this);
-        rl_time_chose.setOnClickListener(this);
+//        rl_time_chose.setOnClickListener(this);
         adapter = new ChangeTaskAdapter(ChangeTasksActivity.this);
         adapter.setAddNameListens(this);
         adapter.setRemoveListens(this);
@@ -426,6 +428,11 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
         }
 
         if(saveStartDataMap.containsKey(wtype)){
+            HouseData data = saveStartDataMap.get(wtype);
+            List<Ctime> time = data.getTime();
+            Intent intent = new Intent(this, ServerTimesActivity.class);
+            intent.putExtra("ChangeTasksActivity",(Serializable)time);
+            startActivity(intent);
 
         }else {
             Intent intent4 = new Intent(this, ServerTimeActivity.class);
@@ -527,6 +534,7 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
                     }
                     houseData.setTime(clistQiao);
                 }
+                saveStartDataMap.put(type,houseData);
                 break;
         }
     }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import app.entity.Ctime;
 import app.entity.Time;
 import app.tools.TimeTools;
 import app.tools.UIEventUpdate;
@@ -97,6 +99,9 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
 //    private List<String> itemInfo = new ArrayList<>();
 
 
+
+    private int flages;
+    List<List<String>> pageDate = new ArrayList<>();
     @Override
     public void obtainData() {
 
@@ -104,32 +109,62 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
 
     @Override
     public void initUI() {
-        Intent intent = getIntent();
+        Intent intent = getIntent();//time longToDateStr
+        List<Ctime> time= (List<Ctime>) intent.getSerializableExtra("ChangeTasksActivity");
         time_day = intent.getIntExtra("time_day", 0)-1;
         case_type = intent.getStringExtra("CASE_TYPE");
-
-        if(time_day<8){
+        time_day = time.size();
+        if(time.size()<8){
             group=1;
-            List<List<String>> pageList = new ArrayList<>();
-            for (int j=0;j<7;j++){
-                List<String> itemInfo = new ArrayList<>();
-                pageList.add(itemInfo);
+            for(int m=0;m<time.size();m++){
+                List<String> itemPageData = new ArrayList<>();
+                itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(m).getDatatime()))+"#"+time.get(m).getAm()+"#"+time.get(m).getPm());
+                pageDate.add(itemPageData);
             }
-            hasPage.put(0,pageList);
+            hasPage.put(0,pageDate);
         }else {
             group=  time_day/7;
             remainder=time_day%7;
             group++;
-
-            for (int i=0;i<group;i++){
-                List<List<String>> pageList = new ArrayList<>();
-                for (int j=0;j<7;j++){
-                    List<String> itemInfo = new ArrayList<>();
-                    pageList.add(itemInfo);
+            for (int t=0;t<time.size();t++){
+                if(flages==t/7){
+                    List<List<String>> pageDate = new ArrayList<>();
+                    List<String> itemPageData = new ArrayList<>();
+                    itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(t).getDatatime()))+"#"+time.get(t).getAm()+"#"+time.get(t).getPm());
+                    pageDate.add(itemPageData);
+                    hasPage.put(flages, pageDate);
+                    flages++;
                 }
-                hasPage.put(i,pageList);
             }
         }
+
+
+
+
+
+//
+//        if(time_day<8){
+//            group=1;
+//            List<List<String>> pageList = new ArrayList<>();
+//            for (int j=0;j<7;j++){
+//                List<String> itemInfo = new ArrayList<>();
+//                pageList.add(itemInfo);
+//            }
+//            hasPage.put(0,pageList);
+//        }else {
+//            group=  time_day/7;
+//            remainder=time_day%7;
+//            group++;
+//
+//            for (int i=0;i<group;i++){
+//                List<List<String>> pageList = new ArrayList<>();
+//                for (int j=0;j<7;j++){
+//                    List<String> itemInfo = new ArrayList<>();
+//                    pageList.add(itemInfo);
+//                }
+//                hasPage.put(i,pageList);
+//            }
+//        }
 
         tv_time1 = (TextView) findViewById(R.id.tv_time1);
         tv_time2 = (TextView) findViewById(R.id.tv_time2);
@@ -195,57 +230,166 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             if(time_day<8){
                 if(time_day==1){
                     tv_time1.setText(TimeTools.getDayTime(d1, 1));
-                    rl_2_left.setEnabled(false);
-                    rl_2_right.setEnabled(false);
-                    rl_3_left.setEnabled(false);
-                    rl_3_right.setEnabled(false);
-                    rl_4_left.setEnabled(false);
-                    rl_4_right.setEnabled(false);
-                    rl_5_left.setEnabled(false);
-                    rl_5_right.setEnabled(false);
-                    rl_6_left.setEnabled(false);
-                    rl_6_right.setEnabled(false);
-                    rl_7_left.setEnabled(false);
-                    rl_7_right.setEnabled(false);
+                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
+                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                        img_am1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                        img_pm1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm1.setVisibility(View.INVISIBLE);
+                    }
+
                 }
                 if(time_day==2){
                     tv_time1.setText(TimeTools.getDayTime(d1, 1));
                     tv_time2.setText(TimeTools.getDayTime(d1, 2));
-                    rl_3_left.setEnabled(false);
-                    rl_3_right.setEnabled(false);
-                    rl_4_left.setEnabled(false);
-                    rl_4_right.setEnabled(false);
-                    rl_5_left.setEnabled(false);
-                    rl_5_right.setEnabled(false);
-                    rl_6_left.setEnabled(false);
-                    rl_6_right.setEnabled(false);
-                    rl_7_left.setEnabled(false);
-                    rl_7_right.setEnabled(false);
+                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
+                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                        img_am1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                        img_pm1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm1.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    tv_time2.setText(s2.substring(0,s2.length()-2));
+                    if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                        img_am2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am2.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                        img_pm2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm2.setVisibility(View.INVISIBLE);
+                    }
+
+
+
                 }
                 if(time_day==3){
                     tv_time1.setText(TimeTools.getDayTime(d1,1));
                     tv_time2.setText(TimeTools.getDayTime(d1,2));
                     tv_time3.setText(TimeTools.getDayTime(d1,3));
-                    rl_4_left.setEnabled(false);
-                    rl_4_right.setEnabled(false);
-                    rl_5_left.setEnabled(false);
-                    rl_5_right.setEnabled(false);
-                    rl_6_left.setEnabled(false);
-                    rl_6_right.setEnabled(false);
-                    rl_7_left.setEnabled(false);
-                    rl_7_right.setEnabled(false);
+                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
+                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                        img_am1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                        img_pm1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm1.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    tv_time2.setText(s2.substring(0,s2.length()-2));
+                    if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                        img_am2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am2.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                        img_pm2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm2.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    tv_time3.setText(s3.substring(0,s3.length()-2));
+                    if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                        img_am3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am3.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                        img_pm3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm3.setVisibility(View.INVISIBLE);
+                    }
+
+
+
+
                 }
                 if(time_day==4){
                     tv_time1.setText(TimeTools.getDayTime(d1,1));
                     tv_time2.setText(TimeTools.getDayTime(d1,2));
                     tv_time3.setText(TimeTools.getDayTime(d1,3));
                     tv_time4.setText(TimeTools.getDayTime(d1,4));
-                    rl_5_left.setEnabled(false);
-                    rl_5_right.setEnabled(false);
-                    rl_6_left.setEnabled(false);
-                    rl_6_right.setEnabled(false);
-                    rl_7_left.setEnabled(false);
-                    rl_7_right.setEnabled(false);
+                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
+                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                        img_am1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                        img_pm1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm1.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    tv_time2.setText(s2.substring(0,s2.length()-2));
+                    if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                        img_am2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am2.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                        img_pm2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm2.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    tv_time3.setText(s3.substring(0,s3.length()-2));
+                    if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                        img_am3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am3.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                        img_pm3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm3.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                    tv_time4.setText(s4.substring(0,s4.length()-2));
+                    if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
+                        img_am4.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am4.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s4.substring(s4.length()-1,s4.length()))){
+                        img_pm4.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm4.setVisibility(View.INVISIBLE);
+                    }
+
                 }
                 if(time_day==5){
                     tv_time1.setText(TimeTools.getDayTime(d1,1));
@@ -253,10 +397,77 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     tv_time3.setText(TimeTools.getDayTime(d1,3));
                     tv_time4.setText(TimeTools.getDayTime(d1,4));
                     tv_time5.setText(TimeTools.getDayTime(d1,5));
-                    rl_6_left.setEnabled(false);
-                    rl_6_right.setEnabled(false);
-                    rl_7_left.setEnabled(false);
-                    rl_7_right.setEnabled(false);
+                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
+                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                        img_am1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                        img_pm1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm1.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    tv_time2.setText(s2.substring(0,s2.length()-2));
+                    if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                        img_am2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am2.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                        img_pm2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm2.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    tv_time3.setText(s3.substring(0,s3.length()-2));
+                    if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                        img_am3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am3.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                        img_pm3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm3.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                    tv_time4.setText(s4.substring(0,s4.length()-2));
+                    if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
+                        img_am4.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am4.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s4.substring(s4.length()-1,s4.length()))){
+                        img_pm4.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm4.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s5 = pageDate.get(4).get(0).substring(pageDate.get(4).get(0).length() - 13, pageDate.get(4).get(0).length());
+                    tv_time5.setText(s5.substring(0,s5.length()-2));
+                    if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
+                        img_am5.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am5.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s5.substring(s5.length()-1,s5.length()))){
+                        img_pm5.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm5.setVisibility(View.INVISIBLE);
+                    }
+
+
                 }
                 if(time_day==6){
                     tv_time1.setText(TimeTools.getDayTime(d1,1));
@@ -265,8 +476,92 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     tv_time4.setText(TimeTools.getDayTime(d1,4));
                     tv_time5.setText(TimeTools.getDayTime(d1,5));
                     tv_time6.setText(TimeTools.getDayTime(d1,6));
-                    rl_7_left.setEnabled(false);
-                    rl_7_right.setEnabled(false);
+                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
+                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                        img_am1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                        img_pm1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm1.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    tv_time2.setText(s2.substring(0,s2.length()-2));
+                    if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                        img_am2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am2.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                        img_pm2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm2.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    tv_time3.setText(s3.substring(0,s3.length()-2));
+                    if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                        img_am3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am3.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                        img_pm3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm3.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                    tv_time4.setText(s4.substring(0,s4.length()-2));
+                    if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
+                        img_am4.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am4.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s4.substring(s4.length()-1,s4.length()))){
+                        img_pm4.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm4.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s5 = pageDate.get(4).get(0).substring(pageDate.get(4).get(0).length() - 13, pageDate.get(4).get(0).length());
+                    tv_time5.setText(s5.substring(0,s5.length()-2));
+                    if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
+                        img_am5.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am5.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s5.substring(s5.length()-1,s5.length()))){
+                        img_pm5.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm5.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s6 = pageDate.get(5).get(0).substring(pageDate.get(5).get(0).length() - 13, pageDate.get(5).get(0).length());
+                    tv_time6.setText(s6.substring(0,s6.length()-2));
+                    if("1".equals(s6.substring(s6.length()-2,s6.length()-1))){
+                        img_am6.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am6.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s6.substring(s6.length()-1,s6.length()))){
+                        img_pm6.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm6.setVisibility(View.INVISIBLE);
+                    }
+
+
+
                 }
                 if(time_day==7){
                     tv_time1.setText(TimeTools.getDayTime(d1,1));
@@ -276,6 +571,103 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     tv_time5.setText(TimeTools.getDayTime(d1,5));
                     tv_time6.setText(TimeTools.getDayTime(d1,6));
                     tv_time7.setText(TimeTools.getDayTime(d1,7));
+                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
+                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                        img_am1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                        img_pm1.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm1.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    tv_time2.setText(s2.substring(0,s2.length()-2));
+                    if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                        img_am2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am2.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                        img_pm2.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm2.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    tv_time3.setText(s3.substring(0,s3.length()-2));
+                    if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                        img_am3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am3.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                        img_pm3.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm3.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                    tv_time4.setText(s4.substring(0,s4.length()-2));
+                    if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
+                        img_am4.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am4.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s4.substring(s4.length()-1,s4.length()))){
+                        img_pm4.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm4.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s5 = pageDate.get(4).get(0).substring(pageDate.get(4).get(0).length() - 13, pageDate.get(4).get(0).length());
+                    tv_time5.setText(s5.substring(0,s5.length()-2));
+                    if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
+                        img_am5.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am5.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s5.substring(s5.length()-1,s5.length()))){
+                        img_pm5.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm5.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s6 = pageDate.get(5).get(0).substring(pageDate.get(5).get(0).length() - 13, pageDate.get(5).get(0).length());
+                    tv_time6.setText(s6.substring(0,s6.length()-2));
+                    if("1".equals(s6.substring(s6.length()-2,s6.length()-1))){
+                        img_am6.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am6.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s6.substring(s6.length()-1,s6.length()))){
+                        img_pm6.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm6.setVisibility(View.INVISIBLE);
+                    }
+
+                    String s7 = pageDate.get(6).get(0).substring(pageDate.get(6).get(0).length() - 13, pageDate.get(6).get(0).length());
+                    tv_time7.setText(s7.substring(0,s7.length()-2));
+                    if("1".equals(s7.substring(s7.length()-2,s7.length()-1))){
+                        img_am7.setVisibility(View.VISIBLE);
+                    }else {
+                        img_am7.setVisibility(View.INVISIBLE);
+                    }
+
+                    if("1".equals(s7.substring(s7.length()-1,s7.length()))){
+                        img_pm7.setVisibility(View.VISIBLE);
+                    }else {
+                        img_pm7.setVisibility(View.INVISIBLE);
+                    }
                 }
             }else {
                 tv_time1.setText(TimeTools.getDayTime(d1,1));
@@ -285,6 +677,106 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                 tv_time5.setText(TimeTools.getDayTime(d1,5));
                 tv_time6.setText(TimeTools.getDayTime(d1,6));
                 tv_time7.setText(TimeTools.getDayTime(d1,7));
+
+
+                String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
+                tv_time1.setText(s1.substring(0,s1.length()-2));
+                if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                    img_am1.setVisibility(View.VISIBLE);
+                }else {
+                    img_am1.setVisibility(View.INVISIBLE);
+                }
+
+                if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                    img_pm1.setVisibility(View.VISIBLE);
+                }else {
+                    img_pm1.setVisibility(View.INVISIBLE);
+                }
+
+                String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                tv_time2.setText(s2.substring(0,s2.length()-2));
+                if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                    img_am2.setVisibility(View.VISIBLE);
+                }else {
+                    img_am2.setVisibility(View.INVISIBLE);
+                }
+
+                if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                    img_pm2.setVisibility(View.VISIBLE);
+                }else {
+                    img_pm2.setVisibility(View.INVISIBLE);
+                }
+
+                String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                tv_time3.setText(s3.substring(0,s3.length()-2));
+                if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                    img_am3.setVisibility(View.VISIBLE);
+                }else {
+                    img_am3.setVisibility(View.INVISIBLE);
+                }
+
+                if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                    img_pm3.setVisibility(View.VISIBLE);
+                }else {
+                    img_pm3.setVisibility(View.INVISIBLE);
+                }
+
+                String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                tv_time4.setText(s4.substring(0,s4.length()-2));
+                if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
+                    img_am4.setVisibility(View.VISIBLE);
+                }else {
+                    img_am4.setVisibility(View.INVISIBLE);
+                }
+
+                if("1".equals(s4.substring(s4.length()-1,s4.length()))){
+                    img_pm4.setVisibility(View.VISIBLE);
+                }else {
+                    img_pm4.setVisibility(View.INVISIBLE);
+                }
+
+                String s5 = pageDate.get(4).get(0).substring(pageDate.get(4).get(0).length() - 13, pageDate.get(4).get(0).length());
+                tv_time5.setText(s5.substring(0,s5.length()-2));
+                if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
+                    img_am5.setVisibility(View.VISIBLE);
+                }else {
+                    img_am5.setVisibility(View.INVISIBLE);
+                }
+
+                if("1".equals(s5.substring(s5.length()-1,s5.length()))){
+                    img_pm5.setVisibility(View.VISIBLE);
+                }else {
+                    img_pm5.setVisibility(View.INVISIBLE);
+                }
+
+                String s6 = pageDate.get(5).get(0).substring(pageDate.get(5).get(0).length() - 13, pageDate.get(5).get(0).length());
+                tv_time6.setText(s6.substring(0,s6.length()-2));
+                if("1".equals(s6.substring(s6.length()-2,s6.length()-1))){
+                    img_am6.setVisibility(View.VISIBLE);
+                }else {
+                    img_am6.setVisibility(View.INVISIBLE);
+                }
+
+                if("1".equals(s6.substring(s6.length()-1,s6.length()))){
+                    img_pm6.setVisibility(View.VISIBLE);
+                }else {
+                    img_pm6.setVisibility(View.INVISIBLE);
+                }
+
+                String s7 = pageDate.get(6).get(0).substring(pageDate.get(6).get(0).length() - 13, pageDate.get(6).get(0).length());
+                tv_time7.setText(s7.substring(0,s7.length()-2));
+                if("1".equals(s7.substring(s7.length()-2,s7.length()-1))){
+                    img_am7.setVisibility(View.VISIBLE);
+                }else {
+                    img_am7.setVisibility(View.INVISIBLE);
+                }
+
+                if("1".equals(s7.substring(s7.length()-1,s7.length()))){
+                    img_pm7.setVisibility(View.VISIBLE);
+                }else {
+                    img_pm7.setVisibility(View.INVISIBLE);
+                }
+
             }
 
         } catch (ParseException e) {

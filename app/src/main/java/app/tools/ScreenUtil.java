@@ -6,6 +6,7 @@ package app.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.Display;
 
 import java.lang.reflect.Field;
@@ -41,6 +42,16 @@ public class ScreenUtil {
         return display.getWidth();
 
     }
+
+
+    public static int getScreenHeight(Activity context){
+//        DisplayMetrics dm = new DisplayMetrics();
+//         //获取屏幕信息
+//        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Display display = context.getWindowManager().getDefaultDisplay();
+        return display.getHeight();
+    }
+
 
     public int dip2px(int dip){
         float density = getDensity(mCtx);

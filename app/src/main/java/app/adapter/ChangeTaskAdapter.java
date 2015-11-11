@@ -125,7 +125,7 @@ public class ChangeTaskAdapter extends AllAdapter {
         for (int i=0;i<num;i++){
             View view = activity.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
             RelativeLayout rl_del_case = (RelativeLayout) view.findViewById(R.id.rl_del_case);
-            RelativeLayout rl_invitation = (RelativeLayout) view.findViewById(R.id.rl_invitation);
+            RelativeLayout rl_invitation = (RelativeLayout) view.findViewById(R.id.rl_invitation_);
             TextView tv_case_type = (TextView) view.findViewById(R.id.tv_case_type);
             TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
             rl_del_case.setId(i);

@@ -1,9 +1,11 @@
 package app.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/11/6.
  */
-public class Ctime {
+public class Ctime implements Serializable {
 
     private String datatime;
     private String am;

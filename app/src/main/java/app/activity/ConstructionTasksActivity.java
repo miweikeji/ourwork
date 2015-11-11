@@ -316,8 +316,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 for (int i = 0; i < count1; i++) {
                     View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
                     view1.add(layout);
-                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_del_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation_);
                     TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
                     TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
                     tvhas1.put(10001 + i, tv_name);
@@ -375,8 +375,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 tvhas2.clear();
                 for (int i = 0; i < count2; i++) {
                     View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_del_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation_);
                     TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
                     TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
 
@@ -435,8 +435,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 tvhas3.clear();
                 for (int i = 0; i < count3; i++) {
                     View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_del_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation_);
                     TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
                     TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
                     tv_case_type.setText(strCase[2]);
@@ -492,8 +492,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 tvhas4.clear();
                 for (int i = 0; i < count4; i++) {
                     View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_del_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation_);
                     TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
                     TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
                     tv_case_type.setText(strCase[3]);
@@ -552,8 +552,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 tvhas5.clear();
                 for (int i = 0; i < count5; i++) {
                     View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_del_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation_);
                     TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
                     TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
                     tv_case_type.setText(strCase[4]);
@@ -612,8 +612,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 tvhas6.clear();
                 for (int i = 0; i < count6; i++) {
                     View layout = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_list_choose_case, null);
-                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
-                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation);
+                    RelativeLayout rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_del_case);
+                    RelativeLayout rl_invitation = (RelativeLayout) layout.findViewById(R.id.rl_invitation_);
                     TextView tv_case_type = (TextView) layout.findViewById(R.id.tv_case_type);
                     TextView tv_name = (TextView) layout.findViewById(R.id.tv_name);
                     tv_case_type.setText(strCase[5]);
