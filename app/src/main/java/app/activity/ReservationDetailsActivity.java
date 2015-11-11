@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,6 +36,11 @@ public class ReservationDetailsActivity extends BaseActivity implements
     private TextView tv_content;
     private TextView tv_time;
     private String name;
+    private String from;
+    private Button btn_hint;
+    private LinearLayout linear_is_show;
+    private String houseId;
+    private String craftsId;
     @Override
     public void obtainData() {
 
@@ -42,8 +48,13 @@ public class ReservationDetailsActivity extends BaseActivity implements
 
     @Override
     public void initUI() {
-        lyf = (HousesByLyf) getIntent().getSerializableExtra("ReservationDetailsActivity");
-         name = lyf.getCrafts_name();
+        Intent intent = getIntent();
+        from = intent.getStringExtra("FromeActvity");
+        lyf = (HousesByLyf) intent.getSerializableExtra("ReservationDetailsActivity");
+        name = lyf.getCrafts_name();
+         houseId = lyf.getHouse_id();
+        craftsId = lyf.getCrafts_id();
+
         RelativeLayout rl_house = (RelativeLayout) findViewById(R.id.rl_house);
         rl_msg_hint = (RelativeLayout) findViewById(R.id.rl_msg_hint);
         rl_house.setOnClickListener(this);
@@ -51,8 +62,10 @@ public class ReservationDetailsActivity extends BaseActivity implements
         Button btn_sure = (Button)findViewById(R.id.btn_sure);
         btn_sure.setOnClickListener(this);
         btn_refuse.setOnClickListener(this);
+        btn_hint = (Button) findViewById(R.id.btn_hint);
+        linear_is_show = (LinearLayout) findViewById(R.id.linear_is_show);
 
-         tv_creat_time = (TextView)findViewById(R.id.tv_creat_time);
+        tv_creat_time = (TextView)findViewById(R.id.tv_creat_time);
          tv_status_ = (TextView)findViewById(R.id.tv_status_);
          tv_content = (TextView)findViewById(R.id.tv_content);
          tv_time = (TextView) findViewById(R.id.tv_time);
@@ -86,7 +99,18 @@ public class ReservationDetailsActivity extends BaseActivity implements
 //            tv_content.setText();
             btn_sure.setVisibility(View.GONE);
         }
-
+        if("ReservationHistoryActivity".equals(from)){
+            if("3".equals(lyf.getState())||"4".equals(lyf.getState())) {
+                rl_msg_hint.setVisibility(View.VISIBLE);
+                linear_is_show.setVisibility(View.INVISIBLE);
+                getJournalAccept();
+            }else if("5".equals(lyf.getState())){
+                rl_msg_hint.setVisibility(View.VISIBLE);
+                getJournalRefuse();
+                btn_hint.setVisibility(View.VISIBLE);
+                linear_is_show.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
     @Override
@@ -150,8 +174,8 @@ public class ReservationDetailsActivity extends BaseActivity implements
     }
 
     private void getJournalAccept() {
-        HttpRequest.getYYDialyLog(ReservationDetailsActivity.this, "houseId",
-                "craftsId", new ICallback<JournalResult>() {
+        HttpRequest.getYYDialyLog(ReservationDetailsActivity.this, houseId,
+                craftsId, new ICallback<JournalResult>() {
                     @Override
                     public void onSucceed(JournalResult result) {
                         Uihelper.showToast(ReservationDetailsActivity.this, result.getMsg());
@@ -160,12 +184,22 @@ public class ReservationDetailsActivity extends BaseActivity implements
                         tv_creat_time.setText(journal.getAddtime());
 
                         tv_status_.setText(journal.getTitle());
-                        if (journal.getTitle_state().equals("6")) {
-                            tv_content.setText("已经为您的"+lyf.getHouse_type()+"房子免费预约带班班长（"+name+"）上门量房");
-                            tv_time.setText("预约量房完成时间为："+journal.getLftime());
-                        } else if (journal.getTitle_state().equals("8")) {
-                            tv_content.setText("您的"+lyf.getHouse_type()+"房子已经有带班班长（"+name+"）完成上门量房");
-                            tv_time.setText("量房完成时间为："+journal.getLftime());
+                        if (!"ReservationHistoryActivity".equals(from)) {
+                            if (journal.getTitle_state().equals("6")) {
+                                tv_content.setText("已经为您的" + lyf.getHouse_type() + "房子免费预约带班班长（" + name + "）上门量房");
+                                tv_time.setText("预约量房完成时间为：" + journal.getLftime());
+                            } else if (journal.getTitle_state().equals("8")) {
+                                tv_content.setText("您的" + lyf.getHouse_type() + "房子已经有带班班长（" + name + "）完成上门量房");
+                                tv_time.setText("量房完成时间为：" + journal.getLftime());
+                            }
+                        } else {
+                            if (journal.getTitle_state().equals("3")) {
+                                tv_content.setText("已经为您的" + lyf.getHouse_type() + "房子免费预约带班班长（" + name + "）上门量房");
+                                tv_time.setText("预约量房完成时间为：" + journal.getLftime());
+                            } else if (journal.getTitle_state().equals("4")) {
+                                tv_content.setText("您的" + lyf.getHouse_type() + "房子已经有带班班长（" + name + "）完成上门量房");
+                                tv_time.setText("量房完成时间为：" + journal.getLftime());
+                            }
                         }
 
                     }
@@ -208,8 +242,8 @@ public class ReservationDetailsActivity extends BaseActivity implements
     }
 
     private void getJournalRefuse() {
-        HttpRequest.getRefuseYYDialyLog(ReservationDetailsActivity.this, "houseId",
-                "craftsId", new ICallback<JournalResult>() {
+        HttpRequest.getRefuseYYDialyLog(ReservationDetailsActivity.this, houseId,
+                craftsId, new ICallback<JournalResult>() {
                     @Override
                     public void onSucceed(JournalResult result) {
                         Uihelper.showToast(ReservationDetailsActivity.this, result.getMsg());
@@ -219,7 +253,8 @@ public class ReservationDetailsActivity extends BaseActivity implements
                         tv_status_.setText(journal.getTitle());
                         tv_content.setText("带班班长"+name+"由于目前手头上的项目比较多，无法安排施工，十分抱歉婉拒您的预约。");
                         tv_time.setVisibility(View.GONE);
-
+                        btn_hint.setVisibility(View.VISIBLE);
+                        linear_is_show.setVisibility(View.INVISIBLE);
                     }
 
                     @Override

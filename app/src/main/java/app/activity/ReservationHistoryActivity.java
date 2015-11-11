@@ -1,5 +1,9 @@
 package app.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -20,7 +24,7 @@ import app.views.NavigationBar;
 /**
  * Created by Administrator on 2015/10/18.
  */
-public class ReservationHistoryActivity extends BaseActivity {
+public class ReservationHistoryActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private int p=1;
     private PullToRefreshListView pull_case;
@@ -36,6 +40,7 @@ public class ReservationHistoryActivity extends BaseActivity {
     public void initUI() {
         pull_case =(PullToRefreshListView)findViewById(R.id.pull_case);
         pull_case.setMode(PullToRefreshBase.Mode.BOTH);
+        pull_case.setOnItemClickListener(this);
         pull_case.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -85,5 +90,16 @@ public class ReservationHistoryActivity extends BaseActivity {
     public void initTitle(NavigationBar mBar) {
         mBar.setContexts(this);
         mBar.setTitle("预约历史");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(ReservationHistoryActivity.this,ReservationDetailsActivity.class);
+        Bundle bundle = new Bundle();
+        HousesByLyf byLyf = allCases.get(position-1);
+        bundle.putSerializable("ReservationDetailsActivity",byLyf);
+        intent.putExtras(bundle);
+        intent.putExtra("FromeActvity","ReservationHistoryActivity");
+        startActivity(intent);
     }
 }

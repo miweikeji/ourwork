@@ -98,6 +98,7 @@ public class SureBespeakFragment extends Fragment implements AdapterView.OnItemC
         HousesByLyf byLyf = allCases.get(position-1);
         bundle.putSerializable("ReservationDetailsActivity",byLyf);
         intent.putExtras(bundle);
+        intent.putExtra("FromeActvity","Fragment");
         startActivity(intent);
     }
 }

@@ -102,6 +102,7 @@ public class BespeakingFragment extends Fragment implements AdapterView.OnItemCl
         HousesByLyf byLyf = allCases.get(position-1);
         bundle.putSerializable("ReservationDetailsActivity",byLyf);
         intent.putExtras(bundle);
+        intent.putExtra("FromeActvity","Fragment");
         startActivity(intent);
 
     }
