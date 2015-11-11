@@ -154,6 +154,7 @@
         android:layout_above="@+id/linear_is_show">
 
         <RelativeLayout
+            android:id="@+id/rl_msg_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_item"
@@ -161,6 +162,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:padding="10dp"
+            android:visibility="visible"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true">
 

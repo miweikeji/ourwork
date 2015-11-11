@@ -259,6 +259,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name="app.activity.AddMembersActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_add_members"
             android:screenOrientation="portrait"></activity>

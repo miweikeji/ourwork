@@ -20,6 +20,7 @@ public class HousesByLyf implements Serializable{
     private String owner_name;
     private String owner_phone;
     private String crafts_id;
+    private String crafts_name;
     private String designer_id;
     private String addtime;
     private String lftime;
@@ -168,5 +169,13 @@ public class HousesByLyf implements Serializable{
 
     public void setStats_des(String stats_des) {
         this.stats_des = stats_des;
+    }
+
+    public String getCrafts_name() {
+        return crafts_name;
+    }
+
+    public void setCrafts_name(String crafts_name) {
+        this.crafts_name = crafts_name;
     }
 }

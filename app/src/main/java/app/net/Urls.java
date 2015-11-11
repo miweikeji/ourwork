@@ -137,5 +137,9 @@ public class Urls {
 
     //获取已建计划详情接口
     public final static String getDetailTask= base_server+"App/Workplan/getDetailTask";
+    //获取接受预约日志接口
+    public final static String getYYDialyLog= base_server+"App/Dialy/getYYDialyLog";
+    //获取接受预约日志接口
+    public final static String getRefuseYYDialyLog= base_server+"App/Dialy/getRefuseYYDialyLog";
 
 }

@@ -2,6 +2,8 @@ package app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -26,7 +28,8 @@ import app.views.CircleBitmapDisplayer;
 import app.views.MyGridView;
 import app.views.NavigationBar;
 
-public class GroupMembersActivity extends BaseActivity implements NavigationBar.RightOnClick {
+public class GroupMembersActivity extends BaseActivity implements
+        NavigationBar.RightOnClick, AdapterView.OnItemClickListener {
 
 
     private int p=1;
@@ -65,6 +68,7 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
         foremanName = (TextView)findViewById(R.id.tv_me_name);
         pull_to_grid = (PullToRefreshScrollView)findViewById(R.id.pull_to_grid);
         grid_memeber = (MyGridView)findViewById(R.id.grid_memeber);
+        grid_memeber.setOnItemClickListener(this);
         grid_memeber.setFocusable(false);
 
         pull_to_grid.setMode(PullToRefreshBase.Mode.BOTH);
@@ -152,5 +156,11 @@ public class GroupMembersActivity extends BaseActivity implements NavigationBar.
         Intent intent = new Intent(GroupMembersActivity.this,AddMembersActivity.class);
         intent.putExtra("groupId",groupid);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        startActivity(new Intent(GroupMembersActivity.this, CraftsmanZoneActivity.class));
+
     }
 }

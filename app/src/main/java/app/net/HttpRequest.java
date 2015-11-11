@@ -28,6 +28,7 @@ import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
 import app.entity.HouseInfoResult;
 import app.entity.HousesByLyfResult;
+import app.entity.JournalResult;
 import app.entity.JsonDataResult;
 import app.entity.JsonResult;
 import app.entity.MessageDetailResult;
@@ -1760,6 +1761,56 @@ public class HttpRequest {
             public void onSucceed(String result) {
                 MyLog.e("", "请求参数==" + result.toString());
                 JsonResult meta = JsonUtil.parseObject(result, JsonResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //获取接受预约日志接口
+    public static void getRefuseYYDialyLog(Context context,String houseId,String craftsId,final ICallback<JournalResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("houseId", houseId));
+        mList.add(new Param("craftsId", craftsId));
+        new MyAsyncTask(context, Urls.getRefuseYYDialyLog, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                JournalResult meta = JsonUtil.parseObject(result, JournalResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //获取接受预约日志接口
+    public static void getYYDialyLog(Context context,String houseId,String craftsId,final ICallback<JournalResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("houseId", houseId));
+        mList.add(new Param("craftsId", craftsId));
+        new MyAsyncTask(context, Urls.getYYDialyLog, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                JournalResult meta = JsonUtil.parseObject(result, JournalResult.class);
                 if (meta.getStatus() == 0) {
                     callback.onSucceed(meta);
                 } else {

@@ -93,7 +93,7 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
         String json1 = gson.toJson(map1);
         String json2 = gson.toJson(meta1);
         String json3 = gson.toJson(test);
-        Uihelper.showToast(this, json);
+//        Uihelper.showToast(this, json);
 //        Uihelper.showToast(this,json3);
         et_members_phone = (EditText) findViewById(R.id.et_members_phone);
         line_add_memebers = (LinearLayout) findViewById(R.id.line_add_memebers);
