@@ -141,5 +141,7 @@ public class Urls {
     public final static String getYYDialyLog= base_server+"App/Dialy/getYYDialyLog";
     //获取接受预约日志接口
     public final static String getRefuseYYDialyLog= base_server+"App/Dialy/getRefuseYYDialyLog";
+    //银行接口
+    public final static String gettn= base_server+"App/Union/gettn";
 
 }

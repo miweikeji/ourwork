@@ -110,11 +110,14 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
 
     private void netWorkData() {
         dialog.show();//UserInfo.getInstance().getId()//workType
-        HttpRequest.getWorkList(getActivity(), "101", p, workType, new ICallback<WorkListResult>() {
+        HttpRequest.getWorkList(getActivity(), UserInfo.getInstance().getId(), p, workType, new ICallback<WorkListResult>() {
             @Override
             public void onSucceed(WorkListResult result) {
                 List<WorkList> workList = result.getWorkList();
-                allList.addAll(workList);
+                int pages = result.getTotalPages();
+                if(p<=pages){
+                    allList.addAll(workList);
+                }
                 if(p==1){
                     adapter = new JobAdapter(getActivity(),allList);
                     pull_to_list.setAdapter(adapter);

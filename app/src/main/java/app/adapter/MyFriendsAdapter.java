@@ -52,7 +52,7 @@ public class MyFriendsAdapter extends AllAdapter{
             holder = (ViewHolder) layout.getTag();
         }
         MyFriends friends = allList.get(position);
-//        instance.displayImage(friends.getFcimg(), holder.img_head, options);
+        instance.displayImage(friends.getFcimg(), holder.img_head, options);
         holder.tv_name.setText(friends.getFname());
         holder.tv_age.setText(friends.getFage()+"岁/"+friends.getFcworkold()+"年工龄");
         holder.tv_home.setText(friends.getFcworkhome());

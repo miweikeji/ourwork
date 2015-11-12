@@ -67,6 +67,7 @@ public abstract class DialogCharge extends Dialog {
                 }
                 positionBtnClick(money);
                 editMoney.setText("");
+                dismiss();
             }
         });
     }

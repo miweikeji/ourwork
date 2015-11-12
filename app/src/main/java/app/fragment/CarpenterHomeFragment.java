@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.miweikeij.app.R;
 
@@ -16,6 +17,7 @@ import app.activity.CraftsmanGroupActivity;
 import app.activity.FindFartnerActivity;
 import app.activity.MyFriendsActivity;
 import app.activity.WorkArrangementActivity;
+import app.activity.mywork.ParterMessageActivity;
 import app.utils.UserUtil;
 
 /**
@@ -24,6 +26,7 @@ import app.utils.UserUtil;
 public class CarpenterHomeFragment extends Fragment implements View.OnClickListener {
 
     private View layout;
+    private TextView tvNum;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,18 @@ public class CarpenterHomeFragment extends Fragment implements View.OnClickListe
         rl_my_friends.setOnClickListener(this);
         rl_find_craftsman.setOnClickListener(this);
         rl_all_craftsman.setOnClickListener(this);
+
+        //消息
+        tvNum=(TextView)layout.findViewById(R.id.tv_message_num);
+
+        layout.findViewById(R.id.frame_message).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //到消息页面
+
+                startActivity(new Intent(getActivity(), ParterMessageActivity.class));
+            }
+        });
     }
 
     @Override

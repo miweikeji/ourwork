@@ -1824,4 +1824,37 @@ public class HttpRequest {
             }
         }).executeOnExecutor();
     }
+    //银行接口
+    public static void gettn(Context context,String cid,String money,String content,String usetype,
+                             String useId,final ICallback<String> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("money", money));
+        mList.add(new Param("content", content));
+        mList.add(new Param("usetype", usetype));
+        mList.add(new Param("useId", useId));
+        new MyAsyncTask(context, Urls.gettn, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                try {
+                    JSONObject object = new JSONObject(result);
+                    String status = object.getString("status");
+                    if("0".equals(status)){
+                        callback.onSucceed(object.getString("tn"));
+                    }else {
+                        callback.onFail(object.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
 }

@@ -9,6 +9,7 @@ import com.miweikeij.app.R;
 
 import app.entity.CraGroup;
 import app.entity.CraGroupResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.TimeTools;
@@ -47,7 +48,7 @@ public class CraftsmanGroupActivity extends BaseActivity implements View.OnClick
     }
 
     private void netWorkData() {
-        HttpRequest.craftsmanGroupHttp(this, "106", new ICallback<CraGroupResult>() {
+        HttpRequest.craftsmanGroupHttp(this, UserInfo.getInstance().getId(), new ICallback<CraGroupResult>() {
             @Override
             public void onSucceed(CraGroupResult result) {
                 CraGroup group = result.getGroup();

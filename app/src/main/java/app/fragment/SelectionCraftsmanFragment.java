@@ -63,7 +63,10 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
             @Override
             public void onSucceed(craftsListResult result) {
                 List<Allcrafts> list = result.getCrafts().getList();
-                allList.addAll(list);
+                int page = result.getCrafts().getPage();
+                if(p<=page){
+                    allList.addAll(list);
+                }
                 if (p == 1) {
                     adapter = new ClassMonitorAdapter(getActivity(), allList, imageLoader, options, 1);
                     pull_list.setAdapter(adapter);

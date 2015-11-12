@@ -48,7 +48,10 @@ public class WorkConstructionFragment extends Fragment implements AdapterView.On
             @Override
             public void onSucceed(ConstructPlanResult result) {
                 List<ConstructPlan> cases = result.getHouseList();
-                allCases.addAll(cases);
+                int page = result.getPage();
+                if(p<=page){
+                    allCases.addAll(cases);
+                }
                 if (p == 1) {
                     adapter = new MyWorkAdapter(getActivity(), allCases);
                     pull_case.setAdapter(adapter);

@@ -32,4 +32,6 @@ dependencies {
     compile files('libs/litepal-1.2.0-src.jar')
     compile files('libs/xUtils-2.6.14.jar')
     compile files('libs/com.umeng.message.lib_v2.5.0.jar')
+    compile files('libs/UPPayPluginEx.jar')
+    compile files('libs/UPPayAssistEx.jar')
 }

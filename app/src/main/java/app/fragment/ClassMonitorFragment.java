@@ -64,7 +64,10 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
             public void onSucceed(craftsListResult result) {
                 pull_list.onRefreshComplete();
                 List<Allcrafts> list = result.getCrafts().getList();
-                allList.addAll(list);
+                int page = result.getCrafts().getPage();
+                if(p<=page){
+                    allList.addAll(list);
+                }
                 if(p==1){
                     adapter = new ClassMonitorAdapter(getActivity(),allList,imageLoader,options,0);
                     pull_list.setAdapter(adapter);

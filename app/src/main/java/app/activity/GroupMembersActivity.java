@@ -115,11 +115,16 @@ public class GroupMembersActivity extends BaseActivity implements
     }
 
     private void netWorkData() {
-        HttpRequest.getGroupCraftsHttp(this, "100", "1", p, new ICallback<GroupMemberResult>() {
+        HttpRequest.getGroupCraftsHttp(this, groupid, "1", p, new ICallback<GroupMemberResult>() {
             @Override
             public void onSucceed(GroupMemberResult result) {
                 List<GroupMembe> craftsList = result.getCraftsList();
-                AllList.addAll(craftsList);
+                String page = result.getTotalpage();
+                if(p<=Integer.valueOf(page).intValue()){
+                    AllList.addAll(craftsList);
+                }else {
+                    Uihelper.showToast(GroupMembersActivity.this,"没有更多数据了");
+                }
                 if(p==1){
                     adapter = new GroupMemberAdapter(GroupMembersActivity.this,AllList,imageLoader,options);
                     grid_memeber.setAdapter(adapter);

@@ -20,6 +20,7 @@ import java.util.List;
 import app.adapter.MyFriendsAdapter;
 import app.entity.MyFriends;
 import app.entity.MyFriendsResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -72,11 +73,14 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
 
     private void netWorkData() {
 
-        HttpRequest.getMyfriend(this, "102", p, new ICallback<MyFriendsResult>() {
+        HttpRequest.getMyfriend(this, UserInfo.getInstance().getId(), p, new ICallback<MyFriendsResult>() {
             @Override
             public void onSucceed(MyFriendsResult result) {
                 List<MyFriends> message = result.getMessage();
-                allList.addAll(message);
+                int page = result.getPage();
+                if(p<=page){
+                    allList.addAll(message);
+                }
                 if(p==1){
                     adapter = new MyFriendsAdapter(MyFriendsActivity.this, allList,imageLoader,options);
                     list.setAdapter(adapter);

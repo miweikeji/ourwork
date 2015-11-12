@@ -6,12 +6,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
+import com.unionpay.UPPayAssistEx;
+import com.unionpay.uppay.PayActivity;
+
 
 import app.activity.BaseActivity;
 import app.dialog.DialogCharge;
 import app.dialog.DialogRefund;
 import app.entity.Meta;
 import app.entity.MyProtect;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -98,13 +102,55 @@ public class ProtectMoneyActivity extends BaseActivity {
         if (dialogCharge == null) {
             dialogCharge = new DialogCharge(mActivity) {
                 @Override
-                public void positionBtnClick(String s) {
+                public void positionBtnClick(String money) {
 
+                    getTn(money);
                 }
             };
         }
         dialogCharge.show();
 
+    }
+
+    private void getTn(String money) {
+        showWaitingDialog();
+        HttpRequest.gettn(mActivity, UserInfo.getInstance().getId(), money, "", "1",UserInfo.getInstance().getId(),  new ICallback<String>() {
+            @Override
+            public void onSucceed(String tn) {
+                disMissWaitingDialog();
+                String serverMode = "01";
+                if(tn!=null&&!"".equals(tn)){
+                    UPPayAssistEx.startPayByJAR(ProtectMoneyActivity.this, PayActivity.class, null, null,
+                            tn, serverMode);
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                disMissWaitingDialog();
+                Uihelper.showToast(mActivity, error);
+
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if( data == null ){
+            return;
+        }
+
+        String str =  data.getExtras().getString("pay_result");
+        if( str.equalsIgnoreCase("success") ){
+            Uihelper.showToast(ProtectMoneyActivity.this,"支付成功");
+        }else if( str.equalsIgnoreCase("fail") ){
+            Uihelper.showToast(ProtectMoneyActivity.this,"支付失败");
+        }else if( str.equalsIgnoreCase("cancel") ){
+            Uihelper.showToast(ProtectMoneyActivity.this,"支付取消");
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

@@ -113,12 +113,14 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         List<Ctime> time= (List<Ctime>) intent.getSerializableExtra("ChangeTasksActivity");
         time_day = intent.getIntExtra("time_day", 0)-1;
         case_type = intent.getStringExtra("CASE_TYPE");
-        time_day = time.size();
-        if(time.size()<8){
+        if(time!=null){
+            time_day = time.size();
+        }
+        if(time_day<8){
             group=1;
             for(int m=0;m<time.size();m++){
                 List<String> itemPageData = new ArrayList<>();
-                itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(m).getDatatime()))+"#"+time.get(m).getAm()+"#"+time.get(m).getPm());
+                itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(m).getDatatime()))+time.get(m).getAm()+time.get(m).getPm());
                 pageDate.add(itemPageData);
             }
             hasPage.put(0,pageDate);
@@ -130,7 +132,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                 if(flages==t/7){
                     List<List<String>> pageDate = new ArrayList<>();
                     List<String> itemPageData = new ArrayList<>();
-                    itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(t).getDatatime()))+"#"+time.get(t).getAm()+"#"+time.get(t).getPm());
+                    itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(t).getDatatime()))+time.get(t).getAm()+time.get(t).getPm());
                     pageDate.add(itemPageData);
                     hasPage.put(flages, pageDate);
                     flages++;
