@@ -101,6 +101,8 @@ public class YSDailyActivity extends BaseActivity implements View.OnClickListene
             }, year, month, date);
         }
         datePicker.show();
+
+        
     }
 
     @Override
