@@ -55,6 +55,8 @@ public class GroupMembersActivity extends BaseActivity implements
 
     @Override
     public void obtainData() {
+        gangerData();
+        netWorkData();
     }
 
     @Override
@@ -86,9 +88,6 @@ public class GroupMembersActivity extends BaseActivity implements
                 netWorkData();
             }
         });
-
-        gangerData();
-        netWorkData();
 
     }
 

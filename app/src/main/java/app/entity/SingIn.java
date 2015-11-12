@@ -9,7 +9,7 @@ public class SingIn {
     private int is_sign;
     private String houseId;
     private String status;
-    private String hasTask;
+    private boolean hasTask;
     private int signNum;
     private String signtime;
 
@@ -45,11 +45,11 @@ public class SingIn {
         this.status = status;
     }
 
-    public String getHasTask() {
+    public boolean getHasTask() {
         return hasTask;
     }
 
-    public void setHasTask(String hasTask) {
+    public void setHasTask(boolean hasTask) {
         this.hasTask = hasTask;
     }
 

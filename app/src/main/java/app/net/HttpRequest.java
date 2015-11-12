@@ -14,6 +14,7 @@ import java.util.Map;
 
 import app.entity.AddMemberError;
 import app.entity.AdvertiseResult;
+import app.entity.ApplyCraftsResult;
 import app.entity.ArrangeTaskResult;
 import app.entity.BuiltTaskResult;
 import app.entity.CaseResult;
@@ -28,8 +29,8 @@ import app.entity.GroupGangerResult;
 import app.entity.GroupMemberResult;
 import app.entity.HouseInfoResult;
 import app.entity.HousesByLyfResult;
+import app.entity.InviteCraftsResult;
 import app.entity.JournalResult;
-import app.entity.JsonDataResult;
 import app.entity.JsonResult;
 import app.entity.MessageDetailResult;
 import app.entity.MessageResult;
@@ -51,8 +52,10 @@ import app.entity.craftsListResult;
 import app.tools.MyLog;
 import app.tools.UserInfoJsonTools;
 import app.utils.Constants;
+import app.utils.ExtendOperationController;
 import app.utils.JsonUtil;
 import app.utils.MobileOS;
+import app.utils.Pref;
 import app.utils.UserUtil;
 
 /**
@@ -1142,7 +1145,7 @@ public class HttpRequest {
     public static void myInfoEdit(Context context, String name, String age, String worktype, String workage, String cworkhome, String work, String adress,
                                   String bankName, String bankNum, String bankUserName, String referee, String price, String serverArea, String des, final ICallback<Meta> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
-        mList.add(new Param("id", "106"));
+        mList.add(new Param("id", UserUtil.getUserId(context)));
         mList.add(new Param("name", name));
         mList.add(new Param("age", age));
         mList.add(new Param("worktype", worktype));
@@ -1272,7 +1275,9 @@ public class HttpRequest {
                 callback.onFail(error);
             }
         }).executeOnExecutor();
-    }/**
+    }
+
+    /**
      * 我的保证金
      */
     public static void getMyProtect(Context context, final ICallback<MyProtect> callback) {
@@ -1376,7 +1381,7 @@ public class HttpRequest {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("cid", cid));
         mList.add(new Param("workId", workId));
-        mList.add(new Param("enterDetail", "enterDetail"));
+        mList.add(new Param("enterDetail", enterDetail));
         new MyAsyncTask(context, Urls.getMessageOrderDetail, mList, new ICallback<String>() {
 
             @Override
@@ -1427,7 +1432,7 @@ public class HttpRequest {
     /**
      * 获取房屋信息
      */
-    public static void getHouseInfo(Context context, String craftsId, String houseId, final ICallback<HouseInfoResult> callback) {
+    public static void getHouseInfo(final Context context, String craftsId, String houseId, final ICallback<HouseInfoResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("craftsId", craftsId));
         mList.add(new Param("houseId", houseId));
@@ -1437,6 +1442,8 @@ public class HttpRequest {
             @Override
             public void onSucceed(String result) {
                 HouseInfoResult meta = JsonUtil.parseObject(result, HouseInfoResult.class);
+                ExtendOperationController.getInstance().doNotificationExtendOperation(ExtendOperationController.OperationKey.HouseInfo, meta);
+
                 if (meta.getStatus() == 0) {
                     callback.onSucceed(meta);
                 } else {
@@ -1552,6 +1559,7 @@ public class HttpRequest {
         }).executeOnExecutor();
     }
 
+    //申请加入
     public static void applyOder(Context context, String applyCraftsId, String workId, final ICallback<Meta> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("applyCraftsId", applyCraftsId));
@@ -1576,6 +1584,153 @@ public class HttpRequest {
             }
         }).executeOnExecutor();
     }
+
+    //申请人列表
+    public static void getMessageOrderApplyCrafts(Context context, String cid, String workId, int p, final ICallback<ApplyCraftsResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("cid", cid));
+        mList.add(new Param("workId", workId));
+        mList.add(new Param("p", p + ""));
+        new MyAsyncTask(context, Urls.getMessageOrderApplyCrafts, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                ApplyCraftsResult meta = JsonUtil.parseObject(result, ApplyCraftsResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //邀请人列表
+    public static void getMessageInviteCrafts(Context context, String messageId, final ICallback<InviteCraftsResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("messageId", messageId));
+        new MyAsyncTask(context, Urls.getMessageOrderApplyCrafts, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                InviteCraftsResult meta = JsonUtil.parseObject(result, InviteCraftsResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //同意邀请
+    public static void acceptInvite(Context context, String messageId, final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("messageId", messageId));
+        new MyAsyncTask(context, Urls.acceptInvite, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //拒绝邀请
+    public static void refuseInvite(Context context, String messageId, final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("messageId", messageId));
+        new MyAsyncTask(context, Urls.refuseInvite, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //同意申请
+    public static void choseCrafts(Context context, String workId, String applyCraftsId, final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("workId", workId));
+        mList.add(new Param("applyCraftsId", applyCraftsId));
+        new MyAsyncTask(context, Urls.choseCrafts, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
+    //拒绝申请
+    public static void refuseOder(Context context, String messageId, final ICallback<Meta> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("messageId", messageId));
+        new MyAsyncTask(context, Urls.refuseOder, mList, new ICallback<String>() {
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
+
 
     public static void myWorkDetail(Context context, String cid, String workId, String finish, final ICallback<MyWorkDetailResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
@@ -1719,7 +1874,7 @@ public class HttpRequest {
     }
 
     //发起预约验收
-    public static void addYSDailyLog(Context context, String cid, String cname, int housestate,
+    public static void addYSDailyLog(Context context, String cid, String cname, String housestate,
                                      String houseid, String ownerid, String ysTime,
                                      String titleState, final ICallback<Meta> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
@@ -1752,7 +1907,7 @@ public class HttpRequest {
     }
 
     //获取已建计划详情接口
-    public static void getDetailTask(Context context,String houseId,final ICallback<JsonResult> callback) {
+    public static void getDetailTask(Context context, String houseId, final ICallback<JsonResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("houseId", houseId));
         new MyAsyncTask(context, Urls.getDetailTask, mList, new ICallback<String>() {

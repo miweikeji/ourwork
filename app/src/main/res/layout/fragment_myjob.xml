@@ -38,6 +38,7 @@
                android:layout_alignParentRight="true"
                android:id="@+id/imageView27" />
             <TextView
+                android:visibility="invisible"
                 android:id="@+id/tv_message_num"
                android:layout_width="16dp"
                android:layout_height="16dp"

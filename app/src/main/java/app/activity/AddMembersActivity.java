@@ -58,41 +58,39 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initUI() {
-
-
-        JsonData test = new JsonData();
-        test.setWho("1");
-        test.setServertype("11");
-        test.setType("111");
-        Map<String, List<Info>> map = new HashMap<String, List<Info>>();
-        Map<String, Info> map1 = new HashMap<String, Info>();
-        Gson gson = new Gson();
-        Info meta = new Info();
-        Info meta1 = new Info();
-        Name name = new Name();
-        Name name1 = new Name();
-        name.setName("ere");
-        name.setUid("234234");
-        name1.setUid("234234");
-        name1.setName("43");
-        meta.setCharge("12");
-        meta1.setNum("淡淡的忧伤");
-        List<Info> list = new ArrayList<Info>();
-        List<Name> listName = new ArrayList<Name>();
-        listName.add(name);
-        listName.add(name1);
-        meta.setName(listName);
-        meta1.setName(listName);
-        list.add(meta);
-        list.add(meta1);
-        test.setInfo(list);
-        map1.put("Meta", meta);
-        map1.put("Meta1", meta1);
-        map.put("phones", list);
-        String json = gson.toJson(map);//==
-        String json1 = gson.toJson(map1);
-        String json2 = gson.toJson(meta1);
-        String json3 = gson.toJson(test);
+//        JsonData test = new JsonData();
+//        test.setWho("1");
+//        test.setServertype("11");
+//        test.setType("111");
+//        Map<String, List<Info>> map = new HashMap<String, List<Info>>();
+//        Map<String, Info> map1 = new HashMap<String, Info>();
+//        Gson gson = new Gson();
+//        Info meta = new Info();
+//        Info meta1 = new Info();
+//        Name name = new Name();
+//        Name name1 = new Name();
+//        name.setName("ere");
+//        name.setUid("234234");
+//        name1.setUid("234234");
+//        name1.setName("43");
+//        meta.setCharge("12");
+//        meta1.setNum("淡淡的忧伤");
+//        List<Info> list = new ArrayList<Info>();
+//        List<Name> listName = new ArrayList<Name>();
+//        listName.add(name);
+//        listName.add(name1);
+//        meta.setName(listName);
+//        meta1.setName(listName);
+//        list.add(meta);
+//        list.add(meta1);
+//        test.setInfo(list);
+//        map1.put("Meta", meta);
+//        map1.put("Meta1", meta1);
+//        map.put("phones", list);
+//        String json = gson.toJson(map);//==
+//        String json1 = gson.toJson(map1);
+//        String json2 = gson.toJson(meta1);
+//        String json3 = gson.toJson(test);
 //        Uihelper.showToast(this, json);
 //        Uihelper.showToast(this,json3);
         et_members_phone = (EditText) findViewById(R.id.et_members_phone);

@@ -1,9 +1,11 @@
 package app.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by tlt on 2015/11/3.
  */
-public class MessageItem {
+public class MessageItem implements Serializable{
 
     private String id;
     private String craftsId;

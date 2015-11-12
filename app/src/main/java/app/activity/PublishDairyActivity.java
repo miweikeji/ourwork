@@ -2,6 +2,7 @@ package app.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -26,6 +27,8 @@ import java.util.List;
 
 import app.activity.mywork.LocalAlbumPreActivity;
 import app.activity.mywork.adapter.FooterSelectedPicAdapter;
+import app.entity.HouseInfo;
+import app.entity.HouseInfo_Bundle;
 import app.entity.ImageEntity;
 import app.net.Urls;
 import app.utils.Constants;
@@ -44,6 +47,16 @@ public class PublishDairyActivity extends BaseActivity {
     private ArrayList<ImageEntity> selectedAlbumImages = new ArrayList<ImageEntity>();
     private int imageTotalCount = Constants.MAX_SELECT_PHOTO_NUM;
     private HttpUtils http;
+    private HouseInfo_Bundle houseInfo;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        Intent intent=getIntent();
+        houseInfo= (HouseInfo_Bundle) intent.getSerializableExtra("houseInfo");
+
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void obtainData() {
@@ -182,13 +195,16 @@ public class PublishDairyActivity extends BaseActivity {
             Uihelper.showToast(mActivity,"内容不能为空");
             return;
         }
+        if (houseInfo==null){
+            return;
+        }
         String uploadHost = Urls.addDailyLog;
         RequestParams params = new RequestParams();
         params.addBodyParameter("cid", "101");
         params.addBodyParameter("content", content);
-        params.addBodyParameter("housestate", "2");
-        params.addBodyParameter("houseid", "753665");
-        params.addBodyParameter("ownerid", "");
+        params.addBodyParameter("housestate", houseInfo.getStatus());
+        params.addBodyParameter("houseid", houseInfo.getId());
+        params.addBodyParameter("ownerid", houseInfo.getOwnerId());
         for (int i = 0; i < selectedAlbumImages.size(); i++) {
             String path = selectedAlbumImages.get(i).getPath();
             String newPath = path.substring(7, path.length());

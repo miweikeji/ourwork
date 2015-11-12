@@ -31,6 +31,7 @@ public class Pref {
 	// 是否退出应用
 	public static final String EXIT = "exit";
 	public static final String PUSH = "PUSH";
+	public static final String HouseInfo = "HouseInfo";
 
 
 	private static SharedPreferences getSettings(final Context contex) {

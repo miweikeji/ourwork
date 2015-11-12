@@ -100,14 +100,19 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
         layout = inflater.inflate(R.layout.fragment_mine, null);
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
-
                 .displayer(new CircleBitmapDisplayer()).build();
         httpUtils = new HttpUtils();
         findView(layout);
-//        obtainSign();
+        obtainSign();
         obtainData();
 
         return layout;
+    }
+
+    @Override
+    public void onResume() {
+        obtainData();
+        super.onResume();
     }
 
     private void obtainSign() {
@@ -120,8 +125,10 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
                     signTime = singIn.getSignNum();
                     if (singIn.getIs_sign() == 1) {
                         isSign = true;
+                    }else {
+                        isSign=false;
                     }
-                    hasCase = true;
+                    hasCase = singIn.getHasTask();
                 }
             }
 
@@ -213,8 +220,6 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
         });
 
     }
-
-
     @Override
     public void onClick(View v) {
 

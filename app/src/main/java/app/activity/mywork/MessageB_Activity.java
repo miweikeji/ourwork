@@ -10,24 +10,32 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import java.util.List;
 
 import app.activity.BaseActivity;
+import app.activity.mywork.adapter.ApplyDetailsAdapter;
 import app.dialog.DialogTools;
+import app.entity.ApplyCrafts;
+import app.entity.ApplyCraftsResult;
 import app.entity.Data;
+import app.entity.InviteCrafts;
+import app.entity.InviteCraftsResult;
 import app.entity.MessageDetail;
 import app.entity.MessageDetailResult;
 import app.entity.Meta;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.views.CircleBitmapDisplayer;
+import app.views.MyListView;
 import app.views.NavigationBar;
 
 /**
  * Created by tlt on 2015/10/27.
  */
-public class MessageA_Activity extends BaseActivity implements View.OnClickListener {
+public class MessageB_Activity extends BaseActivity implements View.OnClickListener {
     private TextView tv_work_area;
     private TextView tv_service;
     private TextView tv_feestyle;
@@ -37,8 +45,14 @@ public class MessageA_Activity extends BaseActivity implements View.OnClickListe
     private String workId;
     private String messageId;
     private int enterState;
+    private MyListView listView;
+    private TextView tv_applyname;
     private int messageState;
-    private Button appstate;
+    private boolean isApply;
+    private List<ApplyCrafts> applyCraftList;
+    private List<InviteCrafts> inviteCraftList;
+    private DisplayImageOptions options;
+    private ApplyDetailsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +61,9 @@ public class MessageA_Activity extends BaseActivity implements View.OnClickListe
         workId = intent.getStringExtra("workId");
         messageId = intent.getStringExtra("messageId");
         enterState = intent.getIntExtra("enterState", 0);
+
+        options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
+                .displayer(new CircleBitmapDisplayer()).build();
 
         super.onCreate(savedInstanceState);
     }
@@ -76,18 +93,17 @@ public class MessageA_Activity extends BaseActivity implements View.OnClickListe
                     tv_feestyle.setText("承包价格");
                 }
                 tv_price.setText(message.getW_money());
-
                 messageState = result.getMessage().getMessageStatus();
-
-                if (messageState == 1) {
-                    appstate.setVisibility(View.VISIBLE);
-                    appstate.setText("申请接单成功");
-                } else if (messageState == 2) {
-                    appstate.setVisibility(View.VISIBLE);
-                    appstate.setText("申请接单失败");
-                } else if (messageState == 3) {
-                    findViewById(R.id.frame_apply).setVisibility(View.VISIBLE);
+                if (messageState == 0) {//有人申请接单
+                    isApply = true;
+                    tv_applyname.setText("申请人列表");
+                } else if (messageState == 3 || messageState == 4 || messageState == 5) {
+                    isApply = false;
+                    tv_applyname.setText("邀请人列表");
                 }
+
+                //获得申请人或邀请人列表
+                getListData();
             }
 
             @Override
@@ -98,22 +114,72 @@ public class MessageA_Activity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    private void getListData() {
+        if (isApply) {//有人申请接单
+
+            HttpRequest.getMessageOrderApplyCrafts(mActivity, "100", "133", 1, new ICallback<ApplyCraftsResult>() {
+                @Override
+                public void onSucceed(ApplyCraftsResult result) {
+                    applyCraftList = result.getCrafts();
+                    setData();
+                }
+
+                @Override
+                public void onFail(String error) {
+                    Uihelper.showToast(mActivity, error);
+                }
+            });
+
+
+        } else {//邀请人列表
+            HttpRequest.getMessageInviteCrafts(mActivity, messageId, new ICallback<InviteCraftsResult>() {
+                @Override
+                public void onSucceed(InviteCraftsResult result) {
+                    inviteCraftList = result.getCrafts();
+                    setData();
+                }
+
+                @Override
+                public void onFail(String error) {
+                    Uihelper.showToast(mActivity, error);
+                }
+            });
+
+        }
+
+
+    }
+
+    private void setData() {
+
+        adapter=new ApplyDetailsAdapter(mActivity,options,isApply);
+        if (isApply){
+            adapter.setApplyList(applyCraftList);
+            adapter.setMessageID(messageId);
+        }else {
+            adapter.setInviteList(inviteCraftList);
+        }
+        listView.setAdapter(adapter);
+    }
+
+
     @Override
     public void initUI() {
+
+        listView = (MyListView) findViewById(R.id.listViewq);
+        tv_applyname = (TextView) findViewById(R.id.tv_applyname);
+
         tv_work_area = (TextView) findViewById(R.id.tv_work_area);
         tv_service = (TextView) findViewById(R.id.tv_service);
         tv_feestyle = (TextView) findViewById(R.id.tv_feestyle);
         tv_price = (TextView) findViewById(R.id.tv_price);
         RelativeLayout toTime = (RelativeLayout) findViewById(R.id.rl_to_time);
-
-        appstate = (Button) findViewById(R.id.btn_applystate);
-
         toTime.setOnClickListener(this);
     }
 
     @Override
     public int onCreateMyView() {
-        return R.layout.activity_message_a;
+        return R.layout.activity_message_b;
     }
 
     @Override
@@ -131,56 +197,9 @@ public class MessageA_Activity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    //接受邀请
-    public void btn_acceptapply(View view) {
-        if (TextUtils.isEmpty(messageId)){
-            return;
-        }
-        showWaitingDialog();
-        HttpRequest.acceptInvite(mActivity, messageId, new ICallback<Meta>() {
-            @Override
-            public void onSucceed(Meta result) {
-                disMissWaitingDialog();
-                Uihelper.showToast(mActivity, "发送成功");
-                finish();
-            }
+    public static void enterActivity(Activity activity, String workId, int enterstate, String messageId) {
 
-            @Override
-            public void onFail(String error) {
-                disMissWaitingDialog();
-                Uihelper.showToast(mActivity,error);
-
-            }
-        });
-    }
-
-    //拒绝邀请
-    public void btn_refuseapply(View view) {
-        if (TextUtils.isEmpty(messageId)){
-            return;
-        }
-        showWaitingDialog();
-        HttpRequest.refuseInvite(mActivity, messageId, new ICallback<Meta>() {
-            @Override
-            public void onSucceed(Meta result) {
-                disMissWaitingDialog();
-                Uihelper.showToast(mActivity,"发送成功");
-                finish();
-            }
-
-            @Override
-            public void onFail(String error) {
-                disMissWaitingDialog();
-                Uihelper.showToast(mActivity,error);
-
-            }
-        });
-
-    }
-
-    public static void enterActivity(Activity activity, String workId, int enterstate,String messageId) {
-
-        Intent intent = new Intent(activity, MessageA_Activity.class);
+        Intent intent = new Intent(activity, MessageB_Activity.class);
         intent.putExtra("workId", workId);
         intent.putExtra("enterState", enterstate);
         intent.putExtra("messageId", messageId);

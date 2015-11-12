@@ -91,9 +91,6 @@ public class WorkPlanDetailsActivity extends BaseActivity implements View.OnClic
 
         netWorkData();
     }
-
-
-
     private void netWorkData() {
 
         HttpRequest.detailPlan(this, "100",constructPlan.getHouse_id(), p, new ICallback<DetailPlanResult>() {

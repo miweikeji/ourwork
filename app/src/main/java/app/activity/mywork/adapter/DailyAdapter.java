@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
@@ -14,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import app.activity.GroupMembersActivity;
 import app.adapter.AllAdapter;
@@ -33,6 +35,7 @@ public class DailyAdapter extends AllAdapter {
     List<String> imageList = new ArrayList<>();
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
+    private Map<Integer, Integer> mSateHaseMap;
 
     public DailyAdapter(Activity activity, List<DialyData> allList,
                         ImageLoader imageLoader, DisplayImageOptions options) {
@@ -56,7 +59,9 @@ public class DailyAdapter extends AllAdapter {
             holder = new ViewHolder();
             layout = activity.getLayoutInflater().inflate(R.layout.item_dairy, null);
             holder.gv_images = (SodukuGridView) layout.findViewById(R.id.gv_images);
+            holder.frame_state = (RelativeLayout) layout.findViewById(R.id.frame_state);
             holder.tv_title = (TextView) layout.findViewById(R.id.tv_title);
+            holder.tv_state = (TextView) layout.findViewById(R.id.tv_state);
             holder.tv_time = (TextView) layout.findViewById(R.id.tv_time);
             holder.tv_content = (TextView) layout.findViewById(R.id.tv_content);
             layout.setTag(holder);
@@ -64,6 +69,12 @@ public class DailyAdapter extends AllAdapter {
             holder = (ViewHolder) layout.getTag();
         }
         DialyData dialyData = allList.get(position);
+        holder.frame_state.setVisibility(View.GONE);
+        if (mSateHaseMap.containsValue(position)) {
+            int state = dialyData.getHouse_state();
+            holder.frame_state.setVisibility(View.VISIBLE);
+            StatusTools.setStatus(holder.tv_state, state + "");
+        }
         imageList.clear();
         if (dialyData != null) {
             addImageList(dialyData);
@@ -110,10 +121,17 @@ public class DailyAdapter extends AllAdapter {
         }
     }
 
+    public void setSortHasemap(Map<Integer, Integer> mSateHaseMap) {
+
+        this.mSateHaseMap = mSateHaseMap;
+    }
+
     public class ViewHolder {
         SodukuGridView gv_images;
         TextView tv_title;
         TextView tv_time;
         TextView tv_content;
+        TextView tv_state;
+        RelativeLayout frame_state;
     }
 }

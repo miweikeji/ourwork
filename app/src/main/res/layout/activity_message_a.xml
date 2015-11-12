@@ -170,32 +170,6 @@
             android:layout_toRightOf="@+id/textView5"
             android:layout_toEndOf="@+id/textView5" />
     </RelativeLayout>
-        <RelativeLayout
-            android:layout_marginTop="@dimen/margin_top"
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_height="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="邀请列表"
-                android:textSize="18sp"
-                android:id="@+id/tv_list"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="25dp"
-                android:layout_marginStart="25dp" />
-            <LinearLayout
-                android:id="@+id/linear_shigongrenwu"
-                android:layout_below="@+id/tv_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </RelativeLayout>
 
     </LinearLayout>
     </ScrollView>
@@ -207,13 +181,47 @@
         android:id="@+id/relativeLayout33">
 
         <Button
+            android:visibility="gone"
+            android:id="@+id/btn_applystate"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey_1"
             android:text="申请接单成功"
-            android:id="@+id/button3"
-
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
+
+     <LinearLayout
+         android:visibility="gone"
+         android:id="@+id/frame_apply"
+         android:layout_width="match_parent"
+         android:layout_height="50dp"
+         android:orientation="horizontal"
+         >
+
+         <Button
+             android:layout_weight="1"
+             android:layout_width="match_parent"
+             android:layout_height="50dp"
+             android:background="#f3A989"
+             android:text="拒绝邀请"
+             android:onClick="btn_refuseapply"
+             android:textColor="@color/white"
+             android:layout_alignParentBottom="true"
+             android:layout_centerHorizontal="true" />
+         <Button
+             android:layout_weight="1"
+             android:layout_width="match_parent"
+             android:layout_height="50dp"
+             android:background="@color/base_orange"
+             android:text="接受邀请"
+             android:onClick="btn_acceptapply"
+             android:textColor="@color/white"
+             android:layout_alignParentBottom="true"
+             android:layout_centerHorizontal="true" />
+
+
+     </LinearLayout>
+
+
     </RelativeLayout>
 </RelativeLayout>

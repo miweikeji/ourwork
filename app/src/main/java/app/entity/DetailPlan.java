@@ -22,6 +22,7 @@ public class DetailPlan {
     private String profession;
 
 
+
     public String getWorktype() {
         return worktype;
     }

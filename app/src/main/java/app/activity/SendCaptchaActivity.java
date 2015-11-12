@@ -42,7 +42,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
     private MyRunnable myRunnable;
     private boolean isSending;
     private ImageView btnViewState;
-    private boolean isView;
+    private boolean isView=true;
     private boolean isForgetPsw;
 
     @Override
@@ -113,15 +113,15 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
         switch (view.getId()) {
             case R.id.btn_getMyPhont:
                 String myPhone = getMyPhone();
-                if(myPhone!=null&&!"".equals(myPhone)){
-                    if(myPhone.length()>11) {
+                if (myPhone != null && !"".equals(myPhone)) {
+                    if (myPhone.length() > 11) {
                         String phone = myPhone.substring(myPhone.length() - 11, myPhone.length());
                         et_phone.setText(phone);
-                    }else{
+                    } else {
                         et_phone.setText(myPhone);
                     }
-                }else {
-                    Uihelper.showToast(this,"无法获取手机号码，请手动输入");
+                } else {
+                    Uihelper.showToast(this, "无法获取手机号码，请手动输入");
                 }
                 break;
             case R.id.btn_send_code:
@@ -173,10 +173,12 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.tv_view_state:
                 if (isView) {
-                    et_psw.setInputType(InputType.TYPE_CLASS_TEXT);
+                    et_psw.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 } else {
-                    et_psw.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    et_psw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 }
+                String text = et_psw.getText().toString();
+                et_psw.setSelection(text.length());
                 isView = !isView;
                 break;
             default:
@@ -186,7 +188,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
 
     private void summit(String psw, String code) {
 
-        String md5_psw= MD5Util.getMD5String(psw);
+        String md5_psw = MD5Util.getMD5String(psw);
         if (isForgetPsw) {
             showWaitingDialog();
             HttpRequest.findPsw(this, new ICallback<Meta>() {
@@ -206,7 +208,7 @@ public class SendCaptchaActivity extends BaseActivity implements View.OnClickLis
                 }
             }, phone, md5_psw, code);
         } else {
-             showWaitingDialog();
+            showWaitingDialog();
             HttpRequest.registerHttp(this, new ICallback<RegisterInfo>() {
                 @Override
                 public void onSucceed(RegisterInfo result) {

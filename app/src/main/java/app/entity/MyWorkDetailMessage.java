@@ -36,13 +36,13 @@ public class MyWorkDetailMessage {
     private String who;
     private String house_id;
     private Comment comment;
-    private List<Data> data;
+    private List<CaseItem> data;
 
-    public List<Data> getData() {
+    public List<CaseItem> getData() {
         return data;
     }
 
-    public void setData(List<Data> data) {
+    public void setData(List<CaseItem> data) {
         this.data = data;
     }
 

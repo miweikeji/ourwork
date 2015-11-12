@@ -1,6 +1,7 @@
 package app.activity.mywork;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.activity.BaseActivity;
+import app.activity.SystemMessageActivity;
 import app.activity.mywork.adapter.MessageAdapter;
 import app.entity.MessageItem;
 import app.entity.MessageResult;
@@ -59,7 +61,6 @@ public class ParterMessageActivity extends BaseActivity {
     @Override
     public void initUI() {
 
-
         listView = (ListView) findViewById(R.id.listView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,16 +79,37 @@ public class ParterMessageActivity extends BaseActivity {
 //        6表示点击详情进入“业主预约”界面
 //        7表示点击详情进入“系统消息”界面
                         case "0":
+                            MessageA_Activity.enterActivity(mActivity, messageItem.getWorkId(), 1, messageItem.getId());
+                            break;
                         case "1":
+                            MessageA_Activity.enterActivity(mActivity, messageItem.getWorkId(), 1, messageItem.getId());
+                            break;
                         case "2":
+                            MessageA_Activity.enterActivity(mActivity, messageItem.getWorkId(), 2, messageItem.getId());
+                            break;
                         case "3":
+                            MessageB_Activity.enterActivity(mActivity, messageItem.getWorkId(), 3, messageItem.getId());
+                            break;
                         case "4":
+                            MessageB_Activity.enterActivity(mActivity, messageItem.getWorkId(), 3, messageItem.getId());
+                            break;
                         case "5":
-                            startActivity(new Intent(mActivity,MessageA_Activity.class));
+                            MessageB_Activity.enterActivity(mActivity, messageItem.getWorkId(), 3, messageItem.getId());
                             break;
                         case "6":
+
+                            Intent intent = new Intent(mActivity, YuyueDetailsActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("messageItem", messageItem);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+
                             break;
                         case "7":
+
+                            Intent intent_system = new Intent(mActivity, SystemMessageActivity.class);
+                            startActivity(intent_system);
+
                             break;
                         default:
                             break;

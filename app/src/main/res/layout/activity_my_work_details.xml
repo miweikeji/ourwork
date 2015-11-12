@@ -307,14 +307,10 @@
                 </RelativeLayout>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="10dp"></RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="20dp"
 
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
@@ -324,31 +320,31 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_item"
                     android:orientation="vertical"
-
                     >
-
                     <RelativeLayout
                         android:layout_width="match_parent"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:background="@color/white"
                         android:layout_height="50dp">
-
                         <TextView
-                            android:id="@+id/textView76"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginStart="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="10dp"
                             android:text="施工任务"
-                            android:textSize="18sp" />
+                            android:textSize="16sp"
+                            />
                     </RelativeLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linear_shigongrenwu"
+                    <app.views.MyListView
+                        android:id="@+id/listViewq"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"></LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp">
+
+                    </app.views.MyListView>
 
                 </LinearLayout>
 

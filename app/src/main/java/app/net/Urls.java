@@ -62,16 +62,16 @@ public class Urls {
     //获取已建计划接口
     public final static String getTask = base_server + "App/Workplan/getTask";
 
-      /* ============================================我的工作==开始=================================*/
-      //现场日志列表
-      public final static String getDailyLogByHouseId = base_server + "App/Dialy/getDailyLogByHouseId";
+    /* ============================================我的工作==开始=================================*/
+    //现场日志列表
+    public final static String getDailyLogByHouseId = base_server + "App/Dialy/getDailyLogByHouseId";
 
-      //添加日志
-      public final static String addDailyLog = base_server + "App/Dialy/addDailyLog";
-      //评价工匠
-      public final static String addComment = base_server + "App/Comment/addComment";
-        //获取参与房屋装修的所有工匠
-      public final static String getCraftsByHouseId = base_server + "App/House/getCraftsByHouseId";
+    //添加日志
+    public final static String addDailyLog = base_server + "App/Dialy/addDailyLog";
+    //评价工匠
+    public final static String addComment = base_server + "App/Comment/addComment";
+    //获取参与房屋装修的所有工匠
+    public final static String getCraftsByHouseId = base_server + "App/House/getCraftsByHouseId";
 
       /* ============================================我的工作==结束=================================*/
 
@@ -103,9 +103,9 @@ public class Urls {
     public final static String addUmengDeviceToken = base_server + "App/Crafts/addUmengDeviceToken";
     //消息列表
     public final static String getMessages = base_server + "/App/Crafts/getMessages";
-     //获取消息列表的订单详情
+    //获取消息列表的订单详情
     public final static String getMessageOrderDetail = base_server + "/App/Crafts/getMessageOrderDetail";
-     //修改头像接口
+    //修改头像接口
     public final static String myImgEdit = base_server + "App/Crafts/myImgEdit";
 
      /* ============================================我的接口结束=================================*/
@@ -127,13 +127,24 @@ public class Urls {
 
     //申请加入
     public final static String applyOder = base_server + "App/Work/applyOder";
+    //申请人列表
+    public final static String getMessageOrderApplyCrafts = base_server + "App/Crafts/getMessageOrderApplyCrafts";
+
+    //同意邀请
+    public final static String acceptInvite = base_server + "App/Work/acceptInvite";
+    //拒绝邀请
+    public final static String refuseInvite = base_server + "App/Work/refuseInvite";
+    //通过申请
+    public final static String choseCrafts = base_server + "App/Work/choseCrafts";
+    //拒绝申请
+    public final static String refuseOder = base_server + "App/Work/refuseOder";
 
     //新建接口
-    public final static String createTask= base_server+"App/Workplan/createTask";
+    public final static String createTask = base_server + "App/Workplan/createTask";
     //获取工匠的所有口碑评价
-    public final static String getCommentByCrafts= base_server+"App/Comment/getCommentByCrafts";
+    public final static String getCommentByCrafts = base_server + "App/Comment/getCommentByCrafts";
     //发起预约验收
-    public final static String addYSDailyLog= base_server+"App/Dialy/addYSDailyLog";
+    public final static String addYSDailyLog = base_server + "App/Dialy/addYSDailyLog";
 
     //获取已建计划详情接口
     public final static String getDetailTask= base_server+"App/Workplan/getDetailTask";

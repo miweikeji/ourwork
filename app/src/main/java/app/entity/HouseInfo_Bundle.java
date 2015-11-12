@@ -5,12 +5,10 @@ import java.io.Serializable;
 /**
  * Created by tlt on 2015/10/29.
  */
-public class HouseInfo implements Serializable {
+public class HouseInfo_Bundle implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Designer designer;
     private String relation;
-    private Crafts crafts;
     private String id;
     private String name;
     private String type;
@@ -228,22 +226,6 @@ public class HouseInfo implements Serializable {
         this.sort = sort;
     }
 
-    public Crafts getCrafts() {
-        return crafts;
-    }
-
-    public void setCrafts(Crafts crafts) {
-        this.crafts = crafts;
-    }
-
-
-    public Designer getDesigner() {
-        return designer;
-    }
-
-    public void setDesigner(Designer designer) {
-        this.designer = designer;
-    }
 
     public String getRelation() {
         return relation;

@@ -114,9 +114,7 @@ public class MainActivity extends FragmentActivity {
                 mPushAgent.isEnabled(), mPushAgent.isRegistered(),
                 mPushAgent.getRegistrationId(), MsgConstant.SDK_VERSION,
                 UmengMessageDeviceConfig.getAppVersionCode(this), UmengMessageDeviceConfig.getAppVersionName(this));
-        Uihelper.showToast(this, "应用包名：" + pkgName + "\n" + info);
-
-
+        Uihelper.trace("=====mPushAgent======", "应用包名：" + pkgName + "\n" + info);
         Log.e(TAG, "updateStatus:" + String.format("enabled:%s  isRegistered:%s",
                 mPushAgent.isEnabled(), mPushAgent.isRegistered()));
         Log.e(TAG, "=============================");

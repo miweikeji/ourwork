@@ -1,6 +1,8 @@
 package app.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,18 +22,16 @@ import app.entity.MyWorkDetailResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.views.MyListView;
 import app.views.NavigationBar;
 
 /**
  * Created by Administrator on 2015/10/12.
  */
-public class
-        MyWorkDetailsActivity extends BaseActivity implements
+public class MyWorkDetailsActivity extends BaseActivity implements
         NavigationBar.RightOnClick {
 
 
-    private LinearLayout linearDuty;
-    private RecyclerView recyclerView;
     private RatingBar ratingBarQuality;
     private RatingBar ratingBarValue;
     private TextView tv_feestyle;
@@ -43,12 +43,17 @@ public class
     private String workId;
     private TextView tvCraft;
     private TextView tv_commentTime;
+    private MyListView listView;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        //工作任务
+        workId = getIntent().getStringExtra("workId");
+        super.onCreate(savedInstanceState, persistentState);
+    }
     @Override
     public void obtainData() {
 
-        View item = LayoutInflater.from(mActivity).inflate(R.layout.item_person_shigongrenwu, null);
-        linearDuty.addView(item);
         showWaitingDialog();
         HttpRequest.myWorkDetail(this, "101", "133", "1", new ICallback<MyWorkDetailResult>() {
             @Override
@@ -66,19 +71,15 @@ public class
                     tv_feestyle.setText("承包价格");
                 }
                 tvPrice.setText(message.getW_money());
-
                 Comment comment = message.getComment();
                 if (comment != null) {
                     if (!TextUtils.isEmpty(comment.getTime())) {
-
                         tv_commentTime.setText(comment.getTime());
                     }
                     tvCraft.setText(comment.getComment_craftsman_name());
                     tvValue.setText(comment.getAdvise());
                     ratingBarValue.setRating(comment.getQuality());
                     ratingBarQuality.setRating(comment.getAttitude());
-
-
                 }
             }
 
@@ -89,19 +90,13 @@ public class
                 Uihelper.showToast(mActivity, error);
             }
         });
-
-
     }
 
     @Override
     public void initUI() {
 
-        workId = getIntent().getStringExtra("workId");
 
-        //工作任务
-        linearDuty = (LinearLayout) findViewById(R.id.linear_shigongrenwu);
-        linearDuty.setOrientation(LinearLayout.VERTICAL);
-
+        listView = (MyListView) findViewById(R.id.listViewq);
         tvName = (TextView) findViewById(R.id.tv_mywork_name);
         tv_feestyle = (TextView) findViewById(R.id.tv_mywork_style);
         tvPrice = (TextView) findViewById(R.id.tv_mywork_price);
@@ -116,8 +111,6 @@ public class
         tvCraft = (TextView) findViewById(R.id.tv_mywork_craft);
         tv_commentTime = (TextView) findViewById(R.id.tv_mywork_time);
         tvValue = (TextView) findViewById(R.id.tv_mywork_value);
-
-
     }
 
     //查看施工项目
@@ -142,6 +135,4 @@ public class
     public void setRightOnClick() {
         startActivity(new Intent(MyWorkDetailsActivity.this, CraftsmanZoneActivity.class));
     }
-
-
 }

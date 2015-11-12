@@ -35,7 +35,7 @@ public class MessageDetail {
     private  String   did;
     private  String   who;
     private  String   house_id;
-    private  String   messageStatus;
+    private  int   messageStatus;
     private List<Data> data;
 
     public String getWhoid() {
@@ -262,11 +262,11 @@ public class MessageDetail {
         this.house_id = house_id;
     }
 
-    public String getMessageStatus() {
+    public int getMessageStatus() {
         return messageStatus;
     }
 
-    public void setMessageStatus(String messageStatus) {
+    public void setMessageStatus(int messageStatus) {
         this.messageStatus = messageStatus;
     }
 
