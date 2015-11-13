@@ -43,6 +43,19 @@ public class TimeTools {
         return date;
     }
 
+    public static Long strToDateLong(String timestamp) {
+        SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+        Date date= null;
+        try {
+            date = simpleDateFormat .parse(timestamp);
+            Long timeStemp = date.getTime();
+            return timeStemp;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0l;
+    }
+
     public static String getDayTime(Date today,int day) throws ParseException {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
         today=sdf.parse(sdf.format(today));

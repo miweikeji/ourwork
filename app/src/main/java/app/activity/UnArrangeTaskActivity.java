@@ -16,6 +16,7 @@ import java.util.List;
 import app.adapter.UnArrangeTaskAdapter;
 import app.entity.ArrangeTask;
 import app.entity.ArrangeTaskResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -74,7 +75,7 @@ public class UnArrangeTaskActivity extends BaseActivity{
 
     private void netWorkData() {
 
-        HttpRequest.unArrangeTask(this, "100", p, new ICallback<ArrangeTaskResult>() {
+        HttpRequest.unArrangeTask(this, UserInfo.getInstance().getJiang(), p, new ICallback<ArrangeTaskResult>() {
             @Override
             public void onSucceed(ArrangeTaskResult result) {
                 List<ArrangeTask> houseList = result.getHouseList();

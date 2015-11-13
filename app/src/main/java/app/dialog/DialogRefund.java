@@ -66,6 +66,7 @@ public abstract class DialogRefund extends Dialog {
                 }
                 positionBtnClick(money);
                 editMoney.setText("");
+                dismiss();
             }
         });
     }

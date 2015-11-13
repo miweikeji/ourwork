@@ -71,6 +71,7 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
 
     @Override
     public void initUI() {
+        String hourseID = getIntent().getStringExtra("hourseID");
         UIEventUpdate.getInstance().register(this);
         UIEventUpdate.getInstance().registerData(this);
          et_workplace = (TextView) findViewById(R.id.et_workplace);
@@ -87,7 +88,7 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
         adapter.setRemoveNameListens(this);
         adapter.setAddCaseNmaeListens(this);
         adapter.setChangeTimeListens(this);
-        HttpRequest.getDetailTask(this, "753666", new ICallback<JsonResult>() {
+        HttpRequest.getDetailTask(this, hourseID, new ICallback<JsonResult>() {
             @Override
             public void onSucceed(JsonResult result) {
                 JsonDataResult housedtail = result.getHousedtail();
@@ -95,7 +96,7 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
                 adapter.setData(info);
                 list_task.setAdapter(adapter);
                 et_workplace.setText(housedtail.getWorkplace());
-                tv_time_choose.setText(TimeTools.longToDateStr(Double.valueOf(housedtail.getAddtime())));
+                tv_time_choose.setText(TimeTools.longToDateStr(Double.valueOf(housedtail.getChecktime())));
                 startTime =  TimeTools.longToDateStr(Double.valueOf(housedtail.getAddtime()));
                 for (int i=0;i<info.size();i++){
                     String wtype = info.get(i).getWtype();

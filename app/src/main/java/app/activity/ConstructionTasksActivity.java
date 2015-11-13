@@ -965,8 +965,9 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
         String workpalce = et_workplace.getText().toString().trim();
         if (workpalce != null && !"".equals(workpalce)&&hint_time!=null&&list.size()!=0) {
-            Date dt = new Date();
-            Long time = dt.getTime();
+//            Date dt = new Date();
+//            Long time = dt.getTime();
+            Long time = TimeTools.strToDateLong(hint_time);
 
             for (int i = 10001; i < 10050; i++) {//10001
 
@@ -1158,6 +1159,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
             jsonData.setInfo(lists);
             jsonData.setChecktime(String.valueOf(time));
+            jsonData.setWorkplace(workpalce);
             Gson gson = new Gson();
             String json = gson.toJson(jsonData);
             netWorkData(json);
@@ -1202,6 +1204,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 if ("水电工".equals(type)) {
                     listShui.clear();
                     listShui.addAll(list);
+                    MyLog.e("","listShui="+listShui.toString());
                 } else if ("泥水工".equals(type)) {
                     listNi.clear();
                     listNi.addAll(list);

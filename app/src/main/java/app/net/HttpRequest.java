@@ -1044,8 +1044,8 @@ public class HttpRequest {
     public static void backMoney(Context context, String money, String content, final ICallback<Meta> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("cid", UserUtil.getUserId(context)));
-        mList.add(new Param("content", content));
         mList.add(new Param("money", money));
+        mList.add(new Param("content", content));
 
 
         new MyAsyncTask(context, Urls.backMoney, mList, new ICallback<String>() {

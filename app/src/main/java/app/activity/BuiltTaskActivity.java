@@ -15,6 +15,7 @@ import java.util.List;
 import app.adapter.BuiltTaskAdapter;
 import app.entity.BuiltTask;
 import app.entity.BuiltTaskResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
@@ -59,7 +60,7 @@ public class BuiltTaskActivity extends BaseActivity implements AdapterView.OnIte
 
     private void netWorkData() {
 
-        HttpRequest.getTask(BuiltTaskActivity.this, "100", p, new ICallback<BuiltTaskResult>() {
+        HttpRequest.getTask(BuiltTaskActivity.this, UserInfo.getInstance().getId(), p, new ICallback<BuiltTaskResult>() {
             @Override
             public void onSucceed(BuiltTaskResult result) {
                 List<BuiltTask> cases = result.getHouseList();
@@ -94,6 +95,10 @@ public class BuiltTaskActivity extends BaseActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            startActivity(new Intent(this,ChangeTasksActivity.class));
+//            startActivity(new Intent(this,ChangeTasksActivity.class));
+        String house_id = allCases.get(position - 1).getHouse_id();
+        Intent intent = new Intent(this,ChangeTasksActivity.class);
+        intent.putExtra("hourseID",house_id);
+        startActivity(intent);
     }
 }

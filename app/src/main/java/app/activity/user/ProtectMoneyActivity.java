@@ -71,9 +71,9 @@ public class ProtectMoneyActivity extends BaseActivity {
         if (dialogRefund == null) {
             dialogRefund = new DialogRefund(mActivity) {
                 @Override
-                public void positionBtnClick(String s) {
+                public void positionBtnClick(String money) {
                     showWaitingDialog();
-                    HttpRequest.backMoney(mActivity, s, "", new ICallback<Meta>() {
+                    HttpRequest.backMoney(mActivity, money, "", new ICallback<Meta>() {
                         @Override
                         public void onSucceed(Meta result) {
                             disMissWaitingDialog();
