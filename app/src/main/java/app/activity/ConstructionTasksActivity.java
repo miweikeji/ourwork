@@ -879,7 +879,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
                     } else if ("门窗安装工".equals(split[0])) {
                         name5 = split[2];
                         caseName5.add(split[2]);
-                        name[5].setText(split[2]);
+//                        name[5].setText(split[2]);
                         if (tvhas5.containsKey(Integer.valueOf(split[3]).intValue())) {
                             TextView textView = tvhas5.get(Integer.valueOf(split[3]).intValue());
                             textView.setText(split[2]);
@@ -968,7 +968,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
 //            Date dt = new Date();
 //            Long time = dt.getTime();
             Long time = TimeTools.strToDateLong(hint_time);
-
+            time=time/1000;
             for (int i = 10001; i < 10050; i++) {//10001
 
                 if (hasShui.containsKey("" + i)) {
@@ -1169,15 +1169,18 @@ public class ConstructionTasksActivity extends BaseActivity implements
     }
 
     private void netWorkData(String json) {
+        showWaitingDialog();
         HttpRequest.createTask(this, json, new ICallback<Meta>() {
             @Override
             public void onSucceed(Meta result) {
+                disMissWaitingDialog();
                 finish();
             }
 
             @Override
             public void onFail(String error) {
                 Uihelper.showToast(ConstructionTasksActivity.this,error);
+                disMissWaitingDialog();
             }
         });
 

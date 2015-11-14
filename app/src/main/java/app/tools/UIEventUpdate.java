@@ -87,11 +87,11 @@ public class UIEventUpdate {
 	}
 
 	public void customSendData(int positionKey,List<Time> list,String type){
-		if(mListener==null){
+		if(dataListener==null){
 			return ;
 		}
 
-		for (int i = 0; i < mListener.size(); i++) {
+		for (int i = 0; i < dataListener.size(); i++) {
 			DataListener updateListener = dataListener.get(i);
 			try {
 				if(updateListener!=null){

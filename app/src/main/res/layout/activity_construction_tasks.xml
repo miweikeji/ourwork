@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
+                    android:text=""
                     android:id="@+id/tv_time_choose"
                     android:layout_marginLeft="5dp"
                     android:layout_centerVertical="true"

@@ -483,7 +483,7 @@ public class ServerTimeActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        List<List<String>> lists = hasPage.get(mark);
+//        List<List<String>> lists = hasPage.get(mark);
         flage = mark;
         switch (v.getId()){
             case R.id.rl_1_left:
@@ -1183,7 +1183,7 @@ public class ServerTimeActivity extends BaseActivity implements View.OnClickList
                         Time time = new Time();
                         String msg = msgLsit.get(0);
                         String dateToLong = TimeTools.dateToLong(msg.substring(0, msg.length() - 2));
-                        time.setDatatime(dateToLong);
+                        time.setDatatime(dateToLong.substring(0,dateToLong.length()-3));
                         time.setAm(msg.substring(msg.length() - 2, msg.length() - 1));
                         time.setPm(msg.substring(msg.length() - 1, msg.length()));
                         listTime.add(time);

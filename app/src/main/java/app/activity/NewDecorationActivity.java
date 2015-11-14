@@ -100,7 +100,7 @@ public class NewDecorationActivity extends BaseActivity implements CompoundButto
             house_craftmode = "半包";
         }else if(rb_type_two.isChecked()){
             house_craftmode = "全包";
-        }else if(rb_type_two.isChecked()){
+        }else if(rb_type_three.isChecked()){
             house_craftmode = "清包";
         }
         String house_xiaoqu = et_village.getText().toString().trim();

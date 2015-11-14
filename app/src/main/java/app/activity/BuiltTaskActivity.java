@@ -96,9 +96,14 @@ public class BuiltTaskActivity extends BaseActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //            startActivity(new Intent(this,ChangeTasksActivity.class));
-        String house_id = allCases.get(position - 1).getHouse_id();
-        Intent intent = new Intent(this,ChangeTasksActivity.class);
-        intent.putExtra("hourseID",house_id);
-        startActivity(intent);
+        String bao = allCases.get(position - 1).getBao();
+        if("0".equals(bao)){
+            String house_id = allCases.get(position - 1).getHouse_id();
+            Intent intent = new Intent(this,ChangeTasksActivity.class);
+            intent.putExtra("hourseID",house_id);
+            startActivity(intent);
+        }else {
+            Uihelper.showToast(this,"该计划已发布不能进行修改");
+        }
     }
 }
