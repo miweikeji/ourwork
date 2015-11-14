@@ -53,6 +53,7 @@ public class GroupMemberAdapter extends AllAdapter{
             holder=(ViewHolder) layout.getTag();
         }
         GroupMembe membe = allList.get(position);
+        holder.img_head.setImageResource(R.mipmap.test);
         imageLoader.displayImage(membe.getCimg(),holder.img_head,options);
         holder.tv_name.setText(membe.getName());
         holder.tv_age.setText(membe.getAge());

@@ -55,6 +55,7 @@ public class ClassMonitorAdapter extends AllAdapter {
             holder = (ViewHolder) layout.getTag();
         }
         Allcrafts allcrafts = allList.get(position);
+        holder.img_head.setImageResource(R.mipmap.test);
         imageLoader.displayImage(allcrafts.getCimg(), holder.img_head, options);
         holder.tv_name.setText(allcrafts.getName());
         holder.tv_home.setText(allcrafts.getCworkhome());
