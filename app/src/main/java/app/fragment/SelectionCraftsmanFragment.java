@@ -29,6 +29,7 @@ import app.entity.craftsListResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.Footools;
+import app.utils.Config;
 import app.utils.Uihelper;
 import app.views.CircleBitmapDisplayer;
 import app.views.ProgressDialogView;
@@ -48,6 +49,7 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
     private Dialog dialog;
     private int page;
     private View inflate;
+    private boolean isFisrstShow;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,13 +64,13 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
     }
 
     private void netWorkData() {
-        if(page==1){
+        if(!isFisrstShow){
             dialog.show();
         }
         HttpRequest.getAllcrafts(getActivity(), "1", p, new ICallback<craftsListResult>() {
             @Override
             public void onSucceed(craftsListResult result) {
-
+                isFisrstShow = true;
                 List<Allcrafts> list = result.getCrafts().getList();
                  page = result.getCrafts().getPage();
                 if(p<=page){
@@ -95,6 +97,7 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
                 Uihelper.showToast(getActivity(), error);
                 dialog.dismiss();
                 pull_list.onRefreshComplete();
+                isFisrstShow = true;
             }
         });
     }
@@ -141,7 +144,7 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-        if(visibleItemCount+firstVisibleItem>=totalItemCount&&isOver){
+        if(visibleItemCount+firstVisibleItem>=totalItemCount- Config.NUMBER&&isOver){
             p++;
             if(page>1&&p!=page){
                 Footools.addFoot(pull_list,getActivity(),inflate);

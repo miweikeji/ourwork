@@ -11,7 +11,8 @@ import android.util.DisplayMetrics;
  */
 
 public class Config {
-	
+	//提前几天加载
+	public static int NUMBER = 5;
 	// 关于手机屏幕的一些属性
 	public static int WIDTH = 480; // 屏幕宽度
 	public static int HEIGHT = 800; // 屏幕高度

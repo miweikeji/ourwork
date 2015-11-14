@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -27,6 +28,8 @@ import app.entity.Allcrafts;
 import app.entity.craftsListResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
+import app.tools.Footools;
+import app.utils.Config;
 import app.utils.Uihelper;
 import app.views.CircleBitmapDisplayer;
 import app.views.ProgressDialogView;
@@ -34,7 +37,7 @@ import app.views.ProgressDialogView;
 /**
  * Created by Administrator on 2015/10/10.
  */
-public class ClassMonitorFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class ClassMonitorFragment extends Fragment implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
 
     private PullToRefreshListView pull_list;
     private ListView list;
@@ -44,6 +47,10 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
     private Dialog dialog;
+    private int page;
+    private View inflate;
+    private boolean isOver;
+    private boolean isFisrstShow;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,16 +65,27 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
     }
 
     private void netWorkData() {
-        dialog.show();
+        if(!isFisrstShow){
+            dialog.show();
+        }
         HttpRequest.getAllcrafts(getActivity(), "0", p, new ICallback<craftsListResult>() {
             @Override
             public void onSucceed(craftsListResult result) {
+                isFisrstShow = true;
                 pull_list.onRefreshComplete();
                 List<Allcrafts> list = result.getCrafts().getList();
-                int page = result.getCrafts().getPage();
+                 page = result.getCrafts().getPage();
+
                 if(p<=page){
+                    if(p<=page-1){
+                        isOver = true;
+                    }
                     allList.addAll(list);
+                }else {
+                    isOver = false;
+                    Footools.removeFoot(pull_list, getActivity(), inflate);
                 }
+
                 if(p==1){
                     adapter = new ClassMonitorAdapter(getActivity(),allList,imageLoader,options,0);
                     pull_list.setAdapter(adapter);
@@ -81,16 +99,19 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
             public void onFail(String error) {
                 pull_list.onRefreshComplete();
                 Uihelper.showToast(getActivity(),error);
+                isFisrstShow = true;
                 dialog.dismiss();
             }
         });
     }
 
     private void initUI(View layout) {
+        inflate = getActivity().getLayoutInflater().inflate(R.layout.footview, null);
         pull_list = (PullToRefreshListView)layout.findViewById(R.id.pull_list);
         pull_list.setOnItemClickListener(this);
         list = pull_list.getRefreshableView();
-        pull_list.setMode(PullToRefreshBase.Mode.BOTH);
+        pull_list.setMode(PullToRefreshBase.Mode.PULL_DOWN_TO_REFRESH);
+        pull_list.setOnScrollListener(this);
         pull_list.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -112,5 +133,22 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         startActivity(new Intent(getActivity(), CraftsmanZoneActivity.class));
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if(visibleItemCount+firstVisibleItem>=totalItemCount- Config.NUMBER&&isOver){
+            p++;
+            if(page>1&&p!=page){
+                Footools.addFoot(pull_list, getActivity(), inflate);
+            }
+            isOver=false;
+            netWorkData();
+        }
     }
 }
