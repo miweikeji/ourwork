@@ -112,21 +112,16 @@ public class CraftsmanInfoFragment extends Fragment {
                 } if (!TextUtils.isEmpty(crafts.getRenzheng())){
                     Authentication.setText(crafts.getRenzheng());
                 }
-
-
             }
 
             @Override
             public void onFail(String error) {
                 Uihelper.showToast(getActivity(),error);
-
             }
         });
     }
 
     private void initUI(View layout) {
-
-
         rl_normal = (RelativeLayout) layout.findViewById(R.id.rl_normal);
         rl_foreman = (RelativeLayout) layout.findViewById(R.id.rl_foreman);
         areaServer = (TextView) layout.findViewById(R.id.tv_area_server);
@@ -157,7 +152,6 @@ public class CraftsmanInfoFragment extends Fragment {
         ratingBarValue = (RatingBar) layout.findViewById(R.id.ratingBar_value);
         ratingBarQuality.setEnabled(false);
         ratingBarValue.setEnabled(false);
-
 
     }
 }

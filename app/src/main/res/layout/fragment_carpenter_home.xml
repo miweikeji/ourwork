@@ -39,6 +39,7 @@
                 android:id="@+id/imageView27" />
             <TextView
                 android:id="@+id/tv_message_num"
+                android:visibility="gone"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:background="@drawable/btn_circlepress"
