@@ -1,7 +1,9 @@
 package app.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -25,6 +27,16 @@ import app.views.PagerSlidingTabStrip;
  */
 public class CraftsmanZoneActivity extends BaseActivity {
     private ArrayList<Fragment> fragments;
+    private String craftId;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        
+        Intent intent=getIntent();
+        craftId=intent.getStringExtra("");
+        
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void obtainData() {
@@ -88,5 +100,11 @@ public class CraftsmanZoneActivity extends BaseActivity {
 
     public void btn_callphone(View v) {
         startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:10086")));
+    }
+
+    public static  void enterActivity(Activity activity,String craftId){
+        Intent intent =new Intent(activity,CraftsmanZoneActivity.class);
+        intent.putExtra("craftId",craftId);
+        activity.startActivity(intent);
     }
 }

@@ -46,10 +46,10 @@ public class MyWorkDetailsActivity extends BaseActivity implements
     private MyListView listView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+    public void onCreate(Bundle savedInstanceState) {
         //工作任务
         workId = getIntent().getStringExtra("workId");
-        super.onCreate(savedInstanceState, persistentState);
+        super.onCreate(savedInstanceState);
     }
     @Override
     public void obtainData() {
@@ -70,6 +70,7 @@ public class MyWorkDetailsActivity extends BaseActivity implements
                 } else if ("2".equals(type)) {
                     tv_feestyle.setText("承包价格");
                 }
+
                 tvPrice.setText(message.getW_money());
                 Comment comment = message.getComment();
                 if (comment != null) {

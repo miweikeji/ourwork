@@ -113,6 +113,10 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        MyFriends myFriends=allList.get(position);
+
+
         startActivity(new Intent(this, CraftsmanZoneActivity.class));
     }
 }

@@ -51,15 +51,30 @@ public class MessageAdapter extends AllAdapter {
         }
         MessageItem item = list.get(position);
         String type = item.getWorkType();
-        if (!TextUtils.isEmpty(type)) {
-            String workname = StatusTools.workType(type);
-            holder.tv_name.setText(workname);
-        }
-        holder.tv_plaint.setText("服务地点：" + item.getWorkplace());
 
+        holder.tv_name.setText("--");
+        holder.tv_plaint.setText("--");
+        holder.tv_name.setText("--");
+        holder.tv_message_type.setText("--");
         String enterDetail = item.getEnterDetail();
         if (!TextUtils.isEmpty(enterDetail)) {
-            switch (enterDetail) {
+
+            if ("7".equals(enterDetail)){
+                holder.tv_name.setText(item.getTitle());
+                holder.tv_plaint.setText(item.getContent());
+
+            }else if("6".equals(enterDetail)){
+                holder.tv_name.setText(item.getContent());
+                holder.tv_plaint.setText(item.getHouse_name());
+            }
+            else{
+                if (!TextUtils.isEmpty(type)) {
+                    String workname = StatusTools.workType(type);
+                    holder.tv_name.setText(workname);
+                }
+                holder.tv_plaint.setText("服务地点：" + item.getWorkplace());
+            }
+            holder.tv_message_type.setText(item.getRightShow());
                 //        enterDetail ：
 //        0 表示点击详情进入“有人申请加入”界面
 //        1表示点击详情进入“申请接单成功”界面
@@ -69,34 +84,6 @@ public class MessageAdapter extends AllAdapter {
 //        5表示点击详情进入“邀请施工人员失败”界面
 //        6表示点击详情进入“业主预约”界面
 //        7表示点击详情进入“系统消息”界面
-                case "0":
-                    holder.tv_message_type.setText("有人申请加入");
-                    break;
-                case "1":
-                    holder.tv_message_type.setText("申请接单成功");
-                    break;
-                case "2":
-                    holder.tv_message_type.setText("申请接单失败");
-                    break;
-                case "3":
-                    holder.tv_message_type.setText("邀请施工");
-                    break;
-                case "4":
-                    holder.tv_message_type.setText("邀请施工人员成功");
-                    break;
-                case "5":
-                    holder.tv_message_type.setText("邀请施工人员失败");
-                    break;
-                case "6":
-                    holder.tv_message_type.setText("业主预约");
-                    break;
-                case "7":
-                    holder.tv_message_type.setText("系统消息");
-                    break;
-                default:
-                    break;
-
-            }
         }
         return layout;
     }

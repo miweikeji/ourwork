@@ -60,7 +60,7 @@ public class DailyPicAdapter extends AllAdapter {
         lp.height = columnWidth;
         lp.width = columnWidth;
         holder.iv_pic.setLayoutParams(lp);
-        imageLoader.displayImage("https://gd1.alicdn.com/bao/uploaded/i1/TB161JKJVXXXXb2XVXXXXXXXXXX_!!0-item_pic.jpg", holder.iv_pic, options);
+        imageLoader.displayImage(allList.get(position), holder.iv_pic, options);
         return layout;
     }
 
