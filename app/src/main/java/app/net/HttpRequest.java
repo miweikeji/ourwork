@@ -897,24 +897,11 @@ public class HttpRequest {
             @Override
             public void onSucceed(String result) {
                 MyLog.e("", "请求参数==" + result.toString());
-                try {
-                    JSONObject object = new JSONObject(result);
-                    int status = object.getInt("status");
-                    if (status == 0) {
-                        JSONObject dialylist = object.getJSONObject("dialylist");
-                        if (dialylist.getInt("totalpage") == 0) {
-                            callback.onFail(Constants.JSON_HAS_NULL);
-                        } else {
-                            Gson gson = new Gson();
-                            DailyListResult meta = gson.fromJson(result, DailyListResult.class);
-                            callback.onSucceed(meta);
-
-                        }
-                    } else {
-                        callback.onFail(object.getString("msg"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                DailyListResult meta = JsonUtil.parseObject(result, DailyListResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
                 }
             }
 
@@ -1074,29 +1061,11 @@ public class HttpRequest {
 
             @Override
             public void onSucceed(String result) {
-                MyLog.e("", "请求参数==" + result.toString());
-                //{"houseList":null,"page":0,"status":0,"msg":"","sessionid":"40a5be61562f73454e372"}
-                try {
-                    JSONObject object = new JSONObject(result);
-                    int status = object.getInt("status");
-                    if (status == 0) {
-                        int page = object.getInt("page");
-                        if (page == 0) {
-                            callback.onFail(Constants.JSON_HAS_NULL);
-                        } else {
-//                            GsonBuilder gb = new GsonBuilder();
-//                            gb.registerTypeAdapter(String.class, new StringConverter());
-//                            Gson gson = gb.create();
-//                            DetailPlanResult meta = JsonUtil.parseObject(result, DetailPlanResult.class);
-                            ProtectRecordResult meta = JsonUtil.parseObject(result, ProtectRecordResult.class);
-                            callback.onSucceed(meta);
-
-                        }
-                    } else {
-                        callback.onFail(object.getString("msg"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                ProtectRecordResult meta = JsonUtil.parseObject(result, ProtectRecordResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
                 }
 
             }
@@ -1208,33 +1177,16 @@ public class HttpRequest {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("cid", UserUtil.getUserId(context)));
         mList.add(new Param("p", "" + p));
-
-
         new MyAsyncTask(context, Urls.getScoreList, mList, new ICallback<String>() {
 
             @Override
             public void onSucceed(String result) {
-                MyLog.e("", "请求参数==" + result.toString());
-                //{"houseList":null,"page":0,"status":0,"msg":"","sessionid":"40a5be61562f73454e372"}
-                try {
-                    JSONObject object = new JSONObject(result);
-                    int status = object.getInt("status");
-                    if (status == 0) {
-                        int page = object.getInt("page");
-                        if (page == 0) {
-                            callback.onFail(Constants.JSON_HAS_NULL);
-                        } else {
-                            ScoreResult meta = JsonUtil.parseObject(result, ScoreResult.class);
-                            callback.onSucceed(meta);
-
-                        }
-                    } else {
-                        callback.onFail(object.getString("msg"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                ScoreResult meta = JsonUtil.parseObject(result, ScoreResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
                 }
-
             }
 
             @Override

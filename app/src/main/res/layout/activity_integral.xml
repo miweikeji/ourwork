@@ -47,10 +47,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/relativeLayout7"
             android:layout_marginLeft="@dimen/margin_left_right"
             android:layout_marginRight="@dimen/margin_left_right"
-            >
+            android:layout_below="@+id/relativeLayout7">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,14 +60,14 @@
                 android:layout_marginTop="@dimen/margin_top"
                 android:id="@+id/tv_1" />
 
-            <ListView
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/listView"
-                android:layout_below="@+id/tv_1"
+                android:layout_marginTop="5dp"
                 android:scrollbars="none"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tv_1" />
 
         </RelativeLayout>
 
