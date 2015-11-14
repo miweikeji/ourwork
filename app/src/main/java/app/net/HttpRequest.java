@@ -815,14 +815,8 @@ public class HttpRequest {
                     JSONObject object = new JSONObject(result);
                     int status = object.getInt("status");
                     if (status == 0) {
-                        int page = object.getInt("page");
-                        if (page == 0) {
-                            callback.onFail(Constants.JSON_HAS_NULL);
-                        } else {
-                            ConstructPlanResult meta = JsonUtil.parseObject(result, ConstructPlanResult.class);
-                            callback.onSucceed(meta);
-
-                        }
+                        ConstructPlanResult meta = JsonUtil.parseObject(result, ConstructPlanResult.class);
+                        callback.onSucceed(meta);
                     } else {
                         callback.onFail(object.getString("msg"));
                     }

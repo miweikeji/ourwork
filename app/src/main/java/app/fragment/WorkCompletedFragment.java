@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.activity.WorkPlanDetailsActivity;
+import app.adapter.HintAdapter;
 import app.adapter.MyWorkAdapter;
 import app.entity.ConstructPlan;
 import app.entity.ConstructPlanResult;
@@ -65,25 +66,34 @@ public class WorkCompletedFragment extends Fragment implements AdapterView.OnIte
             @Override
             public void onSucceed(ConstructPlanResult result) {
                 List<ConstructPlan> cases = result.getHouseList();
+
                 page = result.getPage();
 
-
-                if(p<=page){
-                    if(p<=page-1){
-                        isOver = true;
-                    }
-                    allCases.addAll(cases);
-                }else {
+                if(page==0){
                     isOver = false;
-                    Footools.removeFoot(pull_case, getActivity(), inflate);
+                    HintAdapter hintAdapter = new HintAdapter(getActivity());
+                    pull_case.getRefreshableView().setDividerHeight(0);
+                    pull_case.setAdapter(hintAdapter);
+                } else {
+                    if(p<=page){
+                        if(p<=page-1){
+                            isOver = true;
+                        }
+                        allCases.addAll(cases);
+                    }else {
+                        isOver = false;
+                        Footools.removeFoot(pull_case, getActivity(), inflate);
+                    }
+
+                    if (p == 1) {
+                        adapter = new MyWorkAdapter(getActivity(), allCases);
+                        pull_case.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
 
-                if (p == 1) {
-                    adapter = new MyWorkAdapter(getActivity(), allCases);
-                    pull_case.setAdapter(adapter);
-                } else {
-                    adapter.notifyDataSetChanged();
-                }
+
                 pull_case.onRefreshComplete();
                 dialog.dismiss();
                 isFisrstShow=true;
@@ -92,7 +102,7 @@ public class WorkCompletedFragment extends Fragment implements AdapterView.OnIte
             @Override
             public void onFail(String error) {
                 pull_case.onRefreshComplete();
-                Uihelper.showToast(getActivity(), error);
+//                Uihelper.showToast(getActivity(), error);
                 dialog.dismiss();
                 isFisrstShow=true;
             }

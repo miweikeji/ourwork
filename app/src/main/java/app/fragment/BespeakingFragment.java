@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.activity.ReservationDetailsActivity;
+import app.adapter.HintAdapter;
 import app.adapter.HousesByLyfAdapter;
 import app.entity.HousesByLyf;
 import app.entity.HousesByLyfResult;
@@ -65,21 +66,29 @@ public class BespeakingFragment extends Fragment implements AdapterView.OnItemCl
             public void onSucceed(HousesByLyfResult result) {
                 List<HousesByLyf> mHousesByLyf =  result.getHouseList();
                 page= result.getTotalpage();
-                if(p<=page){
-                    if(p<=page-1){
-                        isOver = true;
-                    }
-                    allCases.addAll(mHousesByLyf);
-                }else {
+                if(page==0){
                     isOver = false;
-                    Footools.removeFoot(pull_case, getActivity(), inflate);
-                }
+                    HintAdapter hintAdapter = new HintAdapter(getActivity());
+                    pull_case.getRefreshableView().setDividerHeight(0);
+                    pull_case.setAdapter(hintAdapter);
+                } else {
 
-                if(p==1){
-                    adapter = new HousesByLyfAdapter(getActivity(),allCases);
-                    pull_case.setAdapter(adapter);
-                }else {
-                    adapter.notifyDataSetChanged();
+                    if(p<=page){
+                        if(p<=page-1){
+                            isOver = true;
+                        }
+                        allCases.addAll(mHousesByLyf);
+                    }else {
+                        isOver = false;
+                        Footools.removeFoot(pull_case, getActivity(), inflate);
+                    }
+
+                    if(p==1){
+                        adapter = new HousesByLyfAdapter(getActivity(),allCases);
+                        pull_case.setAdapter(adapter);
+                    }else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
                 pull_case.onRefreshComplete();
                 dialog.dismiss();

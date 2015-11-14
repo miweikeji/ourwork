@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.adapter.HintAdapter;
 import app.adapter.MyFriendsAdapter;
 import app.entity.MyFriends;
 import app.entity.MyFriendsResult;
@@ -90,23 +91,30 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
             public void onSucceed(MyFriendsResult result) {
                 isFisrstShow = true;
                 List<MyFriends> message = result.getMessage();
-                int page = result.getPage();
-
-                if(p<=page){
-                    if(p<=page-1){
-                        isOver = true;
-                    }
-                    allList.addAll(message);
-                }else {
+                 page = result.getPage();
+                if(page==0){
                     isOver = false;
-                    Footools.removeFoot(pull_list, MyFriendsActivity.this, inflate);
-                }
+                    HintAdapter hintAdapter = new HintAdapter(MyFriendsActivity.this);
+                    pull_list.getRefreshableView().setDividerHeight(0);
+                    pull_list.setAdapter(hintAdapter);
+                } else {
 
-                if(p==1){
-                    adapter = new MyFriendsAdapter(MyFriendsActivity.this, allList,imageLoader,options);
-                    list.setAdapter(adapter);
-                }else {
-                    adapter.notifyDataSetChanged();
+                    if(p<=page){
+                        if(p<=page-1){
+                            isOver = true;
+                        }
+                        allList.addAll(message);
+                    }else {
+                        isOver = false;
+                        Footools.removeFoot(pull_list, MyFriendsActivity.this, inflate);
+                    }
+
+                    if(p==1){
+                        adapter = new MyFriendsAdapter(MyFriendsActivity.this, allList,imageLoader,options);
+                        pull_list.setAdapter(adapter);
+                    }else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
                 pull_list.onRefreshComplete();
                 disMissWaitingDialog();

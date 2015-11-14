@@ -24,6 +24,7 @@ import java.util.List;
 
 import app.activity.CraftsmanZoneActivity;
 import app.adapter.ClassMonitorAdapter;
+import app.adapter.HintAdapter;
 import app.entity.Allcrafts;
 import app.entity.craftsListResult;
 import app.net.HttpRequest;
@@ -73,20 +74,28 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
                 isFisrstShow = true;
                 List<Allcrafts> list = result.getCrafts().getList();
                  page = result.getCrafts().getPage();
-                if(p<=page){
-                    if(p<=page-1){
-                        isOver = true;
-                    }
-                    allList.addAll(list);
-                }else {
+
+                if(page==0){
                     isOver = false;
-                    Footools.removeFoot(pull_list,getActivity(),inflate);
-                }
-                if (p == 1) {
-                    adapter = new ClassMonitorAdapter(getActivity(), allList, imageLoader, options, 1);
-                    pull_list.setAdapter(adapter);
+                    HintAdapter hintAdapter = new HintAdapter(getActivity());
+                    pull_list.getRefreshableView().setDividerHeight(0);
+                    pull_list.setAdapter(hintAdapter);
                 } else {
-                    adapter.notifyDataSetChanged();
+                    if(p<=page){
+                        if(p<=page-1){
+                            isOver = true;
+                        }
+                        allList.addAll(list);
+                    }else {
+                        isOver = false;
+                        Footools.removeFoot(pull_list,getActivity(),inflate);
+                    }
+                    if (p == 1) {
+                        adapter = new ClassMonitorAdapter(getActivity(), allList, imageLoader, options, 1);
+                        pull_list.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
                 dialog.dismiss();
                 pull_list.onRefreshComplete();

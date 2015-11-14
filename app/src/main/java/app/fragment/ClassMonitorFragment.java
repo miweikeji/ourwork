@@ -24,6 +24,7 @@ import java.util.List;
 
 import app.activity.CraftsmanZoneActivity;
 import app.adapter.ClassMonitorAdapter;
+import app.adapter.HintAdapter;
 import app.entity.Allcrafts;
 import app.entity.craftsListResult;
 import app.net.HttpRequest;
@@ -75,22 +76,29 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
                 pull_list.onRefreshComplete();
                 List<Allcrafts> list = result.getCrafts().getList();
                  page = result.getCrafts().getPage();
-
-                if(p<=page){
-                    if(p<=page-1){
-                        isOver = true;
-                    }
-                    allList.addAll(list);
-                }else {
+                if(page==0){
                     isOver = false;
-                    Footools.removeFoot(pull_list, getActivity(), inflate);
-                }
+                    HintAdapter hintAdapter = new HintAdapter(getActivity());
+                    pull_list.getRefreshableView().setDividerHeight(0);
+                    pull_list.setAdapter(hintAdapter);
+                } else {
 
-                if(p==1){
-                    adapter = new ClassMonitorAdapter(getActivity(),allList,imageLoader,options,0);
-                    pull_list.setAdapter(adapter);
-                }else {
-                    adapter.notifyDataSetChanged();
+                    if(p<=page){
+                        if(p<=page-1){
+                            isOver = true;
+                        }
+                        allList.addAll(list);
+                    }else {
+                        isOver = false;
+                        Footools.removeFoot(pull_list, getActivity(), inflate);
+                    }
+
+                    if(p==1){
+                        adapter = new ClassMonitorAdapter(getActivity(),allList,imageLoader,options,0);
+                        pull_list.setAdapter(adapter);
+                    }else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
                 dialog.dismiss();
             }
@@ -98,7 +106,7 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
             @Override
             public void onFail(String error) {
                 pull_list.onRefreshComplete();
-                Uihelper.showToast(getActivity(),error);
+                Uihelper.showToast(getActivity(), error);
                 isFisrstShow = true;
                 dialog.dismiss();
             }

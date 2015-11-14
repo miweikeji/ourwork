@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.adapter.BuiltTaskAdapter;
+import app.adapter.HintAdapter;
 import app.entity.BuiltTask;
 import app.entity.BuiltTaskResult;
 import app.entity.UserInfo;
@@ -80,22 +81,30 @@ public class BuiltTaskActivity extends BaseActivity implements AdapterView.OnIte
 
                 List<BuiltTask> cases = result.getHouseList();
 
-                if(p<=page){
-                    if(p<=page-1){
-                        isOver = true;
-                    }
-                    allCases.addAll(cases);
-                }else {
+                if(page==0){
                     isOver = false;
-                    Footools.removeFoot(pull_case, BuiltTaskActivity.this, inflate);
+                    HintAdapter hintAdapter = new HintAdapter(BuiltTaskActivity.this);
+                    pull_case.getRefreshableView().setDividerHeight(0);
+                    pull_case.setAdapter(hintAdapter);
+                } else {
+                    if(p<=page){
+                        if(p<=page-1){
+                            isOver = true;
+                        }
+                        allCases.addAll(cases);
+                    }else {
+                        isOver = false;
+                        Footools.removeFoot(pull_case, BuiltTaskActivity.this, inflate);
+                    }
+
+                    if (p == 1) {
+                        adapter = new BuiltTaskAdapter(BuiltTaskActivity.this, allCases);
+                        pull_case.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
 
-                if (p == 1) {
-                    adapter = new BuiltTaskAdapter(BuiltTaskActivity.this, allCases);
-                    pull_case.setAdapter(adapter);
-                } else {
-                    adapter.notifyDataSetChanged();
-                }
                 pull_case.onRefreshComplete();
                 disMissWaitingDialog();
             }

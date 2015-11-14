@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.activity.WorkPlanDetailsActivity;
+import app.adapter.HintAdapter;
 import app.adapter.MyWorkAdapter;
 import app.entity.ConstructPlan;
 import app.entity.ConstructPlanResult;
@@ -64,23 +65,29 @@ public class WorkConstructionFragment extends Fragment implements AdapterView.On
             public void onSucceed(ConstructPlanResult result) {
                 List<ConstructPlan> cases = result.getHouseList();
                 page = result.getPage();
-
-
-                if(p<=page){
-                    if(p<=page-1){
-                        isOver = true;
-                    }
-                    allCases.addAll(cases);
-                }else {
+                if(page==0){
                     isOver = false;
-                    Footools.removeFoot(pull_case, getActivity(), inflate);
-                }
-
-                if (p == 1) {
-                    adapter = new MyWorkAdapter(getActivity(), allCases);
-                    pull_case.setAdapter(adapter);
+                    HintAdapter hintAdapter = new HintAdapter(getActivity());
+                    pull_case.getRefreshableView().setDividerHeight(0);
+                    pull_case.setAdapter(hintAdapter);
                 } else {
-                    adapter.notifyDataSetChanged();
+
+                    if(p<=page){
+                        if(p<=page-1){
+                            isOver = true;
+                        }
+                        allCases.addAll(cases);
+                    }else {
+                        isOver = false;
+                        Footools.removeFoot(pull_case, getActivity(), inflate);
+                    }
+
+                    if (p == 1) {
+                        adapter = new MyWorkAdapter(getActivity(), allCases);
+                        pull_case.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
                 pull_case.onRefreshComplete();
                 dialog.dismiss();
