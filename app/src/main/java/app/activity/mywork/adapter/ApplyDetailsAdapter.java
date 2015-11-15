@@ -17,8 +17,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.activity.CraftsmanZoneActivity;
-import app.activity.WorkPlanDetailsActivity;
 import app.adapter.AllAdapter;
 import app.entity.ApplyCrafts;
 import app.entity.DetailPlan;

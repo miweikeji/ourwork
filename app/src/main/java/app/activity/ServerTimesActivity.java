@@ -18,6 +18,7 @@ import java.util.List;
 
 import app.entity.Ctime;
 import app.entity.Time;
+import app.tools.MyLog;
 import app.tools.TimeTools;
 import app.tools.UIEventUpdate;
 import app.utils.Uihelper;
@@ -90,14 +91,14 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
     private int flage;
     private int maxIsTrue;
     private boolean isStopUp;
-
+    private boolean isToFor;
     private int group;
     private int mark;
     private Date d1;
     private int remainder;
     private HashMap<Integer,List<List<String>>> hasPage = new HashMap<>();
 //    private List<String> itemInfo = new ArrayList<>();
-
+    private List<Ctime> saveCtim = new ArrayList<>();
 
 
     private int flages;
@@ -111,6 +112,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
     public void initUI() {
         Intent intent = getIntent();//time longToDateStr
         List<Ctime> time= (List<Ctime>) intent.getSerializableExtra("ChangeTasksActivity");
+        saveCtim.addAll(time);
         time_day = intent.getIntExtra("time_day", 0)-1;
         case_type = intent.getStringExtra("CASE_TYPE");
         if(time!=null){
@@ -127,47 +129,35 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         }else {
             group=  time_day/7;
             remainder=time_day%7;
-            group++;
-            for (int t=0;t<time.size();t++){
-                if(flages==t/7){
-                    List<List<String>> pageDate = new ArrayList<>();
-                    List<String> itemPageData = new ArrayList<>();
-                    itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(t).getDatatime()))+time.get(t).getAm()+time.get(t).getPm());
-                    pageDate.add(itemPageData);
-                    hasPage.put(flages, pageDate);
-                    flages++;
+            if(remainder!=0){
+                group++;
+            }
+            for(int k =0;k<group;k++){
+                List<List<String>> pageDate = new ArrayList<>();//存七天的数据
+                hasPage.put(k, pageDate);
+                for (int t=0;t<7;t++){
+                    List<List<String>> lists = hasPage.get(k);
+                    if(k<group-1||remainder==0){
+                        List<String> itemPageData = new ArrayList<>();
+                        itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(7*k+t).getDatatime()))+time.get(7*k+t).getAm()+time.get(7*k+t).getPm());
+                        lists.add(itemPageData);
+                    }else {
+                        if(!isToFor){
+                            isToFor=true;
+                            for(int g=0;g<remainder;g++){
+                                List<String> itemPageData = new ArrayList<>();
+                                itemPageData.add(TimeTools.longToDateStr(Double.valueOf(time.get(7*k+g).getDatatime()))+time.get(7*k+g).getAm()+time.get(7*k+g).getPm());
+                                lists.add(itemPageData);
+                            }
+//                            hasPage.put(group, lists);
+                        }
+                    }
                 }
+//                hasPage.put(k,lists);
             }
         }
 
-
-
-
-
-//
-//        if(time_day<8){
-//            group=1;
-//            List<List<String>> pageList = new ArrayList<>();
-//            for (int j=0;j<7;j++){
-//                List<String> itemInfo = new ArrayList<>();
-//                pageList.add(itemInfo);
-//            }
-//            hasPage.put(0,pageList);
-//        }else {
-//            group=  time_day/7;
-//            remainder=time_day%7;
-//            group++;
-//
-//            for (int i=0;i<group;i++){
-//                List<List<String>> pageList = new ArrayList<>();
-//                for (int j=0;j<7;j++){
-//                    List<String> itemInfo = new ArrayList<>();
-//                    pageList.add(itemInfo);
-//                }
-//                hasPage.put(i,pageList);
-//            }
-//        }
-
+        MyLog.e("","pageDate"+hasPage.size());
         tv_time1 = (TextView) findViewById(R.id.tv_time1);
         tv_time2 = (TextView) findViewById(R.id.tv_time2);
         tv_time3 = (TextView) findViewById(R.id.tv_time3);
@@ -231,9 +221,8 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             d1=sdf.parse(date);
             if(time_day<8){
                 if(time_day==1){
-                    tv_time1.setText(TimeTools.getDayTime(d1, 1));
-                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
-                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    String s1 = hasPage.get(0).get(0).get(0);
+                    tv_time1.setText(s1.substring(0, s1.length() - 2));
                     if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                         img_am1.setVisibility(View.VISIBLE);
                     }else {
@@ -248,10 +237,8 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
 
                 }
                 if(time_day==2){
-                    tv_time1.setText(TimeTools.getDayTime(d1, 1));
-                    tv_time2.setText(TimeTools.getDayTime(d1, 2));
-                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
-                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    String s1 = hasPage.get(0).get(0).get(0);
+                    tv_time1.setText(s1.substring(0, s1.length() - 2));
                     if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                         img_am1.setVisibility(View.VISIBLE);
                     }else {
@@ -263,8 +250,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm1.setVisibility(View.INVISIBLE);
                     }
-
-                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    String s2 = hasPage.get(0).get(1).get(0);
                     tv_time2.setText(s2.substring(0,s2.length()-2));
                     if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
                         img_am2.setVisibility(View.VISIBLE);
@@ -282,11 +268,8 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
 
                 }
                 if(time_day==3){
-                    tv_time1.setText(TimeTools.getDayTime(d1,1));
-                    tv_time2.setText(TimeTools.getDayTime(d1,2));
-                    tv_time3.setText(TimeTools.getDayTime(d1,3));
-                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
-                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    String s1 = hasPage.get(0).get(0).get(0);
+                    tv_time1.setText(s1.substring(0, s1.length() - 2));
                     if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                         img_am1.setVisibility(View.VISIBLE);
                     }else {
@@ -298,8 +281,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm1.setVisibility(View.INVISIBLE);
                     }
-
-                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    String s2 = hasPage.get(0).get(1).get(0);
                     tv_time2.setText(s2.substring(0,s2.length()-2));
                     if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
                         img_am2.setVisibility(View.VISIBLE);
@@ -312,8 +294,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm2.setVisibility(View.INVISIBLE);
                     }
-
-                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    String s3 = hasPage.get(0).get(2).get(0);
                     tv_time3.setText(s3.substring(0,s3.length()-2));
                     if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
                         img_am3.setVisibility(View.VISIBLE);
@@ -326,18 +307,11 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm3.setVisibility(View.INVISIBLE);
                     }
-
-
-
 
                 }
                 if(time_day==4){
-                    tv_time1.setText(TimeTools.getDayTime(d1,1));
-                    tv_time2.setText(TimeTools.getDayTime(d1,2));
-                    tv_time3.setText(TimeTools.getDayTime(d1,3));
-                    tv_time4.setText(TimeTools.getDayTime(d1,4));
-                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
-                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    String s1 = hasPage.get(0).get(0).get(0);
+                    tv_time1.setText(s1.substring(0, s1.length() - 2));
                     if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                         img_am1.setVisibility(View.VISIBLE);
                     }else {
@@ -349,8 +323,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm1.setVisibility(View.INVISIBLE);
                     }
-
-                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    String s2 = hasPage.get(0).get(1).get(0);
                     tv_time2.setText(s2.substring(0,s2.length()-2));
                     if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
                         img_am2.setVisibility(View.VISIBLE);
@@ -363,8 +336,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm2.setVisibility(View.INVISIBLE);
                     }
-
-                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    String s3 = hasPage.get(0).get(2).get(0);
                     tv_time3.setText(s3.substring(0,s3.length()-2));
                     if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
                         img_am3.setVisibility(View.VISIBLE);
@@ -377,8 +349,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm3.setVisibility(View.INVISIBLE);
                     }
-
-                    String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                    String s4 = hasPage.get(0).get(3).get(0);
                     tv_time4.setText(s4.substring(0,s4.length()-2));
                     if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
                         img_am4.setVisibility(View.VISIBLE);
@@ -394,13 +365,8 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
 
                 }
                 if(time_day==5){
-                    tv_time1.setText(TimeTools.getDayTime(d1,1));
-                    tv_time2.setText(TimeTools.getDayTime(d1,2));
-                    tv_time3.setText(TimeTools.getDayTime(d1,3));
-                    tv_time4.setText(TimeTools.getDayTime(d1,4));
-                    tv_time5.setText(TimeTools.getDayTime(d1,5));
-                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
-                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    String s1 = hasPage.get(0).get(0).get(0);
+                    tv_time1.setText(s1.substring(0, s1.length() - 2));
                     if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                         img_am1.setVisibility(View.VISIBLE);
                     }else {
@@ -412,8 +378,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm1.setVisibility(View.INVISIBLE);
                     }
-
-                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    String s2 = hasPage.get(0).get(1).get(0);
                     tv_time2.setText(s2.substring(0,s2.length()-2));
                     if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
                         img_am2.setVisibility(View.VISIBLE);
@@ -426,8 +391,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm2.setVisibility(View.INVISIBLE);
                     }
-
-                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    String s3 = hasPage.get(0).get(2).get(0);
                     tv_time3.setText(s3.substring(0,s3.length()-2));
                     if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
                         img_am3.setVisibility(View.VISIBLE);
@@ -440,8 +404,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm3.setVisibility(View.INVISIBLE);
                     }
-
-                    String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                    String s4 = hasPage.get(0).get(3).get(0);
                     tv_time4.setText(s4.substring(0,s4.length()-2));
                     if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
                         img_am4.setVisibility(View.VISIBLE);
@@ -454,8 +417,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm4.setVisibility(View.INVISIBLE);
                     }
-
-                    String s5 = pageDate.get(4).get(0).substring(pageDate.get(4).get(0).length() - 13, pageDate.get(4).get(0).length());
+                    String s5 = hasPage.get(0).get(4).get(0);
                     tv_time5.setText(s5.substring(0,s5.length()-2));
                     if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
                         img_am5.setVisibility(View.VISIBLE);
@@ -472,14 +434,8 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
 
                 }
                 if(time_day==6){
-                    tv_time1.setText(TimeTools.getDayTime(d1,1));
-                    tv_time2.setText(TimeTools.getDayTime(d1,2));
-                    tv_time3.setText(TimeTools.getDayTime(d1,3));
-                    tv_time4.setText(TimeTools.getDayTime(d1,4));
-                    tv_time5.setText(TimeTools.getDayTime(d1,5));
-                    tv_time6.setText(TimeTools.getDayTime(d1,6));
-                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
-                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    String s1 = hasPage.get(0).get(0).get(0);
+                    tv_time1.setText(s1.substring(0, s1.length() - 2));
                     if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                         img_am1.setVisibility(View.VISIBLE);
                     }else {
@@ -491,8 +447,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm1.setVisibility(View.INVISIBLE);
                     }
-
-                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    String s2 = hasPage.get(0).get(1).get(0);
                     tv_time2.setText(s2.substring(0,s2.length()-2));
                     if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
                         img_am2.setVisibility(View.VISIBLE);
@@ -505,8 +460,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm2.setVisibility(View.INVISIBLE);
                     }
-
-                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    String s3 = hasPage.get(0).get(2).get(0);
                     tv_time3.setText(s3.substring(0,s3.length()-2));
                     if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
                         img_am3.setVisibility(View.VISIBLE);
@@ -519,8 +473,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm3.setVisibility(View.INVISIBLE);
                     }
-
-                    String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                    String s4 = hasPage.get(0).get(3).get(0);
                     tv_time4.setText(s4.substring(0,s4.length()-2));
                     if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
                         img_am4.setVisibility(View.VISIBLE);
@@ -533,8 +486,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm4.setVisibility(View.INVISIBLE);
                     }
-
-                    String s5 = pageDate.get(4).get(0).substring(pageDate.get(4).get(0).length() - 13, pageDate.get(4).get(0).length());
+                    String s5 = hasPage.get(0).get(4).get(0);
                     tv_time5.setText(s5.substring(0,s5.length()-2));
                     if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
                         img_am5.setVisibility(View.VISIBLE);
@@ -547,8 +499,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm5.setVisibility(View.INVISIBLE);
                     }
-
-                    String s6 = pageDate.get(5).get(0).substring(pageDate.get(5).get(0).length() - 13, pageDate.get(5).get(0).length());
+                    String s6 = hasPage.get(0).get(5).get(0);
                     tv_time6.setText(s6.substring(0,s6.length()-2));
                     if("1".equals(s6.substring(s6.length()-2,s6.length()-1))){
                         img_am6.setVisibility(View.VISIBLE);
@@ -561,20 +512,12 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm6.setVisibility(View.INVISIBLE);
                     }
-
 
 
                 }
                 if(time_day==7){
-                    tv_time1.setText(TimeTools.getDayTime(d1,1));
-                    tv_time2.setText(TimeTools.getDayTime(d1,2));
-                    tv_time3.setText(TimeTools.getDayTime(d1,3));
-                    tv_time4.setText(TimeTools.getDayTime(d1,4));
-                    tv_time5.setText(TimeTools.getDayTime(d1,5));
-                    tv_time6.setText(TimeTools.getDayTime(d1,6));
-                    tv_time7.setText(TimeTools.getDayTime(d1,7));
-                    String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
-                    tv_time1.setText(s1.substring(0,s1.length()-2));
+                    String s1 = hasPage.get(0).get(0).get(0);
+                    tv_time1.setText(s1.substring(0, s1.length() - 2));
                     if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                         img_am1.setVisibility(View.VISIBLE);
                     }else {
@@ -586,8 +529,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm1.setVisibility(View.INVISIBLE);
                     }
-
-                    String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                    String s2 = hasPage.get(0).get(1).get(0);
                     tv_time2.setText(s2.substring(0,s2.length()-2));
                     if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
                         img_am2.setVisibility(View.VISIBLE);
@@ -600,8 +542,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm2.setVisibility(View.INVISIBLE);
                     }
-
-                    String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                    String s3 = hasPage.get(0).get(2).get(0);
                     tv_time3.setText(s3.substring(0,s3.length()-2));
                     if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
                         img_am3.setVisibility(View.VISIBLE);
@@ -614,8 +555,8 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm3.setVisibility(View.INVISIBLE);
                     }
-
-                    String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                    String s4 = hasPage.get(0).get(3).get(0);
+//                String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
                     tv_time4.setText(s4.substring(0,s4.length()-2));
                     if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
                         img_am4.setVisibility(View.VISIBLE);
@@ -628,8 +569,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm4.setVisibility(View.INVISIBLE);
                     }
-
-                    String s5 = pageDate.get(4).get(0).substring(pageDate.get(4).get(0).length() - 13, pageDate.get(4).get(0).length());
+                    String s5 = hasPage.get(0).get(4).get(0);
                     tv_time5.setText(s5.substring(0,s5.length()-2));
                     if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
                         img_am5.setVisibility(View.VISIBLE);
@@ -642,8 +582,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm5.setVisibility(View.INVISIBLE);
                     }
-
-                    String s6 = pageDate.get(5).get(0).substring(pageDate.get(5).get(0).length() - 13, pageDate.get(5).get(0).length());
+                    String s6 = hasPage.get(0).get(5).get(0);
                     tv_time6.setText(s6.substring(0,s6.length()-2));
                     if("1".equals(s6.substring(s6.length()-2,s6.length()-1))){
                         img_am6.setVisibility(View.VISIBLE);
@@ -656,8 +595,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm6.setVisibility(View.INVISIBLE);
                     }
-
-                    String s7 = pageDate.get(6).get(0).substring(pageDate.get(6).get(0).length() - 13, pageDate.get(6).get(0).length());
+                    String s7 = hasPage.get(0).get(6).get(0);
                     tv_time7.setText(s7.substring(0,s7.length()-2));
                     if("1".equals(s7.substring(s7.length()-2,s7.length()-1))){
                         img_am7.setVisibility(View.VISIBLE);
@@ -670,19 +608,13 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     }else {
                         img_pm7.setVisibility(View.INVISIBLE);
                     }
+
                 }
             }else {
-                tv_time1.setText(TimeTools.getDayTime(d1,1));
-                tv_time2.setText(TimeTools.getDayTime(d1,2));
-                tv_time3.setText(TimeTools.getDayTime(d1,3));
-                tv_time4.setText(TimeTools.getDayTime(d1,4));
-                tv_time5.setText(TimeTools.getDayTime(d1,5));
-                tv_time6.setText(TimeTools.getDayTime(d1,6));
-                tv_time7.setText(TimeTools.getDayTime(d1,7));
 
-
-                String s1 = pageDate.get(0).get(0).substring(pageDate.get(0).get(0).length() - 13, pageDate.get(0).get(0).length());
-                tv_time1.setText(s1.substring(0,s1.length()-2));
+                MyLog.e("","pageDate"+pageDate.size());
+                String s1 = hasPage.get(0).get(0).get(0);
+                tv_time1.setText(s1.substring(0, s1.length() - 2));
                 if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                     img_am1.setVisibility(View.VISIBLE);
                 }else {
@@ -694,8 +626,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                 }else {
                     img_pm1.setVisibility(View.INVISIBLE);
                 }
-
-                String s2 = pageDate.get(1).get(0).substring(pageDate.get(1).get(0).length() - 13, pageDate.get(1).get(0).length());
+                String s2 = hasPage.get(0).get(1).get(0);
                 tv_time2.setText(s2.substring(0,s2.length()-2));
                 if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
                     img_am2.setVisibility(View.VISIBLE);
@@ -708,8 +639,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                 }else {
                     img_pm2.setVisibility(View.INVISIBLE);
                 }
-
-                String s3 = pageDate.get(2).get(0).substring(pageDate.get(2).get(0).length() - 13, pageDate.get(2).get(0).length());
+                String s3 = hasPage.get(0).get(2).get(0);
                 tv_time3.setText(s3.substring(0,s3.length()-2));
                 if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
                     img_am3.setVisibility(View.VISIBLE);
@@ -722,8 +652,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                 }else {
                     img_pm3.setVisibility(View.INVISIBLE);
                 }
-
-                String s4 = pageDate.get(3).get(0).substring(pageDate.get(3).get(0).length() - 13, pageDate.get(3).get(0).length());
+                String s4 = hasPage.get(0).get(3).get(0);
                 tv_time4.setText(s4.substring(0,s4.length()-2));
                 if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
                     img_am4.setVisibility(View.VISIBLE);
@@ -736,8 +665,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                 }else {
                     img_pm4.setVisibility(View.INVISIBLE);
                 }
-
-                String s5 = pageDate.get(4).get(0).substring(pageDate.get(4).get(0).length() - 13, pageDate.get(4).get(0).length());
+                String s5 = hasPage.get(0).get(4).get(0);
                 tv_time5.setText(s5.substring(0,s5.length()-2));
                 if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
                     img_am5.setVisibility(View.VISIBLE);
@@ -750,8 +678,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                 }else {
                     img_pm5.setVisibility(View.INVISIBLE);
                 }
-
-                String s6 = pageDate.get(5).get(0).substring(pageDate.get(5).get(0).length() - 13, pageDate.get(5).get(0).length());
+                String s6 = hasPage.get(0).get(5).get(0);
                 tv_time6.setText(s6.substring(0,s6.length()-2));
                 if("1".equals(s6.substring(s6.length()-2,s6.length()-1))){
                     img_am6.setVisibility(View.VISIBLE);
@@ -764,8 +691,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                 }else {
                     img_pm6.setVisibility(View.INVISIBLE);
                 }
-
-                String s7 = pageDate.get(6).get(0).substring(pageDate.get(6).get(0).length() - 13, pageDate.get(6).get(0).length());
+                String s7 = hasPage.get(0).get(6).get(0);
                 tv_time7.setText(s7.substring(0,s7.length()-2));
                 if("1".equals(s7.substring(s7.length()-2,s7.length()-1))){
                     img_am7.setVisibility(View.VISIBLE);
@@ -821,13 +747,18 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             savePageInfo();
             mark++;
             reset();
-            if(mark<maxIsTrue){
-                if(mark+1<maxIsTrue){
+            if(mark+1<group){
+                getPageInfo();
+            }else {
+                if(remainder==0){
                     getPageInfo();
                 }else {
                     getLestPageInfo();
                 }
-            }
+//                    if(mark+1==group){
+//
+                    }
+//                }
 
             than7(mark);
 
@@ -848,9 +779,9 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
 
 
         List<List<String>> lists = hasPage.get(mark);
-        if(lists.get(0).get(0).length()>10){
-            String s1 = lists.get(0).get(0).substring(lists.get(0).get(0).length() - 13, lists.get(0).get(0).length());
-            tv_time1.setText(s1.substring(0,s1.length()-2));
+        if(lists.size()==1){
+            String s1 = lists.get(0).get(0);
+            tv_time1.setText(s1.substring(0, s1.length() - 2));
             if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
                 img_am1.setVisibility(View.VISIBLE);
             }else {
@@ -862,10 +793,25 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             }else {
                 img_pm1.setVisibility(View.INVISIBLE);
             }
-        }
 
-        if(lists.get(1).get(0).length()>10){
-            String s2 = lists.get(1).get(0).substring(lists.get(1).get(0).length() - 13, lists.get(1).get(0).length());
+        }
+        if(lists.size()==2){
+
+
+            String s1 = lists.get(0).get(0);
+            tv_time1.setText(s1.substring(0, s1.length() - 2));
+            if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                img_am1.setVisibility(View.VISIBLE);
+            }else {
+                img_am1.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                img_pm1.setVisibility(View.VISIBLE);
+            }else {
+                img_pm1.setVisibility(View.INVISIBLE);
+            }
+            String s2 = lists.get(1).get(0);
             tv_time2.setText(s2.substring(0,s2.length()-2));
             if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
                 img_am2.setVisibility(View.VISIBLE);
@@ -878,10 +824,38 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             }else {
                 img_pm2.setVisibility(View.INVISIBLE);
             }
-        }
 
-        if(lists.get(2).get(0).length()>10){
-            String s3 = lists.get(2).get(0).substring(lists.get(2).get(0).length() - 13, lists.get(2).get(0).length());
+
+
+        }
+        if(lists.size()==3){
+            String s1 = lists.get(0).get(0);
+            tv_time1.setText(s1.substring(0, s1.length() - 2));
+            if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                img_am1.setVisibility(View.VISIBLE);
+            }else {
+                img_am1.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                img_pm1.setVisibility(View.VISIBLE);
+            }else {
+                img_pm1.setVisibility(View.INVISIBLE);
+            }
+            String s2 = lists.get(1).get(0);
+            tv_time2.setText(s2.substring(0,s2.length()-2));
+            if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                img_am2.setVisibility(View.VISIBLE);
+            }else {
+                img_am2.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                img_pm2.setVisibility(View.VISIBLE);
+            }else {
+                img_pm2.setVisibility(View.INVISIBLE);
+            }
+            String s3 = lists.get(2).get(0);
             tv_time3.setText(s3.substring(0,s3.length()-2));
             if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
                 img_am3.setVisibility(View.VISIBLE);
@@ -894,10 +868,49 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             }else {
                 img_pm3.setVisibility(View.INVISIBLE);
             }
-        }
 
-        if(lists.get(3).get(0).length()>10){
-            String s4 = lists.get(3).get(0).substring(lists.get(3).get(0).length() - 13, lists.get(3).get(0).length());
+        }
+        if(lists.size()==4){
+            String s1 = lists.get(0).get(0);
+            tv_time1.setText(s1.substring(0, s1.length() - 2));
+            if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                img_am1.setVisibility(View.VISIBLE);
+            }else {
+                img_am1.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                img_pm1.setVisibility(View.VISIBLE);
+            }else {
+                img_pm1.setVisibility(View.INVISIBLE);
+            }
+            String s2 = lists.get(1).get(0);
+            tv_time2.setText(s2.substring(0,s2.length()-2));
+            if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                img_am2.setVisibility(View.VISIBLE);
+            }else {
+                img_am2.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                img_pm2.setVisibility(View.VISIBLE);
+            }else {
+                img_pm2.setVisibility(View.INVISIBLE);
+            }
+            String s3 = lists.get(2).get(0);
+            tv_time3.setText(s3.substring(0,s3.length()-2));
+            if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                img_am3.setVisibility(View.VISIBLE);
+            }else {
+                img_am3.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                img_pm3.setVisibility(View.VISIBLE);
+            }else {
+                img_pm3.setVisibility(View.INVISIBLE);
+            }
+            String s4 = lists.get(3).get(0);
             tv_time4.setText(s4.substring(0,s4.length()-2));
             if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
                 img_am4.setVisibility(View.VISIBLE);
@@ -910,11 +923,62 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             }else {
                 img_pm4.setVisibility(View.INVISIBLE);
             }
+
         }
+        if(lists.size()==5){
+            String s1 = lists.get(0).get(0);
+            tv_time1.setText(s1.substring(0, s1.length() - 2));
+            if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                img_am1.setVisibility(View.VISIBLE);
+            }else {
+                img_am1.setVisibility(View.INVISIBLE);
+            }
 
-        if( lists.get(4).get(0).length()>10){
+            if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                img_pm1.setVisibility(View.VISIBLE);
+            }else {
+                img_pm1.setVisibility(View.INVISIBLE);
+            }
+            String s2 = lists.get(1).get(0);
+            tv_time2.setText(s2.substring(0,s2.length()-2));
+            if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                img_am2.setVisibility(View.VISIBLE);
+            }else {
+                img_am2.setVisibility(View.INVISIBLE);
+            }
 
-            String s5 = lists.get(4).get(0).substring(lists.get(4).get(0).length() - 13, lists.get(4).get(0).length());
+            if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                img_pm2.setVisibility(View.VISIBLE);
+            }else {
+                img_pm2.setVisibility(View.INVISIBLE);
+            }
+            String s3 = lists.get(2).get(0);
+            tv_time3.setText(s3.substring(0,s3.length()-2));
+            if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                img_am3.setVisibility(View.VISIBLE);
+            }else {
+                img_am3.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                img_pm3.setVisibility(View.VISIBLE);
+            }else {
+                img_pm3.setVisibility(View.INVISIBLE);
+            }
+            String s4 = lists.get(3).get(0);
+            tv_time4.setText(s4.substring(0,s4.length()-2));
+            if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
+                img_am4.setVisibility(View.VISIBLE);
+            }else {
+                img_am4.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s4.substring(s4.length()-1,s4.length()))){
+                img_pm4.setVisibility(View.VISIBLE);
+            }else {
+                img_pm4.setVisibility(View.INVISIBLE);
+            }
+            String s5 = lists.get(4).get(0);
             tv_time5.setText(s5.substring(0,s5.length()-2));
             if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
                 img_am5.setVisibility(View.VISIBLE);
@@ -927,11 +991,76 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             }else {
                 img_pm5.setVisibility(View.INVISIBLE);
             }
+
+
         }
+        if(lists.size()==6){
+            String s1 = lists.get(0).get(0);
+            tv_time1.setText(s1.substring(0, s1.length() - 2));
+            if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
+                img_am1.setVisibility(View.VISIBLE);
+            }else {
+                img_am1.setVisibility(View.INVISIBLE);
+            }
 
-        if(lists.get(5).get(0).length()>10){
+            if("1".equals(s1.substring(s1.length()-1,s1.length()))){
+                img_pm1.setVisibility(View.VISIBLE);
+            }else {
+                img_pm1.setVisibility(View.INVISIBLE);
+            }
+            String s2 = lists.get(1).get(0);
+            tv_time2.setText(s2.substring(0,s2.length()-2));
+            if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
+                img_am2.setVisibility(View.VISIBLE);
+            }else {
+                img_am2.setVisibility(View.INVISIBLE);
+            }
 
-            String s6 = lists.get(5).get(0).substring(lists.get(5).get(0).length() - 13, lists.get(5).get(0).length());
+            if("1".equals(s2.substring(s2.length()-1,s2.length()))){
+                img_pm2.setVisibility(View.VISIBLE);
+            }else {
+                img_pm2.setVisibility(View.INVISIBLE);
+            }
+            String s3 = lists.get(2).get(0);
+            tv_time3.setText(s3.substring(0,s3.length()-2));
+            if("1".equals(s3.substring(s3.length()-2,s3.length()-1))){
+                img_am3.setVisibility(View.VISIBLE);
+            }else {
+                img_am3.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s3.substring(s3.length()-1,s3.length()))){
+                img_pm3.setVisibility(View.VISIBLE);
+            }else {
+                img_pm3.setVisibility(View.INVISIBLE);
+            }
+            String s4 = lists.get(3).get(0);
+            tv_time4.setText(s4.substring(0,s4.length()-2));
+            if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
+                img_am4.setVisibility(View.VISIBLE);
+            }else {
+                img_am4.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s4.substring(s4.length()-1,s4.length()))){
+                img_pm4.setVisibility(View.VISIBLE);
+            }else {
+                img_pm4.setVisibility(View.INVISIBLE);
+            }
+            String s5 = lists.get(4).get(0);
+            tv_time5.setText(s5.substring(0,s5.length()-2));
+            if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
+                img_am5.setVisibility(View.VISIBLE);
+            }else {
+                img_am5.setVisibility(View.INVISIBLE);
+            }
+
+            if("1".equals(s5.substring(s5.length()-1,s5.length()))){
+                img_pm5.setVisibility(View.VISIBLE);
+            }else {
+                img_pm5.setVisibility(View.INVISIBLE);
+            }
+            String s6 = lists.get(5).get(0);
             tv_time6.setText(s6.substring(0,s6.length()-2));
             if("1".equals(s6.substring(s6.length()-2,s6.length()-1))){
                 img_am6.setVisibility(View.VISIBLE);
@@ -944,25 +1073,9 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
             }else {
                 img_pm6.setVisibility(View.INVISIBLE);
             }
+
+
         }
-
-        if(lists.get(6).get(0).length()>10){
-
-            String s7 = lists.get(6).get(0).substring(lists.get(6).get(0).length() - 13, lists.get(6).get(0).length());
-            tv_time7.setText(s7.substring(0,s7.length()-2));
-            if("1".equals(s7.substring(s7.length()-2,s7.length()-1))){
-                img_am7.setVisibility(View.VISIBLE);
-            }else {
-                img_am7.setVisibility(View.INVISIBLE);
-            }
-
-            if("1".equals(s7.substring(s7.length()-1,s7.length()))){
-                img_pm7.setVisibility(View.VISIBLE);
-            }else {
-                img_pm7.setVisibility(View.INVISIBLE);
-            }
-        }
-
 
 
     }
@@ -1096,7 +1209,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
     private void getPageInfo(){
         List<List<String>> lists = hasPage.get(mark);
         String s1 = lists.get(0).get(0).substring(lists.get(0).get(0).length() - 13, lists.get(0).get(0).length());
-        tv_time1.setText(s1.substring(0,s1.length()-2));
+        tv_time1.setText(s1.substring(0, s1.length() - 2));
         if("1".equals(s1.substring(s1.length()-2,s1.length()-1))){
             img_am1.setVisibility(View.VISIBLE);
         }else {
@@ -1110,7 +1223,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         }
 
         String s2 = lists.get(1).get(0).substring(lists.get(1).get(0).length() - 13, lists.get(1).get(0).length());
-        tv_time2.setText(s2.substring(0,s2.length()-2));
+        tv_time2.setText(s2.substring(0, s2.length() - 2));
         if("1".equals(s2.substring(s2.length()-2,s2.length()-1))){
             img_am2.setVisibility(View.VISIBLE);
         }else {
@@ -1138,7 +1251,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         }
 
         String s4 = lists.get(3).get(0).substring(lists.get(3).get(0).length() - 13, lists.get(3).get(0).length());
-        tv_time4.setText(s4.substring(0,s4.length()-2));
+        tv_time4.setText(s4.substring(0, s4.length() - 2));
         if("1".equals(s4.substring(s4.length()-2,s4.length()-1))){
             img_am4.setVisibility(View.VISIBLE);
         }else {
@@ -1152,7 +1265,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         }
 
         String s5 = lists.get(4).get(0).substring(lists.get(4).get(0).length() - 13, lists.get(4).get(0).length());
-        tv_time5.setText(s5.substring(0,s5.length()-2));
+        tv_time5.setText(s5.substring(0, s5.length() - 2));
         if("1".equals(s5.substring(s5.length()-2,s5.length()-1))){
             img_am5.setVisibility(View.VISIBLE);
         }else {
@@ -1166,7 +1279,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         }
 
         String s6 = lists.get(5).get(0).substring(lists.get(5).get(0).length() - 13, lists.get(5).get(0).length());
-        tv_time6.setText(s6.substring(0,s6.length()-2));
+        tv_time6.setText(s6.substring(0, s6.length() - 2));
         if("1".equals(s6.substring(s6.length()-2,s6.length()-1))){
             img_am6.setVisibility(View.VISIBLE);
         }else {
@@ -1180,7 +1293,7 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         }
 
         String s7 = lists.get(6).get(0).substring(lists.get(6).get(0).length() - 13, lists.get(6).get(0).length());
-        tv_time7.setText(s7.substring(0,s7.length()-2));
+        tv_time7.setText(s7.substring(0, s7.length() - 2));
         if("1".equals(s7.substring(s7.length()-2,s7.length()-1))){
             img_am7.setVisibility(View.VISIBLE);
         }else {
@@ -1195,10 +1308,12 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
     }
 
     private void saveLastPageInfo(){
-        List<List<String>> lists = hasPage.get(mark);
+//        List<List<String>> lists = hasPage.get(mark);
+        List<List<String>> lists = new ArrayList<>();
 
-
+//        lists.clear();
         String s1 = tv_time1.getText().toString();
+        if(s1!=null&&s1.length()>5){
         if(View.VISIBLE==img_am1.getVisibility()){
             s1=s1+1;
         }else {
@@ -1209,107 +1324,122 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         }else {
             s1=s1+0;
         }
-        List<String> l1 = lists.get(0);
+        List<String> l1 = new ArrayList<>();
         l1.clear();
         l1.add(s1);
+            lists.add(l1);
+        }
 
         String s2 = tv_time2.getText().toString();
-        if(View.VISIBLE==img_am2.getVisibility()){
-            s2=s2+1;
-        }else {
-            s2=s2+0;
+        if(s2!=null&&s2.length()>5) {
+            if (View.VISIBLE == img_am2.getVisibility()) {
+                s2 = s2 + 1;
+            } else {
+                s2 = s2 + 0;
+            }
+            if (View.VISIBLE == img_pm2.getVisibility()) {
+                s2 = s2 + 1;
+            } else {
+                s2 = s2 + 0;
+            }
+            List<String> l2 = new ArrayList<>();
+            l2.clear();
+            l2.add(s2);
+
+            lists.add(l2);
         }
-        if(View.VISIBLE==img_pm2.getVisibility()){
-            s2=s2+1;
-        }else {
-            s2=s2+0;
-        }
-        List<String> l2 = lists.get(1);
-        l2.clear();
-        l2.add(s2);
 
         String s3 = tv_time3.getText().toString();
-        if(View.VISIBLE==img_am3.getVisibility()){
-            s3=s3+1;
-        }else {
-            s3=s3+0;
-        }
-        if(View.VISIBLE==img_pm3.getVisibility()){
-            s3=s3+1;
-        }else {
-            s3=s3+0;
-        }
-        List<String> l3 = lists.get(2);
-        l3.clear();
-        l3.add(s3);
+        if(s3!=null&&s3.length()>5) {
+            if (View.VISIBLE == img_am3.getVisibility()) {
+                s3 = s3 + 1;
+            } else {
+                s3 = s3 + 0;
+            }
+            if (View.VISIBLE == img_pm3.getVisibility()) {
+                s3 = s3 + 1;
+            } else {
+                s3 = s3 + 0;
+            }
+            List<String> l3 = new ArrayList<>();
+            l3.clear();
+            l3.add(s3);
 
+            lists.add(l3);
+        }
         String s4 = tv_time4.getText().toString();
-        if(View.VISIBLE==img_am4.getVisibility()){
-            s4=s4+1;
-        }else {
-            s4=s4+0;
-        }
-        if(View.VISIBLE==img_pm4.getVisibility()){
-            s4=s4+1;
-        }else {
-            s4=s4+0;
-        }
-        List<String> l4 = lists.get(3);
-        l4.clear();
-        l4.add(s4);
+        if(s4!=null&&s4.length()>5) {
+            if (View.VISIBLE == img_am4.getVisibility()) {
+                s4 = s4 + 1;
+            } else {
+                s4 = s4 + 0;
+            }
+            if (View.VISIBLE == img_pm4.getVisibility()) {
+                s4 = s4 + 1;
+            } else {
+                s4 = s4 + 0;
+            }
+            List<String> l4 = new ArrayList<>();
+            l4.clear();
+            l4.add(s4);
 
+            lists.add(l4);
+        }
         String s5 = tv_time5.getText().toString();
-        if(View.VISIBLE==img_am5.getVisibility()){
-            s5=s5+1;
-        }else {
-            s5=s5+0;
-        }
-        if(View.VISIBLE==img_pm5.getVisibility()){
-            s5=s5+1;
-        }else {
-            s5=s5+0;
-        }
-        List<String> l5 = lists.get(4);
-        l5.clear();
-        l5.add(s5);
+        if(s5!=null&&s5.length()>5) {
+            if (View.VISIBLE == img_am5.getVisibility()) {
+                s5 = s5 + 1;
+            } else {
+                s5 = s5 + 0;
+            }
+            if (View.VISIBLE == img_pm5.getVisibility()) {
+                s5 = s5 + 1;
+            } else {
+                s5 = s5 + 0;
+            }
+            List<String> l5 = new ArrayList<>();
+            l5.clear();
+            l5.add(s5);
 
+            lists.add(l5);
+        }
         String s6 = tv_time6.getText().toString();
-        if(View.VISIBLE==img_am6.getVisibility()){
-            s6=s6+1;
-        }else {
-            s6=s6+0;
+        if(s6!=null&&s6.length()>5) {
+            if (View.VISIBLE == img_am6.getVisibility()) {
+                s6 = s6 + 1;
+            } else {
+                s6 = s6 + 0;
+            }
+            if (View.VISIBLE == img_pm6.getVisibility()) {
+                s6 = s6 + 1;
+            } else {
+                s6 = s6 + 0;
+            }
+            List<String> l6 = new ArrayList<>();
+            l6.clear();
+            l6.add(s6);
+            lists.add(l6);
         }
-        if(View.VISIBLE==img_pm6.getVisibility()){
-            s6=s6+1;
-        }else {
-            s6=s6+0;
-        }
-        List<String> l6 = lists.get(5);
-        l6.clear();
-        l6.add(s6);
-
         String s7 = tv_time7.getText().toString();
-        if(View.VISIBLE==img_am7.getVisibility()){
-            s7=s7+1;
-        }else {
-            s7=s7+0;
+        if(s7!=null&&s7.length()>5) {
+            if (View.VISIBLE == img_am7.getVisibility()) {
+                s7 = s7 + 1;
+            } else {
+                s7 = s7 + 0;
+            }
+            if (View.VISIBLE == img_pm7.getVisibility()) {
+                s7 = s7 + 1;
+            } else {
+                s7 = s7 + 0;
+            }
+            List<String> l7 = new ArrayList<>();
+            l7.clear();
+            l7.add(s7);
+            lists.add(l7);
         }
-        if(View.VISIBLE==img_pm7.getVisibility()){
-            s7=s7+1;
-        }else {
-            s7=s7+0;
-        }
-        List<String> l7 = lists.get(6);
-        l7.clear();
-        l7.add(s7);
 
-        lists.add(l1);
-        lists.add(l2);
-        lists.add(l3);
-        lists.add(l4);
-        lists.add(l5);
-        lists.add(l6);
-        lists.add(l7);
+
+
         hasPage.put(mark,lists);
 
         for (int i=0;i<hasPage.size();i++){
@@ -1320,128 +1450,147 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
     }
 
     private void savePageInfo(){
-        List<List<String>> lists = hasPage.get(mark);
+//        List<List<String>> lists = hasPage.get(mark);
 
-
+        List<List<String>> lists = new ArrayList<>();
         String s1 = tv_time1.getText().toString();
-        if(View.VISIBLE==img_am1.getVisibility()){
-            s1=s1+1;
-        }else {
-            s1=s1+0;
+        if(s1!=null&&s1.length()>5){
+            if(View.VISIBLE==img_am1.getVisibility()){
+                s1=s1+1;
+            }else {
+                s1=s1+0;
+            }
+            if(View.VISIBLE==img_pm1.getVisibility()){
+                s1=s1+1;
+            }else {
+                s1=s1+0;
+            }
+//            List<String> l1 = lists.get(0);
+            List<String> l1 = new ArrayList<>();
+            l1.clear();
+            l1.add(s1);
+            lists.add(l1);
         }
-        if(View.VISIBLE==img_pm1.getVisibility()){
-            s1=s1+1;
-        }else {
-            s1=s1+0;
-        }
-        List<String> l1 = lists.get(0);
-        l1.clear();
-        l1.add(s1);
 
         String s2 = tv_time2.getText().toString();
-        if(View.VISIBLE==img_am2.getVisibility()){
-            s2=s2+1;
-        }else {
-            s2=s2+0;
+        if(s2!=null&&s2.length()>5) {
+            if (View.VISIBLE == img_am2.getVisibility()) {
+                s2 = s2 + 1;
+            } else {
+                s2 = s2 + 0;
+            }
+            if (View.VISIBLE == img_pm2.getVisibility()) {
+                s2 = s2 + 1;
+            } else {
+                s2 = s2 + 0;
+            }
+//            List<String> l2 = lists.get(1);
+            List<String> l2 = new ArrayList<>();
+            l2.clear();
+            l2.add(s2);
+            lists.add(l2);
         }
-        if(View.VISIBLE==img_pm2.getVisibility()){
-            s2=s2+1;
-        }else {
-            s2=s2+0;
-        }
-        List<String> l2 = lists.get(1);
-        l2.clear();
-        l2.add(s2);
-
         String s3 = tv_time3.getText().toString();
-        if(View.VISIBLE==img_am3.getVisibility()){
-            s3=s3+1;
-        }else {
-            s3=s3+0;
+        if(s3!=null&&s3.length()>5) {
+            if (View.VISIBLE == img_am3.getVisibility()) {
+                s3 = s3 + 1;
+            } else {
+                s3 = s3 + 0;
+            }
+            if (View.VISIBLE == img_pm3.getVisibility()) {
+                s3 = s3 + 1;
+            } else {
+                s3 = s3 + 0;
+            }
+//            List<String> l3 = lists.get(2);
+            List<String> l3 = new ArrayList<>();
+            l3.clear();
+            l3.add(s3);
+            lists.add(l3);
         }
-        if(View.VISIBLE==img_pm3.getVisibility()){
-            s3=s3+1;
-        }else {
-            s3=s3+0;
-        }
-        List<String> l3 = lists.get(2);
-        l3.clear();
-        l3.add(s3);
-
         String s4 = tv_time4.getText().toString();
-        if(View.VISIBLE==img_am4.getVisibility()){
-            s4=s4+1;
-        }else {
-            s4=s4+0;
+        if(s4!=null&&s4.length()>5) {
+            if (View.VISIBLE == img_am4.getVisibility()) {
+                s4 = s4 + 1;
+            } else {
+                s4 = s4 + 0;
+            }
+            if (View.VISIBLE == img_pm4.getVisibility()) {
+                s4 = s4 + 1;
+            } else {
+                s4 = s4 + 0;
+            }
+//            List<String> l4 = lists.get(3);
+            List<String> l4 = new ArrayList<>();
+            l4.clear();
+            l4.add(s4);
+            lists.add(l4);
         }
-        if(View.VISIBLE==img_pm4.getVisibility()){
-            s4=s4+1;
-        }else {
-            s4=s4+0;
-        }
-        List<String> l4 = lists.get(3);
-        l4.clear();
-        l4.add(s4);
-
         String s5 = tv_time5.getText().toString();
-        if(View.VISIBLE==img_am5.getVisibility()){
-            s5=s5+1;
-        }else {
-            s5=s5+0;
+        if(s5!=null&&s5.length()>5) {
+            if (View.VISIBLE == img_am5.getVisibility()) {
+                s5 = s5 + 1;
+            } else {
+                s5 = s5 + 0;
+            }
+            if (View.VISIBLE == img_pm5.getVisibility()) {
+                s5 = s5 + 1;
+            } else {
+                s5 = s5 + 0;
+            }
+//            List<String> l5 = lists.get(4);
+            List<String> l5 = new ArrayList<>();
+            l5.clear();
+            l5.add(s5);
+            lists.add(l5);
         }
-        if(View.VISIBLE==img_pm5.getVisibility()){
-            s5=s5+1;
-        }else {
-            s5=s5+0;
-        }
-        List<String> l5 = lists.get(4);
-        l5.clear();
-        l5.add(s5);
-
         String s6 = tv_time6.getText().toString();
-        if(View.VISIBLE==img_am6.getVisibility()){
-            s6=s6+1;
-        }else {
-            s6=s6+0;
+        if(s6!=null&&s6.length()>5) {
+            if (View.VISIBLE == img_am6.getVisibility()) {
+                s6 = s6 + 1;
+            } else {
+                s6 = s6 + 0;
+            }
+            if (View.VISIBLE == img_pm6.getVisibility()) {
+                s6 = s6 + 1;
+            } else {
+                s6 = s6 + 0;
+            }
+//            List<String> l6 = lists.get(5);
+            List<String> l6 = new ArrayList<>();
+            l6.clear();
+            l6.add(s6);
+            lists.add(l6);
         }
-        if(View.VISIBLE==img_pm6.getVisibility()){
-            s6=s6+1;
-        }else {
-            s6=s6+0;
-        }
-        List<String> l6 = lists.get(5);
-        l6.clear();
-        l6.add(s6);
-
         String s7 = tv_time7.getText().toString();
-        if(View.VISIBLE==img_am7.getVisibility()){
-            s7=s7+1;
-        }else {
-            s7=s7+0;
+        if(s7!=null&&s7.length()>5) {
+            if (View.VISIBLE == img_am7.getVisibility()) {
+                s7 = s7 + 1;
+            } else {
+                s7 = s7 + 0;
+            }
+            if (View.VISIBLE == img_pm7.getVisibility()) {
+                s7 = s7 + 1;
+            } else {
+                s7 = s7 + 0;
+            }
+//            List<String> l7 = lists.get(6);
+            List<String> l7 = new ArrayList<>();
+            l7.clear();
+            l7.add(s7);
+            lists.add(l7);
         }
-        if(View.VISIBLE==img_pm7.getVisibility()){
-            s7=s7+1;
-        }else {
-            s7=s7+0;
-        }
-        List<String> l7 = lists.get(6);
-        l7.clear();
-        l7.add(s7);
 
-        lists.add(l1);
-        lists.add(l2);
-        lists.add(l3);
-        lists.add(l4);
-        lists.add(l5);
-        lists.add(l6);
-        lists.add(l7);
+
+
+
         hasPage.put(mark,lists);
 
-        for (int i=0;i<hasPage.size();i++){
-            if(hasPage.get(i).get(0).size()>0){
-                maxIsTrue++;
-            }
-        }
+//        for (int i=0;i<hasPage.size();i++){
+//            if(hasPage.get(i).get(0).size()>0){
+//                maxIsTrue++;
+//            }
+//        }
     }
 
     private void reset(){
@@ -1493,16 +1642,16 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         try {
             d1=sdf.parse(date);
             if(page!=group){
-                tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
-                tv_time2.setText(TimeTools.getDayTime(d1,7*page-5));
-                tv_time3.setText(TimeTools.getDayTime(d1,7*page-4));
-                tv_time4.setText(TimeTools.getDayTime(d1,7*page-3));
-                tv_time5.setText(TimeTools.getDayTime(d1,7*page-2));
-                tv_time6.setText(TimeTools.getDayTime(d1,7*page-1));
-                tv_time7.setText(TimeTools.getDayTime(d1,7*page));
+//                tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
+//                tv_time2.setText(TimeTools.getDayTime(d1,7*page-5));
+//                tv_time3.setText(TimeTools.getDayTime(d1,7*page-4));
+//                tv_time4.setText(TimeTools.getDayTime(d1,7*page-3));
+//                tv_time5.setText(TimeTools.getDayTime(d1,7*page-2));
+//                tv_time6.setText(TimeTools.getDayTime(d1,7*page-1));
+//                tv_time7.setText(TimeTools.getDayTime(d1,7*page));
             }else {
                 if(remainder==1){
-                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
+//                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
                     rl_2_left.setEnabled(false);
                     rl_2_right.setEnabled(false);
                     rl_3_left.setEnabled(false);
@@ -1517,8 +1666,8 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     rl_7_right.setEnabled(false);
                 }
                 if(remainder==2){
-                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
-                    tv_time2.setText(TimeTools.getDayTime(d1,7*page - 5));
+//                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
+//                    tv_time2.setText(TimeTools.getDayTime(d1,7*page - 5));
                     rl_3_left.setEnabled(false);
                     rl_3_right.setEnabled(false);
                     rl_4_left.setEnabled(false);
@@ -1531,9 +1680,9 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     rl_7_right.setEnabled(false);
                 }
                 if(remainder==3){
-                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
-                    tv_time2.setText(TimeTools.getDayTime(d1, 7 *page-5));
-                    tv_time3.setText(TimeTools.getDayTime(d1,7*page-4));
+//                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
+//                    tv_time2.setText(TimeTools.getDayTime(d1, 7 *page-5));
+//                    tv_time3.setText(TimeTools.getDayTime(d1,7*page-4));
                     rl_4_left.setEnabled(false);
                     rl_4_right.setEnabled(false);
                     rl_5_left.setEnabled(false);
@@ -1544,10 +1693,10 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     rl_7_right.setEnabled(false);
                 }
                 if(remainder==4){
-                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
-                    tv_time2.setText(TimeTools.getDayTime(d1,7*page-5));
-                    tv_time3.setText(TimeTools.getDayTime(d1, 7 * page-4));
-                    tv_time4.setText(TimeTools.getDayTime(d1,7*page-3));
+//                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
+//                    tv_time2.setText(TimeTools.getDayTime(d1,7*page-5));
+//                    tv_time3.setText(TimeTools.getDayTime(d1, 7 * page-4));
+//                    tv_time4.setText(TimeTools.getDayTime(d1,7*page-3));
                     rl_5_left.setEnabled(false);
                     rl_5_right.setEnabled(false);
                     rl_6_left.setEnabled(false);
@@ -1556,23 +1705,23 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
                     rl_7_right.setEnabled(false);
                 }
                 if(remainder==5){
-                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
-                    tv_time2.setText(TimeTools.getDayTime(d1,7*page-5));
-                    tv_time3.setText(TimeTools.getDayTime(d1,7*page-4));
-                    tv_time4.setText(TimeTools.getDayTime(d1, 7 * page-3));
-                    tv_time5.setText(TimeTools.getDayTime(d1,7*page-2));
+//                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
+//                    tv_time2.setText(TimeTools.getDayTime(d1,7*page-5));
+//                    tv_time3.setText(TimeTools.getDayTime(d1,7*page-4));
+//                    tv_time4.setText(TimeTools.getDayTime(d1, 7 * page-3));
+//                    tv_time5.setText(TimeTools.getDayTime(d1,7*page-2));
                     rl_6_left.setEnabled(false);
                     rl_6_right.setEnabled(false);
                     rl_7_left.setEnabled(false);
                     rl_7_right.setEnabled(false);
                 }
                 if(remainder==6){
-                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
-                    tv_time2.setText(TimeTools.getDayTime(d1,7*page-5));
-                    tv_time3.setText(TimeTools.getDayTime(d1,7*page-4));
-                    tv_time4.setText(TimeTools.getDayTime(d1,7*page-3));
-                    tv_time5.setText(TimeTools.getDayTime(d1,7*page-2));
-                    tv_time6.setText(TimeTools.getDayTime(d1,7*page-1));
+//                    tv_time1.setText(TimeTools.getDayTime(d1,7*page-6));
+//                    tv_time2.setText(TimeTools.getDayTime(d1,7*page-5));
+//                    tv_time3.setText(TimeTools.getDayTime(d1,7*page-4));
+//                    tv_time4.setText(TimeTools.getDayTime(d1,7*page-3));
+//                    tv_time5.setText(TimeTools.getDayTime(d1,7*page-2));
+//                    tv_time6.setText(TimeTools.getDayTime(d1,7*page-1));
                     rl_7_left.setEnabled(false);
                     rl_7_right.setEnabled(false);
                 }
@@ -1659,17 +1808,18 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
 
 
     public void addComplete(View v){
-        List<Time> listTime = new ArrayList<Time>();
+        MyLog.e("","hasPage="+hasPage.toString());
+       final List<Ctime> listTime = new ArrayList<Ctime>();
         for (int i=0;i<group;i++){
             List<List<String>> lists = hasPage.get(i);
-            for(int j=0;j<7;j++){
+            for(int j=0;j<lists.size();j++){
                 List<String> msgLsit = lists.get(j);
                 if(msgLsit.size()!=0){
                     if(msgLsit.get(0).length()>10){//这边可以判断是否需要显示没选中的日期
-                        Time time = new Time();
+                        Ctime time = new Ctime();
                         String msg = msgLsit.get(0);
                         String dateToLong = TimeTools.dateToLong(msg.substring(0, msg.length() - 2));
-                        time.setDatatime(dateToLong);
+                        time.setDatatime(dateToLong.substring(0,dateToLong.length()-3));
                         time.setAm(msg.substring(msg.length() - 2, msg.length() - 1));
                         time.setPm(msg.substring(msg.length() - 1, msg.length()));
                         listTime.add(time);
@@ -1679,7 +1829,22 @@ public class ServerTimesActivity extends BaseActivity  implements View.OnClickLi
         }
 
 
-        UIEventUpdate.getInstance().customSendData(2,listTime,case_type);
+        for (int m=0;m<saveCtim.size();m++){
+            Ctime ctime = listTime.get(m);
+            Ctime sctime = saveCtim.get(m);
+            ctime.setDid(sctime.getDid());
+            ctime.setId(sctime.getId());
+            ctime.setAddtime(sctime.getAddtime());
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                UIEventUpdate.getInstance().customSendCtimData(11, listTime, case_type);
+            }
+        }).start();
+//        UIEventUpdate.getInstance().customSendCtimData(11, listTime, case_type);
+
 
         finish();
 

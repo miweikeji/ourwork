@@ -31,11 +31,11 @@ import app.views.SodukuGridView;
  */
 public class DailyAdapter extends AllAdapter {
     Activity activity;
-    private List<DialyData> allList;
+    private List<DialyData> allList=new ArrayList<>();
     List<String> imageList = new ArrayList<>();
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
-    private Map<Integer, Integer> mSateHaseMap;
+    private Map<Integer, Integer> sateHaseMap;
 
     public DailyAdapter(Activity activity, List<DialyData> allList,
                         ImageLoader imageLoader, DisplayImageOptions options) {
@@ -70,7 +70,7 @@ public class DailyAdapter extends AllAdapter {
         }
         DialyData dialyData = allList.get(position);
         holder.frame_state.setVisibility(View.GONE);
-        if (mSateHaseMap.containsValue(position)) {
+        if (sateHaseMap.containsValue(position)) {
             int state = dialyData.getHouse_state();
             holder.frame_state.setVisibility(View.VISIBLE);
             StatusTools.setStatus(holder.tv_state, state + "");
@@ -122,8 +122,11 @@ public class DailyAdapter extends AllAdapter {
     }
 
     public void setSortHasemap(Map<Integer, Integer> mSateHaseMap) {
-
-        this.mSateHaseMap = mSateHaseMap;
+        if (sateHaseMap!=null&&sateHaseMap.size()>0){
+            sateHaseMap.putAll(mSateHaseMap);
+        }else {
+            this.sateHaseMap = mSateHaseMap;
+        }
     }
 
     public class ViewHolder {

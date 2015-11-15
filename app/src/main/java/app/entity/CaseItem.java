@@ -9,7 +9,7 @@ public class CaseItem {
     private  String am;
     private  String datatime;
     private  String addtime;
-    private  String id;
+    private  int id;
     private  String craftsImg;
     private  String name;
     private  String workType;
@@ -55,11 +55,11 @@ public class CaseItem {
         this.addtime = addtime;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

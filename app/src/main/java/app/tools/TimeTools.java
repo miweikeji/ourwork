@@ -42,6 +42,11 @@ public class TimeTools {
         String date = sdf.format(new Date((long) (timestamp * 1000L)));
         return date;
     }
+    public static String longToDateStrs(Double timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String date = sdf.format(new Date((long) (timestamp * 1000L)));
+        return date;
+    }
 
     public static Long strToDateLong(String timestamp) {
         SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");

@@ -106,7 +106,7 @@
         android:textColor="@color/white"
         android:text="确认发布邀请"
         android:id="@+id/button7"
-        android:onClick="release"
+        android:onClick="releases"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />

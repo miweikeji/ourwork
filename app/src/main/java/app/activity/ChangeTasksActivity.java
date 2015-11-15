@@ -44,7 +44,12 @@ import app.views.NavigationBar;
 /**
  * Created by Administrator on 2015/11/6.
  */
-public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapter.removeItem, View.OnClickListener, DialogTools.DialogOnClickChockedListens, ChangeTaskAdapter.addNameItem, ChangeTaskAdapter.billingTypeItem, ChangeTaskAdapter.removeNameItem, ChangeTaskAdapter.addCaseNmae, UIEventUpdate.UIEventUpdateListener, ChangeTaskAdapter.changeTime, UIEventUpdate.DataListener {
+public class ChangeTasksActivity extends BaseActivity implements
+        ChangeTaskAdapter.removeItem, View.OnClickListener, DialogTools.DialogOnClickChockedListens,
+        ChangeTaskAdapter.addNameItem, ChangeTaskAdapter.billingTypeItem,
+        ChangeTaskAdapter.removeNameItem, ChangeTaskAdapter.addCaseNmae,
+        UIEventUpdate.UIEventUpdateListener, ChangeTaskAdapter.changeTime,
+        UIEventUpdate.DataListener, UIEventUpdate.DataCtimListener, ChangeTaskAdapter.moneyItem {
 
 
     private HashMap<String,HouseData> startDataMap = new HashMap<>();
@@ -64,6 +69,8 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
     List<Ctime> time = new ArrayList<>();
     private String hint_time;
     private  String startTime;
+
+    private  JsonDataResult housedtail;
     @Override
     public void obtainData() {
 
@@ -74,6 +81,7 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
         String hourseID = getIntent().getStringExtra("hourseID");
         UIEventUpdate.getInstance().register(this);
         UIEventUpdate.getInstance().registerData(this);
+        UIEventUpdate.getInstance().ctimregister(this);
          et_workplace = (TextView) findViewById(R.id.et_workplace);
          tv_time_choose = (TextView) findViewById(R.id.tv_time_choose);
         TextView tv_add_case = (TextView) findViewById(R.id.tv_add_case);
@@ -88,10 +96,11 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
         adapter.setRemoveNameListens(this);
         adapter.setAddCaseNmaeListens(this);
         adapter.setChangeTimeListens(this);
+        adapter.setmoneyItem(this);
         HttpRequest.getDetailTask(this, hourseID, new ICallback<JsonResult>() {
             @Override
             public void onSucceed(JsonResult result) {
-                JsonDataResult housedtail = result.getHousedtail();
+                housedtail = result.getHousedtail();
                 info = housedtail.getInfo();
                 adapter.setData(info);
                 list_task.setAdapter(adapter);
@@ -124,6 +133,7 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
         super.onDestroy();
         UIEventUpdate.getInstance().unregister(this);
         UIEventUpdate.getInstance().unregisterData(this);
+        UIEventUpdate.getInstance().ctimUnregister(this);
     }
     @Override
     public void initTitle(NavigationBar mBar) {
@@ -299,6 +309,9 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
     }
 
     private int getDay(String hint_time) {
+
+
+
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = sDateFormat.format(new java.util.Date());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -341,9 +354,7 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
     }
 
 
-    public void release(View v){
 
-    }
 
     @Override
     public void removeNamePosition(int position, String wtype,int id) {
@@ -433,12 +444,13 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
             List<Ctime> time = data.getTime();
             Intent intent = new Intent(this, ServerTimesActivity.class);
             intent.putExtra("ChangeTasksActivity",(Serializable)time);
+            intent.putExtra("CASE_TYPE", StatusTools.workType(wtype));
             startActivity(intent);
 
         }else {
             Intent intent4 = new Intent(this, ServerTimeActivity.class);
             intent4.putExtra("CASE_TYPE", StatusTools.workType(wtype));
-            intent4.putExtra("time_day", getDay(hint_time));
+            intent4.putExtra("time_day", getDay(TimeTools.longToDateStrs(Double.valueOf(housedtail.getChecktime()))));
                 startActivity(intent4);
         }
 
@@ -462,7 +474,9 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
             case UIEventUpdate.PositionKey.INVITATION_SERVERTIME:
                 boolean b = saveStartDataMap.containsKey("" + StatusTools.getWorkType(type));
                 HouseData houseData = saveStartDataMap.get("" + StatusTools.getWorkType(type));
+                HouseData houseData_s = startDataMap.get("" + StatusTools.getWorkType(type));
                 if ("水电工".equals(type)) {
+                    clistShui.clear();
                     listShui.clear();
                     listShui.addAll(list);
                     for (int i=0;i<listShui.size();i++){
@@ -474,8 +488,10 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
                         clistShui.add(ctime);
                     }
                     houseData.setTime(clistShui);
+                    houseData_s.setTime(clistShui);
                 } else if ("泥水工".equals(type)) {
                     listNi.clear();
+                    clistNi.clear();
                     listNi.addAll(list);
                     for (int i=0;i<listNi.size();i++){
                         Time time = listNi.get(i);
@@ -486,8 +502,10 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
                         clistNi.add(ctime);
                     }
                     houseData.setTime(clistNi);
+                    houseData_s.setTime(clistNi);
                 } else if ("木工".equals(type)) {
                     listMu.clear();
+                    clistMu.clear();
                     listMu.addAll(list);
                     for (int i=0;i<listMu.size();i++){
                         Time time = listMu.get(i);
@@ -498,8 +516,10 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
                         clistMu.add(ctime);
                     }
                     houseData.setTime(clistMu);
+                    houseData_s.setTime(clistMu);
                 } else if ("油漆工".equals(type)) {
                     listYou.clear();
+                    clistYou.clear();
                     listYou.addAll(list);
                     for (int i=0;i<listYou.size();i++){
                         Time time = listYou.get(i);
@@ -510,8 +530,10 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
                         clistYou.add(ctime);
                     }
                     houseData.setTime(clistYou);
+                    houseData_s.setTime(clistYou);
                 } else if ("门窗安装工".equals(type)) {
                     listMen.clear();
+                    clistMen.clear();
                     listMen.addAll(list);
                     for (int i=0;i<listMen.size();i++){
                         Time time = listMen.get(i);
@@ -522,8 +544,10 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
                         clistMen.add(ctime);
                     }
                     houseData.setTime(clistMen);
+                    houseData_s.setTime(clistMen);
                 } else if ("敲打搬运工".equals(type)) {
                     listQiao.clear();
+                    clistQiao.clear();
                     listQiao.addAll(list);
                     for (int i=0;i<listQiao.size();i++){
                         Time time = listQiao.get(i);
@@ -534,9 +558,78 @@ public class ChangeTasksActivity extends BaseActivity implements ChangeTaskAdapt
                         clistQiao.add(ctime);
                     }
                     houseData.setTime(clistQiao);
+                    houseData_s.setTime(clistQiao);
                 }
                 saveStartDataMap.put(type,houseData);
+                startDataMap.put(type,houseData_s);
+                MyLog.e("", "saveStartDataMap" + saveStartDataMap.toString());
                 break;
         }
+    }
+
+    @Override
+    public void setSendCtimDate(int positionKey, List<Ctime> list, String type) {
+        switch (positionKey) {
+            case UIEventUpdate.PositionKey.INVIATION_SERVERCTIME:
+                HouseData houseData = saveStartDataMap.get("" + StatusTools.getWorkType(type));
+                HouseData houseData_s = startDataMap.get("" + StatusTools.getWorkType(type));
+                if ("水电工".equals(type)) {
+                    clistShui.clear();
+                    clistShui.addAll(list);
+                    houseData.setTime(clistShui);
+                    houseData_s.setTime(clistShui);
+
+                } else if ("泥水工".equals(type)) {
+                    clistNi.clear();
+                    clistNi.addAll(list);
+                    houseData.setTime(clistNi);
+                    houseData_s.setTime(clistNi);
+                } else if ("木工".equals(type)) {
+                    clistMu.clear();
+                    clistMu.addAll(list);
+                    houseData.setTime(clistMu);
+                    houseData_s.setTime(clistMu);
+                } else if ("油漆工".equals(type)) {
+                    clistYou.clear();
+                    clistYou.addAll(list);
+                    houseData.setTime(clistYou);
+                    houseData_s.setTime(clistYou);
+                } else if ("门窗安装工".equals(type)) {
+                    clistMen.clear();
+                    clistMen.addAll(list);
+                    houseData.setTime(clistMen);
+                    houseData_s.setTime(clistMen);
+                } else if ("敲打搬运工".equals(type)) {
+                    clistQiao.clear();
+                    clistQiao.addAll(list);
+                    houseData.setTime(clistQiao);
+                    houseData_s.setTime(clistQiao);
+                }
+                saveStartDataMap.put("" + StatusTools.getWorkType(type),houseData);
+                startDataMap.put("" + StatusTools.getWorkType(type),houseData_s);
+                MyLog.e("", "saveStartDataMap" + saveStartDataMap.toString());
+                break;
+        }
+    }
+
+
+    public void releases(View view){
+Toast.makeText(this,"是否进来",1).show();
+        MyLog.e("","saveStartDataMap"+saveStartDataMap.toString());
+        MyLog.e("","saveStartDataMap"+saveStartDataMap.toString());
+    }
+
+    @Override
+    public void moneyItemPosition(int position, String money,String wtype) {
+        HouseData houseData = startDataMap.get(wtype);
+        houseData.setCharge(money);
+        info.clear();
+        for (int i = 1; i < 7; i++) {
+            if (startDataMap.containsKey(""+i)) {
+                info.add(startDataMap.get(""+i));
+            }
+        }
+        MyLog.e("", "info="+info.toString());
+        adapter.notifyDataSetChanged();
     }
 }

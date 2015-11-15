@@ -6,10 +6,6 @@ package app.net;
 public class Urls {
     //测试服务器
     public static final String base_server = "http://test.miweikj.cn/";
-
-    //正式服务器
-//    public static final String base_server = "http://www.miweikj.cn/";
-
     //发送验证码
     public final static String getMsgCode = base_server + "App/Signup/getMsgCode";
     //注册

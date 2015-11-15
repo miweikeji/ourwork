@@ -2,6 +2,7 @@ package app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -35,8 +36,8 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
 
     private MyFriendsAdapter adapter;
     private ListView list;
-    private  PullToRefreshListView pull_list;
-    private int p=1;
+    private PullToRefreshListView pull_list;
+    private int p = 1;
     private List<MyFriends> allList = new ArrayList<MyFriends>();
     private DisplayImageOptions options;
 
@@ -66,7 +67,7 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
         pull_list.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                p=1;
+                p = 1;
                 allList.clear();
                 netWorkData();
             }
@@ -83,7 +84,7 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
     }
 
     private void netWorkData() {
-        if(!isFisrstShow){
+        if (!isFisrstShow) {
             showWaitingDialog();
         }
         HttpRequest.getMyfriend(this, UserInfo.getInstance().getId(), p, new ICallback<MyFriendsResult>() {
@@ -91,28 +92,28 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
             public void onSucceed(MyFriendsResult result) {
                 isFisrstShow = true;
                 List<MyFriends> message = result.getMessage();
-                 page = result.getPage();
-                if(page==0){
+                page = result.getPage();
+                if (page == 0) {
                     isOver = false;
                     HintAdapter hintAdapter = new HintAdapter(MyFriendsActivity.this);
                     pull_list.getRefreshableView().setDividerHeight(0);
                     pull_list.setAdapter(hintAdapter);
                 } else {
 
-                    if(p<=page){
-                        if(p<=page-1){
+                    if (p <= page) {
+                        if (p <= page - 1) {
                             isOver = true;
                         }
                         allList.addAll(message);
-                    }else {
+                    } else {
                         isOver = false;
                         Footools.removeFoot(pull_list, MyFriendsActivity.this, inflate);
                     }
 
-                    if(p==1){
-                        adapter = new MyFriendsAdapter(MyFriendsActivity.this, allList,imageLoader,options);
+                    if (p == 1) {
+                        adapter = new MyFriendsAdapter(MyFriendsActivity.this, allList, imageLoader, options);
                         pull_list.setAdapter(adapter);
-                    }else {
+                    } else {
                         adapter.notifyDataSetChanged();
                     }
                 }
@@ -146,8 +147,15 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        MyFriends myFriends=allList.get(position);
+        if (position <= 0) {
+            return;
+        }
 
+        MyFriends myFriends = allList.get(position - 1);
+        String cid = myFriends.getCid();
+        if (!TextUtils.isEmpty(cid)) {
+            CraftsmanZoneActivity.enterActivity(mActivity, Integer.parseInt(cid));
+        }
 
         startActivity(new Intent(this, CraftsmanZoneActivity.class));
     }
@@ -159,12 +167,12 @@ public class MyFriendsActivity extends BaseActivity implements AdapterView.OnIte
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        if(visibleItemCount+firstVisibleItem>=totalItemCount- Config.NUMBER&&isOver){
+        if (visibleItemCount + firstVisibleItem >= totalItemCount - Config.NUMBER && isOver) {
             p++;
-            if(page>1&&p!=page){
+            if (page > 1 && p != page) {
                 Footools.addFoot(pull_list, this, inflate);
             }
-            isOver=false;
+            isOver = false;
             netWorkData();
         }
     }

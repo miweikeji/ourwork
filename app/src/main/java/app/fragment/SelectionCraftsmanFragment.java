@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,13 +45,14 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
     private ListView list;
     private ClassMonitorAdapter adapter;
     private List<Allcrafts> allList = new ArrayList<Allcrafts>();
-    private int p=1;
+    private int p = 1;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
     private Dialog dialog;
     private int page;
     private View inflate;
     private boolean isFisrstShow;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
     }
 
     private void netWorkData() {
-        if(!isFisrstShow){
+        if (!isFisrstShow) {
             dialog.show();
         }
         HttpRequest.getAllcrafts(getActivity(), "1", p, new ICallback<craftsListResult>() {
@@ -73,22 +75,22 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
             public void onSucceed(craftsListResult result) {
                 isFisrstShow = true;
                 List<Allcrafts> list = result.getCrafts().getList();
-                 page = result.getCrafts().getPage();
+                page = result.getCrafts().getPage();
 
-                if(page==0){
+                if (page == 0) {
                     isOver = false;
                     HintAdapter hintAdapter = new HintAdapter(getActivity());
                     pull_list.getRefreshableView().setDividerHeight(0);
                     pull_list.setAdapter(hintAdapter);
                 } else {
-                    if(p<=page){
-                        if(p<=page-1){
+                    if (p <= page) {
+                        if (p <= page - 1) {
                             isOver = true;
                         }
                         allList.addAll(list);
-                    }else {
+                    } else {
                         isOver = false;
-                        Footools.removeFoot(pull_list,getActivity(),inflate);
+                        Footools.removeFoot(pull_list, getActivity(), inflate);
                     }
                     if (p == 1) {
                         adapter = new ClassMonitorAdapter(getActivity(), allList, imageLoader, options, 1);
@@ -115,7 +117,7 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
 
         inflate = getActivity().getLayoutInflater().inflate(R.layout.footview, null);
 
-        pull_list = (PullToRefreshListView)layout.findViewById(R.id.pull_list);
+        pull_list = (PullToRefreshListView) layout.findViewById(R.id.pull_list);
         list = pull_list.getRefreshableView();
         pull_list.setOnItemClickListener(this);
         pull_list.setMode(PullToRefreshBase.Mode.PULL_DOWN_TO_REFRESH);
@@ -140,9 +142,18 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
     }
 
     private boolean isOver;
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getActivity(), CraftsmanZoneActivity.class));
+
+        if (position <= 0) {
+            return;
+        }
+        Allcrafts allcrafts = allList.get(position - 1);
+         String  cid= allcrafts.getId();
+        if (!TextUtils.isEmpty(cid)){
+            CraftsmanZoneActivity.enterActivity(getActivity(),Integer.parseInt(cid));
+        }
     }
 
     @Override
@@ -153,12 +164,12 @@ public class SelectionCraftsmanFragment extends Fragment implements AdapterView.
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-        if(visibleItemCount+firstVisibleItem>=totalItemCount- Config.NUMBER&&isOver){
+        if (visibleItemCount + firstVisibleItem >= totalItemCount - Config.NUMBER && isOver) {
             p++;
-            if(page>1&&p!=page){
-                Footools.addFoot(pull_list,getActivity(),inflate);
+            if (page > 1 && p != page) {
+                Footools.addFoot(pull_list, getActivity(), inflate);
             }
-            isOver=false;
+            isOver = false;
             netWorkData();
         }
     }

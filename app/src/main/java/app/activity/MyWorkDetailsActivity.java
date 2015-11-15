@@ -1,5 +1,6 @@
 package app.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -12,9 +13,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.miweikeij.app.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.List;
 
+import app.activity.mywork.MyWorkDetailsAdapter;
+import app.entity.CaseItem;
 import app.entity.Comment;
 import app.entity.Data;
 import app.entity.MyWorkDetailMessage;
@@ -22,6 +27,7 @@ import app.entity.MyWorkDetailResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.MyListView;
 import app.views.NavigationBar;
 
@@ -44,18 +50,25 @@ public class MyWorkDetailsActivity extends BaseActivity implements
     private TextView tvCraft;
     private TextView tv_commentTime;
     private MyListView listView;
+    private int state;  //0为进行中，1为已完成
+    private View frame_comment;
+    private View frame_data;
+    private DisplayImageOptions options;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         //工作任务
-        workId = getIntent().getStringExtra("workId");
+        Intent intent = getIntent();
+        workId = intent.getStringExtra("wordId");
+        state = intent.getIntExtra("state", 0);
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public void obtainData() {
 
         showWaitingDialog();
-        HttpRequest.myWorkDetail(this, "101", "133", "1", new ICallback<MyWorkDetailResult>() {
+        HttpRequest.myWorkDetail(this, UserUtil.getUserId(mActivity), workId, state + "", new ICallback<MyWorkDetailResult>() {
             @Override
             public void onSucceed(MyWorkDetailResult result) {
                 disMissWaitingDialog();
@@ -74,6 +87,7 @@ public class MyWorkDetailsActivity extends BaseActivity implements
                 tvPrice.setText(message.getW_money());
                 Comment comment = message.getComment();
                 if (comment != null) {
+                    frame_comment.setVisibility(View.VISIBLE);
                     if (!TextUtils.isEmpty(comment.getTime())) {
                         tv_commentTime.setText(comment.getTime());
                     }
@@ -82,6 +96,14 @@ public class MyWorkDetailsActivity extends BaseActivity implements
                     ratingBarValue.setRating(comment.getQuality());
                     ratingBarQuality.setRating(comment.getAttitude());
                 }
+                List<CaseItem> list = message.getData();
+                if (list.size() > 0) {
+                    frame_data.setVisibility(View.VISIBLE);
+                    MyWorkDetailsAdapter adater = new MyWorkDetailsAdapter(mActivity, list, options);
+                    listView.setAdapter(adater);
+                }
+
+
             }
 
             @Override
@@ -96,7 +118,10 @@ public class MyWorkDetailsActivity extends BaseActivity implements
     @Override
     public void initUI() {
 
+        options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
 
+        frame_comment = findViewById(R.id.frame_comment);
+        frame_data = findViewById(R.id.frame_data);
         listView = (MyListView) findViewById(R.id.listViewq);
         tvName = (TextView) findViewById(R.id.tv_mywork_name);
         tv_feestyle = (TextView) findViewById(R.id.tv_mywork_style);
@@ -134,6 +159,17 @@ public class MyWorkDetailsActivity extends BaseActivity implements
 
     @Override
     public void setRightOnClick() {
-        startActivity(new Intent(MyWorkDetailsActivity.this, CraftsmanZoneActivity.class));
+        if (!TextUtils.isEmpty(workId)) {
+            CraftsmanZoneActivity.enterActivity(mActivity, Integer.parseInt(workId));
+        }
+    }
+
+    public static void enterActivity(Activity activity, int craftId, int state) {
+
+        Intent intent = new Intent(activity, MyWorkDetailsActivity.class);
+        intent.putExtra("wordId", craftId);
+        intent.putExtra("state", craftId);
+        activity.startActivity(intent);
+
     }
 }

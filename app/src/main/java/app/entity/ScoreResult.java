@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class ScoreResult extends Meta {
     private List<Score> scorList;
-    private String page;
+    private int page;
 
     public List<Score> getScorList() {
         return scorList;
@@ -17,11 +17,11 @@ public class ScoreResult extends Meta {
         this.scorList = scorList;
     }
 
-    public String getPage() {
+    public int getPage() {
         return page;
     }
 
-    public void setPage(String page) {
+    public void setPage(int page) {
         this.page = page;
     }
 }

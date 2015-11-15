@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,7 +141,14 @@ public class ClassMonitorFragment extends Fragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getActivity(), CraftsmanZoneActivity.class));
+        if (position <= 0) {
+            return;
+        }
+        Allcrafts allcrafts = allList.get(position - 1);
+        String  cid= allcrafts.getId();
+        if (!TextUtils.isEmpty(cid)){
+            CraftsmanZoneActivity.enterActivity(getActivity(),Integer.parseInt(cid));
+        }
     }
 
     @Override
