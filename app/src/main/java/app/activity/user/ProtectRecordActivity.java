@@ -31,6 +31,7 @@ public class ProtectRecordActivity extends BaseActivity {
             public void onSucceed(ProtectRecordResult result) {
                 disMissWaitingDialog();
                 List<ProtectRecord> list= result.getMessage();
+
                 if (list!=null&&list.size()>0){
                     items.addAll(list);
                     adapter = new ProtectRecordAdapter(mActivity, items);
