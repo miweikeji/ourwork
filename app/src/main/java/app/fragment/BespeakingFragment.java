@@ -24,6 +24,7 @@ import app.adapter.HintAdapter;
 import app.adapter.HousesByLyfAdapter;
 import app.entity.HousesByLyf;
 import app.entity.HousesByLyfResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.Footools;
@@ -61,7 +62,7 @@ public class BespeakingFragment extends Fragment implements AdapterView.OnItemCl
         if(!isFisrstShow){
             dialog.show();
         }
-        HttpRequest.getHousesByLyf(getActivity(), "100", p, new ICallback<HousesByLyfResult>() {
+        HttpRequest.getHousesByLyf(getActivity(), UserInfo.getInstance().getId(), p, new ICallback<HousesByLyfResult>() {
             @Override
             public void onSucceed(HousesByLyfResult result) {
                 List<HousesByLyf> mHousesByLyf =  result.getHouseList();

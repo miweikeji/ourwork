@@ -36,9 +36,17 @@
         android:id="@+id/rl_group_members">
 
         <TextView
+            android:id="@+id/tv_date_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="鲁班的工匠班组"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text=""/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
             android:id="@+id/tv_my_craftsman_group"
             android:layout_marginTop="20dp"
             android:layout_alignParentTop="true"
@@ -57,7 +65,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:id="@+id/tv_creat_time" />
@@ -65,7 +72,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:id="@+id/tv_group_num" />
@@ -73,7 +79,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:id="@+id/tv_Construction_type" />
@@ -81,7 +86,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:id="@+id/tv_style" />
@@ -94,7 +98,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/white"
+        android:background="@drawable/sl_bg"
         android:layout_below="@+id/rl_group_members"
         android:layout_centerHorizontal="true"
         android:id="@+id/rl_owner_reservation">

@@ -234,13 +234,33 @@ public class HttpRequest {
             @Override
             public void onSucceed(String result) {
                 MyLog.e("", "result==" + result.toString());
-                CraGroupResult mate = JsonUtil.parseObject(result, CraGroupResult.class);
 
-                if (mate.getStatus() == 0) {
-                    callback.onSucceed(mate);
-                } else {
-                    callback.onFail(mate.getMsg());
+                try {
+                    JSONObject object = new JSONObject(result);
+                    int status = object.getInt("status");
+                    if(status==0){
+
+                        if(result.contains("{}")){
+                            callback.onFail("暂无数据");
+                        }else {
+                            CraGroupResult mate = JsonUtil.parseObject(result, CraGroupResult.class);
+                            callback.onSucceed(mate);
+                        }
+
+                    }else {
+                        callback.onFail(object.getString("msg"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+//                CraGroupResult mate = JsonUtil.parseObject(result, CraGroupResult.class);
+//
+//                if (mate.getStatus() == 0) {
+//                    callback.onSucceed(mate);
+//                } else {
+//                    callback.onFail(mate.getMsg());
+//                }
             }
 
             @Override
@@ -623,7 +643,7 @@ public class HttpRequest {
      */
     public static void unArrangeTask(Context context, String jiang, int p, final ICallback<ArrangeTaskResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
-        mList.add(new Param("jiang", jiang));
+        mList.add(new Param("craftsId", jiang));
         mList.add(new Param("p", "" + p));
 
 
@@ -1732,6 +1752,37 @@ public class HttpRequest {
         Map<String, String> mList = new HashMap<String, String>();
         mList.put("message", message);
         new MyAsynctask_Post(context, Urls.createTask, new ICallbackString() {
+
+            @Override
+            public void onSucceed(String result) {
+                MyLog.e("", "请求参数==" + result.toString());
+                Meta meta = JsonUtil.parseObject(result, Meta.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }, mList).executeOnExecutor();
+    }
+
+    /**
+     * 修改已建立计划接口
+     */
+
+    public static void modifyArrangeTask(Context context, String hourseID,String json, final ICallback<Meta> callback) {
+//        ArrayList<Param> mList = new ArrayList<Param>();
+//        mList.add(new Param("groupId", groupId));
+//        mList.add(new Param("phones", phones));
+        Map<String, String> mList = new HashMap<String, String>();
+        mList.put("hourseID", hourseID);
+        mList.put("message", json);
+        new MyAsynctask_Post(context, Urls.modifyArrangeTask, new ICallbackString() {
 
             @Override
             public void onSucceed(String result) {

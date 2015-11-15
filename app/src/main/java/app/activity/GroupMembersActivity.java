@@ -45,7 +45,9 @@ public class GroupMembersActivity extends BaseActivity implements
     private TextView foremanName;
     private String groupid;
     public static DisplayImageOptions options;
+    private String gangerId;
 
+    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
@@ -61,7 +63,9 @@ public class GroupMembersActivity extends BaseActivity implements
 
     @Override
     public void initUI() {
-
+        Intent intent = getIntent();
+        gangerId = intent.getStringExtra("ganger_id");
+        id = intent.getStringExtra("id");
         userImage = (ImageView)findViewById(R.id.iv_me_userimage);
         area = (TextView)findViewById(R.id.tv_me_area);
         age = (TextView)findViewById(R.id.tv_me_age);
@@ -93,7 +97,7 @@ public class GroupMembersActivity extends BaseActivity implements
 
     private void gangerData() {
 
-        HttpRequest.getGroupGangerHttp(this, "106", new ICallback<GroupGangerResult>() {
+        HttpRequest.getGroupGangerHttp(this, gangerId, new ICallback<GroupGangerResult>() {
             @Override
             public void onSucceed(GroupGangerResult result) {
                 GroupGanger crafts = result.getCrafts();
@@ -114,7 +118,7 @@ public class GroupMembersActivity extends BaseActivity implements
     }
 
     private void netWorkData() {
-        HttpRequest.getGroupCraftsHttp(this, groupid, "1", p, new ICallback<GroupMemberResult>() {
+        HttpRequest.getGroupCraftsHttp(this, groupid, id, p, new ICallback<GroupMemberResult>() {
             @Override
             public void onSucceed(GroupMemberResult result) {
                 List<GroupMembe> craftsList = result.getCraftsList();

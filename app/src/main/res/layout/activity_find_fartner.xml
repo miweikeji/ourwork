@@ -10,7 +10,7 @@
         android:id="@+id/rl_un_arrangeTask"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:background="@drawable/sl_bg"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 
@@ -44,7 +44,7 @@
         android:id="@+id/rl_new_decoration"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:background="@drawable/sl_bg"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
         <ImageView
@@ -75,7 +75,7 @@
         android:id="@+id/rl_built_task"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:background="@drawable/sl_bg"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
         <ImageView

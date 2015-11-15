@@ -194,7 +194,7 @@ public class AddMembersActivity extends BaseActivity implements View.OnClickList
 
     private void netWorkData(String json) {
         showWaitingDialog();
-        HttpRequest.addGroupCraf(this, "", json.toString().trim(), new ICallback<Meta>() {
+        HttpRequest.addGroupCraf(this, groupId, json.toString().trim(), new ICallback<Meta>() {
             @Override
             public void onSucceed(Meta result) {
                 disMissWaitingDialog();

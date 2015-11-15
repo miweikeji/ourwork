@@ -18,6 +18,7 @@ import app.adapter.HintAdapter;
 import app.adapter.HousesByLyfAdapter;
 import app.entity.HousesByLyf;
 import app.entity.HousesByLyfResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.Footools;
@@ -58,6 +59,9 @@ public class ReservationHistoryActivity extends BaseActivity implements AdapterV
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 allCases.clear();
                 p = 1;
+                if(adapter!=null){
+                    adapter.notifyDataSetChanged();
+                }
                 netWorkData();
             }
 
@@ -74,7 +78,7 @@ public class ReservationHistoryActivity extends BaseActivity implements AdapterV
         if(!isFisrstShow){
             showWaitingDialog();
         }
-        HttpRequest.getHousesByHistoryLyf(this, "100", p, new ICallback<HousesByLyfResult>() {
+        HttpRequest.getHousesByHistoryLyf(this, UserInfo.getInstance().getId(), p, new ICallback<HousesByLyfResult>() {
             @Override
             public void onSucceed(HousesByLyfResult result) {
                 List<HousesByLyf> mHousesByLyf = result.getHouseList();

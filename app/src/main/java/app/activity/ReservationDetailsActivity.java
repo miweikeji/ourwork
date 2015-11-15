@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.miwei.jzj_system.R;
 
+import java.util.Calendar;
 import java.util.List;
 
 import app.dialog.DialogTools;
@@ -18,8 +19,10 @@ import app.entity.HousesByLyf;
 import app.entity.Journal;
 import app.entity.JournalResult;
 import app.entity.Meta;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
+import app.tools.TimeTools;
 import app.utils.Uihelper;
 import app.views.NavigationBar;
 
@@ -153,12 +156,15 @@ public class ReservationDetailsActivity extends BaseActivity implements
     }
 
     private void accept() {
-
-        String houseId = "753665";
-        String ownerId = "458763";
-        String craftsId = "100";
-        String craftsName = "思明";
-        String yyTime = "2015-10-22";
+        Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int date = c.get(Calendar.DATE);
+        String houseId =lyf.getHouse_id();
+        String ownerId = lyf.getOwner_id();
+        String craftsId = UserInfo.getInstance().getId();
+        String craftsName = UserInfo.getInstance().getName();
+        String yyTime = year+"-"+month+"-"+date;
         HttpRequest.acceptAppointmentLyf(ReservationDetailsActivity.this, houseId,
                 ownerId, craftsId, craftsName, yyTime, new ICallback<Meta>() {
                     @Override
@@ -184,24 +190,24 @@ public class ReservationDetailsActivity extends BaseActivity implements
                         Uihelper.showToast(ReservationDetailsActivity.this, result.getMsg());
                         List<Journal> dialy = result.getDialy();
                         Journal journal = dialy.get(0);
-                        tv_creat_time.setText(journal.getAddtime());
+                        tv_creat_time.setText(TimeTools.longToDateStrs(Double.valueOf(journal.getAddtime())));
 
                         tv_status_.setText(journal.getTitle());
                         if (!"ReservationHistoryActivity".equals(from)) {
                             if (journal.getTitle_state().equals("6")) {
                                 tv_content.setText("已经为您的" + lyf.getHouse_type() + "房子免费预约带班班长（" + name + "）上门量房");
-                                tv_time.setText("预约量房完成时间为：" + journal.getLftime());
+                                tv_time.setText("预约量房完成时间为：" + TimeTools.longToDateStrs(Double.valueOf(journal.getLftime())));
                             } else if (journal.getTitle_state().equals("8")) {
                                 tv_content.setText("您的" + lyf.getHouse_type() + "房子已经有带班班长（" + name + "）完成上门量房");
-                                tv_time.setText("量房完成时间为：" + journal.getLftime());
+                                tv_time.setText("量房完成时间为：" + TimeTools.longToDateStrs(Double.valueOf(journal.getLftime())));
                             }
                         } else {
                             if (journal.getTitle_state().equals("3")) {
                                 tv_content.setText("已经为您的" + lyf.getHouse_type() + "房子免费预约带班班长（" + name + "）上门量房");
-                                tv_time.setText("预约量房完成时间为：" + journal.getLftime());
+                                tv_time.setText("预约量房完成时间为：" + TimeTools.longToDateStrs(Double.valueOf(journal.getLftime())));
                             } else if (journal.getTitle_state().equals("4")) {
                                 tv_content.setText("您的" + lyf.getHouse_type() + "房子已经有带班班长（" + name + "）完成上门量房");
-                                tv_time.setText("量房完成时间为：" + journal.getLftime());
+                                tv_time.setText("量房完成时间为：" + TimeTools.longToDateStrs(Double.valueOf(journal.getLftime())));
                             }
                         }
 

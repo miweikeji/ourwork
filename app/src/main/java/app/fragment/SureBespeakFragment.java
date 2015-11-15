@@ -24,6 +24,7 @@ import app.adapter.HintAdapter;
 import app.adapter.HousesByLyfAdapter;
 import app.entity.HousesByLyf;
 import app.entity.HousesByLyfResult;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.Footools;
@@ -60,7 +61,7 @@ public class SureBespeakFragment extends Fragment implements AdapterView.OnItemC
         if(!isFisrstShow){
             dialog.show();
         }
-        HttpRequest.getHousesByAppointmentLyf(getActivity(), "100", p, new ICallback<HousesByLyfResult>() {
+        HttpRequest.getHousesByAppointmentLyf(getActivity(), UserInfo.getInstance().getId(), p, new ICallback<HousesByLyfResult>() {
             @Override
             public void onSucceed(HousesByLyfResult result) {
                 List<HousesByLyf> mHousesByLyf = result.getHouseList();

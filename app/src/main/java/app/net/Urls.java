@@ -150,5 +150,7 @@ public class Urls {
     public final static String getRefuseYYDialyLog= base_server+"App/Dialy/getRefuseYYDialyLog";
     //银行接口
     public final static String gettn= base_server+"App/Union/gettn";
+    //修改已建立计划接口
+    public final static String modifyArrangeTask= base_server+"App/Workplan/modifyArrangeTask";
 
 }

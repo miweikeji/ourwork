@@ -1,6 +1,8 @@
 package app.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ScrollView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -13,6 +15,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.adapter.HintAdapter;
 import app.adapter.UnArrangeTaskAdapter;
 import app.entity.ArrangeTask;
 import app.entity.ArrangeTaskResult;
@@ -26,7 +29,7 @@ import app.views.NavigationBar;
 /**
  * Created by Administrator on 2015/10/22.
  */
-public class UnArrangeTaskActivity extends BaseActivity{
+public class UnArrangeTaskActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private  PullToRefreshScrollView pull_scro;
     private MyListView my_list;
@@ -35,7 +38,10 @@ public class UnArrangeTaskActivity extends BaseActivity{
     private List<ArrangeTask> allList= new ArrayList<ArrangeTask>();
     private ImageLoader instance ;
     private DisplayImageOptions options;
-
+    private int page;
+    private View inflate;
+    private boolean isOver;
+    private boolean isFisrstShow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
@@ -54,6 +60,7 @@ public class UnArrangeTaskActivity extends BaseActivity{
         pull_scro = (PullToRefreshScrollView) findViewById(R.id.pull_scro);
         pull_scro.setMode(PullToRefreshBase.Mode.BOTH);
         my_list = (MyListView) findViewById(R.id.my_list);
+        my_list.setOnItemClickListener(this);
         pull_scro.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
@@ -75,16 +82,24 @@ public class UnArrangeTaskActivity extends BaseActivity{
 
     private void netWorkData() {
 
-        HttpRequest.unArrangeTask(this, UserInfo.getInstance().getJiang(), p, new ICallback<ArrangeTaskResult>() {
+        HttpRequest.unArrangeTask(this, "100", p, new ICallback<ArrangeTaskResult>() {
             @Override
             public void onSucceed(ArrangeTaskResult result) {
                 List<ArrangeTask> houseList = result.getHouseList();
-                allList.addAll(houseList);
-                if(p==1){
-                    adapter = new UnArrangeTaskAdapter(UnArrangeTaskActivity.this,allList,instance,options);
-                    my_list.setAdapter(adapter);
-                }else {
-                    adapter.notifyDataSetChanged();
+                page = result.getTotalpage();
+                if(page==0){
+                    isOver = false;
+                    HintAdapter hintAdapter = new HintAdapter(UnArrangeTaskActivity.this);
+                    my_list.setDividerHeight(0);
+                    my_list.setAdapter(hintAdapter);
+                } else {
+                    allList.addAll(houseList);
+                    if(p==1){
+                        adapter = new UnArrangeTaskAdapter(UnArrangeTaskActivity.this,allList,instance,options);
+                        my_list.setAdapter(adapter);
+                    }else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
                 pull_scro.onRefreshComplete();
             }
@@ -106,5 +121,10 @@ public class UnArrangeTaskActivity extends BaseActivity{
     public void initTitle(NavigationBar mBar) {
         mBar.setContexts(this);
         mBar.setTitle("分配施工任务");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

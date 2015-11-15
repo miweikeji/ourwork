@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.miwei.jzj_system.R;
 
 import java.io.Serializable;
@@ -31,6 +32,7 @@ import app.entity.HouseData;
 import app.entity.Info;
 import app.entity.JsonDataResult;
 import app.entity.JsonResult;
+import app.entity.Meta;
 import app.entity.Time;
 import app.net.HttpRequest;
 import app.net.ICallback;
@@ -71,6 +73,7 @@ public class ChangeTasksActivity extends BaseActivity implements
     private  String startTime;
 
     private  JsonDataResult housedtail;
+    private String hourseID;
     @Override
     public void obtainData() {
 
@@ -78,7 +81,7 @@ public class ChangeTasksActivity extends BaseActivity implements
 
     @Override
     public void initUI() {
-        String hourseID = getIntent().getStringExtra("hourseID");
+        hourseID = getIntent().getStringExtra("hourseID");
         UIEventUpdate.getInstance().register(this);
         UIEventUpdate.getInstance().registerData(this);
         UIEventUpdate.getInstance().ctimregister(this);
@@ -97,6 +100,7 @@ public class ChangeTasksActivity extends BaseActivity implements
         adapter.setAddCaseNmaeListens(this);
         adapter.setChangeTimeListens(this);
         adapter.setmoneyItem(this);
+        showWaitingDialog();
         HttpRequest.getDetailTask(this, hourseID, new ICallback<JsonResult>() {
             @Override
             public void onSucceed(JsonResult result) {
@@ -114,12 +118,13 @@ public class ChangeTasksActivity extends BaseActivity implements
                     saveStartDataMap.put(wtype,info.get(i));
                 }
                 netWorkType.addAll(list);
-
+                disMissWaitingDialog();
             }
 
             @Override
             public void onFail(String error) {
                 Uihelper.showToast(ChangeTasksActivity.this,error);
+                disMissWaitingDialog();
             }
         });
     }
@@ -613,11 +618,62 @@ public class ChangeTasksActivity extends BaseActivity implements
         }
     }
 
-
     public void releases(View view){
-Toast.makeText(this,"是否进来",1).show();
-        MyLog.e("","saveStartDataMap"+saveStartDataMap.toString());
-        MyLog.e("","saveStartDataMap"+saveStartDataMap.toString());
+        JsonDataResult jsonData = new JsonDataResult();
+        jsonData.setWhoid(housedtail.getWhoid());
+        jsonData.setWho(housedtail.getWho());
+        jsonData.setId(housedtail.getId());
+        jsonData.setBao(housedtail.getBao());
+        jsonData.setWorkplace(housedtail.getWorkplace());
+        jsonData.setType(housedtail.getType());
+        jsonData.setTotal_price(housedtail.getTotal_price());
+        jsonData.setAddtime(housedtail.getAddtime());
+        jsonData.setChecktime(housedtail.getChecktime());
+        jsonData.setCraft_mode(housedtail.getCraft_mode());
+        jsonData.setHouse_area(housedtail.getHouse_area());
+        jsonData.setHouse_style(housedtail.getHouse_style());
+        jsonData.setStatus(housedtail.getStatus());
+        jsonData.setServertime(housedtail.getServertime());
+        jsonData.setHouse_id(housedtail.getHouse_id());
+        jsonData.setHouse_name(housedtail.getHouse_name());
+        jsonData.setHouse_type(housedtail.getHouse_type());
+        jsonData.setServertype(housedtail.getServertype());
+        List<HouseData> info = new ArrayList<>();
+        for (int i=1;i<=saveStartDataMap.size();i++){
+            HouseData data = saveStartDataMap.get("" + i);
+            HouseData houseData = new HouseData();
+            houseData.setCharge(data.getCharge());
+            houseData.setNum(data.getNum());
+            houseData.setWtype(data.getWtype());
+            houseData.setChargetype(data.getChargetype());
+            houseData.setTime(data.getTime());
+            houseData.setName(data.getName());
+            info.add(houseData);
+        }
+        jsonData.setInfo(info);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(jsonData);
+        netWorkData(json);
+    }
+
+    private void netWorkData(String json) {
+        showWaitingDialog();
+        HttpRequest.modifyArrangeTask(this, hourseID, json, new ICallback<Meta>() {
+            @Override
+            public void onSucceed(Meta result) {
+
+                Uihelper.showToast(ChangeTasksActivity.this, result.getMsg());
+                disMissWaitingDialog();
+                finish();
+            }
+
+            @Override
+            public void onFail(String error) {
+                Uihelper.showToast(ChangeTasksActivity.this, error);
+                disMissWaitingDialog();
+            }
+        });
     }
 
     @Override
