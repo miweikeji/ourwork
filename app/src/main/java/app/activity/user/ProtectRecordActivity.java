@@ -48,6 +48,13 @@ public class ProtectRecordActivity extends BaseActivity implements AbsListView.O
                 pull_list.onRefreshComplete();
                 disMissWaitingDialog();
                 List<ProtectRecord> list= result.getMessage();
+<<<<<<< HEAD
+
+                if (list!=null&&list.size()>0){
+                    items.addAll(list);
+                    adapter = new ProtectRecordAdapter(mActivity, items);
+                    listView.setAdapter(adapter);
+=======
                 page=result.getPage();
                 if(page==0){
                     isOver = false;
@@ -71,6 +78,7 @@ public class ProtectRecordActivity extends BaseActivity implements AbsListView.O
                     }else {
                         adapter.notifyDataSetChanged();
                     }
+>>>>>>> f41f12690ee6d6f0763fcb9bdf3597b543340381
                 }
 
             }

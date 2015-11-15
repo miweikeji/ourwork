@@ -1,5 +1,7 @@
 package app.adapter;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -32,9 +34,13 @@ public class ChangeTaskAdapter extends AllAdapter {
     billingTypeItem billingTypeListens;
     addCaseNmae addCaseNmaeListens;
     changeTime changeTimeListens;
+    moneyItem moneyItemListens;
 
     public void setChangeTimeListens(changeTime changeTimeListens) {
         this.changeTimeListens = changeTimeListens;
+    }
+    public void setmoneyItem(moneyItem moneyItemListens) {
+        this.moneyItemListens = moneyItemListens;
     }
 
     public void setData(List<HouseData> infoList) {
@@ -43,6 +49,9 @@ public class ChangeTaskAdapter extends AllAdapter {
 
     public interface removeItem{
         void removePosition(int position,String wtype);
+    }
+    public interface moneyItem{
+        void moneyItemPosition(int position,String money,String wtype);
     }
     public interface changeTime{
         void changeTimePosition(int position,String wtype);
@@ -180,7 +189,28 @@ public class ChangeTaskAdapter extends AllAdapter {
         holder.rl_to_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeTimeListens.changeTimePosition(position,info.getWtype());
+                changeTimeListens.changeTimePosition(position, info.getWtype());
+            }
+        });
+        holder.et_price.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(s!=null){
+                    if(s.toString().length()>0){
+                        moneyItemListens.moneyItemPosition(position,s.toString(),info.getWtype());
+                    }
+                }
             }
         });
         return layout;
