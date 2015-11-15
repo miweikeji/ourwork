@@ -1,5 +1,8 @@
 package app.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -23,6 +26,16 @@ import app.views.PagerSlidingTabStrip;
 public class HouseActivity extends BaseActivity{
 
     private ArrayList<Fragment> fragments;
+    private int houseId;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        houseId=getIntent().getIntExtra("houseId",0);
+
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public void obtainData() {
 
@@ -32,7 +45,9 @@ public class HouseActivity extends BaseActivity{
     public void initUI() {
 
         BaseInfoFragment baseInfoFragment = new BaseInfoFragment();
+        baseInfoFragment.setHouseId(houseId);
         DecorationDiaryFragment diaryFragment = new DecorationDiaryFragment();
+        diaryFragment.setHouseId(houseId);
 
         fragments = new ArrayList<Fragment>();
         fragments.add(baseInfoFragment);
@@ -78,5 +93,11 @@ public class HouseActivity extends BaseActivity{
     public void initTitle(NavigationBar mBar) {
         mBar.setContexts(this);
         mBar.setTitle("清晰小屋");
+    }
+
+    public static  void enterActivity(Activity activity,int houseId){
+        Intent intent =new Intent(activity,HouseActivity.class);
+        intent.putExtra("houseId", houseId);
+        activity.startActivity(intent);
     }
 }

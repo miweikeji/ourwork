@@ -2,6 +2,7 @@ package app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -24,6 +25,7 @@ import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.StatusTools;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.MyListView;
 import app.views.NavigationBar;
 
@@ -93,7 +95,7 @@ public class WorkPlanDetailsActivity extends BaseActivity implements View.OnClic
     }
     private void netWorkData() {
 
-        HttpRequest.detailPlan(this, "100",constructPlan.getHouse_id(), p, new ICallback<DetailPlanResult>() {
+        HttpRequest.detailPlan(this, UserUtil.getUserId(mActivity),constructPlan.getHouse_id(), p, new ICallback<DetailPlanResult>() {
             @Override
             public void onSucceed(DetailPlanResult result) {
                 List<DetailPlan> list = result.getList();
@@ -132,7 +134,9 @@ public class WorkPlanDetailsActivity extends BaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rl_to_house:
-                startActivity(new Intent(this,HouseActivity.class));
+                if (!TextUtils.isEmpty(constructPlan.getHouse_id())) {
+                    HouseActivity.enterActivity(mActivity, Integer.parseInt(constructPlan.getHouse_id()));
+                }
                 break;
         }
     }

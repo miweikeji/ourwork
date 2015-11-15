@@ -100,10 +100,10 @@ public class ValueCraftActivity extends BaseActivity {
     }
 
     public void btn_value(View v) {
-//        if (TextUtils.isEmpty(craftId)) {
-//            Uihelper.showToast(mActivity, "未选择工匠");
-//            return;
-//        }
+        if (TextUtils.isEmpty(craftId)) {
+            Uihelper.showToast(mActivity, "未选择工匠");
+            return;
+        }
         String advice = et_valuecraft.getText().toString();
         if (TextUtils.isEmpty(advice)) {
             Uihelper.showToast(mActivity, "评价不能为空");

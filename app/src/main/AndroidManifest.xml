@@ -165,10 +165,10 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5637269de0f55a6ee9001c7c"></meta-data>
+            android:value="5592070267e58ed259001514"></meta-data>
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="913e252dbad2ed41433a09af044acddf"></meta-data>
+            android:value="b052471e52643d2ed200b11572325632"></meta-data>
 
 
         <activity

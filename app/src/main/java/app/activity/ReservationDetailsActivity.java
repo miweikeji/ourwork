@@ -2,6 +2,7 @@ package app.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -144,7 +145,9 @@ public class ReservationDetailsActivity extends BaseActivity implements
                 accept();
                 break;
             case R.id.rl_house:
-                startActivity(new Intent(this,HouseActivity.class));
+                if (!TextUtils.isEmpty(houseId)) {
+                    HouseActivity.enterActivity(mActivity, Integer.parseInt(houseId));
+                }
                 break;
         }
     }

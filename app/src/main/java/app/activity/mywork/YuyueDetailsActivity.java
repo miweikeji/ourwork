@@ -28,6 +28,7 @@ public class YuyueDetailsActivity extends BaseActivity implements NavigationBar.
 
 
     private MessageItem messageItem;
+
     @Override
     public void obtainData() {
 
@@ -39,30 +40,30 @@ public class YuyueDetailsActivity extends BaseActivity implements NavigationBar.
 
         RelativeLayout rl_house = (RelativeLayout) findViewById(R.id.rl_house);
         rl_house.setOnClickListener(this);
-        Button btn_refuse = (Button)findViewById(R.id.btn_refuse);
-        Button btn_sure = (Button)findViewById(R.id.btn_sure);
+        Button btn_refuse = (Button) findViewById(R.id.btn_refuse);
+        Button btn_sure = (Button) findViewById(R.id.btn_sure);
         btn_sure.setOnClickListener(this);
         btn_refuse.setOnClickListener(this);
 
-        TextView tv_creat_time = (TextView)findViewById(R.id.tv_creat_time);
-        TextView tv_status_ = (TextView)findViewById(R.id.tv_status_);
-        TextView tv_content = (TextView)findViewById(R.id.tv_content);
+        TextView tv_creat_time = (TextView) findViewById(R.id.tv_creat_time);
+        TextView tv_status_ = (TextView) findViewById(R.id.tv_status_);
+        TextView tv_content = (TextView) findViewById(R.id.tv_content);
         TextView tv_time = (TextView) findViewById(R.id.tv_time);
 
-        TextView tv_name= (TextView)findViewById(R.id.tv_name);
-        TextView tv_status= (TextView)findViewById(R.id.tv_status);
-        TextView tv_type= (TextView)findViewById(R.id.tv_type);
-        TextView tv_area= (TextView)findViewById(R.id.tv_area);
-        TextView tv_style= (TextView)findViewById(R.id.tv_style);
-        TextView tv_mode= (TextView)findViewById(R.id.tv_mode);
-        TextView tv_total_price= (TextView)findViewById(R.id.tv_total_price);
+        TextView tv_name = (TextView) findViewById(R.id.tv_name);
+        TextView tv_status = (TextView) findViewById(R.id.tv_status);
+        TextView tv_type = (TextView) findViewById(R.id.tv_type);
+        TextView tv_area = (TextView) findViewById(R.id.tv_area);
+        TextView tv_style = (TextView) findViewById(R.id.tv_style);
+        TextView tv_mode = (TextView) findViewById(R.id.tv_mode);
+        TextView tv_total_price = (TextView) findViewById(R.id.tv_total_price);
         tv_name.setText(messageItem.getHouse_name());
-        tv_type.setText(" "+messageItem.getHouse_type()+" |");
-        tv_area.setText(" "+messageItem.getHouse_area()+"平 |");
-        tv_style.setText(" "+messageItem.getHouse_style()+" |");
-        tv_mode.setText(" "+messageItem.getCraft_mode());
-        tv_total_price.setText("￥"+messageItem.getHouse_total_price());
-        if (!TextUtils.isEmpty(messageItem.getAddTime())){
+        tv_type.setText(" " + messageItem.getHouse_type() + " |");
+        tv_area.setText(" " + messageItem.getHouse_area() + "平 |");
+        tv_style.setText(" " + messageItem.getHouse_style() + " |");
+        tv_mode.setText(" " + messageItem.getCraft_mode());
+        tv_total_price.setText("￥" + messageItem.getHouse_total_price());
+        if (!TextUtils.isEmpty(messageItem.getAddTime())) {
             tv_creat_time.setText(TimeTools.longToDateStr(Double.parseDouble(messageItem.getAddTime())));
         }
 //
@@ -100,7 +101,7 @@ public class YuyueDetailsActivity extends BaseActivity implements NavigationBar.
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_refuse:
                 DialogTools.refuseShow(this).show();
                 DialogTools.setDialogOnClick(this);
@@ -109,7 +110,9 @@ public class YuyueDetailsActivity extends BaseActivity implements NavigationBar.
                 accept();
                 break;
             case R.id.rl_house:
-                startActivity(new Intent(this,HouseActivity.class));
+                if (TextUtils.isEmpty(messageItem.getHouse_id())) {
+                    HouseActivity.enterActivity(mActivity, Integer.parseInt(messageItem.getHouse_id()));
+                }
                 break;
         }
     }
@@ -149,16 +152,16 @@ public class YuyueDetailsActivity extends BaseActivity implements NavigationBar.
         String craftsName = "思明";
         String yyTime = "2015-10-22";
         HttpRequest.refuseAppointmentLyf(YuyueDetailsActivity.this, houseId,
-                ownerId,craftsId, craftsName, yyTime, new ICallback<Meta>() {
-            @Override
-            public void onSucceed(Meta result) {
-                Uihelper.showToast(YuyueDetailsActivity.this,result.getMsg());
-            }
+                ownerId, craftsId, craftsName, yyTime, new ICallback<Meta>() {
+                    @Override
+                    public void onSucceed(Meta result) {
+                        Uihelper.showToast(YuyueDetailsActivity.this, result.getMsg());
+                    }
 
-            @Override
-            public void onFail(String error) {
-                Uihelper.showToast(YuyueDetailsActivity.this,error);
-            }
-        });
+                    @Override
+                    public void onFail(String error) {
+                        Uihelper.showToast(YuyueDetailsActivity.this, error);
+                    }
+                });
     }
 }

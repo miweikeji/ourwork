@@ -20,6 +20,7 @@ import app.entity.HouseInfoResult;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 
 /**
  * Created by Administrator on 2015/10/12.
@@ -47,6 +48,7 @@ public class BaseInfoFragment extends BaseFrament {
 
     public static DisplayImageOptions options;
     private ImageLoader imageLoader;
+    private int houseId;
 
     @Nullable
     @Override
@@ -61,7 +63,7 @@ public class BaseInfoFragment extends BaseFrament {
 
     private void obtainData() {
         mWaitingDialog.show();
-        HttpRequest.getHouseInfo(getActivity(), "100", "753665", new ICallback<HouseInfoResult>() {
+        HttpRequest.getHouseInfo(getActivity(), UserUtil.getUserId(getActivity()), houseId + "", new ICallback<HouseInfoResult>() {
             @Override
             public void onSucceed(HouseInfoResult result) {
                 mWaitingDialog.dismiss();
@@ -136,5 +138,9 @@ public class BaseInfoFragment extends BaseFrament {
         iv_house_designer = (ImageView) layout.findViewById(R.id.iv_house_designer);
         iv_house_craft = (ImageView) layout.findViewById(R.id.iv_house_craft);
 
+    }
+
+    public void setHouseId(int houseId) {
+        this.houseId = houseId;
     }
 }

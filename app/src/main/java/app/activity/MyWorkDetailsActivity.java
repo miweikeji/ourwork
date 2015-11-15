@@ -54,6 +54,7 @@ public class MyWorkDetailsActivity extends BaseActivity implements
     private View frame_comment;
     private View frame_data;
     private DisplayImageOptions options;
+    private String houseId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class MyWorkDetailsActivity extends BaseActivity implements
             public void onSucceed(MyWorkDetailResult result) {
                 disMissWaitingDialog();
                 MyWorkDetailMessage message = result.getMessage();
+                houseId=message.getHouse_id();
                 tvName.setText(message.getS_addr());
                 tvService.setText(message.getContent());
                 String type = message.getCharge_type();
@@ -141,7 +143,9 @@ public class MyWorkDetailsActivity extends BaseActivity implements
 
     //查看施工项目
     public void toProdDetails(View view) {
-        startActivity(new Intent(this, HouseActivity.class));
+        if (!TextUtils.isEmpty(houseId)) {
+            HouseActivity.enterActivity(mActivity, Integer.parseInt(houseId));
+        }
     }
 
     @Override

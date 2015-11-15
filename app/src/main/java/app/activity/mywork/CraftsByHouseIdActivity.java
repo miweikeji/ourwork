@@ -53,6 +53,7 @@ public class CraftsByHouseIdActivity extends BaseActivity {
                     listView.setAdapter(adapter);
                 }
             }
+
             @Override
             public void onFail(String error) {
 
@@ -65,9 +66,7 @@ public class CraftsByHouseIdActivity extends BaseActivity {
     @Override
     public void initUI() {
 
-
         listView = (ListView) findViewById(R.id.listView);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -82,8 +81,6 @@ public class CraftsByHouseIdActivity extends BaseActivity {
                 finish();
             }
         });
-
-
     }
 
     @Override
