@@ -1,5 +1,6 @@
 package app.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -57,11 +58,12 @@ public class MyWorkDetailsActivity extends BaseActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         //工作任务
-        Intent intent=getIntent();
+        Intent intent = getIntent();
         workId = intent.getStringExtra("wordId");
-        state=intent.getIntExtra("state",0);
+        state = intent.getIntExtra("state", 0);
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public void obtainData() {
 
@@ -97,7 +99,7 @@ public class MyWorkDetailsActivity extends BaseActivity implements
                 List<CaseItem> list = message.getData();
                 if (list.size() > 0) {
                     frame_data.setVisibility(View.VISIBLE);
-                    MyWorkDetailsAdapter adater=new MyWorkDetailsAdapter(mActivity,list,options);
+                    MyWorkDetailsAdapter adater = new MyWorkDetailsAdapter(mActivity, list, options);
                     listView.setAdapter(adater);
                 }
 
@@ -118,8 +120,8 @@ public class MyWorkDetailsActivity extends BaseActivity implements
 
         options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).displayer(new RoundedBitmapDisplayer(0)).build();
 
-        frame_comment=findViewById(R.id.frame_comment);
-        frame_data=findViewById(R.id.frame_data);
+        frame_comment = findViewById(R.id.frame_comment);
+        frame_data = findViewById(R.id.frame_data);
         listView = (MyListView) findViewById(R.id.listViewq);
         tvName = (TextView) findViewById(R.id.tv_mywork_name);
         tv_feestyle = (TextView) findViewById(R.id.tv_mywork_style);
@@ -157,8 +159,17 @@ public class MyWorkDetailsActivity extends BaseActivity implements
 
     @Override
     public void setRightOnClick() {
-        if (!TextUtils.isEmpty(workId)){
-            CraftsmanZoneActivity.enterActivity(mActivity,Integer.parseInt(workId));
+        if (!TextUtils.isEmpty(workId)) {
+            CraftsmanZoneActivity.enterActivity(mActivity, Integer.parseInt(workId));
         }
+    }
+
+    public static void enterActivity(Activity activity, int craftId, int state) {
+
+        Intent intent = new Intent(activity, MyWorkDetailsActivity.class);
+        intent.putExtra("wordId", craftId);
+        intent.putExtra("state", craftId);
+        activity.startActivity(intent);
+
     }
 }
