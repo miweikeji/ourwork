@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 /**
  * Created by Administrator on 2015/10/25.

@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.view.ViewGroup.LayoutParams;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.adapter.WorkTypeAdater;
 import app.tools.ScreenUtil;

@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.io.InputStream;
 import java.util.ArrayList;

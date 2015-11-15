@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 /**
  * Created by Administrator on 2015/10/2.

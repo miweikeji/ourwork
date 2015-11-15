@@ -27,7 +27,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.io.File;
 import java.net.URI;
@@ -246,7 +246,6 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
             //签到
             case R.id.tv_sign:
                 if (UserUtil.isLogin(getActivity())) {
-                    if (dialogSign == null) {
                         dialogSign = new DialogSign(getActivity(), signTime, isSign, hasCase) {
 
                             @Override
@@ -274,7 +273,6 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
                                 startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
                             }
                         };
-                    }
                     dialogSign.show();
                 }
 

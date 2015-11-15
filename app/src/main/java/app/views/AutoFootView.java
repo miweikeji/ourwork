@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 
 public class AutoFootView extends LinearLayout{

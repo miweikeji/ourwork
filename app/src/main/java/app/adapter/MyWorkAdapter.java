@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.util.ArrayList;
 

@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.entity.JsonData;
 import app.entity.UserInfo;

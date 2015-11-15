@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.HttpUtils;
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.util.Calendar;
 

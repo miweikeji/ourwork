@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.activity.BaseActivity;
 import app.entity.Meta;

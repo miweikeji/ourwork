@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.tools.ScreenUtil;
 

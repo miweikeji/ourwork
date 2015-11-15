@@ -13,7 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ViewFlipper;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 public class UserHeadPopup extends PopupWindow implements OnClickListener{
 

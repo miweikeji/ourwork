@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.util.ArrayList;
 

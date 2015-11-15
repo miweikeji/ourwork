@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "com.miweikeij.app"
+        applicationId "com.miwei.jzj_system"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1

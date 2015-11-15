@@ -18,7 +18,7 @@ package app.views;
 
 import java.util.Locale;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

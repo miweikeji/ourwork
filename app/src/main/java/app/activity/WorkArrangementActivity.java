@@ -10,7 +10,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.util.ArrayList;
 

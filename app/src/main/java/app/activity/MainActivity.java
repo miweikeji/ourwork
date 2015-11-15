@@ -19,7 +19,7 @@ import app.fragment.CarpenterHomeFragment;
 import app.fragment.JobContentsFragment;
 import app.fragment.MyJobFragment;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 import com.umeng.common.message.UmengMessageDeviceConfig;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.MsgConstant;

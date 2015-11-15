@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 /**
  * Created by Administrator on 2015/11/2.

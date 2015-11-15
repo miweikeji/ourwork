@@ -10,7 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.utils.Uihelper;
 

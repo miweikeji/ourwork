@@ -3,7 +3,7 @@ package app.adapter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.util.List;
 

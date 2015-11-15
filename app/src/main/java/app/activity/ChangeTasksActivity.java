@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.io.Serializable;
 import java.text.ParseException;

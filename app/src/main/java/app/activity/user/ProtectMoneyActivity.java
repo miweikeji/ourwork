@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 

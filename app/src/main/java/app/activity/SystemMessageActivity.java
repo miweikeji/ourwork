@@ -1,6 +1,6 @@
 package app.activity;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.views.NavigationBar;
 

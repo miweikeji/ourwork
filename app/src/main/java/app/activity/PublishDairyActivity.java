@@ -19,8 +19,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.miweikeij.app.R;
-
+import com.miwei.jzj_system.R;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.utils.Config;
 

@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.entity.CraGroup;
 import app.entity.CraGroupResult;

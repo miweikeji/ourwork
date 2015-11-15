@@ -7,7 +7,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.entity.Meta;
 import app.entity.UserInfoResult;

@@ -26,7 +26,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

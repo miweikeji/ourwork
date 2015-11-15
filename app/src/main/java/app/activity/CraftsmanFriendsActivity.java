@@ -4,7 +4,7 @@ package app.activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 
 import app.views.NavigationBar;

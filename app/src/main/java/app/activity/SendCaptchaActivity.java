@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.entity.Meta;
 import app.entity.RegisterInfo;

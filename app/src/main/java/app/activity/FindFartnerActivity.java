@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import app.views.NavigationBar;
 

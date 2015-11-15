@@ -12,7 +12,7 @@ import android.text.TextUtils;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;

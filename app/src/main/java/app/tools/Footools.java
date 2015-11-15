@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 /**
  * Created by Administrator on 2015/11/14.

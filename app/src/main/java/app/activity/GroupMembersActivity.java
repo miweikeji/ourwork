@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import java.util.ArrayList;

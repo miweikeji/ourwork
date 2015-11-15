@@ -2,7 +2,7 @@ package app.activity.user;
 
 import android.widget.ListView;
 
-import com.miweikeij.app.R;
+import com.miwei.jzj_system.R;
 
 import java.util.ArrayList;
 import java.util.List;
