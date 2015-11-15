@@ -275,7 +275,7 @@ public class JobAuthentActivity extends BaseActivity implements View.OnClickList
 
         String uploadHost = Urls.workHeadAudit;
         RequestParams params = new RequestParams();
-        params.addBodyParameter("craftsId", "102");
+        params.addBodyParameter("craftsId", UserUtil.getUserId(mActivity));
         params.addBodyParameter("realname", name);
         params.addBodyParameter("cworknum", authent);
         params.addBodyParameter("groupInfo", groupInfo_String);

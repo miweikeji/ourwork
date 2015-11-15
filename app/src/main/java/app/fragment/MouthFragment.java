@@ -19,7 +19,6 @@ import com.miwei.jzj_system.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.activity.MyWorkDetailsActivity;
 import app.activity.mywork.adapter.CraftValueAdapter;
 import app.adapter.ClassMonitorAdapter;
 import app.adapter.HintAdapter;

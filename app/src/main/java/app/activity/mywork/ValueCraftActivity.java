@@ -1,6 +1,7 @@
 package app.activity.mywork;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import app.entity.Meta;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.NavigationBar;
 
 /**
@@ -29,6 +31,13 @@ public class ValueCraftActivity extends BaseActivity {
     private String craftId;
     private RatingBar ratingBar_quality;
     private RatingBar ratingBarValue;
+    private int houseId;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        houseId = getIntent().getIntExtra("houseId", 0);
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void obtainData() {
@@ -45,7 +54,10 @@ public class ValueCraftActivity extends BaseActivity {
         findViewById(R.id.frame_selectcraft).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Intent intent = new Intent(mActivity, CraftsByHouseIdActivity.class);
+                intent.putExtra("houseId", houseId);
                 startActivityForResult(intent, 0);
             }
         });
@@ -112,7 +124,7 @@ public class ValueCraftActivity extends BaseActivity {
         int ratingValue = (int) ratingBarValue.getRating();
         int ratingQuality = (int) ratingBar_quality.getRating();
         showWaitingDialog();
-        HttpRequest.addComment(mActivity, "100", "147", "753665", ratingValue, ratingQuality, advice, new ICallback<Meta>() {
+        HttpRequest.addComment(mActivity, UserUtil.getUserId(mActivity), craftId, houseId + "", ratingValue, ratingQuality, advice, new ICallback<Meta>() {
             @Override
             public void onSucceed(Meta result) {
                 disMissWaitingDialog();

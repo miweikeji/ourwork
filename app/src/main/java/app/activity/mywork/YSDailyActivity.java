@@ -23,6 +23,7 @@ import app.net.HttpRequest;
 import app.net.ICallback;
 import app.popupwindow.WorkTypePopup;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.NavigationBar;
 
 /**
@@ -136,7 +137,7 @@ public class YSDailyActivity extends BaseActivity implements View.OnClickListene
 
     private void summit() {
         showWaitingDialog();
-        HttpRequest.addYSDailyLog(mActivity, "100", "", houseInfo.getStatus(), houseInfo.getId(), houseInfo.getOwnerId()
+        HttpRequest.addYSDailyLog(mActivity, UserUtil.getUserId(mActivity), "", houseInfo.getStatus(), houseInfo.getId(), houseInfo.getOwnerId()
                 , summitTime, house_state, new ICallback<Meta>() {
             @Override
             public void onSucceed(Meta result) {

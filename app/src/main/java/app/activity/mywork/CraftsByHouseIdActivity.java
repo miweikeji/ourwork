@@ -31,11 +31,14 @@ public class CraftsByHouseIdActivity extends BaseActivity {
     private ListView listView;
     List<Allcrafts> items = new ArrayList<>();
     private DisplayImageOptions options;
+    private int houseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.test).cacheInMemory(true).cacheOnDisk(true)
                 .displayer(new CircleBitmapDisplayer()).build();
+
+        houseId=getIntent().getIntExtra("houseId",0);
         super.onCreate(savedInstanceState);
     }
 
@@ -43,7 +46,7 @@ public class CraftsByHouseIdActivity extends BaseActivity {
     public void obtainData() {
 
         showWaitingDialog();
-        HttpRequest.getCraftsByHouseId(mActivity, "753665", new ICallback<CraftsByHouseIdResult>() {
+        HttpRequest.getCraftsByHouseId(mActivity, houseId+"", new ICallback<CraftsByHouseIdResult>() {
             @Override
             public void onSucceed(CraftsByHouseIdResult result) {
                 disMissWaitingDialog();

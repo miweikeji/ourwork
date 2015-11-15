@@ -202,7 +202,9 @@ public class DecorationDiaryFragment extends BaseFrament implements View.OnClick
                                 bottomSelectDialog.dismiss();
                                 break;
                             case R.id.btn_value:
-                                startActivity(new Intent(getActivity(), ValueCraftActivity.class));
+                                Intent intent_value = new Intent(getActivity(), ValueCraftActivity.class);
+                                intent_value.putExtra("houseId", houseId);
+                                startActivity(intent_value);
                                 bottomSelectDialog.dismiss();
                                 break;
                             case R.id.iv_downarrow:

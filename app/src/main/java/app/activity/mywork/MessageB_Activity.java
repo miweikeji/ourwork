@@ -28,6 +28,7 @@ import app.entity.Meta;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.CircleBitmapDisplayer;
 import app.views.MyListView;
 import app.views.NavigationBar;
@@ -75,7 +76,7 @@ public class MessageB_Activity extends BaseActivity implements View.OnClickListe
 
     private void netWorkData() {
         showWaitingDialog();
-        HttpRequest.getMessageOrderDetail(this, "101", workId, enterState + "", new ICallback<MessageDetailResult>() {
+        HttpRequest.getMessageOrderDetail(this, UserUtil.getUserId(mActivity), workId, enterState + "", new ICallback<MessageDetailResult>() {
             @Override
             public void onSucceed(MessageDetailResult result) {
                 disMissWaitingDialog();

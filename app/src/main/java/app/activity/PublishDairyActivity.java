@@ -32,6 +32,7 @@ import app.entity.ImageEntity;
 import app.net.Urls;
 import app.utils.Constants;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.NavigationBar;
 
 /**
@@ -199,7 +200,7 @@ public class PublishDairyActivity extends BaseActivity {
         }
         String uploadHost = Urls.addDailyLog;
         RequestParams params = new RequestParams();
-        params.addBodyParameter("cid", "101");
+        params.addBodyParameter("cid", UserUtil.getUserId(mActivity));
         params.addBodyParameter("content", content);
         params.addBodyParameter("housestate", houseInfo.getStatus());
         params.addBodyParameter("houseid", houseInfo.getId());
