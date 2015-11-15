@@ -1,4 +1,4 @@
-package app.adapter;
+package app.activity.mywork;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,11 +10,15 @@ import android.widget.TextView;
 
 import com.miweikeij.app.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import app.activity.CraftsmanZoneActivity;
 import app.activity.WorkPlanDetailsActivity;
+import app.adapter.AllAdapter;
+import app.entity.CaseItem;
 import app.entity.DetailPlan;
 import app.tools.ImageLoadTools;
 import app.tools.StatusTools;
@@ -22,16 +26,17 @@ import app.tools.StatusTools;
 /**
  * Created by Administrator on 2015/10/27.
  */
-public class WorkPlanDetailsAdapter extends AllAdapter {
+public class MyWorkDetailsAdapter extends AllAdapter {
 
-    private ArrayList<DetailPlan> allCases;
+    private final ImageLoader imageloader;
+    private List<CaseItem> allCases;
     private Activity activity;
     private DisplayImageOptions options;
-    public WorkPlanDetailsAdapter(WorkPlanDetailsActivity activity,
-                                  ArrayList<DetailPlan> allCases, DisplayImageOptions options) {
+    public MyWorkDetailsAdapter(Activity activity, List<CaseItem> allCases, DisplayImageOptions options) {
         this.activity =activity;
         this.allCases=allCases;
         this.options = options;
+      imageloader=ImageLoader.getInstance();
     }
 
     @Override
@@ -53,30 +58,29 @@ public class WorkPlanDetailsAdapter extends AllAdapter {
         }else {
              holder = (ViewHolder) layout.getTag();
         }
-        final DetailPlan plan = allCases.get(position);
-        holder.tv_name_and_case.setText(plan.getName()+"-"+ StatusTools.workType(plan.getWorktype()));
-        holder.tv_time.setText(plan.getDatatime());
-        if("1".equals(plan.getAm())){
+        final CaseItem caseItem = allCases.get(position);
+        holder.tv_name_and_case.setText(caseItem.getName()+"-"+ StatusTools.workType(caseItem.getWorkType()));
+        holder.tv_time.setText(caseItem.getDatatime());
+        if("1".equals(caseItem.getAm())){
             holder.tv_pam.setText("上午");
         }
-        if("1".equals(plan.getPm())){
+        if("1".equals(caseItem.getPm())){
             holder.tv_pam.setText("下午");
         }
 
-        if("0".equals(plan.getAm())&&"0".equals(plan.getPm())){
+        if("0".equals(caseItem.getAm())&&"0".equals(caseItem.getPm())){
             holder.tv_pam.setText("未安排");
         }
-
+        imageloader.displayImage(caseItem.getCraftsImg(),holder.img_head,options);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 String  cid= plan.getCid();
+                String  cid= caseItem.getDid();
                 if (!TextUtils.isEmpty(cid)){
                     CraftsmanZoneActivity.enterActivity(activity,Integer.parseInt(cid));
                 }
             }
         });
-//        ImageLoadTools.displayImage(plan.get);
         return layout;
     }
 

@@ -1473,27 +1473,11 @@ public class HttpRequest {
 
             @Override
             public void onSucceed(String result) {
-                MyLog.e("", "请求参数==" + result.toString());
-                JSONObject object = null;
-                try {
-                    object = new JSONObject(result);
-                    int status = object.getInt("status");
-                    if (result.contains("page")) {
-                        JSONObject message = object.getJSONObject("message");
-                        int page = message.getInt("page");
-                        if (page == 0) {
-                            callback.onFail(Constants.JSON_HAS_NULL);
-                        } else {
-                            MyWorksListResult meta = JsonUtil.parseObject(result, MyWorksListResult.class);
-                            if (meta.getStatus() == 0) {
-                                callback.onSucceed(meta);
-                            } else {
-                                callback.onFail(meta.getMsg());
-                            }
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                MyWorksListResult meta = JsonUtil.parseObject(result, MyWorksListResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
                 }
 
             }
@@ -1877,7 +1861,7 @@ public class HttpRequest {
     }
 
     //获取接受预约日志接口
-    public static void getRefuseYYDialyLog(Context context,String houseId,String craftsId,final ICallback<JournalResult> callback) {
+    public static void getRefuseYYDialyLog(Context context, String houseId, String craftsId, final ICallback<JournalResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("houseId", houseId));
         mList.add(new Param("craftsId", craftsId));
@@ -1902,7 +1886,7 @@ public class HttpRequest {
     }
 
     //获取接受预约日志接口
-    public static void getYYDialyLog(Context context,String houseId,String craftsId,final ICallback<JournalResult> callback) {
+    public static void getYYDialyLog(Context context, String houseId, String craftsId, final ICallback<JournalResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("houseId", houseId));
         mList.add(new Param("craftsId", craftsId));
@@ -1925,9 +1909,10 @@ public class HttpRequest {
             }
         }).executeOnExecutor();
     }
+
     //银行接口
-    public static void gettn(Context context,String cid,String money,String content,String usetype,
-                             String useId,final ICallback<String> callback) {
+    public static void gettn(Context context, String cid, String money, String content, String usetype,
+                             String useId, final ICallback<String> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("cid", cid));
         mList.add(new Param("money", money));
@@ -1942,9 +1927,9 @@ public class HttpRequest {
                 try {
                     JSONObject object = new JSONObject(result);
                     String status = object.getString("status");
-                    if("0".equals(status)){
+                    if ("0".equals(status)) {
                         callback.onSucceed(object.getString("tn"));
-                    }else {
+                    } else {
                         callback.onFail(object.getString("msg"));
                     }
                 } catch (JSONException e) {

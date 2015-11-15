@@ -36,6 +36,7 @@ public class MouthFragment extends Fragment implements  AdapterView.OnItemClickL
     private CraftValueAdapter adapter;
     private List<Comment> allList = new ArrayList<>();
     private int totalpage;
+    private int craftId;
 
     @Nullable
     @Override
@@ -46,9 +47,13 @@ public class MouthFragment extends Fragment implements  AdapterView.OnItemClickL
         return layout;
     }
 
+    public void setWorkId(int craftId) {
+        this.craftId=craftId;
+    }
+
     private void netWorkData() {
 
-        HttpRequest.getCommentByCrafts(getActivity(), "147", p, new ICallback<CommentResult>() {
+        HttpRequest.getCommentByCrafts(getActivity(), craftId+"", p, new ICallback<CommentResult>() {
             @Override
             public void onSucceed(CommentResult result) {
                 List<Comment> commentList = result.getCommentList();

@@ -33,6 +33,8 @@ public class CaseFragment extends Fragment {
     private PullToRefreshListView pull_case;
     private ArrayList<House> allHouses = new ArrayList<House>();
     private CaseAdapter adapter;
+    private int craftId;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,10 +43,12 @@ public class CaseFragment extends Fragment {
         netWorkData();
         return layout;
     }
-
+    public void setWorkId(int craftId) {
+        this.craftId=craftId;
+    }
     private void netWorkData() {
 
-        HttpRequest.allCaseHttp(getActivity(), "101", p, new ICallback<CaseResult>() {
+        HttpRequest.allCaseHttp(getActivity(), craftId+"", p, new ICallback<CaseResult>() {
             @Override
             public void onSucceed(CaseResult result) {
                 List<House> houses = result.getHouseList();

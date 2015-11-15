@@ -27,14 +27,14 @@ import app.views.PagerSlidingTabStrip;
  */
 public class CraftsmanZoneActivity extends BaseActivity {
     private ArrayList<Fragment> fragments;
-    private String craftId;
+    private int craftId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         
         Intent intent=getIntent();
-        craftId=intent.getStringExtra("");
-        
+        craftId=intent.getIntExtra("craftId", 0);
+
         super.onCreate(savedInstanceState);
     }
 
@@ -46,8 +46,11 @@ public class CraftsmanZoneActivity extends BaseActivity {
     @Override
     public void initUI() {
         CraftsmanInfoFragment infoFragment = new CraftsmanInfoFragment();
+        infoFragment.setWorkId(craftId);
         CaseFragment caseFragment = new CaseFragment();
+        caseFragment.setWorkId(craftId);
         MouthFragment mouthFragment = new MouthFragment();
+        mouthFragment.setWorkId(craftId);
 
         fragments = new ArrayList<Fragment>();
         fragments.add(infoFragment);
@@ -99,10 +102,10 @@ public class CraftsmanZoneActivity extends BaseActivity {
     }
 
     public void btn_callphone(View v) {
-        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:10086")));
+//        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:10086")));
     }
 
-    public static  void enterActivity(Activity activity,String craftId){
+    public static  void enterActivity(Activity activity,int craftId){
         Intent intent =new Intent(activity,CraftsmanZoneActivity.class);
         intent.putExtra("craftId",craftId);
         activity.startActivity(intent);

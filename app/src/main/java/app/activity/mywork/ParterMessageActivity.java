@@ -119,7 +119,10 @@ public class ParterMessageActivity extends BaseActivity implements AbsListView.O
     AdapterView.OnItemClickListener onitemClick= new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            MessageItem messageItem = items.get(position);
+            if (position<=0){
+                return;
+            }
+            MessageItem messageItem = items.get(position-1);
             String enterDetail = messageItem.getEnterDetail();
             if (!TextUtils.isEmpty(enterDetail)) {
                 switch (enterDetail) {

@@ -56,7 +56,11 @@ public class CraftsmanInfoFragment extends Fragment {
     private DisplayImageOptions options;
     private RatingBar ratingBarQuality;
     private RatingBar ratingBarValue;
+    private int craftId;
 
+    public void setWorkId(int craftId) {
+         this.craftId=craftId;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,22 +74,22 @@ public class CraftsmanInfoFragment extends Fragment {
     }
 
     private void netWorkData() {
-        HttpRequest.craftsmanInfoHttp(getActivity(), "106", new ICallback<CraftsResult>() {
+        HttpRequest.craftsmanInfoHttp(getActivity(), craftId+"", new ICallback<CraftsResult>() {
             @Override
             public void onSucceed(CraftsResult result) {
                 Crafts crafts = result.getCrafts();
                 int jiang = crafts.getJiang();
-                if(jiang==0){
+                if (jiang == 0) {
                     rl_foreman.setVisibility(View.VISIBLE);
                     rl_normal.setVisibility(View.INVISIBLE);
                     GroupInfo groupInfo = result.getCrafts().getGroupInfo();
-                    tv_style.setText("装修风格："+groupInfo.getExpert());
-                    constructionType.setText("施工方式"+groupInfo.getStyle());
-                    tv_group_num.setText("工匠队伍："+groupInfo.getCount()+"人");
+                    tv_style.setText("装修风格：" + groupInfo.getExpert());
+                    constructionType.setText("施工方式" + groupInfo.getStyle());
+                    tv_group_num.setText("工匠队伍：" + groupInfo.getCount() + "人");
                     tv_creat_time.setText("" + groupInfo.getCreate_time());
                     tv_my_craftsman_group.setText(groupInfo.getName() + "工匠班组");
 
-                }else{
+                } else {
                     rl_foreman.setVisibility(View.INVISIBLE);
                     rl_normal.setVisibility(View.VISIBLE);
                     rl_is_foreman.setVisibility(View.GONE);
@@ -96,27 +100,30 @@ public class CraftsmanInfoFragment extends Fragment {
                 oldCase.setText(crafts.getWork());
 
                 foremanName.setText(crafts.getName());
-                age.setText(""+crafts.getAge()+"岁");
+                age.setText("" + crafts.getAge() + "岁");
                 area.setText(crafts.getCworkhome());
-                jobAge.setText(""+crafts.getCworkold());
+                jobAge.setText("" + crafts.getCworkold());
                 jobType.setText(crafts.getProfession());
                 imageLoader.displayImage(crafts.getCimg(), userImage, options);
                 ratingBarValue.setRating(crafts.getOverallattitude());
                 ratingBarQuality.setRating(crafts.getOverallquality());
-                if (!TextUtils.isEmpty(crafts.getVip())){
+                if (!TextUtils.isEmpty(crafts.getVip())) {
                     ordinaryVIP.setText(crafts.getVip());
-                } if (!TextUtils.isEmpty(crafts.getGongyi())){
+                }
+                if (!TextUtils.isEmpty(crafts.getGongyi())) {
                     technology.setText(crafts.getGongyi());
-                } if (!TextUtils.isEmpty(crafts.getBaozhengjin())){
+                }
+                if (!TextUtils.isEmpty(crafts.getBaozhengjin())) {
                     tv_gold.setText(crafts.getBaozhengjin());
-                } if (!TextUtils.isEmpty(crafts.getRenzheng())){
+                }
+                if (!TextUtils.isEmpty(crafts.getRenzheng())) {
                     Authentication.setText(crafts.getRenzheng());
                 }
             }
 
             @Override
             public void onFail(String error) {
-                Uihelper.showToast(getActivity(),error);
+                Uihelper.showToast(getActivity(), error);
             }
         });
     }
@@ -154,4 +161,6 @@ public class CraftsmanInfoFragment extends Fragment {
         ratingBarValue.setEnabled(false);
 
     }
+
+
 }

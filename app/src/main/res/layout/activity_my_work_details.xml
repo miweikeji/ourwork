@@ -168,7 +168,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:paddingTop="15dp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -309,22 +309,21 @@
 
 
             <RelativeLayout
+                android:id="@+id/frame_data"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:layout_marginTop="10dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_item"
                     android:orientation="vertical"
                     >
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginLeft="15dp"
                         android:background="@color/white"
                         android:layout_height="50dp">
                         <TextView
