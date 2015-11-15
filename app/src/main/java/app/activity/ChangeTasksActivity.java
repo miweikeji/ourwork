@@ -483,11 +483,11 @@ public class ChangeTasksActivity extends BaseActivity implements
                         Time time = listShui.get(i);
                         Ctime ctime = new Ctime();
                         ctime.setAm(time.getAm());
-                        ctime.setAm(time.getAm());
+                        ctime.setPm(time.getPm());
                         ctime.setDatatime(time.getDatatime());
                         clistShui.add(ctime);
                     }
-                    houseData.setTime(clistShui);
+//                    houseData.setTime(clistShui);
                     houseData_s.setTime(clistShui);
                 } else if ("泥水工".equals(type)) {
                     listNi.clear();
@@ -497,11 +497,11 @@ public class ChangeTasksActivity extends BaseActivity implements
                         Time time = listNi.get(i);
                         Ctime ctime = new Ctime();
                         ctime.setAm(time.getAm());
-                        ctime.setAm(time.getAm());
+                        ctime.setPm(time.getPm());
                         ctime.setDatatime(time.getDatatime());
                         clistNi.add(ctime);
                     }
-                    houseData.setTime(clistNi);
+//                    houseData.setTime(clistNi);
                     houseData_s.setTime(clistNi);
                 } else if ("木工".equals(type)) {
                     listMu.clear();
@@ -511,11 +511,11 @@ public class ChangeTasksActivity extends BaseActivity implements
                         Time time = listMu.get(i);
                         Ctime ctime = new Ctime();
                         ctime.setAm(time.getAm());
-                        ctime.setAm(time.getAm());
+                        ctime.setPm(time.getPm());
                         ctime.setDatatime(time.getDatatime());
                         clistMu.add(ctime);
                     }
-                    houseData.setTime(clistMu);
+//                    houseData.setTime(clistMu);
                     houseData_s.setTime(clistMu);
                 } else if ("油漆工".equals(type)) {
                     listYou.clear();
@@ -525,11 +525,11 @@ public class ChangeTasksActivity extends BaseActivity implements
                         Time time = listYou.get(i);
                         Ctime ctime = new Ctime();
                         ctime.setAm(time.getAm());
-                        ctime.setAm(time.getAm());
+                        ctime.setPm(time.getPm());
                         ctime.setDatatime(time.getDatatime());
                         clistYou.add(ctime);
                     }
-                    houseData.setTime(clistYou);
+//                    houseData.setTime(clistYou);
                     houseData_s.setTime(clistYou);
                 } else if ("门窗安装工".equals(type)) {
                     listMen.clear();
@@ -539,11 +539,11 @@ public class ChangeTasksActivity extends BaseActivity implements
                         Time time = listMen.get(i);
                         Ctime ctime = new Ctime();
                         ctime.setAm(time.getAm());
-                        ctime.setAm(time.getAm());
+                        ctime.setPm(time.getPm());
                         ctime.setDatatime(time.getDatatime());
                         clistMen.add(ctime);
                     }
-                    houseData.setTime(clistMen);
+//                    houseData.setTime(clistMen);
                     houseData_s.setTime(clistMen);
                 } else if ("敲打搬运工".equals(type)) {
                     listQiao.clear();
@@ -553,15 +553,16 @@ public class ChangeTasksActivity extends BaseActivity implements
                         Time time = listQiao.get(i);
                         Ctime ctime = new Ctime();
                         ctime.setAm(time.getAm());
-                        ctime.setAm(time.getAm());
+                        ctime.setPm(time.getPm());
                         ctime.setDatatime(time.getDatatime());
                         clistQiao.add(ctime);
                     }
-                    houseData.setTime(clistQiao);
+//                    houseData.setTime(clistQiao);
                     houseData_s.setTime(clistQiao);
                 }
-                saveStartDataMap.put(type,houseData);
-                startDataMap.put(type,houseData_s);
+//                saveStartDataMap.put(type,houseData);
+                startDataMap.put("" + StatusTools.getWorkType(type),houseData_s);
+                saveStartDataMap.put("" + StatusTools.getWorkType(type),startDataMap.get("" + StatusTools.getWorkType(type)));
                 MyLog.e("", "saveStartDataMap" + saveStartDataMap.toString());
                 break;
         }
