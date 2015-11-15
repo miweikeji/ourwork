@@ -155,7 +155,7 @@ public class Uihelper {
     }
 
     /**
-     * 将时间戳转换成yyyy-MM-dd HH:mm:ss
+     * 将时间戳转换成yyyy-MM-dd
      *
      * @author yangsq
      * @date 2014-7-22
@@ -163,7 +163,7 @@ public class Uihelper {
      * @return
      */
     public static String timestampToDateStr(Double timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String date = sdf.format(new Date((long) (timestamp * 1000L)));
         return date;
     }
