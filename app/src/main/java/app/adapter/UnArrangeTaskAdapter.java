@@ -1,6 +1,8 @@
 package app.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -11,8 +13,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
+import app.activity.ConstructionTasksActivity;
 import app.activity.UnArrangeTaskActivity;
 import app.entity.ArrangeTask;
+import app.entity.JsonData;
+import app.entity.UserInfo;
 
 /**
  * Created by Administrator on 2015/10/22.
@@ -53,7 +58,7 @@ public class UnArrangeTaskAdapter extends AllAdapter {
             holder = (ViewHolder)layout.getTag();
         }
 
-        ArrangeTask mCase = allList.get(position);
+       final ArrangeTask mCase = allList.get(position);
         holder.tv_name.setText(mCase.getName());
         holder.tv_type.setText(" "+mCase.getType()+" |");
         holder.tv_area.setText(" "+mCase.getArea()+"平 |");
@@ -61,6 +66,26 @@ public class UnArrangeTaskAdapter extends AllAdapter {
         holder.tv_mode.setText(" "+mCase.getCraft_mode());
         holder.tv_total_price.setText("￥"+mCase.getTotal_price());
         setStatus(holder.tv_status, mCase.getStatus());
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JsonData jsonData = new JsonData();
+                jsonData.setWorkplace(mCase.getName());
+                jsonData.setType(mCase.getType());
+                jsonData.setWho("0");
+                jsonData.setWhoid(UserInfo.getInstance().getId());
+                jsonData.setServertype("0");
+                jsonData.setHouse_id(mCase.getId());
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("NewDecorationActivity", jsonData);
+                Intent intent = new Intent(activity, ConstructionTasksActivity.class);
+                intent.putExtra("FROM_ACTIVITY","UnArrangeTaskActivity");
+                intent.putExtras(bundle);
+                activity.startActivity(intent);
+            }
+        });
         return layout;
     }
 

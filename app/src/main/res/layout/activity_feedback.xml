@@ -7,9 +7,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="16sp"
         android:text="非常感谢您对我们产品提出的宝贵意见，您的建议让我们的产品做的更好！"
         android:id="@+id/textView38"
+        android:lineSpacingMultiplier="1.5"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/margin_left_right"
@@ -38,6 +39,7 @@
     <Button
         android:id="@+id/btn_next"
         style="@style/click_btn"
+        android:background="@drawable/sl_orgin"
         android:onClick="btn_click"
         android:text="提交"
         android:layout_alignParentBottom="true"

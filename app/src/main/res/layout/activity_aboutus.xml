@@ -2,14 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/margin_left_right"
-    android:paddingRight="@dimen/margin_left_right"
-    android:orientation="vertical">
 
+    android:orientation="vertical">
+    <app.views.OverScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/view"
+        android:layout_gravity="center_horizontal" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_left_right"
+            android:paddingRight="@dimen/margin_left_right"
+            >
   <ImageView
       android:layout_marginTop="50dp"
-      android:layout_width="150dp"
-      android:layout_height="150dp"
+      android:layout_width="130dp"
+      android:layout_height="130dp"
       android:layout_gravity="center_horizontal"
       android:background="@mipmap/login_logo"/>
 
@@ -19,7 +29,7 @@
         android:text="一匠一家"
         android:textSize="24sp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:textColor="#f0000000"/>
 
     <TextView
@@ -27,7 +37,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="版本号"
-    android:textSize="20sp"
+    android:textSize="19sp"
     android:layout_gravity="center_horizontal"
     android:layout_marginTop="10dp"
     android:textColor="#80000000"/>
@@ -36,9 +46,17 @@
         android:id="@+id/tv_aboutus_plain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="16sp"
+        android:lineSpacingMultiplier="1.5"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:textColor="#80000000"/>
 
+
+
+        </LinearLayout>
+
+    </app.views.OverScrollView>
 </LinearLayout>

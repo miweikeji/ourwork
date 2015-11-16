@@ -152,5 +152,7 @@ public class Urls {
     public final static String gettn= base_server+"App/Union/gettn";
     //修改已建立计划接口
     public final static String modifyArrangeTask= base_server+"App/Workplan/modifyArrangeTask";
+    //分配任务接口
+    public final static String arrangeTask= base_server+"App/Workplan/arrangeTask";
 
 }

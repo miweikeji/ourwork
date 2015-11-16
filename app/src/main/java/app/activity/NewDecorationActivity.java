@@ -135,6 +135,7 @@ public class NewDecorationActivity extends BaseActivity implements CompoundButto
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("NewDecorationActivity", jsonData);
                                 Intent intent = new Intent(this, ConstructionTasksActivity.class);
+                                intent.putExtra("FROM_ACTIVITY","NewDecorationActivity");
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }else {

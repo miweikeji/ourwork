@@ -1,5 +1,6 @@
 package app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import app.adapter.HintAdapter;
 import app.adapter.UnArrangeTaskAdapter;
 import app.entity.ArrangeTask;
 import app.entity.ArrangeTaskResult;
+import app.entity.JsonData;
 import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
@@ -125,6 +127,22 @@ public class UnArrangeTaskActivity extends BaseActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        if(allList!=null&&allList.size()>0){
+//            ArrangeTask task = allList.get(position);
+//            JsonData jsonData = new JsonData();
+//            jsonData.setWorkplace(task.getName());
+//            jsonData.setType(task.getType());
+//            jsonData.setWho("0");
+//            jsonData.setWhoid(UserInfo.getInstance().getId());
+//            jsonData.setServertype("0");
+//            jsonData.setHouse_id(task.getId());
+//
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("NewDecorationActivity", jsonData);
+//            Intent intent = new Intent(this, ConstructionTasksActivity.class);
+//            intent.putExtra("FROM_ACTIVITY","UnArrangeTaskActivity");
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+        }
     }
 }

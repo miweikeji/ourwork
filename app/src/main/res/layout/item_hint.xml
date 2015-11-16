@@ -28,9 +28,9 @@
                 android:id="@+id/textView12"
                 android:drawableTop="@mipmap/nodata"
                 android:gravity="center"
-                android:drawablePadding="20dp"
+                android:drawablePadding="30dp"
                 android:textColor="#5B5B5B"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>

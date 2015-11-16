@@ -27,6 +27,7 @@ import app.entity.JsonData;
 import app.entity.Meta;
 import app.entity.Name;
 import app.entity.Time;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.MyLog;
@@ -42,7 +43,7 @@ import app.views.NavigationBar;
  */
 public class ConstructionTasksActivity extends BaseActivity implements
         View.OnClickListener, DialogTools.DialogOnClickChockedListens,
-        DialogTools.DialogCountTypeListens, UIEventUpdate.UIEventUpdateListener, UIEventUpdate.DataListener {
+        DialogTools.DialogCountTypeListens, UIEventUpdate.UIEventUpdateListener, UIEventUpdate.DataListener, DialogTools.DialogPriceListens {
     private ArrayList<Integer> list = new ArrayList<Integer>();
     private ArrayList<Integer> removeList = new ArrayList<Integer>();
     private ArrayList<Integer> surplusList = new ArrayList<Integer>();
@@ -94,21 +95,30 @@ public class ConstructionTasksActivity extends BaseActivity implements
 
     private String hint = "通过平台找工匠";
     private TextView tv_time_choose;
-    private EditText et_workplace;
+    private TextView et_workplace;
 
     private JsonData jsonData;
     private List<Info> info;
 
+    private  String fromActivity;
+
     @Override
     public void obtainData() {
-        jsonData = (JsonData) getIntent().getSerializableExtra("NewDecorationActivity");
-        info = jsonData.getInfo();
+
     }
 
     @Override
     public void initUI() {
-
-        et_workplace = (EditText) findViewById(R.id.et_workplace);
+        Intent intent = getIntent();
+        fromActivity = intent.getStringExtra("FROM_ACTIVITY");
+        jsonData = (JsonData) getIntent().getSerializableExtra("NewDecorationActivity");
+        info = jsonData.getInfo();
+        et_workplace = (TextView) findViewById(R.id.et_workplace);
+        if("UnArrangeTaskActivity".equals(fromActivity)){
+            et_workplace.setText(jsonData.getWorkplace());
+        }else {
+            et_workplace.setText(jsonData.getHouse_xiaoqu()+""+jsonData.getOwner_name()+"的房子");
+        }
         add_choose_case = (LinearLayout) findViewById(R.id.add_choose_case);
         TextView tv_add_case = (TextView) findViewById(R.id.tv_add_case);
         tv_time_choose = (TextView) findViewById(R.id.tv_time_choose);
@@ -689,6 +699,66 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 removeList.add(6);
                 has6.clear();
                 break;
+            case 151:
+                if(Integer.valueOf(UserInfo.getInstance().getProtect()).intValue()>=3000){
+                    DialogTools.billingPrice(this, 1).show();
+                    DialogTools.setPriceChoose(this);
+                }else {
+                    Intent pay1= new Intent(this,PaymentSecurityActivity.class);
+                    pay1.putExtra("WORKPLACE",et_workplace.getText().toString().trim());
+                    startActivity(pay1);
+                }
+                break;
+            case 152:
+                if(Integer.valueOf(UserInfo.getInstance().getProtect()).intValue()>=3000){
+                    DialogTools.billingPrice(this, 2).show();
+                    DialogTools.setPriceChoose(this);
+                }else {
+                    Intent pay2= new Intent(this,PaymentSecurityActivity.class);
+                    pay2.putExtra("WORKPLACE", et_workplace.getText().toString().trim());
+                    startActivity(pay2);
+                }
+                break;
+            case 153:
+                if(Integer.valueOf(UserInfo.getInstance().getProtect()).intValue()>=3000){
+                    DialogTools.billingPrice(this, 3).show();
+                    DialogTools.setPriceChoose(this);
+                }else {
+                    Intent pay3= new Intent(this,PaymentSecurityActivity.class);
+                    pay3.putExtra("WORKPLACE", et_workplace.getText().toString().trim());
+                    startActivity(pay3);
+                }
+                break;
+            case 154:
+                if(Integer.valueOf(UserInfo.getInstance().getProtect()).intValue()>=3000){
+                    DialogTools.billingPrice(this, 4).show();
+                    DialogTools.setPriceChoose(this);
+                }else {
+                    Intent pay4= new Intent(this,PaymentSecurityActivity.class);
+                    pay4.putExtra("WORKPLACE", et_workplace.getText().toString().trim());
+                    startActivity(pay4);
+                }
+                break;
+            case 155:
+                if(Integer.valueOf(UserInfo.getInstance().getProtect()).intValue()>=3000){
+                    DialogTools.billingPrice(this, 5).show();
+                    DialogTools.setPriceChoose(this);
+                }else {
+                    Intent pay5= new Intent(this,PaymentSecurityActivity.class);
+                    pay5.putExtra("WORKPLACE", et_workplace.getText().toString().trim());
+                    startActivity(pay5);
+                }
+                break;
+            case 156:
+                if(Integer.valueOf(UserInfo.getInstance().getProtect()).intValue()>=3000){
+                    DialogTools.billingPrice(this, 6).show();
+                    DialogTools.setPriceChoose(this);
+                }else {
+                    Intent pay6= new Intent(this,PaymentSecurityActivity.class);
+                    pay6.putExtra("WORKPLACE", et_workplace.getText().toString().trim());
+                    startActivity(pay6);
+                }
+                break;
 
         }
     }
@@ -702,7 +772,7 @@ public class ConstructionTasksActivity extends BaseActivity implements
     private TextView[] biling_type = new TextView[7];
     private TextView[] name;
 
-    private EditText[] price = new EditText[7];
+    private TextView[] price = new TextView[7];
 
     @Override
     public void onCheckedChoose(HashMap<Integer, String> hasMap) {
@@ -725,9 +795,10 @@ public class ConstructionTasksActivity extends BaseActivity implements
                         isFirst = true;
                         layout[i] = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_choose_case, null);
                         RelativeLayout rl_to_time = (RelativeLayout) layout[i].findViewById(R.id.rl_to_time);
-                        price[i] = (EditText) layout[i].findViewById(R.id.et_price);
+                        price[i] = (TextView) layout[i].findViewById(R.id.et_price);
                         name[i] = (TextView) layout[i].findViewById(R.id.et_name);
                         RelativeLayout rl_biling_type = (RelativeLayout) layout[i].findViewById(R.id.rl_biling_type);
+                        RelativeLayout rl_prices = (RelativeLayout) layout[i].findViewById(R.id.rl_prices);
 
                         RelativeLayout rl_add_case = (RelativeLayout) layout[i].findViewById(R.id.rl_add_case);
                         RelativeLayout rl_invitation = (RelativeLayout) layout[i].findViewById(R.id.rl_invitation);
@@ -743,20 +814,23 @@ public class ConstructionTasksActivity extends BaseActivity implements
                         rl_invitation.setId(120 + i);
                         rl_add_case.setId(130 + i);
                         tv_deleate_case.setId(140 + i);
+                        rl_prices.setId(150 + i);
                         rl_to_time.setOnClickListener(this);
                         rl_biling_type.setOnClickListener(this);
                         rl_invitation.setOnClickListener(this);
                         rl_add_case.setOnClickListener(this);
                         tv_deleate_case.setOnClickListener(this);
+                        rl_prices.setOnClickListener(this);
 
                         add_choose_case.addView(layout[i]);
                     } else {
                         if (!save.contains(i)) {
                             layout[i] = ConstructionTasksActivity.this.getLayoutInflater().inflate(R.layout.item_choose_case, null);
                             RelativeLayout rl_to_time = (RelativeLayout) layout[i].findViewById(R.id.rl_to_time);
-                            price[i] = (EditText) layout[i].findViewById(R.id.et_price);
+                            price[i] = (TextView) layout[i].findViewById(R.id.et_price);
                             name[i] = (TextView) layout[i].findViewById(R.id.et_name);
                             RelativeLayout rl_biling_type = (RelativeLayout) layout[i].findViewById(R.id.rl_biling_type);
+                            RelativeLayout rl_prices = (RelativeLayout) layout[i].findViewById(R.id.rl_prices);
                             RelativeLayout rl_add_case = (RelativeLayout) layout[i].findViewById(R.id.rl_add_case);
                             RelativeLayout rl_invitation = (RelativeLayout) layout[i].findViewById(R.id.rl_invitation);
                             TextView tv_case_type = (TextView) layout[i].findViewById(R.id.tv_case_type);
@@ -771,11 +845,13 @@ public class ConstructionTasksActivity extends BaseActivity implements
                             rl_invitation.setId(120 + i);
                             rl_add_case.setId(130 + i);
                             tv_deleate_case.setId(140 + i);
+                            rl_prices.setId(150 + i);
                             rl_to_time.setOnClickListener(this);
                             rl_biling_type.setOnClickListener(this);
                             rl_invitation.setOnClickListener(this);
                             rl_add_case.setOnClickListener(this);
                             tv_deleate_case.setOnClickListener(this);
+                            rl_prices.setOnClickListener(this);
                             add_choose_case.addView(layout[i]);
                         }
 
@@ -962,6 +1038,8 @@ public class ConstructionTasksActivity extends BaseActivity implements
     private ArrayList<String> wtype = new ArrayList<>();
 
     public void release(View view) {
+
+
 
         String workpalce = et_workplace.getText().toString().trim();
         if (workpalce != null && !"".equals(workpalce)&&hint_time!=null&&list.size()!=0) {
@@ -1162,10 +1240,33 @@ public class ConstructionTasksActivity extends BaseActivity implements
             jsonData.setWorkplace(workpalce);
             Gson gson = new Gson();
             String json = gson.toJson(jsonData);
-            netWorkData(json);
+            if("UnArrangeTaskActivity".equals(fromActivity)){
+                netArrangeTask(json);
+            }else {
+                netWorkData(json);
+            }
         }else {
             Uihelper.showToast(this,"资料填写未完成");
         }
+    }
+
+    private void netArrangeTask(String json) {
+
+        showWaitingDialog();
+        HttpRequest.arrangeTask(this, json, new ICallback<Meta>() {
+            @Override
+            public void onSucceed(Meta result) {
+                disMissWaitingDialog();
+                finish();
+            }
+
+            @Override
+            public void onFail(String error) {
+                Uihelper.showToast(ConstructionTasksActivity.this, error);
+                disMissWaitingDialog();
+            }
+        });
+
     }
 
     private void netWorkData(String json) {
@@ -1226,5 +1327,10 @@ public class ConstructionTasksActivity extends BaseActivity implements
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onPriceChoose(String money, int i) {
+        price[i].setText(money);
     }
 }

@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -37,6 +38,15 @@ public class DialogTools {
         void onTypeChoose(String type,int i);
     }
 
+    public static DialogPriceListens price;
+    public static DialogChangePriceListens changePrice;
+    public static interface DialogPriceListens{
+        void onPriceChoose(String money,int i);
+    }
+    public static interface DialogChangePriceListens{
+        void onChangePriceChoose(String money,String wtype);
+    }
+
     public static DialogOnClickChockedListens listen;
     public static interface DialogOnClickChockedListens{
         void onCheckedChoose(HashMap<Integer,String> hasMap);
@@ -50,6 +60,12 @@ public class DialogTools {
     }
     public static void setTypeChoose(DialogCountTypeListens l){
         type = l;
+    }
+    public static void setPriceChoose(DialogPriceListens l){
+        price = l;
+    }
+    public static void setChangePriceChoose(DialogChangePriceListens l){
+        changePrice = l;
     }
     private static Dialog dialog;
     public static  Dialog timeShow(Activity activity, List<Data> data){
@@ -273,7 +289,7 @@ public class DialogTools {
     public static  Dialog billingType(Activity activity,final int i){
         LayoutInflater inflater = LayoutInflater.from(activity);
         View layout = inflater.inflate(R.layout.dialog_biling_type, null);
-        RelativeLayout layout_refuse_show = (RelativeLayout)layout.findViewById(R.id.layout_biling);
+        RelativeLayout layout_refuse_show = (RelativeLayout) layout.findViewById(R.id.layout_biling);
         RelativeLayout rl_count = (RelativeLayout)layout.findViewById(R.id.rl_count);
         RelativeLayout rl_ping = (RelativeLayout)layout.findViewById(R.id.rl_ping);
         RelativeLayout rl_jia = (RelativeLayout)layout.findViewById(R.id.rl_jia);
@@ -310,6 +326,10 @@ public class DialogTools {
                 dialog.dismiss();
             }
         });
+
+
+
+
         dialog = new Dialog(activity, R.style.FullScreenDialog);
         Window window = dialog.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
@@ -319,6 +339,84 @@ public class DialogTools {
 
         dialog.setCancelable(true);// 不可以用“返回键”取消
         dialog.setContentView(layout_refuse_show, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
+        return dialog;
+    }
+
+
+
+    public static Dialog billingPrice(Activity activity,final int i){
+
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        View layout = inflater.inflate(R.layout.dialog_price, null);
+        RelativeLayout layout_show = (RelativeLayout)layout.findViewById(R.id.layout_price);
+        final EditText et_server_price = (EditText) layout.findViewById(R.id.et_server_price);
+        Button sure = (Button)layout.findViewById(R.id.btn_sure);
+        Button cancel = (Button)layout.findViewById(R.id.btn_cancel);
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String money = et_server_price.getText().toString().trim();
+                price.onPriceChoose(money, i);
+
+                dialog.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+        dialog = new Dialog(activity, R.style.FullScreenDialog);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+//        lp.alpha = 0.8f;
+
+        window.setAttributes(lp);
+
+        dialog.setCancelable(true);// 不可以用“返回键”取消
+        dialog.setContentView(layout_show, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
+        return dialog;
+    }
+
+
+    public static Dialog changeTaskPrice(Activity activity,final String wtype){
+
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        View layout = inflater.inflate(R.layout.dialog_price, null);
+        RelativeLayout layout_show = (RelativeLayout)layout.findViewById(R.id.layout_price);
+        final EditText et_server_price = (EditText) layout.findViewById(R.id.et_server_price);
+        Button sure = (Button)layout.findViewById(R.id.btn_sure);
+        Button cancel = (Button)layout.findViewById(R.id.btn_cancel);
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String money = et_server_price.getText().toString().trim();
+                changePrice.onChangePriceChoose(money,wtype);
+                dialog.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+        dialog = new Dialog(activity, R.style.FullScreenDialog);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+//        lp.alpha = 0.8f;
+
+        window.setAttributes(lp);
+
+        dialog.setCancelable(true);// 不可以用“返回键”取消
+        dialog.setContentView(layout_show, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
         return dialog;

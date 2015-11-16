@@ -108,7 +108,8 @@ public class ChangeTaskAdapter extends AllAdapter {
             holder = new ViewHolder();
             layout = activity.getLayoutInflater().inflate(R.layout.item_choose_case, null);
             holder.rl_to_time = (RelativeLayout) layout.findViewById(R.id.rl_to_time);
-            holder.et_price = (EditText) layout.findViewById(R.id.et_price);
+            holder.rl_prices = (RelativeLayout) layout.findViewById(R.id.rl_prices);
+            holder.et_price = (TextView) layout.findViewById(R.id.et_price);
             holder.et_name= (TextView) layout.findViewById(R.id.et_name);
             holder.rl_biling_type = (RelativeLayout) layout.findViewById(R.id.rl_biling_type);
             holder.rl_add_case = (RelativeLayout) layout.findViewById(R.id.rl_add_case);
@@ -192,33 +193,21 @@ public class ChangeTaskAdapter extends AllAdapter {
                 changeTimeListens.changeTimePosition(position, info.getWtype());
             }
         });
-        holder.et_price.addTextChangedListener(new TextWatcher() {
+
+        holder.rl_prices.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                if(s!=null){
-                    if(s.toString().length()>0){
-                        moneyItemListens.moneyItemPosition(position,s.toString(),info.getWtype());
-                    }
-                }
+            public void onClick(View v) {
+                moneyItemListens.moneyItemPosition(position,"",info.getWtype());
             }
         });
+
         return layout;
     }
 
     public class  ViewHolder{
         RelativeLayout rl_to_time;
-        EditText et_price;
+        RelativeLayout rl_prices;
+        TextView et_price;
         TextView et_name;
         RelativeLayout rl_biling_type;
         RelativeLayout rl_add_case;

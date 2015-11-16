@@ -34,6 +34,7 @@ import app.entity.JsonDataResult;
 import app.entity.JsonResult;
 import app.entity.Meta;
 import app.entity.Time;
+import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.MyLog;
@@ -51,7 +52,7 @@ public class ChangeTasksActivity extends BaseActivity implements
         ChangeTaskAdapter.addNameItem, ChangeTaskAdapter.billingTypeItem,
         ChangeTaskAdapter.removeNameItem, ChangeTaskAdapter.addCaseNmae,
         UIEventUpdate.UIEventUpdateListener, ChangeTaskAdapter.changeTime,
-        UIEventUpdate.DataListener, UIEventUpdate.DataCtimListener, ChangeTaskAdapter.moneyItem {
+        UIEventUpdate.DataListener, UIEventUpdate.DataCtimListener, ChangeTaskAdapter.moneyItem, DialogTools.DialogChangePriceListens {
 
 
     private HashMap<String,HouseData> startDataMap = new HashMap<>();
@@ -678,6 +679,20 @@ public class ChangeTasksActivity extends BaseActivity implements
 
     @Override
     public void moneyItemPosition(int position, String money,String wtype) {
+
+        if(Integer.valueOf(UserInfo.getInstance().getProtect()).intValue()<3000){
+            Intent intent = new Intent(ChangeTasksActivity.this,PaymentSecurityActivity.class);
+            intent.putExtra("WORKPLACE",et_workplace.getText().toString().trim());
+            startActivity(intent);
+        }else {
+            DialogTools.changeTaskPrice(ChangeTasksActivity.this,wtype).show();
+            DialogTools.setChangePriceChoose(this);
+        }
+
+    }
+
+    @Override
+    public void onChangePriceChoose(String money, String wtype) {
         HouseData houseData = startDataMap.get(wtype);
         houseData.setCharge(money);
         info.clear();

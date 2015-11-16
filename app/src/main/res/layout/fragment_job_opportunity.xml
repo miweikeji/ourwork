@@ -83,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:background="@color/white"
+                    android:background="@drawable/sl_bg"
                     android:layout_toLeftOf="@+id/relativeLayout2"
                     android:layout_toStartOf="@+id/relativeLayout2"
                     android:id="@+id/rl_water">
@@ -113,6 +113,7 @@
                         android:id="@+id/rl_carpenter"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/sl_bg"
                         android:layout_weight="1">
 
                         <TextView
@@ -144,6 +145,7 @@
                         android:id="@+id/rl_painter"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/sl_bg"
                         android:layout_weight="1">
 
                         <TextView
@@ -194,7 +196,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:background="@color/white"
+                    android:background="@drawable/sl_bg"
                     android:layout_toLeftOf="@+id/relativeLayout3"
                     android:layout_toStartOf="@+id/relativeLayout3">
 
@@ -223,6 +225,7 @@
                         android:id="@+id/rl_door"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/sl_bg"
                         android:layout_weight="1">
                         <TextView
                             android:layout_width="wrap_content"
@@ -254,6 +257,7 @@
                         android:id="@+id/rl_porter"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/sl_bg"
                         android:layout_weight="1">
 
                         <TextView

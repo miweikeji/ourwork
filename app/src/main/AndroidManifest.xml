@@ -252,6 +252,11 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_find_fartner"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="app.activity.PaymentSecurityActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_find_fartner"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name="app.activity.ChangeTasksActivity"

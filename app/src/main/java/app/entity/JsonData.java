@@ -23,6 +23,7 @@ public class JsonData implements Serializable{
     private String house_type;
     private String house_area;
     private String house_craftmode;
+    private String house_id;
 
 
     //注意：上传的信息  如果有某个工总或工作被接
@@ -131,5 +132,13 @@ public class JsonData implements Serializable{
 
     public void setHouse_craftmode(String house_craftmode) {
         this.house_craftmode = house_craftmode;
+    }
+
+    public String getHouse_id() {
+        return house_id;
+    }
+
+    public void setHouse_id(String house_id) {
+        this.house_id = house_id;
     }
 }

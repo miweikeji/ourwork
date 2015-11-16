@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/activity_bg"
     android:paddingLeft="@dimen/margin_left_right"
     android:paddingRight="@dimen/margin_left_right">
 
-    <ScrollView
+    <app.views.OverScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -437,7 +438,7 @@
                     android:textColor="@color/white" />
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+    </app.views.OverScrollView>
 
 
 </LinearLayout>
