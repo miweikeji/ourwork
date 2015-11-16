@@ -29,6 +29,7 @@ import app.net.ICallback;
 import app.tools.Footools;
 import app.utils.Config;
 import app.utils.Uihelper;
+import app.utils.UserUtil;
 import app.views.ProgressDialogView;
 
 /**
@@ -60,7 +61,7 @@ public class WorkConstructionFragment extends Fragment implements AdapterView.On
         if(!isFisrstShow){
             dialog.show();
         }
-        HttpRequest.constructPlan(getActivity(), "100", p, new ICallback<ConstructPlanResult>() {
+        HttpRequest.constructPlan(getActivity(), UserUtil.getUserId(getActivity()), p, new ICallback<ConstructPlanResult>() {
             @Override
             public void onSucceed(ConstructPlanResult result) {
                 List<ConstructPlan> cases = result.getHouseList();

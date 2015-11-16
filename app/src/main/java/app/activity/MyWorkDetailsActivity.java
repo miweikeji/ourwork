@@ -167,13 +167,4 @@ public class MyWorkDetailsActivity extends BaseActivity implements
             CraftsmanZoneActivity.enterActivity(mActivity, Integer.parseInt(workId));
         }
     }
-
-    public static void enterActivity(Activity activity, int craftId, int state) {
-
-        Intent intent = new Intent(activity, MyWorkDetailsActivity.class);
-        intent.putExtra("wordId", craftId);
-        intent.putExtra("state", craftId);
-        activity.startActivity(intent);
-
-    }
 }

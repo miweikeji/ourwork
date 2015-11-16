@@ -60,8 +60,16 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        startActivity(new Intent(getActivity(), WorkDetailsActivity.class));
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        if (position<=0){
+            return;
+        }
+
+        WorkList workList=allList.get(position - 1);
+       String workId=workList.getWid();
+       Intent intent=new Intent(getActivity(), WorkDetailsActivity.class);
+        intent.putExtra("workId",workId);
+        startActivity(intent);
     }
 
     @Override
@@ -124,6 +132,12 @@ public class LoginJobFragment extends Fragment implements View.OnClickListener, 
         pull_to_list.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                p = 1;
+                allList.clear();
+                if (adapter != null) {
+
+                    adapter.notifyDataSetChanged();
+                }
                 netWorkData();
             }
 

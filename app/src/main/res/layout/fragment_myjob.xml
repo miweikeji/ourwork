@@ -50,37 +50,77 @@
                 android:gravity="center"
                 android:textSize="13sp"
                 android:layout_alignParentEnd="true" />
-
-
         </RelativeLayout>
-
-
     </RelativeLayout>
-
-    <view
+    <RelativeLayout
+        android:id="@+id/frame_noLogin"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        class="app.views.PagerSlidingTabStrip"
-        android:id="@+id/pagerSliding"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         android:layout_below="@+id/relativeLayout4"
-        android:layout_centerHorizontal="true"
-        app:pstsShouldExpand="true"
-        app:pstsUnderlineHeight="1dp"
-        app:pstsIndicatorHeight="2dp"
-        app:zmsTabTextColor="@color/line"
-        app:zmsSelectedTabTextColor="@color/white"
-        android:background="@color/base_green"
-        app:pstsIndicatorColor="@color/base_orange"
-        app:zmsSelectedTabTextSize="16sp"
-        app:zmsTabTextSize="16sp"
-        app:pstsDividerColor="@color/base_green"
-        />
+        android:visibility="visible">
 
-    <view
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        class="android.support.v4.view.ViewPager"
-        android:id="@+id/pager"
-        android:layout_below="@+id/pagerSliding"
-        android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您还未登录呦"
+                android:textSize="@dimen/textsize_normal" />
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:text="点此登录"
+                android:textColor="@color/base_orange"
+                android:textSize="@dimen/textsize_normal" />
+
+        </LinearLayout>
+    </RelativeLayout>
+   <RelativeLayout
+       android:id="@+id/frame_logined"
+       android:visibility="gone"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_below="@+id/relativeLayout4"
+       >
+
+       <view
+           android:layout_width="match_parent"
+           android:layout_height="48dp"
+           class="app.views.PagerSlidingTabStrip"
+           android:id="@+id/pagerSliding"
+           android:layout_centerHorizontal="true"
+           app:pstsShouldExpand="true"
+           app:pstsUnderlineHeight="1dp"
+           app:pstsIndicatorHeight="2dp"
+           app:zmsTabTextColor="@color/line"
+           app:zmsSelectedTabTextColor="@color/white"
+           android:background="@color/base_green"
+           app:pstsIndicatorColor="@color/base_orange"
+           app:zmsSelectedTabTextSize="16sp"
+           app:zmsTabTextSize="16sp"
+           app:pstsDividerColor="@color/base_green"
+           />
+
+       <view
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           class="android.support.v4.view.ViewPager"
+           android:id="@+id/pager"
+           android:layout_below="@+id/pagerSliding"
+           android:layout_centerHorizontal="true" />
+
+   </RelativeLayout>
+
+
+
 </RelativeLayout>

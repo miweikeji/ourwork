@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -15,10 +16,16 @@ import com.miwei.jzj_system.R;
 
 import java.util.ArrayList;
 
+import app.entity.Crafts;
+import app.entity.CraftsResult;
+import app.entity.GroupInfo;
 import app.fragment.CaseFragment;
 import app.fragment.CraftsmanInfoFragment;
 import app.fragment.MouthFragment;
 
+import app.net.HttpRequest;
+import app.net.ICallback;
+import app.utils.Uihelper;
 import app.views.NavigationBar;
 import app.views.PagerSlidingTabStrip;
 
@@ -28,18 +35,32 @@ import app.views.PagerSlidingTabStrip;
 public class CraftsmanZoneActivity extends BaseActivity {
     private ArrayList<Fragment> fragments;
     private int craftId;
+    private String telephone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        
-        Intent intent=getIntent();
-        craftId=intent.getIntExtra("craftId", 0);
+
+        Intent intent = getIntent();
+        craftId = intent.getIntExtra("craftId", 0);
 
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public void obtainData() {
+
+        HttpRequest.craftsmanInfoHttp(mActivity, craftId + "", new ICallback<CraftsResult>() {
+            @Override
+            public void onSucceed(CraftsResult result) {
+                Crafts crafts = result.getCrafts();
+                telephone = crafts.getCworkmobile();
+            }
+
+            @Override
+            public void onFail(String error) {
+                Uihelper.showToast(mActivity, error);
+            }
+        });
 
     }
 
@@ -102,12 +123,14 @@ public class CraftsmanZoneActivity extends BaseActivity {
     }
 
     public void btn_callphone(View v) {
-//        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:10086")));
+        if (!TextUtils.isEmpty(telephone)) {
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + telephone)));
+        }
     }
 
-    public static  void enterActivity(Activity activity,int craftId){
-        Intent intent =new Intent(activity,CraftsmanZoneActivity.class);
-        intent.putExtra("craftId",craftId);
+    public static void enterActivity(Activity activity, int craftId) {
+        Intent intent = new Intent(activity, CraftsmanZoneActivity.class);
+        intent.putExtra("craftId", craftId);
         activity.startActivity(intent);
     }
 }

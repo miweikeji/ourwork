@@ -162,7 +162,7 @@ public class MyApplication extends Application {
         }
         contentViews.setTextViewText(R.id.timeNo, mHour + ":" + string_Minutes);
         String tickerText = context.getResources().getString(R.string.app_name);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(R.mipmap.ic_launcher).setTicker(tickerText);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(R.drawable.message).setTicker(tickerText);
         mBuilder.setAutoCancel(true);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setContent(contentViews);

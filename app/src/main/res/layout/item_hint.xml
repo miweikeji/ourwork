@@ -22,15 +22,15 @@
 
             >
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="暂无数据"
+                android:text="老表~暂时没有数据哦,先看看其他的吧~"
                 android:id="@+id/textView12"
-                android:drawableTop="@mipmap/login_logo"
+                android:drawableTop="@mipmap/nodata"
                 android:gravity="center"
                 android:drawablePadding="20dp"
                 android:textColor="#5B5B5B"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>

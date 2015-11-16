@@ -35,6 +35,9 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.microedition.khronos.opengles.GL10Ext;
+
+import app.activity.HouseActivity;
 import app.activity.LoginActivity;
 import app.activity.MyWorkDetailsActivity;
 import app.activity.user.AboutUsActivity;
@@ -54,6 +57,7 @@ import app.entity.UserInfo;
 import app.net.HttpRequest;
 import app.net.ICallback;
 import app.net.Urls;
+import app.utils.ExtendOperationController;
 import app.utils.ICallbackUri;
 import app.utils.ImageViewUtil;
 import app.utils.Uihelper;
@@ -93,6 +97,8 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
     public static String bitmap2Byte;
     private Bitmap bitmap;
     private HttpUtils httpUtils;
+    private boolean isGetSign;
+    private int houseId;
 
     @Nullable
     @Override
@@ -120,15 +126,17 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
         HttpRequest.getSignIn(getActivity(), new ICallback<SingInResult>() {
             @Override
             public void onSucceed(SingInResult result) {
+                isGetSign = true;
                 SingIn singIn = result.getSingIn();
                 if (singIn != null) {
                     signTime = singIn.getSignNum();
                     if (singIn.getIs_sign() == 1) {
                         isSign = true;
-                    }else {
-                        isSign=false;
+                    } else {
+                        isSign = false;
                     }
                     hasCase = singIn.getHasTask();
+                    houseId = singIn.getHouseId();
                 }
             }
 
@@ -191,7 +199,7 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
 
     private void setData(Crafts crafts) {
 //
-        tvAge.setText(crafts.getAge()+"");
+        tvAge.setText(crafts.getAge() + "");
         tvArea.setText(crafts.getCworkhome());
         tvJob.setText(crafts.getProfession());
         tvJobage.setText(crafts.getCworkold() + "年工龄");
@@ -220,6 +228,7 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
         });
 
     }
+
     @Override
     public void onClick(View v) {
 
@@ -245,34 +254,37 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
                 break;
             //签到
             case R.id.tv_sign:
+                if (!isGetSign) {
+                    return;
+                }
                 if (UserUtil.isLogin(getActivity())) {
-                        dialogSign = new DialogSign(getActivity(), signTime, isSign, hasCase) {
+                    dialogSign = new DialogSign(getActivity(), signTime, isSign, hasCase) {
 
-                            @Override
-                            public void sign() {
-                                dialogSign.dismiss();
-                                HttpRequest.signIn(getActivity(), new ICallback<Meta>() {
-                                    @Override
-                                    public void onSucceed(Meta result) {
+                        @Override
+                        public void sign() {
+                            dialogSign.dismiss();
+                            HttpRequest.signIn(getActivity(), new ICallback<Meta>() {
+                                @Override
+                                public void onSucceed(Meta result) {
 
-                                        Uihelper.showToast(getActivity(), "签到成功");
-                                        obtainSign();
-                                    }
+                                    Uihelper.showToast(getActivity(), "签到成功");
+                                    obtainSign();
+                                }
 
-                                    @Override
-                                    public void onFail(String error) {
+                                @Override
+                                public void onFail(String error) {
 
-                                        Uihelper.showToast(getActivity(), error);
-                                    }
-                                });
-                            }
+                                    Uihelper.showToast(getActivity(), error);
+                                }
+                            });
+                        }
 
-                            @Override
-                            public void toCase() {
-                                dialogSign.dismiss();
-                                startActivity(new Intent(getActivity(), MyWorkDetailsActivity.class));
-                            }
-                        };
+                        @Override
+                        public void toCase() {
+                            dialogSign.dismiss();
+                            HouseActivity.enterActivity(getActivity(), houseId);
+                        }
+                    };
                     dialogSign.show();
                 }
 
@@ -288,6 +300,7 @@ public class MineFragment extends BaseFrament implements View.OnClickListener, U
                 UserUtil.clearUserInfo(getActivity());
                 UserInfo.getInstance().clearUserInfo();
                 onStart();
+                ExtendOperationController.getInstance().doNotificationExtendOperation(ExtendOperationController.OperationKey.EXIT_MYJOB, null);
 
                 break;
             case R.id.tv_login:

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import com.miwei.jzj_system.R;
 
+import app.utils.UserUtil;
+
 /**
  * Created by Administrator on 2015/10/10.
  */
@@ -47,8 +49,12 @@ public class JobContentsFragment extends Fragment implements
 
     @Override
     public void getCraftsmanType(String type) {
-        getChildFragmentManager().beginTransaction().hide(opportunityFragment).show(loginJobFragment).commit();
-        loginJobFragment.setCraftsmanType(type);
+
+        if (UserUtil.isLogin(getActivity())) {
+            getChildFragmentManager().beginTransaction().hide(opportunityFragment).show(loginJobFragment).commit();
+            loginJobFragment.setCraftsmanType(type);
+        }
+
     }
 
     @Override

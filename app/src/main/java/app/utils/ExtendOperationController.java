@@ -18,6 +18,7 @@ public class ExtendOperationController {
 		/** 登录成功 */
 		public static final int LOGIN_SUCCESS = 1001;
 		public static final int HouseInfo = 1002;
+		public static final int EXIT_MYJOB = 1003;
 	}
 
 	/**

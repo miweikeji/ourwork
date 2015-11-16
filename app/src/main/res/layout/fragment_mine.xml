@@ -200,6 +200,7 @@
             <RelativeLayout
                 android:id="@+id/frame_me_integral"
                 android:layout_width="match_parent"
+                android:background="@drawable/sl_bg"
                 android:layout_height="50dp">
 
                 <ImageView
@@ -241,6 +242,7 @@
             <RelativeLayout
                 android:id="@+id/frame_me_protect"
                 android:layout_width="match_parent"
+                android:background="@drawable/sl_bg"
                 android:layout_height="50dp">
 
                 <ImageView
@@ -283,6 +285,7 @@
             <RelativeLayout
                 android:id="@+id/frame_me_authencation"
                 android:layout_width="match_parent"
+                android:background="@drawable/sl_bg"
                 android:layout_height="50dp">
 
                 <ImageView
@@ -324,6 +327,7 @@
             <RelativeLayout
                 android:id="@+id/frame_me_suggestion"
                 android:layout_width="match_parent"
+                android:background="@drawable/sl_bg"
                 android:layout_height="50dp">
 
                 <ImageView
@@ -365,6 +369,7 @@
             <RelativeLayout
                 android:id="@+id/frame_me_about"
                 android:layout_width="match_parent"
+                android:background="@drawable/sl_bg"
                 android:layout_height="50dp">
 
                 <ImageView

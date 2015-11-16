@@ -27,20 +27,21 @@ public class CarpenterHomeFragment extends Fragment implements View.OnClickListe
 
     private View layout;
     private TextView tvNum;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.fragment_carpenter_home,null);
+        layout = inflater.inflate(R.layout.fragment_carpenter_home, null);
         initUI();
         return layout;
     }
 
     private void initUI() {
-        RelativeLayout rl_carftsman_group=(RelativeLayout)layout.findViewById(R.id.rl_carftsman_group);
-        RelativeLayout rl_find_craftsman=(RelativeLayout)layout.findViewById(R.id.rl_find_craftsman);
-        RelativeLayout rl_my_friends=(RelativeLayout)layout.findViewById(R.id.rl_my_friends);
-        RelativeLayout rl_work_arrangement=(RelativeLayout)layout.findViewById(R.id.rl_work_arrangement);
-        RelativeLayout rl_all_craftsman=(RelativeLayout) layout.findViewById(R.id.rl_all_craftsman);
+        RelativeLayout rl_carftsman_group = (RelativeLayout) layout.findViewById(R.id.rl_carftsman_group);
+        RelativeLayout rl_find_craftsman = (RelativeLayout) layout.findViewById(R.id.rl_find_craftsman);
+        RelativeLayout rl_my_friends = (RelativeLayout) layout.findViewById(R.id.rl_my_friends);
+        RelativeLayout rl_work_arrangement = (RelativeLayout) layout.findViewById(R.id.rl_work_arrangement);
+        RelativeLayout rl_all_craftsman = (RelativeLayout) layout.findViewById(R.id.rl_all_craftsman);
         rl_work_arrangement.setOnClickListener(this);
         rl_carftsman_group.setOnClickListener(this);
         rl_my_friends.setOnClickListener(this);
@@ -48,34 +49,45 @@ public class CarpenterHomeFragment extends Fragment implements View.OnClickListe
         rl_all_craftsman.setOnClickListener(this);
 
         //消息
-        tvNum=(TextView)layout.findViewById(R.id.tv_message_num);
+        tvNum = (TextView) layout.findViewById(R.id.tv_message_num);
 
         layout.findViewById(R.id.frame_message).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //到消息页面
+                if (UserUtil.isLogin(getActivity())) {
 
-                startActivity(new Intent(getActivity(), ParterMessageActivity.class));
+                    startActivity(new Intent(getActivity(), ParterMessageActivity.class));
+                }
             }
         });
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.rl_carftsman_group:
-                startActivity(new Intent(getActivity(), CraftsmanGroupActivity.class));
+                if (UserUtil.isLogin(getActivity())) {
+                    startActivity(new Intent(getActivity(), CraftsmanGroupActivity.class));
+                }
                 break;
             case R.id.rl_find_craftsman:
-                startActivity(new Intent(getActivity(), FindFartnerActivity.class));
+                if (UserUtil.isLogin(getActivity())) {
+
+                    startActivity(new Intent(getActivity(), FindFartnerActivity.class));
+                }
                 break;
             case R.id.rl_my_friends:
-//                if (UserUtil.isLogin(getActivity())){
+                if (UserUtil.isLogin(getActivity())) {
                     startActivity(new Intent(getActivity(), MyFriendsActivity.class));
-//                }
+                }
                 break;
             case R.id.rl_work_arrangement:
-                startActivity(new Intent(getActivity(), WorkArrangementActivity.class));
+
+                if (UserUtil.isLogin(getActivity())) {
+                    startActivity(new Intent(getActivity(), WorkArrangementActivity.class));
+                }
+
                 break;
             case R.id.rl_all_craftsman:
                 startActivity(new Intent(getActivity(), AllWorksActivity.class));

@@ -7,7 +7,7 @@ public class SingIn {
 
     private String cid;
     private int is_sign;
-    private String houseId;
+    private int houseId;
     private String status;
     private boolean hasTask;
     private int signNum;
@@ -29,11 +29,11 @@ public class SingIn {
         this.is_sign = is_sign;
     }
 
-    public String getHouseId() {
+    public int getHouseId() {
         return houseId;
     }
 
-    public void setHouseId(String houseId) {
+    public void setHouseId(int houseId) {
         this.houseId = houseId;
     }
 
