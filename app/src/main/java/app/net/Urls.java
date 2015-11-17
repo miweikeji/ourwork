@@ -125,6 +125,8 @@ public class Urls {
     public final static String applyOder = base_server + "App/Work/applyOder";
     //申请人列表
     public final static String getMessageOrderApplyCrafts = base_server + "App/Crafts/getMessageOrderApplyCrafts";
+    //邀请人列表
+    public final static String getMessageOderInviteOrNotCrafts = base_server + "App/Crafts/getMessageOderInviteOrNotCrafts";
 
     //同意邀请
     public final static String acceptInvite = base_server + "App/Work/acceptInvite";

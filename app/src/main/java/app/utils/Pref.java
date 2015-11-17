@@ -32,6 +32,7 @@ public class Pref {
 	public static final String EXIT = "exit";
 	public static final String PUSH = "PUSH";
 	public static final String HouseInfo = "HouseInfo";
+	public static final String CHANNEL_ID = "channelId";
 
 
 	private static SharedPreferences getSettings(final Context contex) {

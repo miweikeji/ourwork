@@ -3,11 +3,14 @@ package app.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.miwei.jzj_system.R;
+import com.umeng.analytics.AnalyticsConfig;
+import com.umeng.analytics.MobclickAgent;
 
 import app.entity.Meta;
 import app.entity.UserInfoResult;
@@ -15,6 +18,8 @@ import app.net.HttpRequest;
 import app.net.ICallback;
 import app.tools.MyLog;
 import app.utils.Constants;
+import app.utils.MobileOS;
+import app.utils.Pref;
 import app.utils.UserUtil;
 import app.views.NavigationBar;
 
@@ -26,6 +31,17 @@ public class AppStartActivity extends BaseActivity  {
     public void obtainData() {
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
     private ImageView img_start;
     private static final int pageCount = 4;
     private ViewPager mViewPager;
@@ -35,6 +51,17 @@ public class AppStartActivity extends BaseActivity  {
         ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
         img_start = (ImageView) findViewById(R.id.img_start);
         framePages = (LinearLayout) findViewById(R.id.frame_pages);
+
+
+        //      设置友盟渠道号
+        String channelId = Pref.getString(Pref.CHANNEL_ID, this, "");
+        if (TextUtils.isEmpty(channelId)) {
+            Pref.saveString(Pref.CHANNEL_ID, MobileOS.getChannelName(this), this);
+        } else {
+            AnalyticsConfig.setChannel(channelId);
+        }
+
+
         if(UserUtil.hasLogin(this)){
             String phone = UserUtil.getUserPhone(this);
             String psw = UserUtil.getUserPsw(this);

@@ -20,6 +20,7 @@ import app.fragment.JobContentsFragment;
 import app.fragment.MyJobFragment;
 
 import com.miwei.jzj_system.R;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.common.message.UmengMessageDeviceConfig;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.MsgConstant;
@@ -70,6 +71,18 @@ public class MainActivity extends FragmentActivity {
 
         MyApplication.setIsCurrent(true);
         handlePush();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     private void handlePush() {

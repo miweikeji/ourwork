@@ -1565,7 +1565,7 @@ public class HttpRequest {
     public static void getMessageInviteCrafts(Context context, String messageId, final ICallback<InviteCraftsResult> callback) {
         ArrayList<Param> mList = new ArrayList<Param>();
         mList.add(new Param("messageId", messageId));
-        new MyAsyncTask(context, Urls.getMessageOrderApplyCrafts, mList, new ICallback<String>() {
+        new MyAsyncTask(context, Urls.getMessageOderInviteOrNotCrafts, mList, new ICallback<String>() {
 
             @Override
             public void onSucceed(String result) {
