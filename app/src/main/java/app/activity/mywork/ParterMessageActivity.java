@@ -164,6 +164,7 @@ public class ParterMessageActivity extends BaseActivity implements AbsListView.O
                     case "7":
 
                         Intent intent_system = new Intent(mActivity, SystemMessageActivity.class);
+                        intent_system.putExtra("messageId",messageItem.getId());
                         startActivity(intent_system);
 
                         break;

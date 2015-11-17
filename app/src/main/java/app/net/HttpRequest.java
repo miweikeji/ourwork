@@ -45,6 +45,7 @@ import app.entity.RegisterInfo;
 import app.entity.ScoreResult;
 import app.entity.SearchResult;
 import app.entity.SingInResult;
+import app.entity.SystemMessageResult;
 import app.entity.UserInfoResult;
 import app.entity.WorkDetailResult;
 import app.entity.WorkListResult;
@@ -1243,6 +1244,32 @@ public class HttpRequest {
         }).executeOnExecutor();
     }
 
+    /**
+     * 系统消息接口
+     */
+    public static void getSystemMessage(Context context, String messageId,final ICallback<SystemMessageResult> callback) {
+        ArrayList<Param> mList = new ArrayList<Param>();
+        mList.add(new Param("messageId", messageId));
+
+
+        new MyAsyncTask(context, Urls.getSystemMessage, mList, new ICallback<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                SystemMessageResult meta = JsonUtil.parseObject(result, SystemMessageResult.class);
+                if (meta.getStatus() == 0) {
+                    callback.onSucceed(meta);
+                } else {
+                    callback.onFail(meta.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                callback.onFail(error);
+            }
+        }).executeOnExecutor();
+    }
     /**
      * 我的保证金
      */

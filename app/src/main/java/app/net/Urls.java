@@ -106,6 +106,9 @@ public class Urls {
 
      /* ============================================我的接口结束=================================*/
 
+    //获得系统消息
+    public final static String getSystemMessage = base_server + "App/Crafts/getSystemMessage";
+
     //房屋信息接口
     public final static String getHouseInfo = base_server + "App/House/getHouseInfo";
 
